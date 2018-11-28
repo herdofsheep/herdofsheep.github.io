@@ -1,0 +1,396 @@
+
+/* rules to generally apply */
+body{
+  margin: 0;
+  padding: 0;
+  font-family:'arlon';
+  overflow-x: hidden;
+}
+
+/* links */
+a, a {
+  color: #841212;
+  font-weight: 700;
+  text-decoration: none; 
+}
+
+/* focus (mouse hover) */
+a:hover,
+a:focus{
+  color: #841212;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* thin outline to show container elements */
+.outline {
+  border:1px solid black;
+}
+
+/* tool to centralise multiple images */
+.container{
+  text-align: center;
+}
+
+/* tool to centralise 1 image wide */
+.centralise {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.img {
+  display: inline-block;
+}
+
+/* tool to shift up navigation bar items */
+.shift{
+  position:relative;
+  top:-100px;
+}
+
+/* non-homepage navigation bar styling */
+.navigation{
+  position:relative;
+  height: 100px;
+  z-index: 1;
+}
+
+/* header navigation spacing */
+.margin {
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+}
+
+/* header navigation colouring*/
+.pink{
+  background: pink;
+}
+
+.paleBlue{
+  background: #b7dbd4;
+}
+
+/* home button */
+.flower{
+  background-image: url(assets/images/flower.png);
+  position:relative;
+  top: 100px;
+  z-index: 2;
+  height:100px;
+  width:100px;
+  background-position: center;
+  background-size: contain;
+}
+
+.flower:hover, .flower:focus{
+  background-image: url(assets/images/flowerBold.png);
+  position:relative;
+  top: 100px;
+  z-index: 2;
+  height:100px;
+  width:100px;
+  background-position: center;
+  background-size: contain;
+}
+
+/* header navigation text*/
+.homelinks {
+  display: inline-block;
+  text-align: center;
+  width: 130px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* breather margins for image pages that need it */
+.topMargin {
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+}
+.topMarginOnly {
+  margin-top: 1.5%;
+}
+.topMargin2 {
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+.topMarginOnly2 {
+  margin-top: 4.16666%;
+}
+
+/* breather margins for design portfolio homepage */
+.portfolioSpacer {
+  margin-top: 4.16666%;
+  margin-bottom: 4.16666%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 83.333333%;
+}
+
+/* portfolio boxes styling */
+.portfolioTextTwoline{
+  display: inline-block;
+  margin-top:30px;
+  margin-left:auto;
+  margin-right:auto;
+  width: 160px;
+  height: 50px;
+  line-height: 25px;
+  background: black;
+
+  color: #FFFFFF;
+  font-size: 18px;
+  text-align:center;
+}
+
+.portfolioTextOneline{
+  display: inline-block;
+  margin-top:30px;
+  margin-left:auto;
+  margin-right:auto;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  background: black;
+
+  color: #FFFFFF;
+  font-size: 18px;
+  text-align: center;
+}
+
+.portfolioBox{
+  text-align: center;
+  display: inline-block;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  margin-left: 4.16666%;
+  margin-right: 4.16666%;
+  height: 350px;
+  width: 250px;
+}
+
+/* text */
+.text{
+  color: black;
+  font-weight: 500;
+  text-align: center;
+  font-size: 30;
+  text-decoration: none; 
+}
+
+/* image sizing tools */
+.quarter{
+  width: 24%;
+}
+.smallThird{
+  width: 30%;
+}
+.third{
+  width: 33%;
+}
+.smallHalf{
+  width: 40%;
+}
+.half{
+  width: 49%;
+}
+.bigPlanet{
+  width: 50%;
+}
+.smallFull{
+  width:90%;
+}
+.full{
+  width:100%;
+}
+
+/* background images for portfolio links*/
+.estates{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/disability.jpg);
+  background-size: cover;
+}
+.access{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/banner.png);
+  background-size: cover, contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.symbiote{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/symbiote.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.paraguay{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/paraguay.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.planets{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/pluto.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.escher{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/escher.jpg);
+  background-color: black;
+  background-position: 50% 70%;
+  background-size: cover, contain;
+  background-repeat: no-repeat;
+}
+.cannon{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/cannonfodder.png);
+  background-color: #FBC7EC;
+  background-position: 50% 70%;
+  background-size: cover, contain;
+  background-repeat: no-repeat;
+}
+.clouds{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/cloud.jpg);
+  background-size: cover;
+  background-position:center;
+  background-repeat: no-repeat;
+}
+.modelling{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/git3d.png);
+  background-position: 50% 70%;
+  background-size: cover, contain;
+  background-repeat: no-repeat;
+}
+.sundry{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/polyportrait.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* scaling tools for different devices */
+
+/* phone */
+@media only screen
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px){
+    .homelinks{
+      font-size: 50px;
+    }
+    .portfolioSpacer {
+      margin-top: 4.16666%;
+      margin-bottom: 4.16666%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 66.666667%;
+    }
+    .portfolioBox{
+      width: 350px;
+      height: 490px;
+    }
+    .portfolioTextTwoline{
+      width: 300px;
+      font-size: 30px;
+      width: 300px;
+      height: 100px;
+      line-height: 50px;
+    }
+    .portfolioTextOneline{
+      width: 300px;
+      font-size: 30px;
+      height: 100px;
+      line-height: 100px;
+    }
+    .quarter{
+      width: 33%;
+    }
+    .smallThird{
+      width: 40%;
+    }
+    .third{
+      width: 49%;
+    }
+    .bigPlanet{
+      width: 75%;
+    }
+    .smallHalf{
+      width: 80%;
+    }
+    .half{
+      width: 100%;
+    }
+}
+
+/* vertical tablet */
+@media only screen
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape){
+}
+
+/* horizontal tablet */
+@media only screen
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait){
+}
+
+/* desktop */
+@media screen
+  and (min-device-width: 1200px){
+}
+
+/* widescreen desktop */
+@media screen
+  and (min-device-width: 1600px){
+    .portfolioSpacer {
+      margin-top: 4.16666%;
+      margin-bottom: 4.16666%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 66.666667%;
+    }
+}
+
+/* fonts */
+
+/* ultralight font */
+@font-face{
+  font-family: 'arlon';
+  src:  url('assets/fonts/arlon-light/arlon-light.woff') format('woff'),
+        url('assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
+        url('assets/fonts/arlon-light/arlon-light.ttf') format('truetype'), 
+        url('assets/fonts/arlon-light/arlon-light.otf') format('opentype'); 
+  font-weight: 300;
+}
+
+/* light font */
+@font-face{
+  font-family: 'arlon';
+  src:  url('assets/fonts/arlon-light/arlon-light.woff') format('woff'),
+        url('assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
+        url('assets/fonts/arlon-light/arlon-light.ttf') format('truetype'), 
+        url('assets/fonts/arlon-light/arlon-light.otf') format('opentype'); 
+  font-weight: 500;
+}
+
+/* semibold font */
+@font-face {
+	font-family: 'arlon';
+	src:  url('assets/fonts/arlon-semibold/arlon-semibold.woff') format('woff'),
+        url('assets/fonts/arlon-semibold/arlon-semibold.woff2') format('woff2'),
+        url('assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype'),
+        url('assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype');
+	font-weight: 700;
+}
+
+/* ultrabold font */
+@font-face {
+	font-family: 'arlon';
+	src:  url('assets/fonts/arlon-ultrabold/arlon-ultrabold.woff') format('woff'),
+        url('assets/fonts/arlon-ultrabold/arlon-ultrabold.woff2') format('woff2'),
+        url('assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype'),
+        url('assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype');
+	font-weight: 900;
+}
+
