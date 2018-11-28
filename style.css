@@ -275,6 +275,7 @@ a:focus{
   and (min-device-width: 320px) 
   and (max-device-width: 480px){
     .homelinks{
+      width: 200px;
       font-size: 50px;
     }
     .portfolioSpacer {
