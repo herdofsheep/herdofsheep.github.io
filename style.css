@@ -24,7 +24,7 @@ a:focus{
 
 /* thin outline to show container elements */
 .outline {
-  border:1px solid black;
+  border:1px solid white;
 }
 
 /* tool to centralise multiple images */
@@ -40,6 +40,13 @@ a:focus{
 }
 .img {
   display: inline-block;
+}
+
+.centerVideo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:90%;
 }
 
 /* tool to shift up navigation bar items */
