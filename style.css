@@ -274,6 +274,12 @@ a:focus{
   background-position: center;
   background-repeat: no-repeat;
 }
+.embroidery{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/embroidery.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 /* scaling tools for different devices */
 
@@ -388,7 +394,7 @@ a:focus{
 	src:  url('assets/fonts/arlon-semibold/arlon-semibold.woff') format('woff'),
         url('assets/fonts/arlon-semibold/arlon-semibold.woff2') format('woff2'),
         url('assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype'),
-        url('assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype');
+        url('assets/fonts/arlon-semibold/arlon-semibold.otf') format('opentype');
 	font-weight: 700;
 }
 
@@ -398,7 +404,7 @@ a:focus{
 	src:  url('assets/fonts/arlon-ultrabold/arlon-ultrabold.woff') format('woff'),
         url('assets/fonts/arlon-ultrabold/arlon-ultrabold.woff2') format('woff2'),
         url('assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype'),
-        url('assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype');
+        url('assets/fonts/arlon-ultrabold/arlon-ultrabold.otf') format('opentype');
 	font-weight: 900;
 }
 
