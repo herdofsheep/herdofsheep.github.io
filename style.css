@@ -236,6 +236,12 @@ a:focus{
   background-size: cover;
   background-repeat: no-repeat;
 }
+.flown{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/flown.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .planets{
   background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/pluto.jpg);
   background-position: center;
