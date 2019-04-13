@@ -38,6 +38,7 @@ a:focus{
   margin-left: auto;
   margin-right: auto;
 }
+
 .img {
   display: inline-block;
 }
@@ -238,6 +239,12 @@ a:focus{
 }
 .flown{
   background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/flown.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tarot{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/tarot.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
