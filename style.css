@@ -219,6 +219,10 @@ a:focus{
   background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/disability.jpg);
   background-size: cover;
 }
+.millingGuide{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/board.png);
+  background-size: cover;
+}
 .access{
   background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/banner.png);
   background-size: cover, contain;
