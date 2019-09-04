@@ -56,18 +56,26 @@
 				controls = new THREE.OrbitControls( camera );
 				controls.update();
 
-				var path = 'assets/images/skyboxes/starbox/';
-				var format = '.png';
-				var envMap = new THREE.CubeTextureLoader().load( [
-					path + 'posx' + format, path + 'negx' + format,
-					path + 'posy' + format, path + 'negy' + format,
-					path + 'posz' + format, path + 'negz' + format
-				] );
+				var texture = THREE.ImageUtils.loadTexture( 'assets/images/planets.jpg' );
+				var scale = 15;
+				var backgroundMesh = new THREE.Mesh(
+						new THREE.PlaneGeometry(1.3847*scale, 0.3000*scale, 0),
+						new THREE.MeshBasicMaterial({
+								map: texture
+						}));
 
-				scene.background = envMap;
+				backgroundMesh.material.depthTest = false;
+				backgroundMesh.material.depthWrite = false;
+				backgroundMesh.position.setX(2);
 
-				mathena = loadModel( 'assets/models/gltf/mathena/mathenaWhite.gltf' );
+				scene.add(backgroundMesh);
+				
+				mathena = loadModel( 'assets/models/gltf/mathena.gltf' );
+				// var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+				// var mesh = new THREE.Mesh( mathena, material );
+				// material.side = THREE.DoubleSide;
 				scene.add(mathena);
+				
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, windowHeight );
@@ -120,11 +128,12 @@
 				mathena.rotation.x = timer*2;
 				mathena.rotation.y = timer;
 
-				var xpos = 3*Math.cos( 0.01*timer );
-				var ypos = 3*Math.sin( 0.01*timer );
-
-				camera.position.set( xpos, 0, ypos );
-				camera.lookAt( scene.position );
+				//backgroundMesh.position.setX(0);
+				var xpos = 7.3*Math.cos( 0.1*timer );
+				
+				mathena.position.setX(xpos);
+				camera.position.set( xpos, 0, 3 );
+				camera.lookAt( mathena.position );
 
 				renderer.render( scene, camera );
 			}
