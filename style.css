@@ -237,6 +237,12 @@ a:focus{
   background-repeat: no-repeat;
   background-position: bottom;
 }
+.mathena{
+  background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/mathena.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .symbiote{
   background-image: url(assets/images/pinkfilter.png), url(assets/images/optimised/symbiote.png);
   background-size: cover;
