@@ -66,7 +66,6 @@
 
 				backgroundMesh.material.depthTest = false;
 				backgroundMesh.material.depthWrite = false;
-				backgroundMesh.position.setX(2);
 
 				scene.add(backgroundMesh);
 				
@@ -129,7 +128,7 @@
 				mathena.rotation.y = timer;
 
 				//backgroundMesh.position.setX(0);
-				var xpos = 7.3*Math.cos( 0.1*timer );
+				var xpos = 9*Math.cos( 0.1*timer );
 				
 				mathena.position.setX(xpos);
 				camera.position.set( xpos, 0, 3 );
