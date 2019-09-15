@@ -169,6 +169,7 @@ a:focus{
 }
 
 .portfolioBox{
+  vertical-align: top;
   text-align: center;
   display: inline-block;
   margin-top: 2.5%;
