@@ -11,15 +11,39 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="tarot" startnode="41" creator="Twine" creator-version="2.2.1" ifid="3E2988AC-4AC7-4C7E-818C-1C3CC07C8503" zoom="1" format="Harlowe" format-version="2.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
+<tw-storydata name="tarot" startnode="40" creator="Twine" creator-version="2.2.1" ifid="3E2988AC-4AC7-4C7E-818C-1C3CC07C8503" zoom="0.6" format="Harlowe" format-version="2.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
+
+
+
+
+
+
+
+
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
+
+
+
+
+
+
+
+
 </script><tw-passagedata pid="1" name="I THE MAGICIAN" tags="MAJOR-ARCANA" position="299,225" size="100,100">THE MAGICIAN
 
 This journey will take you to become a master, powerful and clear sighted.
 
 [[Step forward.|II THE HIGH PRIESTESS]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="2" name="II THE HIGH PRIESTESS" tags="MAJOR-ARCANA" position="300,351" size="100,100">THE HIGH PRIESTESS
+(set: $goes += 1)
+
+(if: $magician is false)[
+(set: $major += 1)(set: $score +=1)(set: $magician to true)
+]</tw-passagedata><tw-passagedata pid="2" name="II THE HIGH PRIESTESS" tags="MAJOR-ARCANA" position="300,351" size="100,100">THE HIGH PRIESTESS
 
 You are guided by a woman of great stature, serious and important like a masterful marble statue. She understands that one needs an understanding of the spiritual as well as the material to accomplish greatness.
 
@@ -27,20 +51,35 @@ You are guided by a woman of great stature, serious and important like a masterf
 (else:)[[[Step forward.|III THE EMPRESS]]
 [[Ask her a question.|XVIII THE MOON]]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="3" name="III THE EMPRESS" tags="MAJOR-ARCANA" position="299,474" size="100,100">THE EMPRESS
+(set: $goes += 1)
+
+(if: $highPriestess is false)[
+(set: $major += 1)(set: $score +=1)(set: $highPriestess to true)
+]</tw-passagedata><tw-passagedata pid="3" name="III THE EMPRESS" tags="MAJOR-ARCANA" position="300,476" size="100,100">THE EMPRESS
 
 Her empathy runs deep and rich, with deep, felt knowledge of the pain of this world, though she is stronger for it.
 
 [[Embrace her.|ACE OF CUPS]]
 [[Ask her why she is so compassionate.|IV THE EMPEROR]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="4" name="XVIII THE MOON" tags="MAJOR-ARCANA" position="301,2191" size="100,100">THE MOON
+(set: $goes += 1)
+
+(if: $empress is false)[
+(set: $major += 1)(set: $score +=1)(set: $empress to true)
+]</tw-passagedata><tw-passagedata pid="4" name="XVIII THE MOON" tags="MAJOR-ARCANA" position="299,2350" size="100,100">THE MOON
 
 The dark energies of the subconcious, the spiritual and mysterious, are a part of you. The high priestess told you of this knowledge, and the moon sees it revealed.
 
 &lt;solve a puzzle and then: (set: $suitGuesses = 0)
+[[You dedicate yourself to exploring this unconscious realm|IX THE HERMIT]]
+[[You feel that the physical world is a more urgent concern right now|V THE HIEROPHANT]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="5" name="ACE OF CUPS" tags="CUPS" position="424,99" size="100,100">You see a beautiful, peaceful fountain, which carves deep grooves in the rock onto which it flows. Some grooves are delicate and beautiful, and others are craggy and painful to touch. In places, the rock runs completely dry. You see that the water always has command over where the rivers form, it is just more difficult to change its ways which are well worn. The water pools and remingles together at the bottom.
+(set: $goes += 1)
+
+(if: $moon is false)[
+(set: $major += 1)(set: $score +=1)(set: $moon to true)
+]</tw-passagedata><tw-passagedata pid="5" name="ACE OF CUPS" tags="CUPS" position="1201,101" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+You see a beautiful, peaceful fountain, which carves deep grooves in the rock onto which it flows. Some grooves are delicate and beautiful, and others are craggy and painful to touch. In places, the rock runs completely dry. You see that the water always has command over where the rivers form, it is just more difficult to change its ways which are well worn. The water pools and remingles together at the bottom.
 
 (if: $aceGuesses &lt; 5)[
 [[You see that the fountain is like emotions.|TWO OF CUPS]]
@@ -54,7 +93,12 @@ The dark energies of the subconcious, the spiritual and mysterious, are a part o
 
 (set: $aceGuesses += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="6" name="IV THE EMPEROR" tags="MAJOR-ARCANA" position="300,600" size="100,100">THE EMPEROR
+(set: $goes += 1)
+
+(if: $C0 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C0 to true)
+]
+</tw-passagedata><tw-passagedata pid="6" name="IV THE EMPEROR" tags="MAJOR-ARCANA" position="300,600" size="100,100">THE EMPEROR
 
 The emperor has a fatherly masculine energy, the strength to be steadfast. He tells you that you, too, have the blood of great men. Wise, strong ancestors who could capture the hearts of enemies but knew to bow before children.
 
@@ -62,7 +106,11 @@ The emperor has a fatherly masculine energy, the strength to be steadfast. He te
 [[Ask him how he came to be so powerful.|ACE OF PENTACLES]]
 [[Ask him how he came to be so decisive.|ACE OF SWORDS]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="7" name="V THE HIEROPHANT" tags="MAJOR-ARCANA" position="300,725" size="100,100">THE HIEROPHANT
+(set: $goes += 1)
+
+(if: $emperor is false)[
+(set: $major += 1)(set: $score +=1)(set: $emperor to true)
+]</tw-passagedata><tw-passagedata pid="7" name="V THE HIEROPHANT" tags="MAJOR-ARCANA" position="300,725" size="100,100">THE HIEROPHANT
 
 The emperor advises you that wisdom comes from carefully deciding what to study, finding the most important lessons in life and being sure to keep these ideas alive. He asks you to choose the curriculum for this coming year.
 
@@ -77,9 +125,14 @@ The emperor advises you that wisdom comes from carefully deciding what to study,
 (if: $wands &gt; 2)[
 [[You choose to teach the students how to be motivated and achieve their dreams.|PAGE OF WANDS]]]
 
-(set: $score += 1)
-</tw-passagedata><tw-passagedata pid="8" name="ACE OF PENTACLES" tags="PENTACLES" position="801,100" size="100,100">You are given a seed, unlike any you have seen before. It is complex and whorled, and seeing how its complex surface matches your fingerprint, you realise it is unique and special to you. You carefully place it in a small hole in the earth you have dug with your fingers.
-Knowing in your heart that this is something special and unique to you, a talent, you dedicate yourself to caring for it humbly, working a little every day. Dedication to this oath will reap you all the rewards of life.
+(set: $goes += 1)
+
+(if: $hierophant is false)[
+(set: $major += 1)(set: $score +=1)(set: $hierophant to true)
+]
+</tw-passagedata><tw-passagedata pid="8" name="ACE OF PENTACLES" tags="PENTACLES" position="1351,101" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+You are given a seed, with a texture which is complex and whorled. You carefully place it in a small hole in the earth you have dug with your fingers.
+Knowing in your heart that this is something special and unique to you, you pledge to care for it humbly, working a little every day. You see that dedication to this oath will reap you all the rewards of life.
 
 (if: $aceGuesses &lt; 5)[
 [[You see that the seed connects you with your inner feelings.|ACE OF CUPS]]
@@ -93,7 +146,12 @@ Knowing in your heart that this is something special and unique to you, a talent
 
 (set: $aceGuesses += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="9" name="ACE OF SWORDS" tags="SWORDS" position="551,100" size="100,100">You see a sword, sharp and beautifully polished, crisply reflecting every detail of its surroundings. A brisk wind blows and you feel alert, seeing with intense crispness as the sword slices the layers away from a branch of wood, defining a form.
+(set: $goes += 1)
+
+(if: $P0 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P0 to true)
+]</tw-passagedata><tw-passagedata pid="9" name="ACE OF SWORDS" tags="SWORDS" position="1051,101" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+You see a sword, sharp and beautifully polished, crisply reflecting every detail of its surroundings. A brisk wind blows and you feel alert, seeing with intense crispness as the sword slices the layers away from a branch of wood, defining a form.
 
 (if: $aceGuesses &lt; 5)[
 [[You see that the sword is revealing a clearer concept to you.|ACE OF CUPS]]
@@ -107,15 +165,32 @@ Knowing in your heart that this is something special and unique to you, a talent
 
 (set: $aceGuesses += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="10" name="TWO OF CUPS" tags="CUPS" position="426,226" size="100,100">The fountain transforms, and becomes a person, with a steady, gentle smile. At first, they are wary of you, but with time, you come to forge a deep relationship together. They offer to care for you, and discover the goodness and beauty everywhere in the world with you.
+(set: $goes += 1)
+
+(if: $S0 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S0 to true)
+]</tw-passagedata><tw-passagedata pid="10" name="TWO OF CUPS" tags="CUPS" position="1203,227" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+The fountain transforms, and becomes a person, with a steady, gentle smile. At first, they are wary of you, but with time, you come to forge a deep relationship together. They offer to care for you, and discover the goodness and beauty everywhere in the world with you.
 
 [[You refuse. You may be limited in your own independence if you commit so deeply to another person.|THREE OF SWORDS]]
 [[You accept. You have so much love, and you want to revel in it and share it with everyone who would accept it.|THREE OF CUPS]]
-[[You accept, and dedicate yourself fully to caring for them too.|VI THE LOVERS]]
+[[You accept, and dedicate yourself fully to caring for them too.|FOUR OF WANDS]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="11" name="TWO OF PENTACLES" tags="PENTACLES" position="801,226" size="100,100">
+(set: $goes += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="12" name="ACE OF WANDS" tags="WANDS" position="675,100" size="100,100">You see a burning wand, which has spring flowers sprouting from the fire, buds full of tense energy, on the brink of blossoming. You feel a sense of urgency, the intense feeling of generations of ancestors pushing forward, of which you are the tip.
+(if: $C2 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C2 to true)
+]</tw-passagedata><tw-passagedata pid="11" name="TWO OF PENTACLES" tags="PENTACLES" position="1351,226.33333333333334" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+As you wait for events to unfold, you feel a sense that things will be revealed to you, and you will know what to do once that happens. You imagine a coin falling, slowly, and you must wait for it to land heads or tails.
+
+[[You wait.|THREE OF PENTACLES]]
+
+(set: $goes += 1)
+
+(if: $P2 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P2 to true)
+]</tw-passagedata><tw-passagedata pid="12" name="ACE OF WANDS" tags="WANDS" position="900,99" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+You see a burning wand, which has spring flowers sprouting from the fire, buds full of tense energy, on the brink of blossoming. You feel a sense of urgency, the intense feeling of generations of ancestors pushing forward, of which you are the tip.
 
 (if: $aceGuesses &lt; 3)[
 [[You feel an intense desire to connect with yourself.|ACE OF CUPS]]
@@ -129,7 +204,11 @@ Knowing in your heart that this is something special and unique to you, a talent
 
 (set: $aceGuesses += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="13" name="VI THE LOVERS" tags="MAJOR-ARCANA" position="300,851" size="100,100">THE LOVERS
+(set: $goes += 1)
+
+(if: $W0 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W0 to true)
+]</tw-passagedata><tw-passagedata pid="13" name="VI THE LOVERS" tags="MAJOR-ARCANA" position="300,851" size="100,100">THE LOVERS
 
 There comes a day when you must make a decision between two paths- you are at a crossroads, and of either decision, the choice you have to make is incompatible with the other.
 
@@ -137,11 +216,28 @@ There comes a day when you must make a decision between two paths- you are at a 
 [[You decide to make a radical change in your life.|ACE OF WANDS]]
 [[You refuse to choose, and decide to wait.|XII THE HANGED MAN]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="14" name="THREE OF SWORDS" tags="SWORDS" position="551,351" size="100,100">
+(set: $goes += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="15" name="THREE OF CUPS" tags="CUPS" position="425,349" size="100,100">
+(if: $lovers is false)[
+(set: $major += 1)(set: $score +=1)(set: $lovers to true)
+]</tw-passagedata><tw-passagedata pid="14" name="THREE OF SWORDS" tags="SWORDS" position="1052,348" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+You see that a misunderstanding is breaking a relationship to the breaking point. The ideologies in conflict are incompatible, and although it will be painful there is going to have to be a parting of ways. It will be a relief in the long run.
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="16" name="VII THE CHARIOT" tags="MAJOR-ARCANA" position="300,975" size="100,100">THE CHARIOT
+[[You focus all your attention on moving on and recovering.|ACE OF PENTACLES]]
+[[You allow yourself to feel the pain of this loss.|ACE OF CUPS]]
+[[You reassess your beliefs, and consider that your original position may have been wrong.|FOUR OF SWORDS]]
+
+(set: $goes += 1)
+
+(if: $S3 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S3 to true)
+]</tw-passagedata><tw-passagedata pid="15" name="THREE OF CUPS" tags="CUPS" position="1202,349" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C3 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C3 to true)
+]</tw-passagedata><tw-passagedata pid="16" name="VII THE CHARIOT" tags="MAJOR-ARCANA" position="300,975" size="100,100">THE CHARIOT
 
 Now that you have commited fully to this path, you are able to apply intense energy and drive to accomplishing your goals, striking like lightning.
 
@@ -153,7 +249,11 @@ Now that you have commited fully to this path, you are able to apply intense ene
 [[You set to the task at hand.|ACE OF WANDS]]
 ]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="17" name="XII THE HANGED MAN" tags="MAJOR-ARCANA" position="300,1549" size="100,100">THE HANGED MAN
+(set: $goes += 1)
+
+(if: $chariot is false)[
+(set: $major += 1)(set: $score +=1)(set: $chariot to true)
+]</tw-passagedata><tw-passagedata pid="17" name="XII THE HANGED MAN" tags="MAJOR-ARCANA" position="299,1600" size="100,100">THE HANGED MAN
 
 You have reached a time where you feel you cannot progress. Now is a good time to be philosophical, to study and meditate upon the position you find yourself in, and to focus on developing patience, wisdom and optimism. You try to stop resisting your circumstances and let some time go by.
 
@@ -161,37 +261,84 @@ You have reached a time where you feel you cannot progress. Now is a good time t
 [[You pick yourself up, and decide to start again.|XIII DEATH]]]
 (else:)[[[You pick yourself up, and decide to start again.|0 THE FOOL]]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="18" name="PAGE OF SWORDS" tags="SWORDS" position="551,1300" size="100,100">After a long time searching, you finally arrive at the royal house of the swords. You are greeted by the Page, a surprisingly untrustworthy seeming young man, who answers your questions with vagueries, or changes the subject. When you ask him why a student of the house of truth would be so sly, he tells you that you cannot always serve the biggest purpose being visibly heroic. Sometimes you must keep your own council, and stealthily accomplish what you can.
+(set: $goes += 1)
 
-[[You consider his words, and then offer him an exchange of information, rather than demanding answers.|SIX OF WANDS]]
-[[You consider his words, and then reprimand him for not being generous with the truth.|FOUR OF SWORDS]]
+(if: $hangedMan is false)[
+(set: $major += 1)(set: $score +=1)(set: $hangedMan to true)
+]</tw-passagedata><tw-passagedata pid="18" name="PAGE OF SWORDS" tags="SWORDS" position="1048,1374" size="100,100">After a long time searching, you finally arrive at the royal house of the swords. You are greeted by the Page, a surprisingly untrustworthy seeming young man, who answers your questions with vagueries, or changes the subject. When you ask him why a student of the house of truth would be so sly, he tells you that you cannot always serve the biggest purpose being visibly heroic. Sometimes you must keep your own council, and stealthily accomplish what you can.
+
+[[You consider his words, and then offer him an exchange of information, rather than demanding answers.|SIX OF SWORDS]]
+[[You consider his words, and then reprimand him for not being generous with the truth.|THREE OF SWORDS]]
 [[You consider his words, and then decide to trust him, following him where he leads you.|FIVE OF PENTACLES]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="19" name="PAGE OF CUPS" tags="CUPS" position="426,1300" size="100,100">After a long time searching, you finally arrive at the royal house of the cups. You are greeted by the Page, 
+(set: $goes += 1)
+
+(if: $SP is false)[
+(set: $swords += 1)(set: $score +=1)(set: $SP to true)
+]</tw-passagedata><tw-passagedata pid="19" name="PAGE OF CUPS" tags="CUPS" position="1201,1375" size="100,100">After a long time searching, you finally arrive at the royal house of the cups. You are greeted by the Page, a brooding teenager  
 
 [[success.|SIX OF CUPS]]
 [[failure.|FIVE OF ]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="20" name="PAGE OF PENTACLES" tags="PENTACLES" position="800,1301" size="100,100">After a long time searching, you finally arrive at the royal house of the pentacles. You are greeted by the Page, a very young boy who is slow to talk and unsure of himself. He tells you he is training to become a master of wealth. He trains every day to become well attuned to his body, and studies how to pay attention and appreciate the pleasures of this world with patience and dedication.
+(set: $goes += 1)
+
+(if: $CP is false)[
+(set: $cups += 1)(set: $score += 1)(set: $CP to true)
+]</tw-passagedata><tw-passagedata pid="20" name="PAGE OF PENTACLES" tags="PENTACLES" position="1350,1374" size="100,100">After a long time searching, you finally arrive at the royal house of the pentacles. You are greeted by the Page, a very young boy who is slow to talk and unsure of himself. He tells you he is training to become a master of wealth. He trains every day to become well attuned to his body, and studies how to pay attention and appreciate the pleasures of this world with patience and dedication.
 He advises you to look to those who have accomplished great things, to replicate their results and avoid their failures.
 
 [[Knowing that the mind of a beginner is a channel for genius, you ask him for his guidance.|SIX OF PENTACLES]]
 [[Seeing that the boy is so fresh faced and has never needed for much, you ask him to direct you to the royalty of pentacles.|FIVE OF WANDS]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="21" name="PAGE OF WANDS" tags="WANDS" position="676,1301" size="100,100">After a long time searching, you finally arrive at the royal house of the wands. You are greeted by the Page, 
+(set: $goes += 1)
 
-[[success.|SIX OF WANDS]]
-[[failure.|FIVE OF ]]
+(if: $PP is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $PP to true)
+]</tw-passagedata><tw-passagedata pid="21" name="PAGE OF WANDS" tags="WANDS" position="900.3333333333334,1373" size="100,100">After a long time searching, you finally arrive at the royal house of the wands. You are greeted by the Page, a scruffy-looking individual who asks you where you would like her to take you, but every time you make a suggestion, she plans an elaborate route which goes off track with her excitement.
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="22" name="TWO OF WANDS" tags="WANDS" position="675,225" size="100,100">
+[[You interrupt her ramblings to assert a destination of your choosing.|FIVE OF WANDS]]
+[[You decide to agree to go along with her unfaesable plan.|SIX OF WANDS]]
+[[You listen to her increasingly fantastical chatting, hoping she will eventually figure out a way to apply herself to taking you somewhere efficiently.|TWO OF PENTACLES]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="23" name="TWO OF SWORDS" tags="SWORDS" position="551,225" size="100,100">
+(set: $goes += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="24" name="XIII DEATH" tags="" position="300,1675" size="100,100">DEATH
+(if: $WP is false)[
+(set: $wands += 1)(set: $score +=1)(set: $WP to true)
+]</tw-passagedata><tw-passagedata pid="22" name="TWO OF WANDS" tags="WANDS" position="898,223" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+As though it understood your urgency, the wand suddenly splits, as if it were struck by lightning.  The two charred branches begin to sprout new growth, entangling with each other to form what perhaps looks like a great door, or maybe a looming beast. You are torn between feelings of impatience and fear.
 
-You realise how to clear the old to make way and cultivate the new. Rebirthing, the cyclical, natural healthiness in endings.
+[[In your feelings of haste, you rush to grapple with the form.|VII THE CHARIOT]]
+[[You watch with interest as it forms, feeling that you must wait this out before approaching.|TWO OF PENTACLES]]
+[[You make a plan of action while the shape emerges|THREE OF WANDS]]
+You flee.|
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="25" name="XV THE DEVIL" tags="MAJOR-ARCANA" position="301,1813" size="100,100">THE DEVIL
+(set: $goes += 1)
+
+(if: $W2 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W2 to true)
+]</tw-passagedata><tw-passagedata pid="23" name="TWO OF SWORDS" tags="SWORDS" position="1049,225" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=sword&quot;&gt;
+The sword splits in two, down the length of the blade. The two blades clash together, and a clear chime rings out. They parry relentlessly against each other, and faced with this violent display, you feel moved to pick a side.
+
+[[Grasp the left sword, to lend your strength and help it fight.|THREE OF SWORDS]]
+[[Grasp the right sword, to lend your strength and help it fight.|THREE OF SWORDS]]
+[[Wait, to see if you can understand what is happening and choose wisely.|FIVE OF SWORDS]]
+
+
+(set: $goes += 1)
+
+(if: $S2 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S2 to true)
+]</tw-passagedata><tw-passagedata pid="24" name="XIII DEATH" tags="MAJOR-ARCANA" position="300,1726" size="100,100">DEATH
+
+A skeleton, clad in black, rides towards you ominously, yet steadily, on a huge white horse. His voice is surprisingly friendly. He tells you you must learn how to clear the old to make way and cultivate the new. 
+
+(if: $sun is true and $star is true and )[[[You think about rebirthing, the cyclical, natural healthiness in endings.|XX JUDGEMENT]]
+
+(set: $goes += 1)
+
+(if: $death is false)[
+(set: $major += 1)(set: $score +=1)(set: $death to true)
+]</tw-passagedata><tw-passagedata pid="25" name="XV THE DEVIL" tags="MAJOR-ARCANA" position="300,1977" size="100,100">THE DEVIL
 
 This evenness allows you to distinguish between the bad and the taboo, and to learn to accept and embrace the nonconformist parts of yourself. You become better able to express all of who you are.
 You are met with resistance- some people see your honesty as evidence that you are a bad person.
@@ -199,7 +346,11 @@ You are met with resistance- some people see your honesty as evidence that you a
 [[Hold your ground and insist that they are wrong.|XVI THE TOWER]]
 [[Reassess and consider that perhaps that you were mistaken.|XII THE HANGED MAN]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="26" name="XVI THE TOWER" tags="MAJOR-ARCANA" position="301,1928" size="100,100">THE TOWER
+(set: $goes += 1)
+
+(if: $devil is false)[
+(set: $major += 1)(set: $score +=1)(set: $devil to true)
+]</tw-passagedata><tw-passagedata pid="26" name="XVI THE TOWER" tags="MAJOR-ARCANA" position="300,2100" size="100,100">THE TOWER
 
 Having seen the truly wrong and distinguished it for what it is, are you ready to question what feels comfortable to live in a more just society? The powerful and complacent have the most to lose when the revolution comes.
 
@@ -207,55 +358,217 @@ Having seen the truly wrong and distinguished it for what it is, are you ready t
 [[You aren&#39;t convinced that the powerful are all so bad.|FIVE OF PENTACLES]]
 [[You dedicate yourself to fighting against the powerful and exploitative|XVII THE STAR]]
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="27" name="XVII THE STAR" tags="MAJOR-ARCANA" position="301,2066" size="100,100">
+(set: $goes += 1)
 
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="28" name="FIVE OF SWORDS" tags="SWORDS" position="550,600" size="100,100">
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="29" name="FIVE OF PENTACLES" tags="PENTACLES" position="800,599" size="100,100">
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="30" name="VIII STRENGTH" tags="" position="300,1100" size="100,100">STRENGTH
-
-A woman guiding a lion agrees to teach you how to control and direct your energy and drive. She teaches you that you must learn to enter a calm state of mind before seeting out on a task, to be driven by desire rather than fear. A feminine spirit of responsibility and experience can be used to safely direct a lion. It is impossible to do with anger or force.
-
-[[You reach out to the lion, 
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="31" name=" KNIGHT OF PENTACLES" tags="" position="797,1510" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="32" name="SIX OF PENTACLES" tags="PENTACLES" position="800,726" size="100,100">
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="33" name="FIVE OF WANDS" tags="WANDS" position="675,599" size="100,100">
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="34" name="SIX OF WANDS" tags="WANDS" position="676,725" size="100,100">
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="35" name="FOUR OF SWORDS" tags="SWORDS" position="549,475" size="100,100">Now that some time has passed, you aren&#39;t sure that you agree with your original decision. Your gut reaction now seems wrong, and you feel the need to contemplate your ideology and moral core for the first time. You decide to take your own council for a while.
-
-[[You decide that sometimes it is best to come to your own conclusions, rather than be led by others.|IX THE HERMIT]]
-[[You decide to seek out someone to guide you.|VIII STRENGTH]]
-
-(set: $score += 1)</tw-passagedata><tw-passagedata pid="36" name="SIX OF CUPS" tags="" position="426,724" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="37" name="FIVE OF " tags="" position="657,1093" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="38" name="IX THE HERMIT" tags="MAJOR-ARCANA" position="300,1226" size="100,100">THE HERMIT
-
-You decide to spend some time alone, to be thoughtful and introspective. 
-
+(if: $tower is false)[
+(set: $major += 1)(set: $score +=1)(set: $tower to true)
+]</tw-passagedata><tw-passagedata pid="27" name="XVII THE STAR" tags="MAJOR-ARCANA" position="301,2227" size="100,100">
 (if: $pentacles &gt; 4)[
 [[|SIX OF PENTACLES]]
 ]
 (if: $swords &gt; 4)[
 [[|SIX OF SWORDS]]]
-[[Nearly driven mad by your solitude, you beg for help.|II THE HIGH PRIESTESS]]
+(if: $wands &gt; 4)[
+[[|SIX OF WANDS]]]
 
-(set: $hermit to true)</tw-passagedata><tw-passagedata pid="39" name="SIX OF SWORDS" tags="" position="551,725" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="X WHEEL OF FORTUNE" tags="" position="299,1350" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="41" name="TAROT" tags="TITLE-CARD" position="177,100" size="100,100">[[TAROT|0 THE FOOL]]
+(set: $goes += 1)
+
+(if: $star is false)[
+(set: $major += 1)(set: $score +=1)(set: $star to true)
+]</tw-passagedata><tw-passagedata pid="28" name="FIVE OF SWORDS" tags="SWORDS" position="1051,600" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+A great clash of beliefs has played out, and you are left standing in the aftermath of a catastrophe. 
+
+[[Sometimes all there is left to do is to clean up after a great mess.
+[[
+
+(set: $goes += 1)
+
+(if: $S5 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S5 to true)
+]</tw-passagedata><tw-passagedata pid="29" name="FIVE OF PENTACLES" tags="PENTACLES" position="1350,601" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P5 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P5 to true)
+]</tw-passagedata><tw-passagedata pid="30" name="VIII STRENGTH" tags="" position="300,1100" size="100,100">STRENGTH
+
+A woman guiding a lion agrees to teach you how to control and direct your energy and drive. She teaches you that you must learn to enter a calm state of mind before setting out on a task, to be driven by desire rather than fear. A feminine spirit of responsibility and experience can be used to safely direct a lion. It is impossible to do with anger or force.
+
+[[You reach out to the lion, 
+
+(set: $goes += 1)
+
+(if: $strength is false)[
+(set: $major += 1)(set: $score +=1)(set: $strength to true)
+]</tw-passagedata><tw-passagedata pid="31" name=" KNIGHT OF PENTACLES" tags="PENTACLES" position="1349.3333333333333,1499.3333333333333" size="100,100">
+
+(set: $goes += 1)
+
+(if: $PN is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $PN to true)
+]</tw-passagedata><tw-passagedata pid="32" name="SIX OF PENTACLES" tags="PENTACLES" position="1351,728" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P6 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P6 to true)
+]</tw-passagedata><tw-passagedata pid="33" name="FIVE OF WANDS" tags="WANDS" position="900,600" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+In your striving to succeed, you have forced a fast pace without taking the time to determine a direction which aligns with your true beliefs. You have managed to misapply your restless energy to a manipulative agenda which doesn&#39;t align with your natural ambition.
+
+(set: $goes += 1)
+
+(if: $W5 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W5 to true)
+]</tw-passagedata><tw-passagedata pid="34" name="SIX OF WANDS" tags="WANDS" position="899,726" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W6 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W6 to true)
+]</tw-passagedata><tw-passagedata pid="35" name="FOUR OF SWORDS" tags="SWORDS" position="1051,476" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+After a vigorous action to which you committed yourself fully, some time has passed, and you aren&#39;t sure that you agree with your original decision. Your gut reaction now seems wrong, and you feel the need to contemplate your ideology and moral core. You consider taking your own council for a while.
+
+[[You decide that sometimes it is best to come to your own conclusions, rather than be led by others.|IX THE HERMIT]]
+[[You decide to seek out someone to guide you.|VIII STRENGTH]]
+
+(set: $goes += 1)
+
+(if: $S4 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S4 to true)
+]</tw-passagedata><tw-passagedata pid="36" name="SIX OF CUPS" tags="CUPS" position="1203,726" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C6 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C6 to true)
+]</tw-passagedata><tw-passagedata pid="37" name="IX THE HERMIT" tags="MAJOR-ARCANA" position="301,1226" size="100,100">THE HERMIT
+
+You decide to spend some time alone, to be thoughtful and introspective. You realise that by casting away your pride, there are lessons to be learned by a humble existence in the company of nature.
+
+[[You realise that by starting anew, you may be rewarded with a fresh perspective|0 THE FOOL]]
+
+
+(set: $goes += 1)
+
+(if: $hermit is false)[
+(set: $major += 1)(set: $score +=1)(set: $hermit to true)
+]</tw-passagedata><tw-passagedata pid="38" name="SIX OF SWORDS" tags="SWORDS" position="1051,727" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $S6 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S6 to true)
+]</tw-passagedata><tw-passagedata pid="39" name="X WHEEL OF FORTUNE" tags="MAJOR-ARCANA" position="299,1349" size="100,100">You encounter a spinning wheel, with the seasons as its spokes, moving unceasingly. The only stable part is the central spoke, an eternal centre.
+
+[[You are frightened and nauseated by the constant motion, and drawn to the unchanging core|IX THE HERMIT]]
+[[You watch the rapid flow of the edge of the wheel, and rather than fear its speed, you try to find comfort in the rhythm of the seasons, and the knowledge that hard times always pass.|XIV TEMPERANCE]]
+
+(set: $goes += 1)
+
+(if: $wheelOfFortune is false)[
+(set: $major += 1)(set: $score +=1)(set: $wheelOfFortune to true)
+]</tw-passagedata><tw-passagedata pid="40" name="TAROT" tags="TITLE-CARD" position="175,100" size="100,100">[[TAROT|0 THE FOOL]]
 
 (set: $hermit to false)
 (set: $moon to false)
 (set: $sun to false)
 (set: $star to false)
 
+(set: $goes = 0)
 (set: $score = 0)
+
+(set: $major = 0)
 (set: $swords  = 0)
 (set: $cups = 0)
 (set: $pentacles = 0)
 (set: $wands = 0)
 
 (set: $aceGuesses = 0)
-</tw-passagedata><tw-passagedata pid="42" name="0 THE FOOL" tags="MAJOR-ARCANA" position="299,101" size="100,100">THE FOOL
+
+
+(set: $fool to false)
+(set: $magician to false)
+(set: $highPriestess to false)
+(set: $empress to false)
+(set: $emperor to false)
+(set: $hierophant to false)
+(set: $lovers to false)
+(set: $empress to false)
+(set: $chariot to false)
+(set: $strength to false)
+(set: $hermit to false)
+(set: $wheelOfFortune to false)
+(set: $justice to false)
+(set: $hangedMan to false)
+(set: $death to false)
+(set: $temperance to false)
+(set: $devil to false)
+(set: $tower to false)
+(set: $star to false)
+(set: $sun to false)
+(set: $judgement to false)
+(set: $world to false)
+
+(set: $W0 to false)
+(set: $W2 to false)
+(set: $W3 to false)
+(set: $W4 to false)
+(set: $W5 to false)
+(set: $W6 to false)
+(set: $W7 to false)
+(set: $W8 to false)
+(set: $W9 to false)
+(set: $W10 to false)
+(set: $WP to false)
+(set: $WN to false)
+(set: $WQ to false)
+(set: $WK to false)
+
+(set: $S0 to false)
+(set: $S2 to false)
+(set: $S3 to false)
+(set: $S4 to false)
+(set: $S5 to false)
+(set: $S6 to false)
+(set: $S7 to false)
+(set: $S8 to false)
+(set: $S9 to false)
+(set: $S10 to false)
+(set: $SP to false)
+(set: $SN to false)
+(set: $SQ to false)
+(set: $SK to false)
+
+(set: $C0 to false)
+(set: $C2 to false)
+(set: $C3 to false)
+(set: $C4 to false)
+(set: $C5 to false)
+(set: $C6 to false)
+(set: $C7 to false)
+(set: $C8 to false)
+(set: $C9 to false)
+(set: $C10 to false)
+(set: $CP to false)
+(set: $CN to false)
+(set: $CQ to false)
+(set: $CK to false)
+
+(set: $P0 to false)
+(set: $P2 to false)
+(set: $P3 to false)
+(set: $P4 to false)
+(set: $P5 to false)
+(set: $P6 to false)
+(set: $P7 to false)
+(set: $P8 to false)
+(set: $P9 to false)
+(set: $P10 to false)
+(set: $PP to false)
+(set: $PN to false)
+(set: $PQ to false)
+(set: $PK to false)</tw-passagedata><tw-passagedata pid="41" name="0 THE FOOL" tags="MAJOR-ARCANA" position="299,101" size="100,100">THE FOOL
 
 You are about to take the first step on a great journey, and in doing so in lighthearted naiivity, take a fall. 
 
@@ -263,7 +576,222 @@ You are about to take the first step on a great journey, and in doing so in ligh
 
 (set: $aceGuesses = 0)
 
-(set: $score += 1)</tw-passagedata></tw-storydata>
+(set: $goes += 1)
+
+(if: $fool is false)[
+(set: $major += 1)(set: $score +=1)(set: $fool to true)
+]</tw-passagedata><tw-passagedata pid="42" name="FOUR OF WANDS" tags="WANDS" position="901,475" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W4 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W4 to true)
+]</tw-passagedata><tw-passagedata pid="43" name="THREE OF PENTACLES" tags="PENTACLES" position="1350,352" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P3 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P3 to true)
+]</tw-passagedata><tw-passagedata pid="44" name="THREE OF WANDS" tags="WANDS" position="900,351" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W3 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W3 to true)
+]</tw-passagedata><tw-passagedata pid="45" name="XIV TEMPERANCE" tags="MAJOR-ARCANA" position="300,1849" size="100,100">Double-click this passage to edit it.
+
+(set: $goes += 1)
+
+(if: $temperance is false)[
+(set: $major += 1)(set: $score +=1)(set: $temperance to true)
+]</tw-passagedata><tw-passagedata pid="46" name="XI JUSTICE " tags="" position="298,1470" size="100,100">
+
+(set: $goes += 1)
+
+(if: $justice is false)[
+(set: $major += 1)(set: $score +=1)(set: $justice to true)
+]</tw-passagedata><tw-passagedata pid="47" name="XIX THE SUN" tags="MAJOR-ARCANA" position="301,2476" size="100,100">
+
+(set: $goes += 1)
+
+(if: $sun is false)[
+(set: $major += 1)(set: $score +=1)(set: $sun to true)
+]</tw-passagedata><tw-passagedata pid="48" name="XX JUDGEMENT" tags="" position="300,2600" size="100,100">
+
+(set: $goes += 1)
+
+(if: $judgement is false)[
+(set: $major += 1)(set: $score +=1)(set: $judgement to true)
+]</tw-passagedata><tw-passagedata pid="49" name="XXI THE WORLD" tags="MAJOR-ARCANA" position="300,2726" size="100,100">
+
+(set: $goes += 1)
+
+(if: $world is false)[
+(set: $major += 1)(set: $score +=1)(set: $world to true)
+]</tw-passagedata><tw-passagedata pid="50" name="FOUR OF CUPS" tags="CUPS" position="1201,476" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C4 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C4 to true)
+]</tw-passagedata><tw-passagedata pid="51" name="FOUR OF PENTACLES" tags="PENTACLES" position="1351,476" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P4 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P4 to true)
+]</tw-passagedata><tw-passagedata pid="52" name="FIVE OF CUPS" tags="CUPS" position="1201,600" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C5 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C5 to true)
+]</tw-passagedata><tw-passagedata pid="53" name="SEVEN OF WANDS" tags="WANDS" position="901,850" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W7 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W7 to true)
+]</tw-passagedata><tw-passagedata pid="54" name="SEVEN OF SWORDS" tags="SWORDS" position="1051,848" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $S7 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S7 to true)
+]</tw-passagedata><tw-passagedata pid="55" name="SEVEN OF CUPS" tags="CUPS" position="1201,850" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C7 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C7 to true)
+]</tw-passagedata><tw-passagedata pid="56" name="SEVEN OF PENTACLES" tags="PENTACLES" position="1350,850" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P7 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P7 to true)
+]</tw-passagedata><tw-passagedata pid="57" name="EIGHT OF WANDS" tags="WANDS" position="903,975" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W8 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W8 to true)
+]</tw-passagedata><tw-passagedata pid="58" name="EIGHT OF SWORDS" tags="SWORDS" position="1050,973" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $S8 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S8 to true)
+]</tw-passagedata><tw-passagedata pid="59" name="EIGHT OF CUPS" tags="CUPS" position="1200,975" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C8 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C8 to true)
+]</tw-passagedata><tw-passagedata pid="60" name="EIGHT OF PENTACLES" tags="PENTACLES" position="1350,973" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P8 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P8 to true)
+]</tw-passagedata><tw-passagedata pid="61" name="NINE OF PENTACLES" tags="PENTACLES" position="1349,1099" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P9 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P9 to true)
+]</tw-passagedata><tw-passagedata pid="62" name="TEN OF PENTACLES" tags="PENTACLES" position="1349,1225" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/pentacle.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;pentacle&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $P10 is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $P10 to true)
+]
+
+</tw-passagedata><tw-passagedata pid="63" name="NINE OF CUPS" tags="" position="1197.3333333333333,1100" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C9 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C9 to true)
+]</tw-passagedata><tw-passagedata pid="64" name="TEN OF CUPS" tags="CUPS" position="1199,1226" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/cup.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;cup&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $C10 is false)[
+(set: $cups += 1)(set: $score += 1)(set: $C10 to true)
+]</tw-passagedata><tw-passagedata pid="65" name="NINE OF SWORDS" tags="SWORDS" position="1049,1100" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $S9 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S9 to true)
+]</tw-passagedata><tw-passagedata pid="66" name="TEN OF SWORDS" tags="SWORDS" position="1050,1225" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/sword.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;sword&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $S10 is false)[
+(set: $swords += 1)(set: $score +=1)(set: $S10 to true)
+]</tw-passagedata><tw-passagedata pid="67" name="NINE OF WANDS" tags="WANDS" position="901,1100" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W9 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W9 to true)
+]</tw-passagedata><tw-passagedata pid="68" name="TEN OF WANDS" tags="WANDS" position="900,1226" size="100,100">&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;&lt;img src=&quot;http://www.meganbat.es/assets/images/tarot/wand.png&quot; width=&quot;57&quot; height=&quot;56&quot; alt=&quot;wand&quot;&gt;
+
+(set: $goes += 1)
+
+(if: $W10 is false)[
+(set: $wands += 1)(set: $score +=1)(set: $W10 to true)
+]</tw-passagedata><tw-passagedata pid="69" name="KNIGHT OF CUPS" tags="CUPS" position="1200,1501.6666666666667" size="100,100">
+(set: $goes += 1)
+
+(if: $CN is false)[
+(set: $cups += 1)(set: $score += 1)(set: $CN to true)
+]</tw-passagedata><tw-passagedata pid="70" name="QUEEN OF CUPS" tags="CUPS" position="1201.6666666666667,1624.6666666666667" size="100,100">
+(set: $goes += 1)
+
+(if: $CQ is false)[
+(set: $cups += 1)(set: $score += 1)(set: $CQ to true)
+]</tw-passagedata><tw-passagedata pid="71" name="KING OF CUPS" tags="CUPS KING" position="1201.6666666666667,1751.3333333333335" size="100,100">
+(set: $goes += 1)
+
+(if: $CK is false)[
+(set: $cups += 1)(set: $score += 1)(set: $CK to true)
+]</tw-passagedata><tw-passagedata pid="72" name="QUEEN OF PENTACLES" tags="PENTACLES" position="1350,1624.6666666666667" size="100,100">(set: $goes += 1)
+
+(if: $PQ is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $PQ to true)
+]</tw-passagedata><tw-passagedata pid="73" name="KING OF PENTACLES" tags="PENTACLES" position="1349.6666666666667,1751.3333333333333" size="100,100">(set: $goes += 1)
+
+(if: $PK is false)[
+(set: $pentacles += 1)(set: $score +=1)(set: $PK to true)
+]</tw-passagedata><tw-passagedata pid="74" name="KNIGHT OF SWORDS" tags="SWORDS" position="1050.3333333333333,1500" size="100,100">(set: $goes += 1)
+
+(if: $SN is false)[
+(set: $swords += 1)(set: $score +=1)(set: $SN to true)
+]</tw-passagedata><tw-passagedata pid="75" name="QUEEN OF SWORDS" tags="SWORDS" position="1051.6666666666667,1625" size="100,100">(set: $goes += 1)
+
+(if: $SQ is false)[
+(set: $swords += 1)(set: $score +=1)(set: $SQ to true)
+]</tw-passagedata><tw-passagedata pid="76" name="KING OF SWORDS" tags="SWORDS" position="1050,1751.6666666666667" size="100,100">(set: $goes += 1)
+
+(if: $SK is false)[
+(set: $swords += 1)(set: $score +=1)(set: $SK to true)
+]</tw-passagedata><tw-passagedata pid="77" name="KNIGHT OF WANDS" tags="" position="900.0000000000001,1499.3333333333333" size="100,100">(set: $goes += 1)
+
+(if: $WN is false)[
+(set: $wands += 1)(set: $score +=1)(set: $WN to true)
+]</tw-passagedata><tw-passagedata pid="78" name="QUEEN OF WANDS" tags="WANDS" position="900.0000000000001,1624.3333333333335" size="100,100">(set: $goes += 1)
+
+(if: $WQ is false)[
+(set: $wands += 1)(set: $score +=1)(set: $WQ to true)
+]</tw-passagedata><tw-passagedata pid="79" name="KING OF WANDS" tags="" position="901.6666666666666,1751.3333333333333" size="100,100">(set: $goes += 1)
+
+(if: $WK is false)[
+(set: $wands += 1)(set: $score +=1)(set: $WK to true)
+]</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
