@@ -115,12 +115,9 @@
 
 				var t = Math.PI * 2 * tee/360;
 
-				xParam = 4*x/(windowHalfX);
-				yParam = y/(windowHalfY);
-
-				x = (( Math.cos( xParam * t ) ) * Math.cos( yParam * t ) );
-				y = (( yParam + Math.cos( xParam * t ) ) * Math.sin( yParam * t ) );
-				z = ( Math.sin( xParam * t ) );
+				x = ( ( Math.cos( (3+x/(3*windowHalfX)) * t ) ) * Math.cos( 2 * t ) );
+				y = (( 2 + Math.cos( 3 * t ) ) * Math.sin( (2 + y/(3*windowHalfY)) * t ) );
+				z = ( Math.sin( 3 * t ) );
 
 				var mult = 15;
 				var v1 = new THREE.Vector3(x*mult,y*mult,z*mult);
