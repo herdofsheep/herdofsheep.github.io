@@ -24,12 +24,16 @@
 		<script src="../assets/js/gltfLoader.js"></script>
 		<script src="../assets/js/detector.js"></script>
 		<script src='../assets/js/perlin.js'></script>
+		<script src="../assets/js/THREE.MeshLine.js"></script>
+
 
 		<script>
 			//let users know if their browser doesn't support webGL
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, scene, renderer, light;
+			var numz = 60;
+			var num = 300;
 			var geometry;
 			var mathena;
 
@@ -47,37 +51,51 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				noise.seed(Math.random());
-
 				scene = new THREE.Scene();
-				// scene.background = new THREE.Color( 0xffffff );
+				scene.background = new THREE.Color( 0xffffff );
 
-				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 10000 );
-				camera.position.set( 0, 0, 2800 );
+				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
+				camera.position.set( 3, 6, 150 );
 
 				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
 				light.position.set( 0, 1, 0 );
         
 				scene.add( light );
         
-				var material = new THREE.PointsMaterial( { transparent: false } );
+				var textureLoader = new THREE.TextureLoader();
+				var sprite = textureLoader.load( '../assets/images/flowerBoldOutline.png' );
+
+				var material = new MeshLineMaterial({color: 0x000000});
 				material.alphaTest = 0.5;
 				material.opacity = 0.6;
 				
-				geometry = new THREE.Geometry();
+				var geometries = []
 
-				for ( var i = 0; i < 361; i += 1 ) {
-					for( var j = 0; j < 361; j += 1 ){
+				for ( var i = 0; i < num+1; i += 1 ) {
 
-						geometry.vertices.push(
-							blob(i,j,mouseX,mouseY)
+					var points = []
+
+					for( var j = 0; j < (numz+10)/2; j += 1 ){
+
+						points.push(
+							knot(i,j)
+							// blob(i,j,mouseX,mouseY)
 						);
 
 					}
+
+					geometries.push( new THREE.Geometry().setFromPoints(points) );
+
 				}
 
-				var thing = new THREE.Points( geometry, material )
-				scene.add( thing )
+				for ( var i = 0; i < geometries.length; i += 1 ) {
+					// var thing = new THREE.Line( geometries[i], material )
+					// scene.add( thing )
+					var line = new MeshLine();
+					line.setGeometry( geometries[i], function( p ) { return 0.1; }  );
+					var mesh = new THREE.Mesh( line.geometry, material );
+					scene.add( mesh )
+				}
 		
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -92,43 +110,65 @@
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			}
 
+			function blob(tee,zee,mouseX,mouseY){
+				
+				var t = ( Math.PI * tee)/(num);
+				var z = ( 4* Math.PI * zee)/(numz);
+
+				xParam = mouseX/windowHalfX;
+				yParam = mouseY/windowHalfY;
+
+				var noisePace = 3
+				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
+				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
+				var zoff = Math.cos(t);
+
+				radius = 1 + noise.perlin3( xoff, yoff, zoff )/3
+				var x = Math.sin(t)*Math.cos(z)*radius;
+				var y = Math.sin(t)*Math.sin(z)*radius;
+				var z = Math.cos(t)*radius;
+
+				var mult = 20;
+				var v1 = new THREE.Vector3(x*mult,y*mult,z*mult);
+
+				return v1
+			}
+
+			function knot(tee, rad) {
+
+				var t = Math.PI * 2 * tee/num;
+				var r = Math.PI * 4 * rad/numz;
+
+				// granny
+				// var x = (- 0.22 * Math.cos( t ) - 1.28 * Math.sin( t ) - 0.44 * Math.cos( 3 * t ) - 0.78 * Math.sin( 3 * t ));
+				// var y = (- 0.1 * Math.cos( 2 * t ) - 0.27 * Math.sin( 2 * t ) + 0.38 * Math.cos( 4 * t ) + 0.46 * Math.sin( 4 * t ));
+				// var z = (0.7 * Math.cos( 3 * t ) - 0.4 * Math.sin( 3 * t ));
+
+				x = (( Math.cos( 3 * t ) ) * Math.cos( 2 * t ) );
+				y = (( 2 + Math.cos( 3 * t ) ) * Math.sin( 2 * t ) );
+				z = ( Math.sin( 3 * t ) );
+
+				xoff = Math.cos( r )*Math.sin( r )
+				yoff = Math.sin( r )*Math.cos( r )
+				zoff = Math.sin( r );
+
+				var mult = 10;
+				var mult2 = 20;
+				xPos = x*mult+mult2*xoff;
+				yPos = y*mult+mult2*yoff
+				zPos = z*mult+mult2*zoff
+
+				var v1 = new THREE.Vector3(xPos,yPos,zPos);
+
+				return v1
+			};
+
+
 			function onDocumentMouseMove( event ) {
 
 				mouseX = event.clientX - windowHalfX;
 				mouseY = event.clientY - windowHalfY;
 
-			}
-		
-			function blob(tee,zee,mouseX,mouseY){
-				
-				var t = (2 * Math.PI * tee)/360;
-				var z = (2 * Math.PI * zee)/360;
-
-				xParam = mouseX/windowHalfX;
-				yParam = mouseY/windowHalfY;
-
-				var noiseMax = 5;
-				// var radius = 1
-				// for(var i=0; i<N; i++){
-				// 	radius += amps[i] * cos((i+1)*alpha + phases[i])
-				// }
-				var xoff = Math.cos(t)
-				var yoff = Math.sin(t)
-				var zoff = Math.sin(z)
-
-				// radius = 1 + noise.perlin2( xoff, yoff )/100
-				radius = 10;
-				radius = 1 + noise.simplex3( xoff, yoff, zoff*3 )
-				var x = Math.cos(t)*radius*zoff;
-				var y = Math.sin(t)*radius*zoff;
-				// var x = Math.cos( t );
-				// var y = Math.sin( t + yParam );
-				var z = Math.cos(z)*30;
-
-				var mult = 100;
-				var v1 = new THREE.Vector3(x*mult,y*mult,z*mult);
-
-				return v1
 			}
 
 			function onWindowResize() {
@@ -152,25 +192,6 @@
 
 				camera.lookAt( scene.position );
 				controls.update();
-
-				geometry.verticesNeedUpdate = true;
-				geometry.dynamic = true;
-
-				// for ( var i = 0; i < geometry.vertices.length; i ++ ) {
-
-				// 	geometry.vertices[i] = blob(i,j,mouseX,mouseY)
-
-				// }
-
-				var width = 361
-
-				for ( var i = 0; i < width; i += 1 ) {
-					for( var j = 0; j < width; j += 1 ){
-
-						geometry.vertices[i + j*width] = blob(i,j,mouseX,mouseY);
-						
-					}
-				}
 
 				renderer.render( scene, camera );
 

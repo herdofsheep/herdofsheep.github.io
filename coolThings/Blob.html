@@ -24,7 +24,6 @@
 		<script src="../assets/js/gltfLoader.js"></script>
 		<script src="../assets/js/detector.js"></script>
 		<script src='../assets/js/perlin.js'></script>
-		<script src="../assets/js/THREE.MeshLine.js"></script>
 
 
 		<script>
@@ -32,11 +31,9 @@
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, scene, renderer, light;
-			var numz = 60;
-			var num = 300;
+			var num = 50;
 			var geometry;
 			var mathena;
-			var lastPos = new THREE.Vector3(0,0,0);
 
 			var mouseX=400;
 			var mouseY=300;
@@ -53,7 +50,7 @@
 				document.body.appendChild( container );
 
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xffffff );
+				// scene.background = new THREE.Color( 0xffffff );
 
 				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
 				camera.position.set( 3, 6, 150 );
@@ -65,38 +62,34 @@
         
 				var textureLoader = new THREE.TextureLoader();
 				var sprite = textureLoader.load( '../assets/images/flowerBoldOutline.png' );
-
-				var material = new MeshLineMaterial({color: 0x000000});
+				var pointSize = 0.1;
+				var material = new THREE.PointsMaterial( { size: pointSize, side: THREE.FrontSide, map: sprite, transparent: false } );
 				material.alphaTest = 0.5;
 				material.opacity = 0.6;
+
+				geometry = new THREE.Geometry();
 				
-				var geometries = []
+				for ( var i = 0; i < num; i += 1 ) {
+					for( var j = 0; j < num/2; j += 1 ){
 
-				for ( var i = 0; i < num+1; i += 1 ) {
-
-					var points = []
-
-					for( var j = 0; j < (numz+10)/2; j += 1 ){
-
-						points.push(
-							// knot(i,j)
+						geometry.vertices.push(
 							blob(i,j,mouseX,mouseY)
 						);
 
 					}
-
-					geometries.push( new THREE.Geometry().setFromPoints(points) );
-
 				}
 
-				for ( var i = 0; i < geometries.length; i += 1 ) {
-					// var thing = new THREE.Line( geometries[i], material )
-					// scene.add( thing )
-					var line = new MeshLine();
-					line.setGeometry( geometries[i], function( p ) { return 0.1; }  );
-					var mesh = new THREE.Mesh( line.geometry, material );
-					scene.add( mesh )
-				}
+				var material = new THREE.PointsMaterial( { transparent: false } );
+
+				var thing = new THREE.Points( geometry, material )
+				scene.add( thing )
+
+				// geometry = new THREE.EdgesGeometry( geometry )
+				// var material = new THREE.MeshBasicMaterial( {
+				// color: "#ffffff", wireframe: true, transparent: false
+				// })
+				// var wireframeCube = new THREE.Mesh ( geometry, material )
+				// scene.add( wireframeCube )
 		
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -113,62 +106,29 @@
 
 			function blob(tee,zee,mouseX,mouseY){
 				
-				var t = ( Math.PI * tee)/(num);
-				var z = ( 4* Math.PI * zee)/(numz);
+				var t = (2 * Math.PI * tee)/num;
+				var z = (2 * Math.PI * zee)/num;
 
 				xParam = mouseX/windowHalfX;
 				yParam = mouseY/windowHalfY;
 
-				var noisePace = 3
-				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
-				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
+				var xoff = Math.sin(t)*Math.cos(z);
+				var yoff = Math.sin(t)*Math.sin(z);
 				var zoff = Math.cos(t);
 
-				radius = 1 + noise.perlin3( xoff, yoff, zoff )/3
+				radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
 				var x = Math.sin(t)*Math.cos(z)*radius;
 				var y = Math.sin(t)*Math.sin(z)*radius;
 				var z = Math.cos(t)*radius;
 
-				var mult = 20;
+				// var x = Math.sin(t)*Math.cos(z);
+				// var y = Math.sin(t)*Math.sin(z);
+				// var z = Math.cos(t);
+				var mult = 100;
 				var v1 = new THREE.Vector3(x*mult,y*mult,z*mult);
 
 				return v1
 			}
-
-			function knot(tee, rad) {
-
-				var t = Math.PI * 2 * tee/num;
-				var r = Math.PI * 4 * rad/numz;
-
-				// granny
-				// var x = (- 0.22 * Math.cos( t ) - 1.28 * Math.sin( t ) - 0.44 * Math.cos( 3 * t ) - 0.78 * Math.sin( 3 * t ));
-				// var y = (- 0.1 * Math.cos( 2 * t ) - 0.27 * Math.sin( 2 * t ) + 0.38 * Math.cos( 4 * t ) + 0.46 * Math.sin( 4 * t ));
-				// var z = (0.7 * Math.cos( 3 * t ) - 0.4 * Math.sin( 3 * t ));
-
-				var xPos = (( Math.cos( 3 * t ) ) * Math.cos( 2 * t ) );
-				var yPos = (( 2 + Math.cos( 3 * t ) ) * Math.sin( 2 * t ) );
-				var zPos = ( Math.sin( 3 * t ) );
-
-				var v1 = new THREE.Vector3(xPos,yPos,zPos);
-
-				var vector = v1.sub(lastPos)
-
-				var unit = new THREE.Vector3(0,0,1);
-				var V = (vector.cross(unit)).normalize();
-				var W = V.cross(vector);
-
-				var offset = V.multiplyScalar(Math.cos( r )).add(W.multiplyScalar(Math.sin( r )));
-
-				var mult = 10;
-				var mult2 = 15;
-
-				var output = v1.multiplyScalar(mult).add(offset.multiplyScalar(mult2));
-
-				lastPos = v1;
-
-				return output
-			};
-
 
 			function onDocumentMouseMove( event ) {
 

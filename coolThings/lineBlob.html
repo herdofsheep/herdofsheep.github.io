@@ -13,11 +13,19 @@
 		    overflow-y: scroll;
 		    width: 100%;
 			}
+			#print{
+				position:fixed;
+				width:100;
+				height:100;
+				background: red;
+			}
 		</style>
 			
 	</head>
 	
 	<body>
+
+		<div id="print">fnehh</div>
 
 		<script src="../assets/js/three.js"></script>
 		<script src="../assets/js/orbitControls.js"></script>
@@ -25,6 +33,8 @@
 		<script src="../assets/js/detector.js"></script>
 		<script src='../assets/js/perlin.js'></script>
 		<script src="../assets/js/THREE.MeshLine.js"></script>
+		<script src="../assets/js/FileSaver.js"></script>
+		<script src="../assets/js/jquery.js"></script>
 
 
 		<script>
@@ -32,11 +42,10 @@
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, scene, renderer, light;
-			var numz = 60;
-			var num = 300;
+			var numz = 300;
+			var num = 100;
 			var geometry;
 			var mathena;
-			var lastPos = new THREE.Vector3(0,0,0);
 
 			var mouseX=400;
 			var mouseY=300;
@@ -56,7 +65,7 @@
 				scene.background = new THREE.Color( 0xffffff );
 
 				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
-				camera.position.set( 3, 6, 150 );
+				camera.position.set( 0, 0, 150 );
 
 				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
 				light.position.set( 0, 1, 0 );
@@ -76,10 +85,9 @@
 
 					var points = []
 
-					for( var j = 0; j < (numz+10)/2; j += 1 ){
+					for( var j = 0; j < (numz+1)/2; j += 1 ){
 
 						points.push(
-							// knot(i,j)
 							blob(i,j,mouseX,mouseY)
 						);
 
@@ -98,18 +106,25 @@
 					scene.add( mesh )
 				}
 		
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.gammaOutput = true;
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
+				// window.open( renderer.domElement.toDataURL( 'image/png' ), 'screenshot' );
 				
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				controls.update();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			}
+
+			$("#print").click(function() {
+				renderer.domElement.toBlob(function(blob) {
+					saveAs(blob, "Final");
+				});
+			});
 
 			function blob(tee,zee,mouseX,mouseY){
 				
@@ -124,7 +139,7 @@
 				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
 				var zoff = Math.cos(t);
 
-				radius = 1 + noise.perlin3( xoff, yoff, zoff )/3
+				radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
 				var x = Math.sin(t)*Math.cos(z)*radius;
 				var y = Math.sin(t)*Math.sin(z)*radius;
 				var z = Math.cos(t)*radius;
@@ -134,41 +149,6 @@
 
 				return v1
 			}
-
-			function knot(tee, rad) {
-
-				var t = Math.PI * 2 * tee/num;
-				var r = Math.PI * 4 * rad/numz;
-
-				// granny
-				// var x = (- 0.22 * Math.cos( t ) - 1.28 * Math.sin( t ) - 0.44 * Math.cos( 3 * t ) - 0.78 * Math.sin( 3 * t ));
-				// var y = (- 0.1 * Math.cos( 2 * t ) - 0.27 * Math.sin( 2 * t ) + 0.38 * Math.cos( 4 * t ) + 0.46 * Math.sin( 4 * t ));
-				// var z = (0.7 * Math.cos( 3 * t ) - 0.4 * Math.sin( 3 * t ));
-
-				var xPos = (( Math.cos( 3 * t ) ) * Math.cos( 2 * t ) );
-				var yPos = (( 2 + Math.cos( 3 * t ) ) * Math.sin( 2 * t ) );
-				var zPos = ( Math.sin( 3 * t ) );
-
-				var v1 = new THREE.Vector3(xPos,yPos,zPos);
-
-				var vector = v1.sub(lastPos)
-
-				var unit = new THREE.Vector3(0,0,1);
-				var V = (vector.cross(unit)).normalize();
-				var W = V.cross(vector);
-
-				var offset = V.multiplyScalar(Math.cos( r )).add(W.multiplyScalar(Math.sin( r )));
-
-				var mult = 10;
-				var mult2 = 15;
-
-				var output = v1.multiplyScalar(mult).add(offset.multiplyScalar(mult2));
-
-				lastPos = v1;
-
-				return output
-			};
-
 
 			function onDocumentMouseMove( event ) {
 
