@@ -37,9 +37,12 @@
 		<script src="../assets/js/jquery.js"></script>
 
 
-		<script>
+		<script type="module">
 			//let users know if their browser doesn't support webGL
+			import {SVGRenderer} from './../assets/three.js/examples/jsm/renderers/SVGRenderer.js';
+
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
 			var container;
 			var camera, scene, renderer, light;
 			var numz = 400;
@@ -75,7 +78,7 @@
 				var textureLoader = new THREE.TextureLoader();
 				var sprite = textureLoader.load( '../assets/images/flowerBoldOutline.png' );
 
-				var material = new MeshLineMaterial({color: 0x000000});
+				var material = new THREE.LineBasicMaterial({color: 0x000000});
 				material.alphaTest = 0.5;
 				material.opacity = 0.6;
 				
@@ -98,15 +101,11 @@
 				}
 
 				for ( var i = 0; i < geometries.length; i += 1 ) {
-					// var thing = new THREE.Line( geometries[i], material )
-					// scene.add( thing )
-					var line = new MeshLine();
-					line.setGeometry( geometries[i], function( p ) { return 0.1; }  );
-					var mesh = new THREE.Mesh( line.geometry, material );
-					scene.add( mesh )
+					var thing = new THREE.Line( geometries[i], material )
+					scene.add( thing )
 				}
 		
-				renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
+				renderer = new THREE.SVGRenderer( { antialias: true, preserveDrawingBuffer: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.gammaOutput = true;
@@ -131,15 +130,15 @@
 				var t = ( Math.PI * tee)/(num);
 				var z = ( 4* Math.PI * zee)/(numz);
 
-				xParam = mouseX/windowHalfX;
-				yParam = mouseY/windowHalfY;
+				// var xParam = mouseX/windowHalfX;
+				// var yParam = mouseY/windowHalfY;
 
 				var noisePace = 3
 				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
 				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
 				var zoff = Math.cos(t);
 
-				radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
+				var radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
 				var x = Math.sin(t)*Math.cos(z)*radius;
 				var y = Math.sin(t)*Math.sin(z)*radius;
 				// var z = Math.cos(t)*radius;
