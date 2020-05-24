@@ -3,7 +3,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -17,11 +17,11 @@
 	<body>
 		<script type="module">
 
-			import * as THREE from './../assets/three.js/build/three.module.js';
+			import * as THREE from './../../assets/three.js/build/three.module.js';
 
-			import { GLTFLoader } from './../assets/three.js/examples/jsm/loaders/GLTFLoader.js';
-			import { OutlineEffect } from './../assets/three.js/examples/jsm/effects/OutlineEffect.js';
-			import { TrackballControls } from './../assets/three.js/examples/jsm/controls/TrackballControls.js';
+			import { GLTFLoader } from './../../assets/three.js/examples/jsm/loaders/GLTFLoader.js';
+			import { OutlineEffect } from './../../assets/three.js/examples/jsm/effects/OutlineEffect.js';
+			import { TrackballControls } from './../../assets/three.js/examples/jsm/controls/TrackballControls.js';
 
 			var camera, controls, scene, renderer, effect;
 
@@ -57,7 +57,7 @@
 				// sphere = new THREE.Mesh( new THREE.SphereBufferGeometry( 200, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
 				// scene.add( sphere );
 
-				var loader = new GLTFLoader().setPath( '../assets/models/gltf/' );
+				var loader = new GLTFLoader().setPath( '../../assets/models/gltf/' );
 				loader.load( 'ramesses.gltf', function ( data ) {
 
 					gltf = data;

@@ -6,7 +6,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -14,17 +14,17 @@
 		    width: 100%;
 			}
 		</style>
-			
+		
 	</head>
 	
 	<body>
 
-		<script src="../assets/js/three.js"></script>
-		<script src="../assets/js/orbitControls.js"></script>
-		<script src="../assets/js/gltfLoader.js"></script>
-		<script src="../assets/js/detector.js"></script>
-		<script src='../assets/js/perlin.js'></script>
-		<script src="../assets/js/THREE.MeshLine.js"></script>
+		<script src="../../assets/js/three.js"></script>
+		<script src="../../assets/js/orbitControls.js"></script>
+		<script src="../../assets/js/gltfLoader.js"></script>
+		<script src="../../assets/js/detector.js"></script>
+		<script src='../../assets/js/perlin.js'></script>
+		<script src="../../assets/js/THREE.MeshLine.js"></script>
 
 
 		<script>
@@ -32,8 +32,8 @@
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, scene, renderer, light;
-			var numz = 60;
-			var num = 300;
+			var numz = 300;
+			var num = 70;
 			var geometry;
 			var mathena;
 			var lastPos = new THREE.Vector3(0,0,0);
@@ -56,7 +56,7 @@
 				scene.background = new THREE.Color( 0xffffff );
 
 				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
-				camera.position.set( 3, 6, 150 );
+				camera.position.set( 0, 0, 90 );
 
 				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
 				light.position.set( 0, 1, 0 );
@@ -64,7 +64,7 @@
 				scene.add( light );
         
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../assets/images/flowerBoldOutline.png' );
+				var sprite = textureLoader.load( '../../assets/images/flowerBoldOutline.png' );
 
 				var material = new MeshLineMaterial({color: 0x000000});
 				material.alphaTest = 0.5;
@@ -119,7 +119,7 @@
 				xParam = mouseX/windowHalfX;
 				yParam = mouseY/windowHalfY;
 
-				var noisePace = 3
+				var noisePace = 2
 				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
 				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
 				var zoff = Math.cos(t);

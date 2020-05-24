@@ -6,12 +6,18 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
 		    overflow-y: scroll;
 		    width: 100%;
+			}
+			#print{
+				position:fixed;
+				width:100;
+				height:100;
+				background: red;
 			}
 		</style>
 			
@@ -19,19 +25,28 @@
 	
 	<body>
 
-		<script src="../assets/js/three.js"></script>
-		<script src="../assets/js/orbitControls.js"></script>
-		<script src="../assets/js/gltfLoader.js"></script>
-		<script src="../assets/js/detector.js"></script>
-		<script src='../assets/js/perlin.js'></script>
+		<div id="print">fnehh</div>
+
+		<script src="../../assets/js/three.js"></script>
+		<script src="../../assets/js/orbitControls.js"></script>
+		<script src="../../assets/js/gltfLoader.js"></script>
+		<script src="../../assets/js/detector.js"></script>
+		<script src='../../assets/js/perlin.js'></script>
+		<script src="../../assets/js/THREE.MeshLine.js"></script>
+		<script src="../../assets/js/FileSaver.js"></script>
+		<script src="../../assets/js/jquery.js"></script>
 
 
-		<script>
+		<script type="module">
 			//let users know if their browser doesn't support webGL
+			import {SVGRenderer} from './../../assets/three.js/examples/jsm/renderers/SVGRenderer.js';
+
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
 			var container;
 			var camera, scene, renderer, light;
-			var num = 50;
+			var numz = 400;
+			var num = 180;
 			var geometry;
 			var mathena;
 
@@ -50,10 +65,10 @@
 				document.body.appendChild( container );
 
 				scene = new THREE.Scene();
-				// scene.background = new THREE.Color( 0xffffff );
+				scene.background = new THREE.Color( 0xffffff );
 
 				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
-				camera.position.set( 3, 6, 150 );
+				camera.position.set( 0, 0, 150 );
 
 				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
 				light.position.set( 0, 1, 0 );
@@ -61,42 +76,42 @@
 				scene.add( light );
         
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../assets/images/flowerBoldOutline.png' );
-				var pointSize = 0.1;
-				var material = new THREE.PointsMaterial( { size: pointSize, side: THREE.FrontSide, map: sprite, transparent: false } );
+				var sprite = textureLoader.load( '../../assets/images/flowerBoldOutline.png' );
+
+				var material = new THREE.LineBasicMaterial({color: 0x000000});
 				material.alphaTest = 0.5;
 				material.opacity = 0.6;
-
-				geometry = new THREE.Geometry();
 				
-				for ( var i = 0; i < num; i += 1 ) {
-					for( var j = 0; j < num/2; j += 1 ){
+				var geometries = []
 
-						geometry.vertices.push(
+				for ( var i = 0; i < num+1; i += 1 ) {
+
+					var points = []
+
+					for( var j = 0; j < (numz+1)/2; j += 1 ){
+
+						points.push(
 							blob(i,j,mouseX,mouseY)
 						);
 
 					}
+
+					geometries.push( new THREE.Geometry().setFromPoints(points) );
+
 				}
 
-				var material = new THREE.PointsMaterial( { transparent: false } );
-
-				var thing = new THREE.Points( geometry, material )
-				scene.add( thing )
-
-				// geometry = new THREE.EdgesGeometry( geometry )
-				// var material = new THREE.MeshBasicMaterial( {
-				// color: "#ffffff", wireframe: true, transparent: false
-				// })
-				// var wireframeCube = new THREE.Mesh ( geometry, material )
-				// scene.add( wireframeCube )
+				for ( var i = 0; i < geometries.length; i += 1 ) {
+					var thing = new THREE.Line( geometries[i], material )
+					scene.add( thing )
+				}
 		
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer = new THREE.SVGRenderer( { antialias: true, preserveDrawingBuffer: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.gammaOutput = true;
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
+				// window.open( renderer.domElement.toDataURL( 'image/png' ), 'screenshot' );
 				
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				controls.update();
@@ -104,27 +119,32 @@
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			}
 
+			$("#print").click(function() {
+				renderer.domElement.toBlob(function(blob) {
+					saveAs(blob, "Final");
+				});
+			});
+
 			function blob(tee,zee,mouseX,mouseY){
 				
-				var t = (2 * Math.PI * tee)/num;
-				var z = (2 * Math.PI * zee)/num;
+				var t = ( Math.PI * tee)/(num);
+				var z = ( 4* Math.PI * zee)/(numz);
 
-				xParam = mouseX/windowHalfX;
-				yParam = mouseY/windowHalfY;
+				// var xParam = mouseX/windowHalfX;
+				// var yParam = mouseY/windowHalfY;
 
-				var xoff = Math.sin(t)*Math.cos(z);
-				var yoff = Math.sin(t)*Math.sin(z);
+				var noisePace = 3
+				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
+				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
 				var zoff = Math.cos(t);
 
-				radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
+				var radius = 1 + noise.perlin3( xoff, yoff, zoff )/10
 				var x = Math.sin(t)*Math.cos(z)*radius;
 				var y = Math.sin(t)*Math.sin(z)*radius;
-				var z = Math.cos(t)*radius;
+				// var z = Math.cos(t)*radius;
+				var z = 0
 
-				// var x = Math.sin(t)*Math.cos(z);
-				// var y = Math.sin(t)*Math.sin(z);
-				// var z = Math.cos(t);
-				var mult = 100;
+				var mult = 50;
 				var v1 = new THREE.Vector3(x*mult,y*mult,z*mult);
 
 				return v1

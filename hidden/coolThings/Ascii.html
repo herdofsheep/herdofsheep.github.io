@@ -3,7 +3,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -17,11 +17,11 @@
 	<body>
 		<script type="module">
 
-			import * as THREE from './../assets/three.js/build/three.module.js';
+			import * as THREE from './../../assets/three.js/build/three.module.js';
 
-			import { GLTFLoader } from './../assets/three.js/examples/jsm/loaders/GLTFLoader.js';
-			import { AsciiEffect } from './../assets/three.js/examples/jsm/effects/AsciiEffect.js';
-			import { TrackballControls } from './../assets/three.js/examples/jsm/controls/TrackballControls.js';
+			import { GLTFLoader } from './../../../assets/three.js/examples/jsm/loaders/GLTFLoader.js';
+			import { AsciiEffect } from './../../../assets/three.js/examples/jsm/effects/AsciiEffect.js';
+			import { TrackballControls } from './../../../assets/three.js/examples/jsm/controls/TrackballControls.js';
 
 			var camera, controls, scene, renderer, effect;
 
@@ -57,14 +57,12 @@
 				// sphere = new THREE.Mesh( new THREE.SphereBufferGeometry( 200, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
 				// scene.add( sphere );
 
-				var loader = new GLTFLoader().setPath( '../assets/models/gltf/' );
-				loader.load( 'knot.glb', function ( data ) {
+				var loader = new GLTFLoader().setPath( '../../assets/models/gltf/' );
+				loader.load( 'mathena.gltf', function ( data ) {
 
 					gltf = data;
 
 					var object = gltf.scene;
-					var size = 100;
-					gltf.scene.scale.set(size,size,size)
 
 					object.traverse( function ( node ) {
 
@@ -111,7 +109,7 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				// effect = new AsciiEffect( renderer, ' .:-+*=%@#', { invert: true } );
-				effect = new AsciiEffect( renderer, ' `.o0@', { invert: false } );
+				effect = new AsciiEffect( renderer, ' `.~o*wP03W@', { invert: false } );
 				// effect = new AsciiEffect( renderer, ' .\'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'.split(''));
 				effect.setSize( window.innerWidth, window.innerHeight );
 				effect.domElement.style.color = 'black';

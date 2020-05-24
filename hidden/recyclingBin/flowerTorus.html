@@ -6,7 +6,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -19,10 +19,10 @@
 	
 	<body>
 
-		<script src="../assets/js/three.js"></script>
-		<script src="../assets/js/orbitControls.js"></script>
-		<script src="../assets/js/gltfLoader.js"></script>
-		<script src="../assets/js/detector.js"></script>
+		<script src="../../assets/js/three.js"></script>
+		<script src="../../assets/js/orbitControls.js"></script>
+		<script src="../../assets/js/gltfLoader.js"></script>
+		<script src="../../assets/js/detector.js"></script>
 
 		<script>
 			//let users know if their browser doesn't support webGL
@@ -55,7 +55,7 @@
         
 				var geometry = new THREE.BoxGeometry( 1, 1, 1);
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../assets/images/flowerBold.png' );
+				var sprite = textureLoader.load( '../../assets/images/flowerBold.png' );
 				var size = 100;
 				var material = new THREE.PointsMaterial( { size: size, map: sprite, transparent: true } );
 				
