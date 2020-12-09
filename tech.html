@@ -18,6 +18,12 @@
 	</head>
 	
 	<body>
+		
+			<div class="container pink"> 
+				<a class="margin homelinks" href="CV.html"> CV </a>
+				<a class="margin homelinks" href="portfolio.html"> portfolio </a>
+				<a class="margin homelinks" href="https://github.com/herdofsheep"> github </a> 
+			</div>
 
 		<script src="assets/js/three.js"></script>
 		<script src="assets/js/orbitControls.js"></script>
@@ -40,7 +46,7 @@
 
 				scene = new THREE.Scene();
 
-				var windowHeight = window.innerHeight;
+				var windowHeight = window.innerHeight-60;
 
 				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / windowHeight, 0.1, 1000 );
 				camera.position.set( 0, 0, 3 );
@@ -51,6 +57,19 @@
 
 				controls = new THREE.OrbitControls( camera );
 				controls.update();
+
+				var texture = THREE.ImageUtils.loadTexture( 'assets/images/planets.jpg' );
+				var scale = 15;
+				var backgroundMesh = new THREE.Mesh(
+						new THREE.PlaneGeometry(1.3847*scale, 0.3000*scale, 0),
+						new THREE.MeshBasicMaterial({
+								map: texture
+						}));
+
+				backgroundMesh.material.depthTest = false;
+				backgroundMesh.material.depthWrite = false;
+
+				scene.add(backgroundMesh);
 				
 				mathena = loadModel( 'assets/models/gltf/mathena.gltf' );
 				// var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
