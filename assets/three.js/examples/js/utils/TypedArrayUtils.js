@@ -1,14 +1,9 @@
-
 THREE.TypedArrayUtils = {};
 
 /**
  * In-place quicksort for typed arrays (e.g. for Float32Array)
  * provides fast sorting
  * useful e.g. for a custom shader and/or BufferGeometry
- *
- * @author Roman Bolzern <roman.bolzern@fhnw.ch>, 2013
- * @author I4DS http://www.fhnw.ch/i4ds, 2013
- * @license MIT License <http://www.opensource.org/licenses/mit-license.php>
  *
  * Complexity: http://bigocheatsheet.com/ see Quicksort
  *
@@ -164,8 +159,6 @@ THREE.TypedArrayUtils.quicksortIP = function ( arr, eleSize, orderElement ) {
  *
  * Based on https://github.com/ubilabs/kd-tree-javascript by Ubilabs
  *
- * @author Roman Bolzern <roman.bolzern@fhnw.ch>, 2013
- * @author I4DS http://www.fhnw.ch/i4ds, 2013
  * @license MIT License <http://www.opensource.org/licenses/mit-license.php>
  *
  * Requires typed array quicksort
@@ -418,7 +411,6 @@ THREE.TypedArrayUtils.Kdtree.prototype.Node = function ( obj, depth, parent, pos
 
 /**
  * Binary heap implementation
- * @author http://eloquentjavascript.net/appendix2.htm
  */
 
 THREE.TypedArrayUtils.Kdtree.BinaryHeap = function ( scoreFunction ) {
@@ -502,7 +494,7 @@ THREE.TypedArrayUtils.Kdtree.BinaryHeap.prototype = {
 
 		}
 
-		throw new Error( "Node not found." );
+		throw new Error( 'Node not found.' );
 
 	},
 

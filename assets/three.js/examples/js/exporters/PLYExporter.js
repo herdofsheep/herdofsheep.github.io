@@ -1,5 +1,4 @@
 /**
- * @author Garrett Johnson / http://gkjohnson.github.io/
  * https://github.com/gkjohnson/ply-exporter-js
  *
  * Usage:
@@ -46,7 +45,7 @@ THREE.PLYExporter.prototype = {
 
 					if ( geometry.isBufferGeometry === true ) {
 
-						if ( geometry.getAttribute( 'position' ) !== undefined ) {
+						if ( geometry.hasAttribute( 'position' ) === true ) {
 
 							cb( mesh, geometry );
 
@@ -191,7 +190,7 @@ THREE.PLYExporter.prototype = {
 			// faces
 			header +=
 				`element face ${faceCount}\n` +
-				`property list uchar int vertex_index\n`;
+				'property list uchar int vertex_index\n';
 
 		}
 

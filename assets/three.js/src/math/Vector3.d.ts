@@ -6,17 +6,21 @@ import { Camera } from './../cameras/Camera';
 import { Spherical } from './Spherical';
 import { Cylindrical } from './Cylindrical';
 import { BufferAttribute } from './../core/BufferAttribute';
+import { InterleavedBufferAttribute } from './../core/InterleavedBufferAttribute';
 import { Vector } from './Vector2';
+
+type Vector3Tuple = [number, number, number];
+
 /**
  * 3D vector.
  *
  * @example
- * var a = new THREE.Vector3( 1, 0, 0 );
- * var b = new THREE.Vector3( 0, 1, 0 );
- * var c = new THREE.Vector3();
+ * const a = new THREE.Vector3( 1, 0, 0 );
+ * const b = new THREE.Vector3( 0, 1, 0 );
+ * const c = new THREE.Vector3();
  * c.crossVectors( a, b );
  *
- * @see <a href="https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js">src/math/Vector3.js</a>
+ * @see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js|src/math/Vector3.js}
  *
  * ( class Vector3 implements Vector<Vector3> )
  */
@@ -24,8 +28,19 @@ export class Vector3 implements Vector {
 
 	constructor( x?: number, y?: number, z?: number );
 
+	/**
+	 * @default 0
+	 */
 	x: number;
+
+	/**
+	 * @default 0
+	 */
 	y: number;
+
+	/**
+	 * @default 0
+	 */
 	z: number;
 	readonly isVector3: true;
 
@@ -71,7 +86,7 @@ export class Vector3 implements Vector {
 	/**
 	 * Adds v to this vector.
 	 */
-	add( v: Vector3, w?: Vector3 ): this;
+	add( v: Vector3 ): this;
 
 	addScalar( s: number ): this;
 
@@ -211,7 +226,7 @@ export class Vector3 implements Vector {
 	/**
 	 * Sets this vector to cross product of itself and v.
 	 */
-	cross( a: Vector3, w?: Vector3 ): this;
+	cross( a: Vector3 ): this;
 
 	/**
 	 * Sets this vector to cross product of a and b.
@@ -272,6 +287,7 @@ export class Vector3 implements Vector {
 	 * @return The created or provided array.
 	 */
 	toArray( array?: number[], offset?: number ): number[];
+	toArray( array?: Vector3Tuple, offset?: 0 ): Vector3Tuple;
 
 	/**
 	 * Copies x, y and z into the provided array-like.
@@ -282,9 +298,8 @@ export class Vector3 implements Vector {
 	toArray( array: ArrayLike<number>, offset?: number ): ArrayLike<number>;
 
 	fromBufferAttribute(
-		attribute: BufferAttribute,
-		index: number,
-		offset?: number
+		attribute: BufferAttribute | InterleavedBufferAttribute,
+		index: number
 	): this;
 
 	/**

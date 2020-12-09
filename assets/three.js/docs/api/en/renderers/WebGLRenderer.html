@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="utf-8" />
 		<base href="../../../" />
-		<script src="list.js"></script>
 		<script src="page.js"></script>
 		<link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
@@ -55,10 +54,10 @@
 
 		[page:String powerPreference] - Provides a hint to the user agent indicating what configuration
 		of GPU is suitable for this WebGL context. Can be *"high-performance"*, *"low-power"* or *"default"*. Default is *"default"*.
-		See [link:https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14.12 WebGL spec] for details.<br />
+		See [link:https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2 WebGL spec] for details.<br />
 
 		[page:Boolean failIfMajorPerformanceCaveat] - whether the renderer creation will fail upon low perfomance is detected. Default is *false*.
-		See [link:https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14.12 WebGL spec] for details.<br />
+		See [link:https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2 WebGL spec] for details.<br />
 
 		[page:Boolean depth] - whether the drawing buffer has a
 		[link:https://en.wikipedia.org/wiki/Z-buffering depth buffer] of at least 16 bits.
@@ -192,9 +191,13 @@
 			</li>
 		</ul>
 		</p>
-		<p>By default these data are reset at each render calls, but when using the composer or mirrors it can be preferred to reset them with a custom pattern :
+		<p>By default these data are reset at each render call but when having multiple render passes per frame (e.g. when using post processing) it can be preferred to reset with a custom pattern.
+			First, set *autoReset* to *false*.
 		<code>
 		renderer.info.autoReset = false;
+		</code>
+		Call *reset()* whenever you have finished to render a single frame.
+		<code>
 		renderer.info.reset();
 		</code>
 		</p>
@@ -275,11 +278,6 @@
 		Exposure level of tone mapping. Default is *1*.
 		</p>
 
-		<h3>[property:Number toneMappingWhitePoint]</h3>
-		<p>
-		Tone mapping white point. Default is *1*.
-		</p>
-
 		<h3>[property:WebXRManager xr]</h3>
 		<p>
 		Provides access to the WebXR related [page:WebXRManager interface] of the renderer.
@@ -303,7 +301,7 @@
 		<h3>[method:null clearStencil]( )</h3>
 		<p>Clear the stencil buffers. Equivalent to calling [page:WebGLRenderer.clear .clear]( false, false, true ).</p>
 
-		<h3>[method:null compile]( [param:Scene scene], [param:Camera camera] )</h3>
+		<h3>[method:null compile]( [param:Object3D scene], [param:Camera camera] )</h3>
 		<p>Compiles all materials in the scene with the camera. This is useful to precompile shaders before the first rendering.</p>
 
 		<h3>[method:null copyFramebufferToTexture]( [param:Vector2 position], [param:Texture texture], [param:Number level] )</h3>
@@ -337,7 +335,7 @@
 		<h3>[method:Float getClearAlpha]()</h3>
 		<p>Returns a [page:Float float] with the current clear alpha. Ranges from 0 to 1.</p>
 
-		<h3>[method:Color getClearColor]()</h3>
+		<h3>[method:Color getClearColor]( [param:Color target] )</h3>
 		<p>Returns a [page:Color THREE.Color] instance with the current clear color.</p>
 
 		<h3>[method:WebGLRenderingContext getContext]()</h3>
@@ -409,9 +407,9 @@
 		<p>For reading out a [page:WebGLCubeRenderTarget WebGLCubeRenderTarget] use the optional parameter activeCubeFaceIndex to determine which face should be read.</p>
 
 
-		<h3>[method:null render]( [param:Scene scene], [param:Camera camera] )</h3>
+		<h3>[method:null render]( [param:Object3D scene], [param:Camera camera] )</h3>
 		<p>
-			Render a [page:Scene scene] using a [page:Camera camera].<br />
+			Render a [page:Scene scene] or another type of [page:Object3D object] using a [page:Camera camera].<br />
 
 			The render is done to a previously specified [page:WebGLRenderTarget renderTarget] set by calling [page:WebGLRenderer.setRenderTarget .setRenderTarget] or to the canvas as usual.<br />
 

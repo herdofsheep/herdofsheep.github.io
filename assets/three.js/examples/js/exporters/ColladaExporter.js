@@ -1,5 +1,4 @@
 /**
- * @author Garrett Johnson / http://gkjohnson.github.io/
  * https://github.com/gkjohnson/collada-exporter-js
  *
  * Usage:
@@ -100,8 +99,8 @@ THREE.ColladaExporter.prototype = {
 			canvas = canvas || document.createElement( 'canvas' );
 			ctx = ctx || canvas.getContext( '2d' );
 
-			canvas.width = image.naturalWidth;
-			canvas.height = image.naturalHeight;
+			canvas.width = image.width;
+			canvas.height = image.height;
 
 			ctx.drawImage( image, 0, 0 );
 
@@ -297,7 +296,7 @@ THREE.ColladaExporter.prototype = {
 
 				}
 
-				gnode += `</mesh></geometry>`;
+				gnode += '</mesh></geometry>';
 
 				libraryGeometries.push( gnode );
 
@@ -396,10 +395,10 @@ THREE.ColladaExporter.prototype = {
 				if ( m.transparent === true ) {
 
 					transparencyNode +=
-						`<transparent>` +
+						'<transparent>' +
 						(
 							m.map ?
-								`<texture texture="diffuse-sampler"></texture>` :
+								'<texture texture="diffuse-sampler"></texture>' :
 								'<float>1</float>'
 						) +
 						'</transparent>';
@@ -516,7 +515,7 @@ THREE.ColladaExporter.prototype = {
 
 					(
 						m.side === THREE.DoubleSide ?
-							`<extra><technique profile="THREEJS"><double_sided sid="double_sided" type="int">1</double_sided></technique></extra>` :
+							'<extra><technique profile="THREEJS"><double_sided sid="double_sided" type="int">1</double_sided></technique></extra>' :
 							''
 					) +
 

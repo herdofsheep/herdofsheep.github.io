@@ -1,7 +1,6 @@
 /**
  * This class has been made to hold a slice of a volume data
  * @class
- * @author Valentin Demeusy / https://github.com/stity
  * @param   {THREE.Volume} volume    The associated volume
  * @param   {number}       [index=0] The index of the slice
  * @param   {string}       [axis='z']      For now only 'x', 'y' or 'z' but later it will change to a normal vector
