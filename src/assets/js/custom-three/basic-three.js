@@ -23,7 +23,6 @@ class BasicThree extends LitElement {
 
     constructor() {
         super();
-        this.kitty = 'wittle';
         this.init();
         this.animate();
     }
@@ -94,10 +93,8 @@ class BasicThree extends LitElement {
         this.renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
-    animate() {
-        var self = this;
-        
-        window.requestAnimationFrame( () => self.animate() );
+    animate() {        
+        window.requestAnimationFrame( () => this.animate() );
         this.render();
     }
 
