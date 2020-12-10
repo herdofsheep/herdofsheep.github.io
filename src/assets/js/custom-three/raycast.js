@@ -79,7 +79,7 @@ class RayCast extends LitElement {
     const quaternion = new THREE.Quaternion();
     const color = new THREE.Color();
 
-    for ( let i = 0; i < 500; i ++ ) {
+    for ( let i = 0; i < 50; i ++ ) {
 
       let geometry = new THREE.BoxBufferGeometry();
 
@@ -153,7 +153,7 @@ class RayCast extends LitElement {
     this.controls.dynamicDampingFactor = 0.3;
 
     this.stats = new Stats();
-    this.container.appendChild( this.stats.dom );
+    // this.container.appendChild( this.stats.dom );
 
     this.renderer.domElement.addEventListener( 'mousemove', this.onMouseMove.bind(this) );
 
