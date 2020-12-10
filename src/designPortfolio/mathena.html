@@ -54,8 +54,8 @@
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
         
-        controls = new THREE.OrbitControls( camera, renderer.domElement );
-        controls.update();
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.update();
 			}
 
 			function loadBar(){
@@ -64,8 +64,6 @@
 				manager.onProgress = function ( item, loaded, total ) {
     				console.log( item, loaded, total );
 				};
-
-
 			}
 
 			function loadModel( url ){
@@ -90,7 +88,6 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
 
-
 			function animate() {
 				requestAnimationFrame( animate );
 				render();
@@ -99,7 +96,7 @@
 			function render() {
 
 				camera.lookAt( scene.position );
-      	controls.update();
+      			controls.update();
 
 				renderer.render( scene, camera );
 			}
