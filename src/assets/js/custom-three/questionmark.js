@@ -35,9 +35,9 @@ class QuestionMark extends LitElement {
         this.scene.background = new THREE.Color( 0xffffff );
 
         this.camera = new THREE.PerspectiveCamera( 45, (this.container.clientWidth) / this.container.clientHeight, 1, 500 );
-        this.camera.position.set( 0, 0, 30 );
+        this.camera.position.set( 0, 30, 0 );
 
-        var light = new THREE.HemisphereLight( 0xff0000, 100, 10 );
+        var light = new THREE.HemisphereLight( 0x470b16, 100, 10 );
         light.position.set( 0, 0, 10 );
         this.scene.add( light );
 
@@ -54,16 +54,7 @@ class QuestionMark extends LitElement {
         window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
     }
 
-    // loadModel( url ){
-    //     new GLTFLoader().load(url, result => { 
-    //         model = result.scene.children[0]; //select first object in the model file
-    //         model.position.set(0,0,0); //set model position
-    //       });
-    //     return model
-    // }
-
     loadModel( url ){
-        // model
         var loader = new GLTFLoader();
         var model = new THREE.Group;
 
@@ -99,6 +90,7 @@ class QuestionMark extends LitElement {
         this.queAll.rotation.y = timer;
 
         this.renderer.render( this.scene, this.camera );
+        this.camera.lookAt( this.que.position );
     }
 
     duplicate() {
@@ -114,24 +106,21 @@ class QuestionMark extends LitElement {
 
             for ( let i = 0; i < 3; i ++ ) {
                 
-                var meep = new THREE.BoxBufferGeometry(1,1,1);
                 var peep = this.que.children[0].children.find(x=>x.type=='Mesh').geometry.clone();
                 
                 var offset = 10;
-                const position = new THREE.Vector3(-offset+i*offset,0,0);
-                const rotation = new THREE.Euler();
-                quaternion.setFromEuler( rotation );
+                const position = new THREE.Vector3(-offset+i*offset,0,5);
+                quaternion.setFromEuler( new THREE.Euler(0,0,0) );
                 const scale = new THREE.Vector3(1,1,1);
 
                 matrix.compose( position, quaternion, scale );
           
                 peep.applyMatrix4( matrix );
 
-                poses.push(peep.attributes.position.array)
                 ques.push(peep)
             }
 
-            var mat = new THREE.MeshBasicMaterial( {color: 0x2194ce} );
+            var mat = new THREE.MeshStandardMaterial({ color: 0xff0808 });
             const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( ques ), mat );
             this.queAll = objects;
             this.scene.add( objects );
