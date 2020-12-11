@@ -14,7 +14,7 @@ class QuestionMark extends LitElement {
             controls:{type: Object},
             scene:{type: Object}, 
             renderer:{type: Object},
-			mathena:{type: Object},
+			que:{type: Object},
             kitty: {type: String}
         };
     }
@@ -40,19 +40,14 @@ class QuestionMark extends LitElement {
         this.scene.background = new THREE.Color( 0xffffff );
 
         this.camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
-        this.camera.position.set( 0, 0, 2 );
+        this.camera.position.set( 0, 0, 30 );
 
-        var light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
-        light.position.set( 0, 1, 0 );
+        var light = new THREE.PointLight( 0xff0000, 100, 10 );
+        light.position.set( 0, 0, 10 );
         this.scene.add( light );
 
-        // const geometry = new THREE.BoxGeometry();
-        // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        // const cube = new THREE.Mesh( geometry, material );
-        // this.scene.add( cube );
-
-        this.mathena = this.loadModel( '/src/assets/models/gltf/mathena.gltf' );
-        this.scene.add( this.mathena );
+        this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
+        this.scene.add( this.que );
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );
         this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -62,9 +57,6 @@ class QuestionMark extends LitElement {
         this.container.appendChild( this.renderer.domElement );
 
         window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
-
-        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-        this.controls.update();
     }
 
     loadModel( url ){
@@ -97,15 +89,8 @@ class QuestionMark extends LitElement {
     render() {
         var timer = Date.now() * 0.0005;
 
-        this.mathena.rotation.x = timer*2;
-        this.mathena.rotation.y = timer;
-
-        //backgroundMesh.position.setX(0);
-        var xpos = 9*Math.cos( 0.1*timer );
-        
-        this.mathena.position.setX(xpos);
-        this.camera.position.set( xpos, 0, 3 );
-        this.camera.lookAt( this.mathena.position );
+        this.que.rotation.x = timer*2;
+        this.que.rotation.y = timer;
 
         this.renderer.render( this.scene, this.camera );
     }
