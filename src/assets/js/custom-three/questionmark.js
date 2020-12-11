@@ -34,7 +34,7 @@ class QuestionMark extends LitElement {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color( 0xffffff );
 
-        this.camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 1, 500 );
+        this.camera = new THREE.PerspectiveCamera( 45, (this.container.clientWidth) / this.container.clientHeight, 1, 500 );
         this.camera.position.set( 0, 0, 30 );
 
         var light = new THREE.HemisphereLight( 0xff0000, 100, 10 );
@@ -104,39 +104,30 @@ class QuestionMark extends LitElement {
     duplicate() {
         var found = _.get(this.que,['children',0,'children'],null)
         if(found){
-            var ques = []
-            
-            
+            var ques = [];
+            var poses = [];
+
             var keep = new THREE.Mesh(1,1,1);
 
             const matrix = new THREE.Matrix4();
             const quaternion = new THREE.Quaternion();
-            
-
 
             for ( let i = 0; i < 3; i ++ ) {
                 
                 var meep = new THREE.BoxBufferGeometry(1,1,1);
-                // var meep = new THREE.BoxGeometry(1,1,1);
-
-                var mesh = this.que.clone();
-                var offset = 40;
-                mesh.position.set(-offset+i*offset,0,0);
-                var peep = mesh.children[0].children.find(x=>x.type=='Mesh').geometry;
+                var peep = this.que.children[0].children.find(x=>x.type=='Mesh').geometry.clone();
                 
-                // var bufferGeometry = new THREE.BufferGeometry().fromGeometry( mesh.geometry );
-                // var offset = 40;
-                // const position = new THREE.Vector3(-offset+i*offset,0,0);
-                // const rotation = new THREE.Euler();
-                // quaternion.setFromEuler( rotation );
+                var offset = 10;
+                const position = new THREE.Vector3(-offset+i*offset,0,0);
+                const rotation = new THREE.Euler();
+                quaternion.setFromEuler( rotation );
+                const scale = new THREE.Vector3(1,1,1);
 
-                // const scale = new THREE.Vector3(1,1,1);
-
-                // matrix.compose( position, quaternion, scale );
-                // peep.attributes.position.needsUpdate = true;
+                matrix.compose( position, quaternion, scale );
           
                 peep.applyMatrix4( matrix );
 
+                poses.push(peep.attributes.position.array)
                 ques.push(peep)
             }
 
