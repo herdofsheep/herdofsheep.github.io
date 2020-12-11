@@ -34,10 +34,10 @@ class QuestionMark extends LitElement {
 
     init() {
 
-        this.container = document.createElement( 'div' );
-        document.body.appendChild( this.container );
+        this.container = document.getElementById( "container" );
 
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color( 0xffffff );
 
         this.camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
         this.camera.position.set( 0, 0, 2 );
@@ -51,17 +51,17 @@ class QuestionMark extends LitElement {
         // const cube = new THREE.Mesh( geometry, material );
         // this.scene.add( cube );
 
-        this.mathena = this.loadModel( 'src/assets/models/gltf/mathena.gltf' );
+        this.mathena = this.loadModel( '/src/assets/models/gltf/mathena.gltf' );
         this.scene.add( this.mathena );
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );
         this.renderer.setPixelRatio( window.devicePixelRatio );
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
         this.renderer.gammaOutput = true;
 
         this.container.appendChild( this.renderer.domElement );
 
-        // window.addEventListener( 'resize', this.onWindowResize, false );
+        window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.update();
@@ -84,15 +84,13 @@ class QuestionMark extends LitElement {
     }
 
     onWindowResize() {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
         this.camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
     }
 
-    animate() {
-        var self = this;
-        
-        window.requestAnimationFrame( () => self.animate() );
+    animate() {        
+        window.requestAnimationFrame( () => this.animate() );
         this.render();
     }
 
