@@ -1,7 +1,7 @@
 
 import {LitElement, html} from './../../../node_modules/lit-element';
 import * as THREE from './../../../node_modules/three';
-import 'lodash/lodash.min';
+import './../../../node_modules/lodash/lodash.min';
 
 import Stats from '../../../../node_modules/three/examples/jsm/libs/stats.module.js';
 
@@ -94,7 +94,7 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.thicQue = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
+    this.thicQue = this.loadModel( '/src/assets/models/gltf/bigQuestionmark.glb' );
 
     // this.art = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     // this.thicArt = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
@@ -219,6 +219,8 @@ class RayCast extends LitElement {
 
           // give the peep's vertices a color corresponding to the "id"
 
+          peep = peep.clone();
+
           this.applyVertexColors( peep, color.setHex( i ) );
 
           geometriesPicking.push( peep );
@@ -235,7 +237,7 @@ class RayCast extends LitElement {
 
         this.highlightShape = new THREE.Mesh(
           thiccQueClone,
-          new THREE.MeshLambertMaterial( { color: 0xffff00 }
+          new THREE.MeshLambertMaterial( { color: 0xff4162 }
           ) );
         // this.highlightShape = this.que.clone();
         this.scene.add( this.highlightShape );
