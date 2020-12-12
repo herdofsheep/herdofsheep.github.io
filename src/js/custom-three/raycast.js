@@ -20,7 +20,7 @@ class RayCast extends LitElement {
       renderer:{type: Object},
       pickingTexture:{type: Object},
       pickingScene:{type: Object},
-      highlightBox:{type: Object},
+      highlightShape:{type: Object},
       mouse:{type: Object},
       mousePosX:{type: Object},
       mousePosY:{type: Object},
@@ -39,7 +39,7 @@ class RayCast extends LitElement {
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
     this.mousePosY = "0px";
-    this.offset = new THREE.Vector3( 10, 10, 10 );
+    this.offset = new THREE.Vector3( 1, 1, 1 );
     this.duplicated = false;
     this.pickingData = [];
     this.cursorType = 'grab';
@@ -94,12 +94,7 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-
-    this.highlightBox = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(),
-      new THREE.MeshLambertMaterial( { color: 0xffff00 }
-      ) );
-    this.scene.add( this.highlightBox );
+    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -155,8 +150,10 @@ class RayCast extends LitElement {
         this.duplicate();
     }
 
-    this.threeRender();
-    this.stats.update();
+    if(this.duplicated == true){
+      this.threeRender();
+      this.stats.update();
+    }
 
   }
 
@@ -184,12 +181,11 @@ class RayCast extends LitElement {
 
         const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
         const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
+        var queClone = this.que.children[0].children.find(x=>x.type=='Mesh').geometry
 
         for ( let i = 1; i < 51; i ++ ) {
 
-          let geometry = new THREE.BoxBufferGeometry();
-
-          var peep = this.que.children[0].children.find(x=>x.type=='Mesh').geometry.clone();
+          var peep = queClone.clone();
 
           const position = new THREE.Vector3();
           position.x = Math.random() * 10000 - 5000;
@@ -209,15 +205,15 @@ class RayCast extends LitElement {
 
           peep.applyMatrix4( matrix );
 
-          // give the geometry's vertices a random color, to be displayed
+          // give the peep's vertices a random color, to be displayed
 
           this.applyVertexColors( peep, color.setHex( 0x060606 ) );
 
           geometriesDrawn.push( peep );
 
-          // give the geometry's vertices a color corresponding to the "id"
+          // give the peep's vertices a color corresponding to the "id"
 
-          this.applyVertexColors( geometry, color.setHex( i ) );
+          this.applyVertexColors( peep, color.setHex( i ) );
 
           geometriesPicking.push( peep );
 
@@ -230,6 +226,12 @@ class RayCast extends LitElement {
           };
 
         }
+
+        this.highlightShape = new THREE.Mesh(
+          queClone,
+          new THREE.MeshLambertMaterial( { color: 0xffff00 }
+          ) );
+        this.scene.add( this.highlightShape );
 
         const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
         this.scene.add( objects );
@@ -271,28 +273,31 @@ class RayCast extends LitElement {
     const data = this.pickingData[ id ];
 
     var debugWindow = this.shadowRoot.getElementById( "debug" );
-    debugWindow.innerHTML = 'id: ' + id + '<br>' + pixelBuffer + '<br>' + this.pickingTexture;
+    debugWindow.innerHTML = 'id: ' + id + '<br>' + pixelBuffer;
+
+    if( id>0 ){
+      this.cursorType = "pointer";
+      this.link = "src/what.html";
+      this.canClick = true;
+    }
 
     if ( data  && id > 0 ) {
 
-      //move our highlightBox so that it surrounds the picked object
+      //move our highlightShape so that it surrounds the picked object
 
       if ( data.position && data.rotation && data.scale ) {
 
-        this.highlightBox.position.copy( data.position );
-        this.highlightBox.rotation.copy( data.rotation );
-        this.highlightBox.scale.copy( data.scale ).add( this.offset );
-        this.highlightBox.visible = true;
-        this.cursorType = "pointer";
-        this.link = "src/what.html";
-        this.canClick = true;
+        this.highlightShape.position.copy( data.position );
+        this.highlightShape.rotation.copy( data.rotation );
+        this.highlightShape.scale.copy( data.scale ).add( this.offset );
+        this.highlightShape.visible = true;
 
       }
 
     } 
     else {
 
-      this.highlightBox.visible = false;
+      this.highlightShape.visible = false;
       this.cursorType = "grab";
       this.canClick = false;
 
