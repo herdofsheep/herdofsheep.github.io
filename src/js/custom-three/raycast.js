@@ -5,6 +5,7 @@ import * as THREE from 'three';
 
 import Stats from '../../../../node_modules/three/examples/jsm/libs/stats.module.js';
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TrackballControls } from '../../../../node_modules/three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
 
@@ -23,7 +24,9 @@ class RayCast extends LitElement {
       mouse:{type: Object},
       offset:{type: Object},
       pickingData:{type: Object},
-      cursorType: {type:String}
+      cursorType: {type:String},
+      canClick: {type:Boolean},
+      link: {type:String}
     };
   }
 
@@ -33,6 +36,9 @@ class RayCast extends LitElement {
     this.offset = new THREE.Vector3( 10, 10, 10 );
     this.pickingData = [];
     this.cursorType = 'grab';
+    this.canClick = false;
+    this.link = ""
+    this.addEventListener('click', this.clickLink);
   }
 
   render(){
@@ -61,7 +67,7 @@ class RayCast extends LitElement {
     this.camera.position.z = 1000;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color( 0xffffff );
+    this.scene.background = new THREE.Color( 0x424242 );
 
     this.pickingScene = new THREE.Scene();
     this.pickingTexture = new THREE.WebGLRenderTarget( 1, 1 );
@@ -69,7 +75,7 @@ class RayCast extends LitElement {
     this.scene.add( new THREE.AmbientLight( 0x555555 ) );
 
     const light = new THREE.SpotLight( 0xffffff, 1.5 );
-    light.position.set( 0, 500, 2000 );
+    light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
     const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
@@ -97,6 +103,8 @@ class RayCast extends LitElement {
     const quaternion = new THREE.Quaternion();
     const color = new THREE.Color();
 
+    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
+
     for ( let i = 1; i < 51; i ++ ) {
 
       let geometry = new THREE.BoxBufferGeometry();
@@ -123,7 +131,7 @@ class RayCast extends LitElement {
 
       // give the geometry's vertices a random color, to be displayed
 
-      applyVertexColors( geometry, color.setHex( Math.random() * 0xffffff ) );
+      applyVertexColors( geometry, color.setHex( 0x060606 ) );
 
       geometriesDrawn.push( geometry );
 
@@ -184,6 +192,21 @@ class RayCast extends LitElement {
 
   }
 
+  loadModel( url ){
+    var loader = new GLTFLoader();
+    var model = new THREE.Group;
+
+    loader.load( url , function ( gltf ) {
+
+        gltf.scene.traverse( function ( child ) {});
+        model.add( gltf.scene );
+
+    } );
+
+    return model;
+
+  }
+
   animate() {
 
     window.requestAnimationFrame( () => this.animate() );
@@ -202,6 +225,47 @@ class RayCast extends LitElement {
     this.renderer.setRenderTarget( null );
     this.renderer.render( this.scene, this.camera );
 
+  }
+
+  duplicate() {
+    var found = _.get(this.que,['children',0,'children'],null)
+    if(found){
+
+          var ques = [];
+          const matrix = new THREE.Matrix4();
+          const quaternion = new THREE.Quaternion();
+
+          var max = 14
+          for ( let i = 0; i < max; i ++ ) {
+              
+              var peep = this.que.children[0].children.find(x=>x.type=='Mesh').geometry.clone();
+              
+              var offset = 50;
+              var offsetCalc = (-offset*max/2)+(i*offset)+max;
+              const position = new THREE.Vector3(offsetCalc,0,5);
+              quaternion.setFromEuler( new THREE.Euler(0,0,0) );
+              var scaleSize = 5;
+              const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
+
+              matrix.compose( position, quaternion, scale );
+        
+              peep.applyMatrix4( matrix );
+              var mat = new THREE.MeshStandardMaterial({ color: 0xff0808 });
+              peep = new THREE.Mesh( peep, mat )
+
+              ques.push(peep)
+          }
+
+          // var mat = new THREE.MeshStandardMaterial({ color: 0xff0808 });
+          // const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( ques ), mat );
+          // this.queAll = objects;
+
+          for ( let i = 0; i < ques.length; i ++ ) {
+              this.scene.add( ques[i] );
+          }
+          this.ques = ques;
+          this.duplicated = true;
+      }
   }
 
   pick() {
@@ -244,18 +308,27 @@ class RayCast extends LitElement {
         this.highlightBox.rotation.copy( data.rotation );
         this.highlightBox.scale.copy( data.scale ).add( this.offset );
         this.highlightBox.visible = true;
-        this.cursorType = "pointer"
+        this.cursorType = "pointer";
+        this.link = "src/what.html";
+        this.canClick = true;
 
       }
-      
+
     } 
     else {
 
       this.highlightBox.visible = false;
-      this.cursorType = "grab"
+      this.cursorType = "grab";
+      this.canClick = false;
 
     }
 
+  }
+
+  clickLink(){
+    if(this.canClick){
+      window.location.href = "src/what.html";
+    }
   }
 
 

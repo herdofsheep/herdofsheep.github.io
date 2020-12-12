@@ -217,13 +217,21 @@ a:focus{
 /*popup 2d version saver*/
 .saver {
   position: absolute;
+  font-weight: 400;
+  background: none;
+  color: white;
   padding: 20px;
   border: solid;
   left: 10px;
   bottom: 10px;
-  width: 80px;
+  width: 90px;
 }
 
+.saver:hover, .saver:focus {
+  background: black;
+  color: white;
+  font-weight: 400;
+}
 .grabcursor{
   cursor: grab;
 }
@@ -309,6 +317,13 @@ a:focus{
 }
 .full{
   width:100%;
+}
+
+.fullScreen{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0px;
 }
 
 /* background images for portfolio links*/
