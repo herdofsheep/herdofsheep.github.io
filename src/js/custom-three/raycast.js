@@ -1,11 +1,11 @@
 
 import {LitElement, html} from './../../../node_modules/lit-element';
-import * as THREE from 'three';
+import * as THREE from './../../../node_modules/three';
 import 'lodash/lodash.min';
 
 import Stats from '../../../../node_modules/three/examples/jsm/libs/stats.module.js';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from '../../../../node_modules/three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
 
@@ -63,7 +63,7 @@ class RayCast extends LitElement {
       }
     </style>
     <div id="container" ></div>
-    <div id="debug" class="followMouse" ><div>
+    <!-- <div id="debug" class="followMouse" ><div> -->
     `;
   }
 
@@ -279,8 +279,8 @@ class RayCast extends LitElement {
     const id = ( pixelBuffer[ 0 ] << 16 ) | ( pixelBuffer[ 1 ] << 8 ) | ( pixelBuffer[ 2 ] );
     const data = this.pickingData[ id ];
 
-    var debugWindow = this.shadowRoot.getElementById( "debug" );
-    debugWindow.innerHTML = 'id: ' + id + '<br>' + pixelBuffer;
+    // var debugWindow = this.shadowRoot.getElementById( "debug" );
+    // debugWindow.innerHTML = 'id: ' + id + '<br>' + pixelBuffer;
 
     if( id>0 ){
       this.cursorType = "pointer";
