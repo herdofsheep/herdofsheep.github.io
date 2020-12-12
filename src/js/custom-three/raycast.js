@@ -1,5 +1,5 @@
 
-import {LitElement, html} from 'lit-element';
+import {LitElement, html} from './../../../node_modules/lit-element';
 import * as THREE from 'three';
 import 'lodash/lodash.min';
 
@@ -95,6 +95,9 @@ class RayCast extends LitElement {
 
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     this.thicQue = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
+
+    // this.art = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
+    // this.thicArt = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
