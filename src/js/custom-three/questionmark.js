@@ -1,7 +1,5 @@
-
-import {LitElement, html} from 'lit-element';
-import * as THREE from 'three';
-import { BufferAttribute } from 'three';
+import {LitElement, html} from './../../../node_modules/lit-element';
+import * as THREE from './../../../node_modules/three';
 import 'lodash/lodash.min';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
