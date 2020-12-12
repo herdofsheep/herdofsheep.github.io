@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<title>meganbates</title>
+		<link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
+		<style>
+			body{
+		    position: fixed; 
+		    overflow-y: scroll;
+		    width: 100%;
+			}
+		</style>
+			
+	</head>
+	
+	<body>
+
+		<script src="../../node_modules/three/build/three.js"></script>
+		<script src="../js/three/orbitControls.js"></script>
+		<script src="../js/three/gltfLoader.js"></script>
+		<script src="../js/three/detector.js"></script>
+
+		<script>
+			//let users know if their browser doesn't support webGL
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			var container;
+			var camera, scene, renderer, light;
+			var mathena;
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
+				camera.position.set( 0, 0, 2 );
+
+				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
+				light.position.set( 0, 1, 0 );
+				scene.add( light );
+
+				mathena = loadModel( '../assets/models/gltf/marble.glb' );
+				scene.add(mathena);
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.gammaOutput = true;
+				container.appendChild( renderer.domElement );
+				window.addEventListener( 'resize', onWindowResize, false );
+        
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.update();
+			}
+
+			function loadBar(){
+				var manager = new THREE.DefaultLoadingManager();
+
+				manager.onProgress = function ( item, loaded, total ) {
+    				console.log( item, loaded, total );
+				};
+			}
+
+			function loadModel( url ){
+				// model
+				var loader = new THREE.GLTFLoader();
+				var model = new THREE.Group;
+
+				loader.load( url , function ( gltf ) {
+
+					gltf.scene.traverse( function ( child ) {});
+					model.add( gltf.scene );
+
+				} );
+
+				return model;
+
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+
+				camera.lookAt( scene.position );
+      			controls.update();
+
+				renderer.render( scene, camera );
+			}
+
+		</script>
+
+	</body>
+</html>

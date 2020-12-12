@@ -1,0 +1,15 @@
+{
+  "name": "lit-element-testing-js",
+  "main": "thing.js",
+  "dependencies": {
+    "lit-element": "^2.4.0",
+    "three": "^0.123.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.46.1"
+  },
+  "scripts": {
+    "serve": "es-dev-server --node-resolve --watch"
+  }
+}
