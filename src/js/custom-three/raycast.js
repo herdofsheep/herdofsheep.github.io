@@ -94,7 +94,7 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
+    this.thicQue = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -169,8 +169,10 @@ class RayCast extends LitElement {
   }
 
   duplicate() {
-    var found = _.get(this.que,['children',0,'children'],null)
-    if(found){
+    var found = _.get(this.que,['children',0,'children'],null);
+    var foundThic = _.get(this.thicQue,['children',0,'children'],null);
+
+    if(found && foundThic){
 
         const geometriesDrawn = [];
         const geometriesPicking = [];
@@ -182,6 +184,7 @@ class RayCast extends LitElement {
         const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
         const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
         var queClone = this.que.children[0].children.find(x=>x.type=='Mesh').geometry
+        var thiccQueClone = this.thicQue.children[0].children.find(x=>x.type=='Mesh').geometry
 
         for ( let i = 1; i < 51; i ++ ) {
 
@@ -228,9 +231,10 @@ class RayCast extends LitElement {
         }
 
         this.highlightShape = new THREE.Mesh(
-          queClone,
+          thiccQueClone,
           new THREE.MeshLambertMaterial( { color: 0xffff00 }
           ) );
+        // this.highlightShape = this.que.clone();
         this.scene.add( this.highlightShape );
 
         const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
