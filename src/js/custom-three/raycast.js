@@ -22,7 +22,8 @@ class RayCast extends LitElement {
       highlightBox:{type: Object},
       mouse:{type: Object},
       offset:{type: Object},
-      pickingData:{type: Object}
+      pickingData:{type: Object},
+      cursorType: {type:String}
     };
   }
 
@@ -31,13 +32,30 @@ class RayCast extends LitElement {
     this.mouse = new THREE.Vector2();
     this.offset = new THREE.Vector3( 10, 10, 10 );
     this.pickingData = [];
+    this.cursorType = 'grab';
+  }
+
+  render(){
+    return html`
+    <style>
+      :host {
+        cursor: ${this.cursorType}
+      } 
+    </style>
+    <div id="container" ></div>
+    `;
+  }
+
+  async firstUpdated() {
+    // Give the browser a chance to paint
+    await new Promise((r) => setTimeout(r, 0));
     this.init();
     this.animate();
   }
 
   init() {
 
-    this.container = document.getElementById( "container" );
+    this.container = this.shadowRoot.getElementById( "container" );
 
     this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
@@ -79,7 +97,7 @@ class RayCast extends LitElement {
     const quaternion = new THREE.Quaternion();
     const color = new THREE.Color();
 
-    for ( let i = 0; i < 50; i ++ ) {
+    for ( let i = 1; i < 51; i ++ ) {
 
       let geometry = new THREE.BoxBufferGeometry();
 
@@ -144,7 +162,7 @@ class RayCast extends LitElement {
     this.container.appendChild( this.renderer.domElement );
 
     this.controls = new TrackballControls( this.camera, this.renderer.domElement );
-    this.controls.rotateSpeed = 1.0;
+    this.controls.rotateSpeed = -1.0;
     this.controls.zoomSpeed = 1.2;
     this.controls.panSpeed = 0.8;
     this.controls.noZoom = false;
@@ -170,12 +188,12 @@ class RayCast extends LitElement {
 
     window.requestAnimationFrame( () => this.animate() );
 
-    this.render();
+    this.threeRender();
     this.stats.update();
 
   }
 
-  render() {
+  threeRender() {
 
     this.controls.update();
 
@@ -216,7 +234,7 @@ class RayCast extends LitElement {
     const id = ( pixelBuffer[ 0 ] << 16 ) | ( pixelBuffer[ 1 ] << 8 ) | ( pixelBuffer[ 2 ] );
     const data = this.pickingData[ id ];
 
-    if ( data ) {
+    if ( data  && id > 0) {
 
       //move our highlightBox so that it surrounds the picked object
 
@@ -226,12 +244,15 @@ class RayCast extends LitElement {
         this.highlightBox.rotation.copy( data.rotation );
         this.highlightBox.scale.copy( data.scale ).add( this.offset );
         this.highlightBox.visible = true;
+        this.cursorType = "pointer"
 
       }
-
-    } else {
+      
+    } 
+    else {
 
       this.highlightBox.visible = false;
+      this.cursorType = "grab"
 
     }
 

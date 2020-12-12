@@ -202,6 +202,9 @@ a:focus{
 .justifyText{
   text-align: justify;
   text-align-last: center;
+}
+
+.textSpacer{
   line-height: 41px;
 }
 
@@ -209,6 +212,20 @@ a:focus{
  .tooltip {
   position: relative;
   display: inline-block;
+}
+
+/*popup 2d version saver*/
+.saver {
+  position: absolute;
+  padding: 20px;
+  border: solid;
+  left: 10px;
+  bottom: 10px;
+  width: 80px;
+}
+
+.grabcursor{
+  cursor: grab;
 }
 
 /* Tooltip text */
