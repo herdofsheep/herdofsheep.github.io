@@ -94,7 +94,7 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.thicQue = this.loadModel( '/src/assets/models/gltf/bigQuestionmark.glb' );
+    this.thicQue = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
 
     // this.art = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     // this.thicArt = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
