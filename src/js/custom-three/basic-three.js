@@ -1,7 +1,7 @@
 
-import {LitElement, html} from 'lit-element';
+import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
 
-import * as THREE from 'three';
+import * as THREE from '../../../../node_modules/three/build/three.module.js';
 
 import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from '../../../../node_modules/three/examples/jsm/controls/OrbitControls.js';

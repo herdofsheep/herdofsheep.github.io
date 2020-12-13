@@ -1,9 +1,10 @@
-import {LitElement, html} from './../../../node_modules/lit-element';
-import * as THREE from './../../../node_modules/three';
-import 'lodash/lodash.min';
+import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
+import * as THREE from '../../../../node_modules/three/build/three.module.js';
+import '../../../../node_modules/lodash/lodash.min.js';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { BufferGeometryUtils } from '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
+
 class QuestionMark extends LitElement {
 
     static get properties() {
