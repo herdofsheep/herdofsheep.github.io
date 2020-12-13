@@ -1,10 +1,11 @@
 
-import {LitElement, html} from 'lit-element';
-import * as THREE from 'three';
+import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
+import * as THREE from '../../../../node_modules/three/build/three.module.js';
 import '../../../../node_modules/lodash/lodash.min.js';
 
 import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { BufferGeometryUtils } from '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
+
 class QuestionMark extends LitElement {
 
     static get properties() {

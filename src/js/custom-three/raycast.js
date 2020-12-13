@@ -1,7 +1,7 @@
 
-import {LitElement, html} from './../../../node_modules/lit-element';
-import * as THREE from './../../../node_modules/three';
-import './../../../node_modules/lodash/lodash.min';
+import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
+import * as THREE from '../../../../node_modules/three/build/three.module.js';
+import '../../../../node_modules/lodash/lodash.min.js';
 
 import Stats from '../../../../node_modules/three/examples/jsm/libs/stats.module.js';
 

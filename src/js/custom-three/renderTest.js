@@ -1,5 +1,5 @@
 
-import {LitElement, html} from 'lit-element';
+import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
 
 class renderTest extends LitElement {
 
@@ -12,7 +12,7 @@ class renderTest extends LitElement {
 
     constructor() {
         super();
-        this.kitty= 'wittle'
+        this.kitty= 'wittle kitten'
         this.cursorType = 'grab';
     }
 
@@ -21,10 +21,14 @@ class renderTest extends LitElement {
         <style>
             :host {
                 cursor: ${this.cursorType}
+                text
             } 
+            #text{
+                font-size: 100px;
+                text-align: center;
+            }
         </style>
-        <p>template content</p>
-        ${this.kitty}
+        <div id="text">${this.kitty}</div>
         `;
     }
 
