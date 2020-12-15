@@ -8,7 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
-class RayCast extends LitElement {
+class SimplerRayCast extends LitElement {
   static get properties() {
     return {
       container:{type: Object},
@@ -30,10 +30,6 @@ class RayCast extends LitElement {
       link: {type:String},
       duplicated: {type:Boolean},
       que:{type: Object},
-      art:{type: Object},
-      queBig:{type: Object},
-      artBig:{type: Object},
-      files:{type: Array}
     };
   }
 
@@ -96,14 +92,11 @@ class RayCast extends LitElement {
     light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
-    this.files = ['que', 'art', 'github'];
-
-    this.art = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
-    this.artBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
-    this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
-    this.githubBig = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
+    this.thicQue = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
+
+    this.art = this.loadModel( '/src/assets/models/gltf/github.glb' );
+    this.thicArt = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -178,123 +171,83 @@ class RayCast extends LitElement {
   }
 
   duplicate() {
+    var found = _.get(this.que,['children',0,'children'],null);
+    var foundThic = _.get(this.thicQue,['children',0,'children'],null);
 
-    var files = this.files;
+    if(found && foundThic){
 
-    for (var i in files){
-      var found = _.get(this,[files[i],'children',0,'children'],null);
-      var foundBig = _.get(this,[files[i]+'Big','children',0,'children'],null);
-      if(found == null || foundBig == null){
-        return;
+        const geometriesDrawn = [];
+        const geometriesPicking = [];
+
+        const matrix = new THREE.Matrix4();
+        const quaternion = new THREE.Quaternion();
+        const color = new THREE.Color();
+
+        const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
+        const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0 } );
+        var queClone = this.que.children[0].children.find(x=>x.type=='Mesh').geometry
+        var thiccQueClone = this.thicQue.children[0].children.find(x=>x.type=='Mesh').geometry
+
+        for ( let i = 1; i < 51; i ++ ) {
+
+          var peep = queClone.clone();
+
+          const position = new THREE.Vector3();
+          position.x = Math.random() * 10000 - 5000;
+          position.y = Math.random() * 6000 - 3000;
+          position.z = Math.random() * 8000 - 4000;
+
+          const rotation = new THREE.Euler();
+          rotation.x = Math.random() * 2 * Math.PI;
+          rotation.y = Math.random() * 2 * Math.PI;
+          rotation.z = Math.random() * 2 * Math.PI;
+
+          var scaleSize = 50;
+          const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
+
+          quaternion.setFromEuler( rotation );
+          matrix.compose( position, quaternion, scale );
+
+          peep.applyMatrix4( matrix );
+
+          // give the peep's vertices a random color, to be displayed
+
+          this.applyVertexColors( peep, color.setHex( 0x060606 ) );
+
+          geometriesDrawn.push( peep );
+
+          // give the peep's vertices a color corresponding to the "id"
+
+          peep = peep.clone();
+
+          this.applyVertexColors( peep, color.setHex( i ) );
+
+          geometriesPicking.push( peep );
+
+          this.pickingData[ i ] = {
+
+            position: position,
+            rotation: rotation,
+            scale: scale
+
+          };
+
+        }
+
+        this.highlightShape = new THREE.Mesh(
+          thiccQueClone,
+          new THREE.MeshLambertMaterial( { color: 0xff4162 }
+          ) );
+        // this.highlightShape = this.que.clone();
+        this.scene.add( this.highlightShape );
+
+        const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
+        this.scene.add( objects );
+
+        this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking ), pickingMaterial ) );
+
+        this.duplicated = true;
       }
-    }
-
-    const geometriesDrawn = {};
-    const geometriesPicking = {};
-
-    const matrix = new THREE.Matrix4();
-    const quaternion = new THREE.Quaternion();
-    const color = new THREE.Color();
-
-    const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
-    const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
-
-    var clones = [];
-    const geometriesTypes = []
-
-    for (var i in files){
-      var clone = {}
-      var littleMesh = _.get(this,[files[i],'children',0,'children'])
-      var hasLittleMesh = littleMesh.find(x=>x.type=='Mesh');
-      if(hasLittleMesh){
-        clone['data'] = littleMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else if( littleMesh.find(x=>x.type=='Group') ){
-        console.log('hellohellohello')
-      }
-      var bigMesh = _.get(this,[files[i]+'Big','children',0,'children']);
-      var hasBigMesh = bigMesh.find(x=>x.type=='Mesh')
-      if(hasBigMesh){
-        clone['bigData'] = bigMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else if( bigMesh.find(x=>x.type=='Group') ){
-        console.log('hellohellohello')
-      }
-      clone['type'] = files[i]
-      clones.push(clone);
-      geometriesDrawn[files[i]] = [];
-      geometriesPicking[files[i]] = [];
-    }
-
-    for ( let i = 1; i < 51; i ++ ) {
-
-      var randomPick = Math.floor(Math.random() * files.length);  
-      var objectThisTime = clones[randomPick];
-      var smallObject = objectThisTime.data.clone();
-
-      const position = new THREE.Vector3();
-      position.x = Math.random() * 10000 - 5000;
-      position.y = Math.random() * 6000 - 3000;
-      position.z = Math.random() * 8000 - 4000;
-
-      const rotation = new THREE.Euler();
-      rotation.x = Math.random() * 2 * Math.PI;
-      rotation.y = Math.random() * 2 * Math.PI;
-      rotation.z = Math.random() * 2 * Math.PI;
-
-      var scaleSize = 50;
-      const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
-
-      quaternion.setFromEuler( rotation );
-      matrix.compose( position, quaternion, scale );
-
-      smallObject.applyMatrix4( matrix );
-
-      // give the peep's vertices a random color, to be displayed
-
-      this.applyVertexColors( smallObject, color.setHex( 0x060606 ) );
-
-      geometriesDrawn[objectThisTime.type].push( smallObject );
-
-      // give the peep's vertices a color corresponding to the "id"
-
-      smallObject = smallObject.clone();
-
-      this.applyVertexColors( smallObject, color.setHex( i ) );
-
-      geometriesPicking[objectThisTime.type].push( smallObject );
-
-      this.pickingData[ i ] = {
-
-        position: position,
-        rotation: rotation,
-        scale: scale,
-        type: objectThisTime.type
-
-      };
-
-    }
-
-    this.highlightShape = {}
-
-    for (var i in files){
-
-      this.highlightShape[files[i]] = new THREE.Mesh(
-        clones[i].bigData,
-        new THREE.MeshPhongMaterial( { color: 0xff4162, flatShading: false, shininess: 150	}
-      ) );
-      this.scene.add( this.highlightShape[files[i]] );
-
-      this.objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
-      this.scene.add( this.objects );
-  
-      this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
-  
-
-    }
-
-    this.duplicated = true;
-
   }
 
   pick() {
@@ -340,21 +293,19 @@ class RayCast extends LitElement {
 
       //move our highlightShape so that it surrounds the picked object
 
-      if ( data.position && data.rotation && data.scale && data.type ) {
+      if ( data.position && data.rotation && data.scale ) {
 
-        this.highlightShape[data.type].position.copy( data.position );
-        this.highlightShape[data.type].rotation.copy( data.rotation );
-        this.highlightShape[data.type].scale.copy( data.scale ).add( this.offset );
-        this.highlightShape[data.type].visible = true;
+        this.highlightShape.position.copy( data.position );
+        this.highlightShape.rotation.copy( data.rotation );
+        this.highlightShape.scale.copy( data.scale ).add( this.offset );
+        this.highlightShape.visible = true;
 
       }
 
     } 
     else {
 
-      for (var i in this.files){
-        this.highlightShape[this.files[i]].visible = false;
-      }
+      this.highlightShape.visible = false;
       this.cursorType = "grab";
       this.canClick = false;
 
@@ -387,4 +338,4 @@ class RayCast extends LitElement {
 
 }
 
-window.customElements.define('ray-cast', RayCast);
+window.customElements.define('simpler-ray-cast', SimplerSimplerRayCast);
