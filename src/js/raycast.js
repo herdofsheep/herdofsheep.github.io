@@ -92,8 +92,8 @@ class RayCast extends LitElement {
     light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
-    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.thicQue = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
+    this.que = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
+    this.thicQue = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
 
     // this.art = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     // this.thicArt = this.loadModel( '/src/assets/models/gltf/fatQuestionmark.glb' );
@@ -236,13 +236,13 @@ class RayCast extends LitElement {
 
         this.highlightShape = new THREE.Mesh(
           thiccQueClone,
-          new THREE.MeshLambertMaterial( { color: 0xff4162 }
+          new THREE.MeshPhongMaterial( { color: 0xff4162, flatShading: false, shininess: 150	}
           ) );
         // this.highlightShape = this.que.clone();
         this.scene.add( this.highlightShape );
 
-        const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
-        this.scene.add( objects );
+        this.objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
+        this.scene.add( this.objects );
 
         this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking ), pickingMaterial ) );
 
