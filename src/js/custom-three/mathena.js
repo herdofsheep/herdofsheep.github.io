@@ -1,11 +1,11 @@
-
 import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
-class BasicThree extends LitElement {
+class Mathena3D extends LitElement {
 
     static get properties() {
         return {
@@ -34,9 +34,7 @@ class BasicThree extends LitElement {
 
     init() {
 
-        this.container = document.createElement( 'div' );
-        document.body.appendChild( this.container );
-
+        this.container = document.getElementById( "container" );
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / window.innerHeight, 0.1, 500 );
@@ -46,10 +44,22 @@ class BasicThree extends LitElement {
         light.position.set( 0, 1, 0 );
         this.scene.add( light );
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        const cube = new THREE.Mesh( geometry, material );
-        this.scene.add( cube );
+        var texture = new THREE.TextureLoader().load( 'assets/images/planets.jpg' );
+        var scale = 15;
+
+        var geometry = new THREE.PlaneGeometry(1.3847*scale, 0.3000*scale);
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+
+        var backgroundMesh = new THREE.Mesh( geometry, material );
+
+        backgroundMesh.material.depthTest = false;
+        backgroundMesh.material.depthWrite = false;
+
+        this.scene.add(backgroundMesh);
+
+
+        this.mathena = this.loadModel( 'assets/models/gltf/mathena.gltf' );
+        this.scene.add( this.mathena );
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );
         this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -66,6 +76,21 @@ class BasicThree extends LitElement {
         this.controls.update();
     }
 
+    loadModel( url ){
+        var loader = new GLTFLoader();
+        var model = new THREE.Group;
+
+        loader.load( url , function ( gltf ) {
+
+            gltf.scene.traverse( function ( child ) {});
+            model.add( gltf.scene );
+
+        } );
+
+        return model;
+
+    }
+
     onWindowResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
@@ -78,10 +103,21 @@ class BasicThree extends LitElement {
     }
 
     render() {
+        var timer = Date.now() * 0.0005;
+
+        this.mathena.rotation.x = timer*2;
+        this.mathena.rotation.y = timer;
+
+        //backgroundMesh.position.setX(0);
+        var xpos = 9*Math.cos( 0.1*timer );
+        
+        this.mathena.position.setX(xpos);
+        this.camera.position.set( xpos, 0, 3 );
+        this.camera.lookAt( this.mathena.position );
 
         this.renderer.render( this.scene, this.camera );
     }
 
 }
 
-window.customElements.define('basic-three', BasicThree);
+window.customElements.define('mathena-3d', Mathena3D);

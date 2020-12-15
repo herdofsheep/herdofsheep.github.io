@@ -7,6 +7,10 @@
 		
 		<title>meganbates</title>
 		<link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+
+		<!-- <script type="module" src="build/js/mathena.js"></script> -->
+		<script type="module" src="build/js/mathena.js"></script> 
+
 		<style>
 			body{
 		    position: fixed; 
@@ -25,125 +29,8 @@
 				<a class="margin homelinks" href="https://github.com/herdofsheep"> github </a> 
 			</div>
 
-		<script src="../node_modules/three/build/three.js"></script>
-		<script src="js/three/orbitControls.js"></script>
-		<script src="js/three/gltfLoader.js"></script>
-		<script src="js/three/detector.js"></script>
-		<!-- <script type="module" >
-			import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-			import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
-		</script> -->
-
-		<script>
-			//let users know if their browser doesn't support webGL
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
-			var container;
-			var camera, scene, renderer, light;
-			var mathena;
-			init();
-			animate();
-
-			function init() {
-
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
-
-				scene = new THREE.Scene();
-
-				var windowHeight = window.innerHeight-60;
-
-				camera = new THREE.PerspectiveCamera( 45, (window.innerWidth) / windowHeight, 0.1, 1000 );
-				camera.position.set( 0, 0, 3 );
-
-				light = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
-				light.position.set( 0, 1, 0 );
-				scene.add( light );
-
-				controls = new THREE.OrbitControls( camera );
-				controls.update();
-
-				var texture = new THREE.TextureLoader().load( 'assets/images/planets.jpg' );
-				var scale = 15;
-
-				var geometry = new THREE.PlaneGeometry(1.3847*scale, 0.3000*scale);
-				var material = new THREE.MeshBasicMaterial({ map: texture });
-
-				var backgroundMesh = new THREE.Mesh( geometry, material );
-
-				backgroundMesh.material.depthTest = false;
-				backgroundMesh.material.depthWrite = false;
-
-				scene.add(backgroundMesh);
-				
-				mathena = loadModel( 'assets/models/gltf/mathena.gltf' );
-				// var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-				// var mesh = new THREE.Mesh( mathena, material );
-				// material.side = THREE.DoubleSide;
-				scene.add(mathena);
-				
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, windowHeight );
-				renderer.gammaOutput = true;
-				container.appendChild( renderer.domElement );
-				window.addEventListener( 'resize', onWindowResize, false );
-			}
-
-			function loadBar(){
-				var manager = new THREE.DefaultLoadingManager();
-
-				manager.onProgress = function ( item, loaded, total ) {
-    				console.log( item, loaded, total );
-				};
-
-
-			}
-
-			function loadModel( url ){
-				// model
-				var loader = new THREE.GLTFLoader();
-				var model = new THREE.Group;
-
-				loader.load( url , function ( gltf ) {
-
-					gltf.scene.traverse( function ( child ) {});
-					model.add( gltf.scene );
-
-				} );
-
-				return model;
-
-			}
-
-			function onWindowResize() {
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize( window.innerWidth, window.innerHeight );
-			}
-
-
-			function animate() {
-				requestAnimationFrame( animate );
-				render();
-			}
-
-			function render() {
-				var timer = Date.now() * 0.0005;
-
-				mathena.rotation.x = timer*2;
-				mathena.rotation.y = timer;
-
-				//backgroundMesh.position.setX(0);
-				var xpos = 9*Math.cos( 0.1*timer );
-				
-				mathena.position.setX(xpos);
-				camera.position.set( xpos, 0, 3 );
-				camera.lookAt( mathena.position );
-
-				renderer.render( scene, camera );
-			}
-
-		</script>
+		<div id="container" ></div>
+		<mathena-3d><mathena-3d>
 
 	</body>
 </html>
