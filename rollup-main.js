@@ -16,6 +16,7 @@ const copyConfig = {
     { src: 'node_modules/systemjs/dist/s.min.js', dest: 'src/build/npm/systemjs/dist' },
     { src: 'node_modules/three/examples/jsm/loaders/GLTFLoader.js', dest: 'src/build/npm/GLTFLoader' },
     { src: 'node_modules/three/examples/jsm/controls/TrackballControls.js', dest: 'src/build/npm/TrackballControls' },
+    { src: 'node_modules/three/examples/jsm/controls/OrbitControls.js', dest: 'src/build/npm/OrbitControls' },
     { src: 'node_modules/three/examples/jsm/utils/BufferGeometryUtils.js', dest: 'src/build/npm/BufferGeometryUtils' },
     { src: 'node_modules/lodash/lodash.min.js', dest: 'src/build/npm/lodash' },
     { src: 'node_modules/three/build/three.module.js', dest: 'src/build/npm/three' },
@@ -27,7 +28,7 @@ const copyConfig = {
 // The main JavaScript bundle for modern browsers that support
 // JavaScript modules and other ES2015+ features.
 const config = {
-  input: ['src/js/custom-three/raycast.js', 'src/js/custom-three/questionmark.js'],
+  input: ['src/js/custom-three/raycast.js', 'src/js/custom-three/questionmark.js', 'src/js/custom-three/mathena.js'],
   output: {
     dir: 'src/build/js',
     format: 'es',

@@ -1,5 +1,5 @@
 
-import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
+import {LitElement, html} from 'lit-element';
 
 class renderTest extends LitElement {
 
