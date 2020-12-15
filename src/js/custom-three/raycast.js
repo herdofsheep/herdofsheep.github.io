@@ -1,13 +1,12 @@
 
-import {LitElement, html} from '../../../../node_modules/lit-element/lit-element.js';
-import * as THREE from '../../../../node_modules/three/build/three.module.js';
-import '../../../../node_modules/lodash/lodash.min.js';
+import {LitElement, html} from 'lit-element';
+import * as THREE from 'three';
+import 'lodash';
 
-import Stats from '../../../../node_modules/three/examples/jsm/libs/stats.module.js';
-
-import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { TrackballControls } from '../../../../node_modules/three/examples/jsm/controls/TrackballControls.js';
-import { BufferGeometryUtils } from '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
+import Stats from 'three/examples/jsm/libs/stats.module.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
+import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class RayCast extends LitElement {
   static get properties() {

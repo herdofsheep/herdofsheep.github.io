@@ -3,6 +3,13 @@
   "main": "my-npm-package.min.js",
   "types": "my-npm-package.d.ts",
   "scripts": {
+    "start": "es-dev-server --app-index=index.html --node-resolve --watch --open",
+    "build:modnomod": "rimraf build-modnomod && rollup -c rollup-modnomod.js",
+    "serve:modnomod": "cd rollup-modnomod && es-dev-server --app-index=index.html --compatibility=none",
+    "build:modern": "rimraf build-modern && rollup -c rollup-modern.js",
+    "serve:modern": "cd build-modern && es-dev-server --app-index=index.html --compatibility=none",
+    "build:universal": "rimraf build-universal && rollup -c rollup-universal.js",
+    "serve:universal": "cd build-universal && es-dev-server --app-index=index.html --compatibility=none",
     "build:run": "rollup -c rollup-main.js",
     "build": "npm run build:run",
     "test": "mocha test/ --timeout=10000",
