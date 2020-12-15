@@ -14,12 +14,12 @@ const copyConfig = {
   targets: [
     { src: 'node_modules/@webcomponents', dest: 'src/build/npm' },
     { src: 'node_modules/systemjs/dist/s.min.js', dest: 'src/build/npm/systemjs/dist' },
-    { src: '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js', dest: 'src/build/npm/GLTFLoader' },
-    { src: '../../../../node_modules/three/examples/jsm/controls/TrackballControls.js', dest: 'src/build/npm/TrackballControls' },
-    { src: '../../../../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js', dest: 'src/build/npm/BufferGeometryUtils' },
-    { src: '../../../../node_modules/lodash/lodash.min.js', dest: 'src/build/npm/lodash' },
-    { src: '../../../../node_modules/three/build/three.module.js', dest: 'src/build/npm/three' },
-    { src: '../../../../node_modules/lit-element/lit-element.js', dest: 'src/build/npm/lit-element' },
+    { src: 'node_modules/three/examples/jsm/loaders/GLTFLoader.js', dest: 'src/build/npm/GLTFLoader' },
+    { src: 'node_modules/three/examples/jsm/controls/TrackballControls.js', dest: 'src/build/npm/TrackballControls' },
+    { src: 'node_modules/three/examples/jsm/utils/BufferGeometryUtils.js', dest: 'src/build/npm/BufferGeometryUtils' },
+    { src: 'node_modules/lodash/lodash.min.js', dest: 'src/build/npm/lodash' },
+    { src: 'node_modules/three/build/three.module.js', dest: 'src/build/npm/three' },
+    { src: 'node_modules/lit-element/lit-element.js', dest: 'src/build/npm/lit-element' },
 
   ],
 };
@@ -32,7 +32,6 @@ const config = {
     dir: 'src/build/js',
     format: 'es',
   },
-  external: p => /^three/.test(p),
   plugins: [
     minifyHTML(),
     copy(copyConfig),
