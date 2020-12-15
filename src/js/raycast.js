@@ -96,12 +96,14 @@ class RayCast extends LitElement {
     light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
-    this.files = ['que', 'art']
+    this.files = ['que', 'art', 'github'];
 
     this.art = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
     this.artBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
+    this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
+    this.githubBig = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -209,8 +211,6 @@ class RayCast extends LitElement {
       geometriesDrawn[files[i]] = [];
       geometriesPicking[files[i]] = [];
     }
-
-    var queClone = this.que.children[0].children.find(x=>x.type=='Mesh').geometry
 
     for ( let i = 1; i < 51; i ++ ) {
 
