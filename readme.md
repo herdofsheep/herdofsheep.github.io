@@ -6,7 +6,7 @@ to build a node_modules folder with your needed dependencies. All added dependen
  >   <p>package.json </p>
 rather than imported to the assets/js folder. I'm currently working on removing any dependencies not in node_modules so all custom js code will be written in
  >   <p>assets/js </p>
-rather than in src/js/custom-three where all the current lit-element code currently resides.
+rather than in src/js where all the current lit-element code currently resides.
 to run a local deployment for testing, run
  >   <p>$npm run serve </p>
 though any custom js code (or changes to custom js code) must first be built with rollup by running
@@ -15,7 +15,7 @@ The custom js that exists and has been built in the website will be brought in w
  >   <p>rollup-main.js </p>
 file in order to get built.
 Debug pointing files to 
- >   <p>src/js/custom-three/</p>
+ >   <p>src/js/</p>
 and remember to point to 
  >   <p>src/build/js/</p>
  for deployment.

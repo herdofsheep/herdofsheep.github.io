@@ -28,7 +28,7 @@ const copyConfig = {
 // The main JavaScript bundle for modern browsers that support
 // JavaScript modules and other ES2015+ features.
 const config = {
-  input: ['src/js/custom-three/raycast.js', 'src/js/custom-three/questionmark.js', 'src/js/custom-three/mathena.js'],
+  input: ['src/js/raycast.js', 'src/js/questionmark.js', 'src/js/mathena.js'],
   output: {
     dir: 'src/build/js',
     format: 'es',
