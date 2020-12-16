@@ -69,9 +69,40 @@ class RayCast extends LitElement {
         position:absolute;
         z-index: 10;
       }
+      #crosshair {
+        top: ${this.YCenter};
+        left: ${this.XCenter};
+        position: absolute;
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+        z-index: 100;
+      }
+      #upSpoke {
+        background: white;
+        height: 10px;
+        width: 2px;
+        transform: translateY(-3px);
+      }
+      #sideSpoke {
+        background: white;
+        height: 2px;
+        width: 10px;
+        transform: translate(-4px,-9px);
+      }
+      @media (hover: none) {
+        /* behaviour for touch browsers */
+        #crosshair {
+          visibility: visible;
+        }
+      }
     </style>
     <div id="container" ></div>
-    <div id="infoText" class="followMouse" ><div>
+    <div id="infoText" class="followMouse" ></div>
+    <div id="crosshair" >
+      <div id="upSpoke"></div>
+      <div id="sideSpoke"></div>
+    </div>
     `;
   }
 
@@ -89,8 +120,11 @@ class RayCast extends LitElement {
     this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
 
-    this.mousePosX = window.innerWidth/2;
-    this.mousePosY = window.innerHeight/2;
+    this.XCenter = window.innerWidth/2 + "px";
+    this.YCenter = window.innerHeight/2 + "px";
+
+    this.mousePosX = this.XCenter;
+    this.mousePosY = this.YCenter;
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color( 0x424242 );
@@ -131,7 +165,17 @@ class RayCast extends LitElement {
     // this.container.appendChild( this.stats.dom );
 
     this.renderer.domElement.addEventListener( 'mousemove', this.onMouseMove.bind(this) );
+    window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
+  }
 
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.XCenter = window.innerWidth/2 + 'px';
+    this.YCenter = window.innerHeight/2 + 'px';
+    this.mousePosX = this.XCenter;
+    this.mousePosY = this.YCenter;
   }
 
   onMouseMove( e ) {
@@ -333,7 +377,8 @@ class RayCast extends LitElement {
             meshes.push(mesh)
           }
           var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
-          clone['data'] = groupMeshes;        }
+          clone['bigData'] = groupMeshes;
+        }
       }
 
       clone['type'] = currentType
