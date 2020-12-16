@@ -184,14 +184,6 @@ class RayCast extends LitElement {
 
     var files = this.files;
 
-    for (var i in files){
-      var found = _.get(this,[files[i],'children',0,'children'],null);
-      var foundBig = _.get(this,[files[i]+'Big','children',0,'children'],null);
-      if(found == null || foundBig == null){
-        return;
-      }
-    }
-
     const geometriesDrawn = {};
     const geometriesPicking = {};
 
@@ -201,48 +193,15 @@ class RayCast extends LitElement {
 
     const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
     const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
-
-    var clones = [];
     const geometriesTypes = []
 
+    var clones = this.cloneFiles(files)
+    if(clones == null){
+      return;
+    }
+
     for (var i in files){
-      var clone = {}
       var currentType = files[i]
-      var littleMesh = _.get(this,[currentType,'children',0,'children'])
-      var hasLittleMesh = littleMesh.find(x=>x.type=='Mesh');
-      if(hasLittleMesh){
-        clone['data'] = littleMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else{
-        var hasLittleMeshGroup = littleMesh.find(x=>x.type=='Group')
-        if( hasLittleMeshGroup ){
-          var meshes = []
-          for(var j=0; j < hasLittleMeshGroup.children.length; j++){
-            var mesh = hasLittleMeshGroup.children[j].geometry
-            meshes.push(mesh)
-          }
-          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
-          clone['data'] = groupMeshes;
-        }
-      }
-      var bigMesh = _.get(this,[currentType+'Big','children',0,'children']);
-      var hasBigMesh = bigMesh.find(x=>x.type=='Mesh')
-      if(hasBigMesh){
-        clone['bigData'] = bigMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else{
-        var hasBigMeshGroup = bigMesh.find(x=>x.type=='Group')
-        if( hasBigMeshGroup ){
-          var meshes = []
-          for(var j=0; j < hasBigMeshGroup.children.length; j++){
-            var mesh = hasBigMeshGroup.children[j].geometry
-            meshes.push(mesh)
-          }
-          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
-          clone['data'] = groupMeshes;        }
-      }
-      clone['type'] = currentType
-      clones.push(clone);
       geometriesDrawn[currentType] = [];
       geometriesPicking[currentType] = [];
     }
@@ -315,6 +274,69 @@ class RayCast extends LitElement {
     }
 
     this.duplicated = true;
+
+  }
+
+  cloneFiles(files){
+
+    for (var i in files){
+      var found = _.get(this,[files[i],'children',0,'children'],null);
+      var foundBig = _.get(this,[files[i]+'Big','children',0,'children'],null);
+      if(found == null || foundBig == null){
+        return null;
+      }
+    }
+
+    var clones = [];
+
+    for (var i in files){
+
+      var clone = {};
+      var currentType = files[i];
+
+      var littleMesh = _.get(this,[currentType,'children',0,'children']);
+      var hasLittleMesh = littleMesh.find(x=>x.type=='Mesh');
+
+      if(hasLittleMesh){
+        clone['data'] = littleMesh.find(x=>x.type=='Mesh').geometry;
+      }
+      else{
+        var hasLittleMeshGroup = littleMesh.find(x=>x.type=='Group')
+        if( hasLittleMeshGroup ){
+          var meshes = []
+          for(var j=0; j < hasLittleMeshGroup.children.length; j++){
+            var mesh = hasLittleMeshGroup.children[j].geometry
+            meshes.push(mesh)
+          }
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          clone['data'] = groupMeshes;
+        }
+      }
+
+      var bigMesh = _.get(this,[currentType+'Big','children',0,'children']);
+      var hasBigMesh = bigMesh.find(x=>x.type=='Mesh')
+
+      if(hasBigMesh){
+        clone['bigData'] = bigMesh.find(x=>x.type=='Mesh').geometry;
+      }
+      else{
+        var hasBigMeshGroup = bigMesh.find(x=>x.type=='Group')
+        if( hasBigMeshGroup ){
+          var meshes = []
+          for(var j=0; j < hasBigMeshGroup.children.length; j++){
+            var mesh = hasBigMeshGroup.children[j].geometry
+            meshes.push(mesh)
+          }
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          clone['data'] = groupMeshes;        }
+      }
+
+      clone['type'] = currentType
+      clones.push(clone);
+
+    }
+
+    return clones;
 
   }
 
