@@ -11,29 +11,30 @@ import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtil
 class RayCast extends LitElement {
   static get properties() {
     return {
-      container:{type: Object},
-      stats:{type: Object},
-      camera:{type: Object},
-      controls:{type: Object},
-      scene:{type: Object},
-      renderer:{type: Object},
-      pickingTexture:{type: Object},
-      pickingScene:{type: Object},
-      highlightShape:{type: Object},
-      mouse:{type: Object},
-      mousePosX:{type: Object},
-      mousePosY:{type: Object},
-      offset:{type: Object},
-      pickingData:{type: Object},
+      container: {type: Object},
+      stats: {type: Object},
+      camera: {type: Object},
+      controls: {type: Object},
+      scene: {type: Object},
+      renderer: {type: Object},
+      pickingTexture: {type: Object},
+      pickingScene: {type: Object},
+      highlightShape: {type: Object},
+      mouse: {type: Object},
+      mousePosX: {type: Object},
+      mousePosY: {type: Object},
+      infoVisible: {type: String},
+      offset: {type: Object},
+      pickingData: {type: Object},
       cursorType: {type:String},
       canClick: {type:Boolean},
       link: {type:String},
       duplicated: {type:Boolean},
-      que:{type: Object},
-      art:{type: Object},
-      queBig:{type: Object},
-      artBig:{type: Object},
-      files:{type: Array}
+      que: {type: Object},
+      art: {type: Object},
+      queBig: {type: Object},
+      artBig: {type: Object},
+      files: {type: Array}
     };
   }
 
@@ -49,6 +50,8 @@ class RayCast extends LitElement {
     this.canClick = false;
     this.link = ""
     this.addEventListener('click', this.clickLink);
+    this.addEventListener('touchstart', this.clickLink)
+
   }
 
   render(){
@@ -60,13 +63,15 @@ class RayCast extends LitElement {
       .followMouse {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
-        background:white;
+        color: white;
+        font-size:20px;
+        visibility: ${this.infoVisible};
         position:absolute;
         z-index: 10;
       }
     </style>
     <div id="container" ></div>
-    <!-- <div id="debug" class="followMouse" ><div> -->
+    <div id="infoText" class="followMouse" ><div>
     `;
   }
 
@@ -369,23 +374,29 @@ class RayCast extends LitElement {
 
     const id = ( pixelBuffer[ 0 ] << 16 ) | ( pixelBuffer[ 1 ] << 8 ) | ( pixelBuffer[ 2 ] );
     const data = this.pickingData[ id ];
-
-    // var debugWindow = this.shadowRoot.getElementById( "debug" );
-    // debugWindow.innerHTML = 'id: ' + id + '<br>' + pixelBuffer;
+    var debugWindow = this.shadowRoot.getElementById( "infoText" );
 
     if( id>0 ){
       this.cursorType = "pointer";
+      this.infoVisible = "visible"
+
       if(data.type == 'art'){
         this.link = "src/art.html";
+        debugWindow.innerHTML = 'art portfolio'
       }
       if(data.type == 'github'){
         this.link = "https://github.com/herdofsheep";
+        debugWindow.innerHTML = 'github'
       }
       if(data.type == 'que'){
         this.link = "src/what.html";
+        debugWindow.innerHTML = "what's this?"
       }
 
       this.canClick = true;
+    }
+    else{
+      this.infoVisible = "hidden"
     }
 
     if ( data  && id > 0 ) {

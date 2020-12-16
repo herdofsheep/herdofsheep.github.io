@@ -225,6 +225,7 @@ a:focus{
   left: 10px;
   bottom: 10px;
   width: 90px;
+  z-index:1000;
 }
 
 .saver:hover, .saver:focus {
