@@ -43,6 +43,7 @@ class RayCast extends LitElement {
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
     this.mousePosY = "0px";
+    this.beganTouching = false;
     this.offset = new THREE.Vector3( 1, 1, 1 );
     this.duplicated = false;
     this.pickingData = [];
@@ -50,8 +51,9 @@ class RayCast extends LitElement {
     this.canClick = false;
     this.link = ""
     this.addEventListener('click', this.clickLink);
-    this.addEventListener('touchstart', this.clickLink)
-
+    this.addEventListener('touchstart', this.touchStart)
+    this.addEventListener("touchmove", this.touchMove);
+    this.addEventListener('touchend', this.touchEnd)
   }
 
   render(){
@@ -126,6 +128,9 @@ class RayCast extends LitElement {
     this.mousePosX = this.XCenter;
     this.mousePosY = this.YCenter;
 
+    this.mouse.x = this.XCenter;
+    this.mouse.y = this.YCenter;
+
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color( 0x424242 );
 
@@ -138,7 +143,7 @@ class RayCast extends LitElement {
     light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
-    this.files = ['que', 'work', 'github'];
+    this.files = ['que', 'work', 'github', 'math'];
 
     this.work = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
     this.workBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
@@ -146,6 +151,8 @@ class RayCast extends LitElement {
     this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
     this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
     this.githubBig = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
+    this.math = this.loadModel( '/src/assets/models/gltf/math.glb' );
+    this.mathBig = this.loadModel( '/src/assets/models/gltf/mathBig.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -308,9 +315,30 @@ class RayCast extends LitElement {
 
     for (var i in files){
 
+      var type = files[i]
+
+      if(type == 'work'){
+        //0xc96833 --orange
+        //0x000422 --darkblue
+        var highlightColor = 0xc96833;
+      }
+      if(type == 'github'){
+        //0x21023a --dark purple
+        //0x380860 --bright purple
+        //0x370e42 --pinkier purple
+        var highlightColor = 0x370e42;
+      }
+      if(type == 'que'){
+        var highlightColor = 0xff4162;
+      }
+      if(type == 'math'){
+        //0xd5fdd5 --paler green
+        var highlightColor = 0xbfe3bf;
+      }
+
       this.highlightShape[files[i]] = new THREE.Mesh(
         clones[i].bigData,
-        new THREE.MeshPhongMaterial( { color: 0xff4162, flatShading: false, shininess: 150	}
+        new THREE.MeshPhongMaterial( { color: highlightColor, flatShading: false, shininess: 150	}
       ) );
       this.scene.add( this.highlightShape[files[i]] );
 
@@ -437,6 +465,10 @@ class RayCast extends LitElement {
         this.link = "src/what.html";
         debugWindow.innerHTML = "what's this?"
       }
+      if(data.type == 'math'){
+        this.link = "src/art.html";
+        debugWindow.innerHTML = "art portfolio"
+      }
 
       this.canClick = true;
     }
@@ -472,6 +504,22 @@ class RayCast extends LitElement {
 
   clickLink(){
     if(this.canClick){
+      window.location.href = this.link;
+    }
+  }
+
+  touchStart(){
+    if(this.canClick){
+      this.beganTouching = true
+    }
+  }
+
+  touchMove(){
+    this.beganTouching = false;
+  }
+
+  touchEnd(){
+    if(this.canClick && this.beganTouching){
       window.location.href = this.link;
     }
   }
