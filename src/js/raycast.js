@@ -84,6 +84,9 @@ class RayCast extends LitElement {
     this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
 
+    this.mousePosX = window.innerWidth/2;
+    this.mousePosY = window.innerHeight/2;
+
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color( 0x424242 );
 
@@ -204,26 +207,44 @@ class RayCast extends LitElement {
 
     for (var i in files){
       var clone = {}
-      var littleMesh = _.get(this,[files[i],'children',0,'children'])
+      var currentType = files[i]
+      var littleMesh = _.get(this,[currentType,'children',0,'children'])
       var hasLittleMesh = littleMesh.find(x=>x.type=='Mesh');
       if(hasLittleMesh){
         clone['data'] = littleMesh.find(x=>x.type=='Mesh').geometry;
       }
-      else if( littleMesh.find(x=>x.type=='Group') ){
-        console.log('hellohellohello')
+      else{
+        var hasLittleMeshGroup = littleMesh.find(x=>x.type=='Group')
+        if( hasLittleMeshGroup ){
+          var meshes = []
+          for(var j=0; j < hasLittleMeshGroup.children.length; j++){
+            var mesh = hasLittleMeshGroup.children[j].geometry
+            meshes.push(mesh)
+          }
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          clone['data'] = groupMeshes;
+        }
       }
-      var bigMesh = _.get(this,[files[i]+'Big','children',0,'children']);
+      var bigMesh = _.get(this,[currentType+'Big','children',0,'children']);
       var hasBigMesh = bigMesh.find(x=>x.type=='Mesh')
       if(hasBigMesh){
         clone['bigData'] = bigMesh.find(x=>x.type=='Mesh').geometry;
       }
-      else if( bigMesh.find(x=>x.type=='Group') ){
-        console.log('hellohellohello')
+      else{
+        var hasBigMeshGroup = bigMesh.find(x=>x.type=='Group')
+        if( hasBigMeshGroup ){
+          var meshes = []
+          for(var j=0; j < hasBigMeshGroup.children.length; j++){
+            var mesh = hasBigMeshGroup.children[j].geometry
+            meshes.push(mesh)
+          }
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          clone['data'] = groupMeshes;        }
       }
-      clone['type'] = files[i]
+      clone['type'] = currentType
       clones.push(clone);
-      geometriesDrawn[files[i]] = [];
-      geometriesPicking[files[i]] = [];
+      geometriesDrawn[currentType] = [];
+      geometriesPicking[currentType] = [];
     }
 
     for ( let i = 1; i < 51; i ++ ) {
@@ -332,7 +353,16 @@ class RayCast extends LitElement {
 
     if( id>0 ){
       this.cursorType = "pointer";
-      this.link = "src/what.html";
+      if(data.type == 'art'){
+        this.link = "src/art.html";
+      }
+      if(data.type == 'github'){
+        this.link = "https://github.com/herdofsheep";
+      }
+      if(data.type == 'que'){
+        this.link = "src/what.html";
+      }
+
       this.canClick = true;
     }
 
@@ -364,7 +394,7 @@ class RayCast extends LitElement {
 
   clickLink(){
     if(this.canClick){
-      window.location.href = "src/what.html";
+      window.location.href = this.link;
     }
   }
 
