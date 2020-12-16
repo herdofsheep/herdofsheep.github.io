@@ -31,9 +31,9 @@ class RayCast extends LitElement {
       link: {type:String},
       duplicated: {type:Boolean},
       que: {type: Object},
-      art: {type: Object},
+      work: {type: Object},
       queBig: {type: Object},
-      artBig: {type: Object},
+      workBig: {type: Object},
       files: {type: Array}
     };
   }
@@ -104,10 +104,10 @@ class RayCast extends LitElement {
     light.position.set( 0, 500, 20000 );
     this.scene.add( light );
 
-    this.files = ['que', 'art', 'github'];
+    this.files = ['que', 'work', 'github'];
 
-    this.art = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
-    this.artBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
+    this.work = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
+    this.workBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
     this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
     this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
     this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
@@ -380,9 +380,9 @@ class RayCast extends LitElement {
       this.cursorType = "pointer";
       this.infoVisible = "visible"
 
-      if(data.type == 'art'){
-        this.link = "src/art.html";
-        debugWindow.innerHTML = 'art portfolio'
+      if(data.type == 'work'){
+        this.link = "src/work.html";
+        debugWindow.innerHTML = 'work portfolio'
       }
       if(data.type == 'github'){
         this.link = "https://github.com/herdofsheep";
