@@ -39,9 +39,6 @@ class QuestionMark extends LitElement {
 
         this.camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, -100, 1000 );
 
-        // this.camera = new THREE.PerspectiveCamera( 45, (this.container.clientWidth) / this.container.clientHeight, 1, 500 );
-        // this.camera.position.set( 0, 30, 0 );
-
         var light = new THREE.HemisphereLight( 0x470b16, 100, 10 );
         light.position.set( 0, 0, 10 );
         this.scene.add( light );
@@ -78,8 +75,12 @@ class QuestionMark extends LitElement {
 
         var width = this.container.clientWidth;
         var height = this.container.clientHeight;
+
+        this.camera.left   = width / - 2;
+        this.camera.right  =  width / 2;
+        this.camera.top   = height / 2;
+        this.camera.bottom   = height / - 2;
         
-        this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize( width, height );
     }
@@ -133,10 +134,6 @@ class QuestionMark extends LitElement {
 
                 ques.push(peep)
             }
-
-            // var mat = new THREE.MeshStandardMaterial({ color: 0xff0808 });
-            // const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( ques ), mat );
-            // this.queAll = objects;
 
             for ( let i = 0; i < ques.length; i ++ ) {
                 this.scene.add( ques[i] );
