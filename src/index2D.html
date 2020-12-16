@@ -2,18 +2,64 @@
 
   <style>
     body {
-      background-image: url("assets/images/optimised/pluto.jpg");
-      background-size: calc(100%/6);
-      background-repeat: repeat;
+      background-image: url("assets/images/homepage.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
     }
   </style>
 
   <head>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
         <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
   </head>
   
   <body>
+
+    <div id="viewport" class="viewport">
+      <object id="github" type="image/svg+xml" data="assets/svgs/github1.svg" >
+        github logo <!-- fallback image in CSS -->
+      </object>
+    </div>
+    
+    <script>
+
+      init()
+
+			function init() {
+
+        let github = document.getElementById("github");
+        const self = this;
+
+        let path = github.addEventListener("load",function(){
+          // get the inner DOM of alpha.svg
+          var svgDoc = github.contentDocument.firstElementChild;
+          var pathDoc = svgDoc.firstElementChild;
+          pathDocFound(pathDoc);
+        });
+
+        console.log('hi')
+
+      }
+
+      function pathDocFound(pathDoc) {
+
+        pathDoc.style.fill='blue'
+        pathDoc.style.cursor = 'pointer'
+        pathDoc.style.transform = 'scale(0.37) translate(987px, 626px)'
+        // pathDoc.style.opacity= 0;
+        
+        pathDoc.addEventListener("mouseenter",function(){
+          pathDoc.style.fill='red'
+        })
+        pathDoc.addEventListener("mouseleave",function(){
+          pathDoc.style.fill='blue'
+        })
+        console.log('hiya')
+
+      }
+
+    </script>
 
     <a class ="centralise" href="what.html">
       what's this?

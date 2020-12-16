@@ -13,6 +13,7 @@ const filesizeConfig = {
 const copyConfig = {
   targets: [
     { src: 'node_modules/@webcomponents', dest: 'src/build/npm' },
+    { src: 'node_modules/jquery', dest: 'src/build/npm' },
     { src: 'node_modules/systemjs/dist/s.min.js', dest: 'src/build/npm/systemjs/dist' },
     { src: 'node_modules/three/examples/jsm/loaders/GLTFLoader.js', dest: 'src/build/npm/GLTFLoader' },
     { src: 'node_modules/three/examples/jsm/controls/TrackballControls.js', dest: 'src/build/npm/TrackballControls' },
