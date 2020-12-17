@@ -67,7 +67,7 @@ class RayCast extends LitElement {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
         color: white;
-        font-size:20px;
+        font-size:20%;
         visibility: ${this.infoVisible};
         position:absolute;
         z-index: 10;
@@ -503,7 +503,7 @@ class RayCast extends LitElement {
       for (var i in this.files){
         this.highlightShape[this.files[i]].visible = false;
       }
-      this.cursorType = "grab";
+      this.cursorType = "cell";
       this.canClick = false;
 
     }
