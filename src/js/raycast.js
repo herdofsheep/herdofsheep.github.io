@@ -53,6 +53,7 @@ class RayCast extends LitElement {
     this.addEventListener('click', this.clickLink);
     this.addEventListener('touchstart', this.touchStart)
     this.addEventListener("touchmove", this.touchMove);
+    this.addEventListener("touchcancel", this.touchMove);
     this.addEventListener('touchend', this.touchEnd)
   }
 
