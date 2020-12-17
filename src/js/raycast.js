@@ -128,9 +128,6 @@ class RayCast extends LitElement {
     this.mousePosX = this.XCenter;
     this.mousePosY = this.YCenter;
 
-    this.mouse.x = this.XCenter;
-    this.mouse.y = this.YCenter;
-
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color( 0x424242 );
 
@@ -424,7 +421,17 @@ class RayCast extends LitElement {
 
     // set the view offset to represent just a single pixel under the mouse
 
-    this.camera.setViewOffset( this.renderer.domElement.width, this.renderer.domElement.height, this.mouse.x * window.devicePixelRatio | 0, this.mouse.y * window.devicePixelRatio | 0, 1, 1 );
+    var mouseX = this.mouse.x;
+    var mouseY = this.mouse.y;
+
+    var touchScreen = window.matchMedia("(hover: none)").matches;
+
+    if(touchScreen){
+      mouseX = this.XCenter.replace('px', '');
+      mouseY = this.YCenter.replace('px', '');
+    }
+
+    this.camera.setViewOffset( this.renderer.domElement.width, this.renderer.domElement.height, mouseX * window.devicePixelRatio | 0, mouseY * window.devicePixelRatio | 0, 1, 1 );
 
     // render the scene
 
