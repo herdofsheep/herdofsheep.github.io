@@ -9,11 +9,11 @@
       background-color: white;
     }
 
-    .imageLayer{
-      background-image: url("assets/images/index/lines.png");
-      background-repeat: no-repeat;
-      background-size: auto 100%;
-      background-position: center;
+    #imageLayer{
+      position: absolute;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     #svgOverlay{
@@ -46,7 +46,7 @@
         background-size: 190%;
       }
 
-      #svgOverlay{
+      #svgOverlay, #imageLayer{
         position: absolute;
         width: 190%;
         left: 50%;
@@ -59,10 +59,12 @@
   <head>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
-        <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
-    </head>
+    <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+  </head>
   
-  <body>      
+  <body>
+    
+    <img id="imageLayer" src= "assets/images/index/blank.png"></img>
 
     <div id="tabWithin">
       <a id="git" class ="centralise focusItem" href="what.html">
@@ -84,12 +86,17 @@
     
     <script>
 
+      var allSvgs;
+      var gitImg, mathImg, queImg, workImg;
+
       init()
 
 			function init() {
 
         let svgOverlay = document.getElementById("svgOverlay");
         const self = this;
+
+        loadImages();
 
         let tabWithin = document.getElementById("tabWithin");
 
@@ -100,28 +107,116 @@
         let path = svgOverlay.addEventListener("load",function(){
           // get the inner DOM of alpha.svg
           var svgDoc = svgOverlay.contentDocument.firstElementChild;
-          var pathDoc = svgDoc.firstElementChild;
-          pathDocFound(pathDoc);
+          svgLoaded(svgDoc.children);
         });
 
         console.log('hi')
 
       }
 
-      function pathDocFound(pathDoc) {
+      function loadImages(){
 
-        pathDoc.style.fill='blue'
-        pathDoc.style.cursor = 'pointer'
-        pathDoc.style.transform = 'scale(0.37) translate(987px, 626px)'
-        // pathDoc.style.opacity= 0;
-        
-        pathDoc.addEventListener("mouseenter",function(){
-          pathDoc.style.fill='red'
-        })
-        pathDoc.addEventListener("mouseleave",function(){
-          pathDoc.style.fill='blue'
-        })
-        console.log('hiya')
+        gitImg = new Image;
+        gitImg.onload = function() {
+            document.src = this.src;
+        }
+        gitImg.src = 'assets/images/index/github.png';
+
+        mathImg = new Image;
+        mathImg.onload = function() {
+            document.src = this.src;
+        }
+        mathImg.src = 'assets/images/index/art.png';
+
+        workImg = new Image;
+        workImg.onload = function() {
+            document.src = this.src;
+        }
+        workImg.src = 'assets/images/index/work.png';
+
+        queImg = new Image;
+        queImg.onload = function() {
+            document.src = this.src;
+        }
+        queImg.src = 'assets/images/index/que.png';
+
+        blankImg = new Image;
+        blankImg.onload = function() {
+            document.src = this.src;
+        }
+        blankImg.src = 'assets/images/index/blank.png';
+
+      }
+
+      function svgLoaded(svgs) {
+
+        allSvgs = svgs;
+
+        for (var i=0; i<svgs.length; i++){
+
+          var path = svgs[i];
+          delete svgs.boundary;
+
+          path.style.cursor = 'pointer'
+          path.style.zIndex = 10;
+          path.style.opacity= 0;
+          
+          path.addEventListener("mouseenter",function(e){
+
+            var id = e.currentTarget.id;
+
+            if(id.slice(0,3) == 'que'){
+              document.getElementById('imageLayer').src = queImg.src
+            }
+            if(id.slice(0,3) == 'git'){
+              document.getElementById('imageLayer').src = gitImg.src
+            }
+            if(id.slice(0,4) == 'math'){
+              document.getElementById('imageLayer').src = mathImg.src
+            }
+            if(id.slice(0,4) == 'work'){
+              document.getElementById('imageLayer').src = workImg.src
+            }
+
+            //colourchanging svg test
+            // if(id.slice(0,3) == 'que'){
+            //   allSvgs.queMark.style.fill='yellow'
+            //   allSvgs.queDot.style.fill='yellow'
+            //   allSvgs.queBubble.style.fill='yellow'
+            // }
+            // else if(id.slice(-6) == 'Bubble'){
+            //   allSvgs[id.slice(0,-6)].style.fill='yellow'
+            // }
+            // else{
+            //   allSvgs[id + "Bubble"].style.fill='yellow'
+            // }
+            // e.currentTarget.style.fill='yellow'
+            
+          })
+
+          path.addEventListener("mouseleave",function(e){
+
+            var id = e.currentTarget.id;
+
+            document.getElementById('imageLayer').src = blankImg.src
+
+            //colourchanging svg test
+            // if(id.slice(0,3) == 'que'){
+            //   allSvgs.queMark.style.fill='blue'
+            //   allSvgs.queDot.style.fill='blue'
+            //   allSvgs.queBubble.style.fill='blue'
+            // }
+            // else if(id.slice(-6) == 'Bubble'){
+            //   allSvgs[id.slice(0,-6)].style.fill='blue'
+            // }
+            // else{
+            //   allSvgs[id + "Bubble"].style.fill='blue'
+            // }
+            // e.currentTarget.style.fill='blue'
+
+          })
+
+        }
 
       }
 
