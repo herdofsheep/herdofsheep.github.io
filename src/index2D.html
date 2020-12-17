@@ -67,9 +67,9 @@
     <img id="imageLayer" src= "assets/images/index/blank.png"></img>
 
     <div id="tabWithin">
-      <a onfocus="onFocus()" href="what.html"></a>
+      <a onfocus="onFocus()" href=""></a>
       <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
-      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="what.html"></a>
+      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="art.html"></a>
       <a id="work" class ="centralise focusItem" onfocus="onFocus()" href="work.html"></a>
       <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="what.html"></a>
     </div>
@@ -78,6 +78,7 @@
         <!-- fallback image in CSS -->
         svgOverlay   
     </object>
+
     
     <script>
 
@@ -89,16 +90,15 @@
 
 			function init(){
 
-        let svgOverlay = document.getElementById("svgOverlay");
-        const self = this;
-
         loadImages();
 
         let tabWithin = document.getElementById("tabWithin");
 
         tabWithin.addEventListener('transitionstart', (e) =>{
           tabWithin.firstElementChild.focus()
-        })
+        });
+
+        let svgOverlay = document.getElementById("svgOverlay");
 
         let path = svgOverlay.addEventListener("load",function(){
           // get the inner DOM of alpha.svg
@@ -106,58 +106,6 @@
           svgLoaded(svgDoc.children);
         });
 
-        console.log('hi')
-
-      }
-
-      function loadImages(){
-
-        gitImg = new Image;
-        gitImg.onload = function() {
-            document.src = this.src;
-        }
-        gitImg.src = 'assets/images/index/github.png';
-
-        mathImg = new Image;
-        mathImg.onload = function() {
-            document.src = this.src;
-        }
-        mathImg.src = 'assets/images/index/art.png';
-
-        workImg = new Image;
-        workImg.onload = function() {
-            document.src = this.src;
-        }
-        workImg.src = 'assets/images/index/work.png';
-
-        queImg = new Image;
-        queImg.onload = function() {
-            document.src = this.src;
-        }
-        queImg.src = 'assets/images/index/que.png';
-
-        blankImg = new Image;
-        blankImg.onload = function() {
-            document.src = this.src;
-        }
-        blankImg.src = 'assets/images/index/blank.png';
-
-      }
-
-      function onFocus(){
-        var id = this.event.target.id
-        if(id == 'que'){
-          document.getElementById('imageLayer').src = queImg.src
-        }
-        if(id == 'git'){
-          document.getElementById('imageLayer').src = gitImg.src
-        }
-        if(id == 'math'){
-          document.getElementById('imageLayer').src = mathImg.src
-        }
-        if(id == 'work'){
-          document.getElementById('imageLayer').src = workImg.src
-        }
       }
 
       function svgLoaded(svgs){
@@ -172,6 +120,10 @@
           path.style.cursor = 'pointer'
           path.style.zIndex = 10;
           path.style.opacity= 0;
+
+          path.addEventListener("click",function(e){
+            clickTrigger();
+          });
           
           path.addEventListener("mouseenter",function(e){
 
@@ -231,6 +183,85 @@
 
           })
 
+        }
+
+      }
+
+      function loadImages(){
+
+        gitImg = new Image;
+        gitImg.onload = function() {
+            document.src = this.src;
+        }
+        gitImg.src = 'assets/images/index/github.png';
+
+        mathImg = new Image;
+        mathImg.onload = function() {
+            document.src = this.src;
+        }
+        mathImg.src = 'assets/images/index/art.png';
+
+        workImg = new Image;
+        workImg.onload = function() {
+            document.src = this.src;
+        }
+        workImg.src = 'assets/images/index/work.png';
+
+        queImg = new Image;
+        queImg.onload = function() {
+            document.src = this.src;
+        }
+        queImg.src = 'assets/images/index/que.png';
+
+        blankImg = new Image;
+        blankImg.onload = function() {
+            document.src = this.src;
+        }
+        blankImg.src = 'assets/images/index/blank.png';
+
+      }
+
+      function onFocus(){
+        var id = this.event.target.id
+        if(id == 'que'){
+          document.getElementById('imageLayer').src = queImg.src
+        }
+        if(id == 'git'){
+          document.getElementById('imageLayer').src = gitImg.src
+        }
+        if(id == 'math'){
+          document.getElementById('imageLayer').src = mathImg.src
+        }
+        if(id == 'work'){
+          document.getElementById('imageLayer').src = workImg.src
+        }
+        if(id == ''){
+          document.getElementById('imageLayer').src = blankImg.src
+        }
+      }
+
+      function dontClick(){
+        focusTarget = ""
+      }
+
+      function clickTrigger(){
+
+        var link = ""
+
+        if(focusTarget.slice(0,3) == 'que'){
+          link = "what.html";
+        }
+        if(focusTarget.slice(0,3) == 'git'){
+          link = "https://github.com/herdofsheep";
+        }
+        if(focusTarget.slice(0,4) == 'math'){
+          link = "art.html";
+        }
+        if(focusTarget.slice(0,4) == 'work'){
+          link = "work.html";
+        }
+        if(link != ""){
+          window.location.href = link;
         }
 
       }
