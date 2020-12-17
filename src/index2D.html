@@ -16,9 +16,41 @@
       background-position: center;
     }
 
+    #svgOverlay{
+      position: absolute;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .focusItem{
+      width: 0px;
+      height: 0px
+    }
+
+    .focusItem:focus, .focusItem:hover {
+      background: yellow;
+    }
+
+    #tabWithin{
+      background-color: rgb(255, 255, 255);
+    }
+
+    #tabWithin:not(:focus-within) {
+      background-color: rgb(255, 255, 254);
+      transition: background-color 0.01s;
+    }
+
     @media screen and (max-aspect-ratio: 4/5){
       body {
         background-size: 190%;
+      }
+
+      #svgOverlay{
+        position: absolute;
+        width: 190%;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
 
@@ -28,14 +60,25 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
         <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
-  </head>
+    </head>
   
-  <body>
+  <body>      
+
+    <div id="tabWithin">
+      <a id="git" class ="centralise focusItem" href="what.html">
+      </a>
+      <a id="math" class ="centralise focusItem" href="https://svgOverlay.com/herdofsheep">
+      </a>
+      <a id="work" class ="centralise focusItem" href="work.html">
+      </a>
+      <a id="que" class ="centralise focusItem" href="art.html">
+        </a>
+    </div>
 
     <div id="viewport" class="viewport">
-      <object id="github" type="image/svg+xml" data="assets/svgs/github1.svg" >
+      <object id="svgOverlay" type="image/svg+xml" data="assets/svgs/all2.svg" >
         <!-- fallback image in CSS -->
-        github logo 
+        svgOverlay logo 
       </object>
     </div>
     
@@ -45,12 +88,18 @@
 
 			function init() {
 
-        let github = document.getElementById("github");
+        let svgOverlay = document.getElementById("svgOverlay");
         const self = this;
 
-        let path = github.addEventListener("load",function(){
+        let tabWithin = document.getElementById("tabWithin");
+
+        tabWithin.addEventListener('transitionstart', (e) =>{
+          tabWithin.firstElementChild.focus()
+        })
+
+        let path = svgOverlay.addEventListener("load",function(){
           // get the inner DOM of alpha.svg
-          var svgDoc = github.contentDocument.firstElementChild;
+          var svgDoc = svgOverlay.contentDocument.firstElementChild;
           var pathDoc = svgDoc.firstElementChild;
           pathDocFound(pathDoc);
         });
@@ -77,20 +126,6 @@
       }
 
     </script>
-
-    <a class ="centralise" href="what.html">
-      what's this?
-    </a>
-    <a class ="centralise" href="https://github.com/herdofsheep">
-      github
-    </a>
-    <a class ="centralise" href="work.html">
-      work portfolio
-    </a>
-    <a class ="centralise" href="art.html">
-      art portfolio
-    </a>
-
 
   </body>
   
