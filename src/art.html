@@ -2,22 +2,70 @@
 
   <style>
     body {
+      display: flex;
+      flex-direction: row;
+    }
+
+    #main{
+      height: 100%;
+      min-width: 80%;
       background-image: url("assets/images/optimised/pluto.jpg");
       background-size: calc(100%/6);
-      background-repeat: repeat;
+      background-repeat: repeat; 
+      overflow-y: hidden;   
     }
+
+    #leftSidebar{
+      width: 20%;
+      border-right: 10px white solid;
+      min-height: 100%;
+      background: black;
+      overflow-y: scroll;
+    }
+
+    #leftSidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    #leftSidebar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
   </style>
 
   <head>
     <title>art</title>
-        <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+    <script src="js/cursorShenanigans.js"></script>
   </head>
   
   <body>
-    
-    <a class ="centralise" href="artPortfolio/renderPaintings.html">
+
+    <div id="leftSidebar">
+      <a class ="centralise" href="artPortfolio/renderPaintings.html">
         render paintings
-    </a>
+      </a>
+      <div>
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+      </div>
+    </div>
+
+    <div id="main">
+
+    </div>
+
+    <script>
+      new fairyDustCursor({
+        colors: ["#ff0000", "#00ff00", "#0000ff"]
+      });
+    </script>
 
   </body>
   
