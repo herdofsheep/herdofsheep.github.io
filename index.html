@@ -8,8 +8,8 @@
 		<title>meganbates</title>
 		<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8"/>
 
-		<!-- <script type="module" src="src/build/js/raycast.js"></script> -->
-		<script type="module" src="src/js/raycast.js"></script>
+		<script type="module" src="src/build/js/raycast.js"></script>
+		<!-- <script type="module" src="src/js/raycast.js"></script> -->
 
 		<style>
 			body{
@@ -17,11 +17,24 @@
 				overflow-y: scroll;
 				width: 100%;
 			}
+
+			#loading{
+				position: absolute;
+				background: none;
+				width: 100%;
+				text-align: center;
+				height: 100%;
+				vertical-align: middle;
+				color: white;
+				font-size: 50px;
+			}
 		</style>
 			
 	</head>
 	
 	<body>
+
+		<div id="loading">LOADING</div>
 
 		<a href="src/index2D.html" class ="centralise saver">click here to go to 2D</a>
 		<ray-cast></ray-cast>
