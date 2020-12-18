@@ -3,7 +3,6 @@ import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
 import 'lodash';
 
-import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -12,7 +11,6 @@ class RayCast extends LitElement {
   static get properties() {
     return {
       container: {type: Object},
-      stats: {type: Object},
       camera: {type: Object},
       controls: {type: Object},
       scene: {type: Object},
@@ -166,9 +164,6 @@ class RayCast extends LitElement {
     this.controls.staticMoving = true;
     this.controls.dynamicDampingFactor = 0.3;
 
-    this.stats = new Stats();
-    // this.container.appendChild( this.stats.dom );
-
     this.renderer.domElement.addEventListener( 'mousemove', this.onMouseMove.bind(this) );
     window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
   }
@@ -218,7 +213,6 @@ class RayCast extends LitElement {
 
     if(this.duplicated == true){
       this.threeRender();
-      this.stats.update();
     }
 
   }
@@ -253,6 +247,9 @@ class RayCast extends LitElement {
     if(clones == null){
       return;
     }
+
+    //hide the loading label
+    this.parentElement.children.loading.style.visibility = 'hidden'
 
     for (var i in files){
       var currentType = files[i]
