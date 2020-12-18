@@ -1,76 +1,6 @@
 <html>
 
   <style>
-
-    #leftCol {
-      position: fixed;
-      width: 150px;
-      background-color: #DDD; 
-      font-size: 21px;
-      overflow-y: scroll;
-      top: 0;
-      bottom: 0;
-    }
-
-    #content {
-      position: relative;            
-      margin-left: 150px;
-    }
-
-    #container{
-      display: flex;
-      flex-direction: row;
-    }
-
-    #main{
-      min-width: 80%;
-      min-height: 100%;
-      background-image: url("assets/images/optimised/pluto.jpg");
-      background-size: calc(100%/6);
-      background-repeat: repeat; 
-      overflow-y: hidden;   
-    }
-
-    #leftSidebar{
-      position: fixed;
-      width: 20%;
-      border-right: 10px white solid;
-      background: black;
-      overflow-y: scroll;
-      top: 0;
-      bottom: 0;
-    }
-
-    #leftSidebar::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    #leftSidebar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-
-    #leftCol {
-      position: fixed;
-      width: 150px;
-      background-color: #DDD; 
-      font-size: 21px;
-      overflow-y: scroll;
-
-    }
-
-    #content {
-      position: relative;            
-      margin-left: 150px;
-    }
-
-    .artItem{
-      color: pink;
-    }
-
-
-
   </style>
 
   <head>
@@ -95,7 +25,9 @@
           </div>
         </div>
         <div id="main">
-        
+          <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </div>
         </div>
 
     <script>
