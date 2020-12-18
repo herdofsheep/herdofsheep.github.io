@@ -67,7 +67,7 @@ class RayCast extends LitElement {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
         color: white;
-        font-size:20%;
+        font-size:50px;
         visibility: ${this.infoVisible};
         position:absolute;
         z-index: 10;
@@ -462,7 +462,7 @@ class RayCast extends LitElement {
       this.infoVisible = "visible"
 
       if(data.type == 'work'){
-        this.link = "src/work.html";
+        this.link = "src/portfolio.html";
         debugWindow.innerHTML = 'work portfolio'
       }
       if(data.type == 'github'){
