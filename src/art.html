@@ -1,14 +1,30 @@
 <html>
 
   <style>
-    body {
+
+    #leftCol {
+      position: fixed;
+      width: 150px;
+      background-color: #DDD; 
+      font-size: 21px;
+      overflow-y: scroll;
+      top: 0;
+      bottom: 0;
+    }
+
+    #content {
+      position: relative;            
+      margin-left: 150px;
+    }
+
+    #container{
       display: flex;
       flex-direction: row;
     }
 
     #main{
-      height: 100%;
       min-width: 80%;
+      min-height: 100%;
       background-image: url("assets/images/optimised/pluto.jpg");
       background-size: calc(100%/6);
       background-repeat: repeat; 
@@ -16,11 +32,13 @@
     }
 
     #leftSidebar{
+      position: fixed;
       width: 20%;
       border-right: 10px white solid;
-      min-height: 100%;
       background: black;
       overflow-y: scroll;
+      top: 0;
+      bottom: 0;
     }
 
     #leftSidebar::-webkit-scrollbar {
@@ -33,6 +51,26 @@
       scrollbar-width: none;  /* Firefox */
     }
 
+    #leftCol {
+      position: fixed;
+      width: 150px;
+      background-color: #DDD; 
+      font-size: 21px;
+      overflow-y: scroll;
+
+    }
+
+    #content {
+      position: relative;            
+      margin-left: 150px;
+    }
+
+    .artItem{
+      color: pink;
+    }
+
+
+
   </style>
 
   <head>
@@ -43,27 +81,26 @@
   
   <body>
 
-    <div id="leftSidebar">
-      <a class ="centralise" href="artPortfolio/renderPaintings.html">
-        render paintings
-      </a>
-      <div>
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-        lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
-      </div>
-    </div>
-
-    <div id="main">
-
-    </div>
+        <div id="leftSidebar">
+          <a class ="centralise artItem">
+            render paintings
+          </a>
+          <div>
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+            lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal lalalalalalal lalalallalalal
+          </div>
+        </div>
+        <div id="main">
+        
+        </div>
 
     <script>
       new fairyDustCursor({
-        colors: ["#ff0000", "#00ff00", "#0000ff"]
+        colors: ["#000000","#000000"]
       });
     </script>
 
