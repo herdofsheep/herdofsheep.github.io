@@ -215,18 +215,30 @@ a:focus{
   display: inline-block;
 }
 
+.saver, .threedsaver{
+  position: absolute;
+  padding: 20px;
+  left: 10px;
+  bottom: 10px;
+  font-size: 30px;
+  width: 150px;
+  z-index:1000;
+}
+
 /*popup 2d version saver*/
 .saver {
-  position: absolute;
   font-weight: 400;
   background: none;
   color: white;
-  padding: 20px;
   border: solid;
-  left: 10px;
-  bottom: 10px;
-  width: 90px;
-  z-index:1000;
+}
+
+.threedsaver {
+  font-weight: 600;
+  color: black;
+  background: white;
+  box-shadow: 0 0 0 1.3pt black;
+  border-radius: 50%;
 }
 
 .saver:hover, .saver:focus {
@@ -234,6 +246,13 @@ a:focus{
   color: white;
   font-weight: 400;
 }
+
+.threedsaver:hover, .threedsaver:focus {
+  font-weight: 900;
+  color: black;
+  box-shadow: 0 0 0 4pt black;
+}
+
 .grabcursor{
   cursor: grab;
 }

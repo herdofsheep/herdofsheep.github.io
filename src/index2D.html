@@ -11,9 +11,12 @@
 
     #imageLayer{
       position: absolute;
-      height: 100%;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    #wrapper{
+      top:0px;
     }
 
     #svgOverlay{
@@ -41,6 +44,12 @@
       transition: background-color 0.01s;
     }
 
+    @media screen and (min-aspect-ratio: 4/5){
+      #imageLayer{
+        height: 100%;
+      }
+    }
+
     @media screen and (max-aspect-ratio: 4/5){
       body {
         background-size: 190%;
@@ -51,6 +60,11 @@
         width: 190%;
         left: 50%;
         transform: translateX(-50%);
+      }
+
+      #imageLayer{
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -64,22 +78,24 @@
   
   <body>
     
-    <img id="imageLayer" src= "assets/images/index/blank.png"></img>
+    <div id="wrapper">
+      <img id="imageLayer" src= "assets/images/index/blank.png"></img>
+      <object id="svgOverlay" type="image/svg+xml" data="assets/svgs/all2.svg" >
+        <!-- fallback image in CSS -->
+        svgOverlay   
+      </object>
+    </div>
 
     <div id="tabWithin">
-      <a onfocus="onFocus()" href=""></a>
+      <!-- <a onfocus="onFocus()" href=""></a> -->
+      <a href="../index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
       <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
       <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="art.html"></a>
-      <a id="work" class ="centralise focusItem" onfocus="onFocus()" href="work.html"></a>
+      <a id="work" class ="centralise focusItem" onfocus="onFocus()" href="portfolio.html"></a>
       <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="what.html"></a>
     </div>
 
-    <object id="svgOverlay" type="image/svg+xml" data="assets/svgs/all2.svg" >
-        <!-- fallback image in CSS -->
-        svgOverlay   
-    </object>
 
-    
     <script>
 
       var allSvgs;
@@ -120,6 +136,10 @@
           path.style.cursor = 'pointer'
           path.style.zIndex = 10;
           path.style.opacity= 0;
+
+          path.addEventListener('touchend', function(e){
+            touchTrigger(e);
+          });
 
           path.addEventListener("click",function(e){
             clickTrigger();
@@ -262,6 +282,25 @@
         }
         if(link != ""){
           window.location.href = link;
+        }
+
+      }
+
+      function touchTrigger(e){
+
+        var id = this.event.target.id
+
+        if(id.slice(0,3) == 'que'){
+          window.location.href = "what.html";
+        }
+        if(id.slice(0,3) == 'git'){
+          window.location.href = "https://github.com/herdofsheep";
+        }
+        if(id.slice(0,4) == 'math'){
+          window.location.href = "art.html";
+        }
+        if(id.slice(0,4) == 'work'){
+          window.location.href = "work.html";
         }
 
       }
