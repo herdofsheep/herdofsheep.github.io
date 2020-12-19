@@ -116,7 +116,9 @@ function fairyDustCursor(options) {
     }
   
     function addParticle(x, y, color) {
-      particles.push(new Particle(x, y, color));
+      if( Math.floor(Math.random()*10) == 0){
+        particles.push(new Particle(x, y, color));
+      }
     }
   
     function updateParticles() {
