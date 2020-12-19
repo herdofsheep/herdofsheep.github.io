@@ -526,11 +526,6 @@ a:focus{
 
     }
 
-    #content {
-      position: relative;            
-      margin-left: 150px;
-    }
-
     .artItem{
       color: pink;
     }
