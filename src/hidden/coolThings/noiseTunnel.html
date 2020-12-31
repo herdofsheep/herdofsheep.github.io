@@ -19,15 +19,12 @@
 	
 	<body>
 
-		<script src="../../../node_modules/three/build/three.js"></script>
-		<script src="../../js/orbitControls.js"></script>
-		<script src="../../js/gltfLoader.js"></script>
-		<script src="../../js/detector.js"></script>
-		<script src='../../js/perlin.js'></script>
+		<script src="../../build/npm/three/three.module.js"></script>
+		<script src="../../build/npm/OrbitControls/OrbitControls.js"></script>
+		<script src="../../build/js/GLTFLoader-8a8cae8b.js"></script>
+		<script src='../../build/js/perlin.js'></script>
 
 		<script>
-			//let users know if their browser doesn't support webGL
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, scene, renderer, light;
 			var geometry;
