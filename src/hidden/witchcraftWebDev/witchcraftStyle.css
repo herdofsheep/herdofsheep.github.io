@@ -86,6 +86,7 @@ a {
 }
 
 .code{
+  cursor:auto;
   color: #73c991;
   background: black;
   font-size: 18px;
