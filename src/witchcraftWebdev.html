@@ -10,6 +10,11 @@
         background:#1e1e1e;
         /* background: black; */
     }
+    h{
+        color:white;
+        font-size: 50px;
+        text-align: center;
+    }
     .littleImg{
         width:300px;
     }
@@ -59,6 +64,11 @@
   </style>
   
   <body>
+
+    <div class="textWindow">
+        <h>Witchcraft Web Dev</h>
+    </div>
+
     <div class="textWindow">
       <div class="text margin">
         The web has a high barrier for entry, there is a lot of money in keeping the internet expensive, mysterious and inaccessible, and part of that is in the language we use to describe it. <br><br>
@@ -221,6 +231,13 @@
             <div class="code margin">&ltimg src="w3schools.jpg" alt="W3Schools.com" width="104" height="142"&gt </div><br><br>
             and I use <br><br>
             <div class="code margin">&ltimg src="artwork.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+            we can save this line of code in index.html to replace<br><br> <div class="code margin">I will these words to appear.</div> <br><br>
+            But I have saved this code in a new file, artwork-portal.html. It can be accessed at <a href="https://manifestation-spell.github.io/artwork-portal.html">manifestation-spell.github.io/artwork-portal.html</a>
+            However, something unexpected has happened- instead of any image, there is just my alt text, 'a painting by Megan Bates of a computer generated rippling water pool with mushrooms'. <br><br>
+            This begins to show us why it is always important to use alt text when including images on our website- if the image caan't by found, we get context explaining what should be there. This is incredibly important for blind users of the internet- often images are essential for basic web navigation, and so you must provide a clear explanation of what each of the images on your website are and what their function is (if they have one).
+            Accessibility is an essential part of internet spellcasting- our disabled brothers sisters and siblings must be included in the web which we build. <br><br>
+            We need to find out where our image is- to find out what is going on, we will use the 'inspect' tool. <br> <br>
+            This is slightly different depending on which browser you use, but all are similar. I will be using firefox's inspect, which can be opened using a right-click > Inspect element or CTRL+SHIFT+C on Windows or CMD+SHIFT+C on Mac.
         </div>
     </div>
 
@@ -228,6 +245,23 @@
         <div class="box">
             <div class="box-inner">
                 <img class= "img full" src="hidden/witchcraftWebDev/11.png" alt="seeing your new web page"> 
+            </div>
+        </div>
+    </div>
+
+    <div class="textWindow">
+        <div class="text margin">
+            Within the inspector- we can see we have 2 errors. One is for an image- it can't be found, and the other is for something called a favicon. What is that? If we think about it- this makes perfect sense.
+            What image indeed? We haven't put an image on to github for our site to access yet. Let's do that now. <br><br> 
+            (for the curious,
+            <a href="https://favicon.io/tutorials/what-is-a-favicon/"">look here for an explanation on favicons.</a> There's no rush to include one right away, they aren't necessary for our website to work.)
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="box-inner">
+                <img class= "img full" src="hidden/witchcraftWebDev/13.png" alt="seeing your new web page"> 
             </div>
         </div>
     </div>
