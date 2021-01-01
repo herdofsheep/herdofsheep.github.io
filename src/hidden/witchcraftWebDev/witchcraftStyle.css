@@ -3,7 +3,6 @@
 body{
   margin: 0;
   padding: 0;
-  font-family:'catull';
   overflow-x: hidden;
 }
 
@@ -75,6 +74,7 @@ a, a {
 /* text */
 .text{
   color: white;
+  font-family:'catull';
   letter-spacing: 3px;
   line-height: 1.6;
   font-weight: 500;
@@ -82,6 +82,15 @@ a, a {
   font-size: 16;
   text-decoration: none; 
   text-align: justify;
+  text-align-last: center;
+}
+
+.code{
+  color: #73c991;
+  background: black;
+  font-size: 18px;
+  text-align: center;
+  font-family: 'anon';
 }
 
 .buffer{
@@ -206,6 +215,13 @@ a, a {
 @font-face{
   font-family: 'catull';
   src: url('../../assets/fonts/catull/Catull.ttf') format('truetype');
+  font-weight: 300;
+}
+
+/* font */
+@font-face{
+  font-family: 'anon';
+  src:  url('../../assets/fonts/anon-pro/anon-pro.ttf') format('truetype');
   font-weight: 300;
 }
 
