@@ -7,7 +7,8 @@ body{
 }
 
 /* links */
-a, a {
+a {
+  cursor: pointer;
   color: red;
   font-weight: 700;
   text-decoration: none; 

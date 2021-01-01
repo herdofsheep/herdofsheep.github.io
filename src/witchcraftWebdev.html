@@ -2,11 +2,13 @@
 
   <head>
     <title>witchcraft web dev</title>
-		<link rel="stylesheet" href="hidden/witchcraftWebDev/witchcraftStyle.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="hidden/witchcraftWebDev/witchcraftStyle.css" type="text/css" charset="utf-8"/>
+    <script src="js/cursorShenanigans.js"></script>
   </head>
 
   <style>
     body{
+        cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAJzGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDggNzkuMTY0MDM2LCAyMDE5LzA4LzEzLTAxOjA2OjU3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIxLTAxLTAxVDIyOjQ1OjI2WiIgeG1wOk1vZGlmeURhdGU9IjIwMjEtMDEtMDFUMjI6NDg6NDdaIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTAxLTAxVDIyOjQ4OjQ3WiIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1MjRjZWE1OC1hMTAzLTQ3MjUtYTY0Mi1jMjA1YmY3NGFkMzUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozNzZlNDFjZi1jNDE0LWExNGEtOTZmMi02YjVmZTMxMTcwN2YiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjMyNDU4MWYyLWVkOTItNDIwOS04MWI5LTc1NjhiYWE4MGQ5NyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0NToyNloiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjb252ZXJ0ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImZyb20gaW1hZ2UvcG5nIHRvIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmU0NTkxMTI5LWEwZjUtNDcyOS1iOGQ3LTFjYzM0NzUwNGUwMyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0ODoyMFoiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDphMDY2NWY0OC01NGExLTQxMmEtYjBkNS1hODA2YjUxZjk3MTUiIHN0RXZ0OndoZW49IjIwMjEtMDEtMDFUMjI6NDg6NDdaIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjEuMCAoTWFjaW50b3NoKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY29udmVydGVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJmcm9tIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AgdG8gaW1hZ2UvcG5nIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJkZXJpdmVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJjb252ZXJ0ZWQgZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NTI0Y2VhNTgtYTEwMy00NzI1LWE2NDItYzIwNWJmNzRhZDM1IiBzdEV2dDp3aGVuPSIyMDIxLTAxLTAxVDIyOjQ4OjQ3WiIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmEwNjY1ZjQ4LTU0YTEtNDEyYS1iMGQ1LWE4MDZiNTFmOTcxNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciIHN0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4oan54AAABmklEQVRIx63Vz0sWURTG8XnxzfK1KCLbZZQIBbnIooWroH1/RIu2/QvSql1U4NZFtDJICFH6IUpCOw2lXZswRAzaZAsV+7Q5Q8Nl5v194MA9d+483znPvTOTIWuSN3C2xZqm2WrBEzzsF+AyBpMF3/A5mRvFtW4A4/iBaVzALf/jOi7hGfZwrluLXobgH2wWAFs4iPHzXvZgHEeq4xhjvQAu4ksTwHdModYJ4ATu4w0OK4S/JvU2nuJOO4DbmImbymIadcwV5jbwCCOdWFTDJD4lT16P6zlkC6e73YOT2E06eB02ZhjAK6zhTDeAByH6F+sFyFxJJysY7tSiTczjJk7hVwB+JpCrUS+j0S5gJISLcy/ivbiC1RB9jN+4G/XHZpBWHk7iQ4wbIZbHPu7FnqxW2dXOSZjC+RgPhy15FDt5F7Z2DBiIrFV0UoQspZBUrFZS10uuNfC+ArIYx73tDqpyKGwpgyzkkF4AOWSpAvIWg70CsvB8sQSyhtl+APJPzEJyhHcw0S9AFv/z+QDsYaIfe1AGmc3Fkf0DcIZCeRD8km8AAAAASUVORK5CYII=),auto;
         background:#1e1e1e;
         /* background: black; */
     }
@@ -41,7 +43,8 @@
         bottom: 0px;
     }
     .box-inner {
-        margin: 3%;
+        margin: 18px;
+        padding: 5px;
         border: 2px solid white;
     }
     .box-inner::before, .box-inner::after {
@@ -65,12 +68,21 @@
   
   <body>
 
+    <script>
+        new fairyDustCursor({
+          colors: ["#ffffff"]
+        });
+    </script>
+
     <div class="textWindow">
         <h>Witchcraft Web Dev</h>
     </div>
 
     <div class="textWindow">
       <div class="text margin">
+        This page is a ritual to guide artists to building a web page hosting their own images, text and links. With a bit of independent learning it is perfectly possible to work with the many wonders of the modern web including 3D things, playable games and interactive experiences.<br><br>
+        To begin we will be starting small, no knowledge of any kind of programming is necessary. We will be building a website from nothing where we can host images as a personal gallery. <br><br>
+        To see some of what can be done with a little coding knowledge, check out my website <a href="https://www.meganbat.es/">here</a> of which you can read the entirety of the code running it <a href="https://github.com/herdofsheep/herdofsheep.github.io">here.</a><br><br>
         The web has a high barrier for entry, there is a lot of money in keeping the internet expensive, mysterious and inaccessible, and part of that is in the language we use to describe it. <br><br>
         In this ritual, We will be simulatenously be leaning web development 101, and using a mental framework to approach web development from an unusual perspective- using witchcraft to manifest a link for ourselves in the online web. <br><br>
         The entire exercise is free, and will end with us having a web page, which we can customise to the limits of how much code/spellcasting we are willing to learn. This is not squarespace or livejournal- everything will run on our own code, and there are no constraints to what we can do, other than what is currently possible on the internet, and 2GB of storage space (loads!).<br><br>
@@ -81,7 +93,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/1.png" alt="github splashscreen"> 
+                <a href="hidden/witchcraftWebDev/1.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/1.png" alt="github splashscreen"> 
+                </a>
             </div>
         </div>
     </div>
@@ -98,7 +112,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/2.png" alt="naming our domain"> 
+                <a href="hidden/witchcraftWebDev/2.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/2.png" alt="naming our domain">
+                </a>
             </div>
         </div>
     </div>
@@ -122,7 +138,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/3.png" alt="confirming email"> 
+                <a href="hidden/witchcraftWebDev/3.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/3.png" alt="confirming email">
+                </a>
             </div>
         </div>
     </div>
@@ -138,8 +156,12 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img littleImg" src="hidden/witchcraftWebDev/4a.png" alt="creating a repo button"> 
-                <img class= "img full" src="hidden/witchcraftWebDev/4.png" alt="creating a repo"> 
+                <a href="hidden/witchcraftWebDev/4a.png">
+                    <img class= "img littleImg" src="hidden/witchcraftWebDev/4a.png" alt="creating a repo button">
+                </a>
+                <a href="hidden/witchcraftWebDev/4.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/4.png" alt="creating a repo"> 
+                </a>
             </div>
         </div>
     </div>
@@ -155,7 +177,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/5.png" alt="create a new file button"> 
+                <a href="hidden/witchcraftWebDev/5.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/5.png" alt="create a new file button"> 
+                </a>
             </div>
         </div>
     </div>
@@ -169,8 +193,12 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/6.png" alt="commit your first file part 1"> 
-                <img class= "img full" src="hidden/witchcraftWebDev/7.png" alt="commit your first file part 2"> 
+                <a href="hidden/witchcraftWebDev/6.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/6.png" alt="commit your first file part 1"> 
+                </a>
+                <a href="hidden/witchcraftWebDev/7.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/7.png" alt="commit your first file part 2"> 
+                </a>
             </div>
         </div>
     </div>
@@ -185,7 +213,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/8.png" alt="working website"> 
+                <a href="hidden/witchcraftWebDev/8.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/8.png" alt="working website"> 
+                </a>
             </div>
         </div>
     </div>
@@ -205,7 +235,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/12.png" alt="W3Schools on images"> 
+                <a href="hidden/witchcraftWebDev/12.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/12.png" alt="W3Schools on images"> 
+                </a>
             </div>
         </div>
     </div>
@@ -219,8 +251,12 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/9.png" alt="commit your first file part 1"> 
-                <img class= "img full" src="hidden/witchcraftWebDev/10.png" alt="commit your first file part 2"> 
+                <a href="hidden/witchcraftWebDev/9.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/9.png" alt="commit your first file part 1">
+                </a>
+                <a href="hidden/witchcraftWebDev/10.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/10.png" alt="commit your first file part 2"> 
+                </a>
             </div>
         </div>
     </div>
@@ -244,7 +280,9 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/11.png" alt="seeing your new web page"> 
+                <a href="hidden/witchcraftWebDev/11.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/11.png" alt="seeing your new web page"> 
+                </a>
             </div>
         </div>
     </div>
@@ -261,8 +299,59 @@
     <div class="container">
         <div class="box">
             <div class="box-inner">
-                <img class= "img full" src="hidden/witchcraftWebDev/13.png" alt="seeing your new web page"> 
+                <a href="hidden/witchcraftWebDev/13.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/13.png" alt="seeing your new web page"> 
+                </a>
             </div>
+        </div>
+    </div>
+
+    <div class="textWindow">
+        <div class="text margin">
+            To add our image, we just add it to our github repository as shown:
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="box-inner">
+                <a href="hidden/witchcraftWebDev/14.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/14.png" alt="seeing your new web page"> 
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="box-inner">
+                <a href="hidden/witchcraftWebDev/15.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/15.png" alt="seeing your new web page"> 
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="box-inner">
+                <a href="hidden/witchcraftWebDev/16.png">
+                    <img class= "img full" src="hidden/witchcraftWebDev/16.png" alt="seeing your new web page"> 
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="textWindow">
+        <div class="text margin">
+            In order for our html page to find this image, it needs to be named correctly. We will remember that the code we used was <br><br>
+            <div class="code margin">&ltimg src="artwork.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+            so we should make sure that the src="image" contents is correct. src is a link source, which locates a url location on the internet to find the image. Now we have uploaded it, the failsafe source of the image is <a href="https://manifestation-spell.github.io/ripple.jpg">manifestation-spell.github.io/ripple.jpg</a>
+            HTML is clever enough to be able to find an image locally however. Using <br><br>
+            <div class="code margin">&ltimg src="ripple.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+            will work fine.<br><br>
+            To create this linked page, I will create yet another html page, <a href="https://manifestation-spell.github.io/linked-artwork-portal.html">manifestation-spell.github.io/linked-artwork-portal.html</a> which hosts the single line of code above, with the correct name of the image in the src="image". Now is a good moment to experiment and test what does and doesn't work- what if we use the full url addresss of the image, 
+            'https://manifestation-spell.github.io/ripple.jpg' instead? What happens if we rename the image itself? What do I do once I've got 100 images? Or 100 html pages? Won't it get a bit messy having them all here? Can I have text and an image? Does it still work if I name this spell index.html? 
         </div>
     </div>
     
