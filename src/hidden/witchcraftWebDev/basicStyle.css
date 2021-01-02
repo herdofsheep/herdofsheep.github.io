@@ -1,29 +1,17 @@
 
 /* rules to generally apply */
 body{
+  /* background-image: linear-gradient( pink, #eaeaff, white, white); */
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  text-align: center;
 }
 
 /* links */
 a {
   cursor: pointer;
-  color: red;
   font-weight: 700;
   text-decoration: none; 
-}
-
-.contents{
-  padding-top:30px;
-  padding: 10px;
-  width: 70%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-left: 3px white solid;
-  border-right: 3px white solid;
 }
 
 /* thin outline to show container elements */
@@ -34,6 +22,7 @@ a {
 /* tool to centralise multiple images */
 .container{
   text-align: center;
+  display: flex;
 }
 
 /* tool to centralise 1 image wide */
@@ -45,25 +34,44 @@ a {
 
 .img {
   display: inline-block;
+  height:100%;
+  transition: opacity 1s, transform 1s;
 }
 
-/* tool to shift up navigation bar items */
-.shift{
-  position:relative;
-  top:-100px;
+#focus{
+    height:100%;
 }
 
-/* non-homepage navigation bar styling */
-.navigation{
-  position:relative;
-  height: 100px;
-  z-index: 1;
+#unfocus{
+    margin: auto;
+    opacity:50%;
+}
+
+/*navigation arrows*/
+#arrow-left, #arrow-right {
+    cursor: pointer;
+    /* fill:#010101 */
+    fill: white;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.arrow{
+  margin: auto;
+  padding: 10px;
+  width: 500px;
+}
+
+.imageFocus{
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
 }
 
 /* header navigation spacing */
 .margin {
-  margin-left: 1.5%;
-  margin-right: 1.5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 /* header navigation text*/
@@ -78,9 +86,9 @@ a {
 }
 
 /* text */
-.text{
-  color: white;
-  font-family:'catull';
+#info{
+  color: black;
+  font-family:'anon';
   letter-spacing: 3px;
   line-height: 1.6;
   font-weight: 500;
@@ -91,7 +99,6 @@ a {
 }
 
 .code{
-  cursor:auto;
   color: #73c991;
   background: black;
   font-size: 18px;
@@ -99,12 +106,8 @@ a {
   font-family: 'anon';
 }
 
-.buffer{
+.marginTop{
   margin-top:30px;
-}
-
-.textWindow{
-  margin-bottom:30px;
 }
 
 /* image sizing tools */
@@ -182,6 +185,12 @@ a {
     .half{
       width: 100%;
     }
+}
+
+@media prefers-reduced-motion{
+  .img {
+    transition: opacity 0s, transform 0s;
+  }
 }
 
 /* vertical tablet */
