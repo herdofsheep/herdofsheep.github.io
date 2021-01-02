@@ -225,7 +225,7 @@
             You can now navigate to the host of your spell. This will be USERNAME-YOU-CHOSE.github.io. You can look at mine here: 
             <a href="https://manifestation-spell.github.io/">manifestation-spell.github.io</a><br><br>
             We now have everything set up to host a web page! We can write any HTML in this file and it will function as a web page for us to use however we like, and share with anyone! Very exciting, you are on your fist step as a software developer, tech witch, and web artist!
-            Bear with if you get a 404 error at first- github pages sometimes takes a while to update. If you have a blank page, your code has an error, if you have a 404 github pages is just taking a moment to update.
+            Bear with if you get a 404 error at first- github pages sometimes takes a while to update. If you have a blank page, your code has an error (and read on to learn how to 'debug' with inspect), if you have a 404, github pages is just taking a moment to update.
         </div>
     </div>
 
@@ -286,8 +286,8 @@
             we can save this line of code in index.html to replace<br><br> <div class="code margin">I will these words to appear.</div> <br><br>
             But I have saved this code in a new file, artwork-portal.html. It can be accessed at <a href="https://manifestation-spell.github.io/artwork-portal.html">manifestation-spell.github.io/artwork-portal.html</a>
             However, something unexpected has happened- instead of any image, there is just my alt text, 'a painting by Megan Bates of a computer generated rippling water pool with mushrooms'. <br><br>
-            This begins to show us why it is always important to use alt text when including images on our website- if the image caan't by found, we get context explaining what should be there. This is incredibly important for blind users of the internet- often images are essential for basic web navigation, and so you must provide a clear explanation of what each of the images on your website are and what their function is (if they have one).
-            Accessibility is an essential part of internet spellcasting- our disabled brothers sisters and siblings must be included in the web which we build. <br><br>
+            This begins to show us why it is always important to use alt text when including images on our website- if the image can't by found, we get context explaining what should be there. This is incredibly important for blind users of the internet- often images are essential for basic web navigation, and so you must provide a clear explanation of what each of the images on your website are, and what their function is (if they have one).
+            Accessibility is an essential part of internet spellcasting- our disabled siblings, sisters and brothers must be included in the web which we build. <br><br>
             We need to find out where our image is- to find out what is going on, we will use the 'inspect' tool. <br> <br>
             This is slightly different depending on which browser you use, but all are similar. I will be using firefox's inspect, which can be opened using a right-click > Inspect element or CTRL+SHIFT+C on Windows or CMD+SHIFT+C on Mac.
         </div>
@@ -362,12 +362,12 @@
         <div class="text margin">
             In order for our html page to find this image, it needs to be named correctly. We will remember that the code we used was <br><br>
             <div class="code margin">&ltimg src="artwork.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
-            so we should make sure that the src="image" contents is correct. src is a link source, which locates a url location on the internet to find the image. Now we have uploaded it, the failsafe source of the image is <a href="https://manifestation-spell.github.io/ripple.jpg">https://manifestation-spell.github.io/ripple.jpg</a>
+            so we should make sure that the src=" " quotes contents is correct. src is a link source, which locates a url location on the internet to find the image. Now we have uploaded it, the failsafe source of the image is <a href="https://manifestation-spell.github.io/ripple.jpg">https://manifestation-spell.github.io/ripple.jpg</a>
             HTML is clever enough to be able to find an image locally however. Using <br><br>
             <div class="code margin">&ltimg src="ripple.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
             will work fine.<br><br>
-            To create this linked page, I will create yet another html page, <a href="https://manifestation-spell.github.io/linked-artwork-portal.html">manifestation-spell.github.io/linked-artwork-portal.html</a> which hosts the single line of code above, with the correct name of the image in the src="image". Now is a good moment to experiment and test what does and doesn't work- what if we use the full url addresss of the image, 
-            'https://manifestation-spell.github.io/ripple.jpg' instead? What happens if we rename the image itself? What do I do once I've got 100 images? Or 100 html pages? Won't it get a bit messy having them all here? Can I have text and an image? Does it still work if I name this spell index.html? 
+            To create this linked page, I will create yet another html page, <a href="https://manifestation-spell.github.io/linked-artwork-portal.html">manifestation-spell.github.io/linked-artwork-portal.html</a> which hosts the single line of code above, with the correct name of the image in the src=" " quotes. Now is a good moment to experiment and test what does and doesn't work- what if we use the full url addresss of the image, 
+            'https://manifestation-spell.github.io/ripple.jpg' in the src=" " quotes instead? What happens if we rename the image itself? What do I do once I've got 100 images? Or 100 html pages? Won't it get a bit messy having them all here? Can I have text and an image? Does it still work if I name this spell index.html? 
         </div>
     </div>
     
