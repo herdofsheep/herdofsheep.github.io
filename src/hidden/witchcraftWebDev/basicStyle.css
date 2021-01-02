@@ -48,23 +48,29 @@ a {
 
 /*navigation arrows*/
 #arrow-left, #arrow-right {
-    margin: 10px;
-    margin-top: auto;
-    margin-bottom: auto;
     cursor: pointer;
-    width: 0; 
-    height: 0; 
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
+}
+
+#arrow-left, #arrow-right {
+  margin: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+.arrow{
+  width: 100%;
 }
 
 #arrow-left{
-    border-right:30px solid gray; 
+  border-right:20px solid gray; 
 }
-
-
 #arrow-right {
-    border-left: 30px solid gray;
+    border-left: 20px solid gray;
 }
 
 .imageFocus{
@@ -90,7 +96,7 @@ a {
 }
 
 /* text */
-.info{
+#info{
   color: black;
   font-family:'catull';
   letter-spacing: 3px;
