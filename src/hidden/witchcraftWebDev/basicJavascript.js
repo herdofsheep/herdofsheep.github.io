@@ -7,8 +7,6 @@ init()
 
 function init(){
 
-    translateDistance = 100;
-
     document.addEventListener('keydown', function(e) {
         switch (e.key) {
             case "ArrowLeft":
@@ -20,32 +18,18 @@ function init(){
         }
     });
 
-    window.addEventListener("resize",setupOffset)
+    // window.addEventListener("resize",setupOffset)
 
     images = document.getElementsByClassName('img');
     focusPos = Array.prototype.indexOf.call(images, images['focus']);
 
-    setupOffset();
     update();
 
 }
 
-function setupOffset(){
-    if(window.outerWidth > 1000){
-        translateOffset = 50;
-    }
-    else if(window.outerWidth > 600){
-        translateOffset = 7;
-    }
-    else {
-        translateOffset = 0;
-    }
-    update();
-}
 
 function update(){
-    var translateValue = focusPos*translateDistance-translateOffset;
-    var translateBy = -1 * translateValue;
+    var translateValue = 100*((images.length/2)-focusPos) - 50;
 
     if (focusPos == images.length-1){
         document.getElementById('arrow-right').style.visibility = 'hidden';
@@ -55,10 +39,10 @@ function update(){
     }
 
     for(var i=0; i<images.length; i++){
-        images[i].style.transform = "translateX(" + translateBy + "%) scale(" + 0.8 + ")"
+        images[i].style.transform = "translateX(" + translateValue + "%) scale(" + 0.8 + ")"
     }
 
-    images[focusPos].style.transform = "translateX(" + translateBy + "%) scale(" + 1 + ")"
+    images[focusPos].style.transform = "translateX(" + translateValue + "%) scale(" + 1 + ")"
 
     updateText();
 }
@@ -81,7 +65,6 @@ function leftClick(){
         images[focusPos].style.zIndex = '10';
 
         update();
-        updateText();
 
     }
 
@@ -100,7 +83,6 @@ function rightClick(){
         images[focusPos].style.zIndex = '10';
 
         update();
-        updateText();
 
     }
 
