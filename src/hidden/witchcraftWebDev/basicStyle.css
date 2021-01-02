@@ -50,10 +50,10 @@ a {
 /*navigation arrows*/
 #arrow-left, #arrow-right {
     cursor: pointer;
-    fill:#010101
-    /* fill: none;
-    stroke: white;
-    stroke-width: 3px; */
+    /* fill:#010101 */
+    fill: white;
+    stroke: black;
+    stroke-width: 2px;
 }
 
 .arrow{
@@ -87,7 +87,7 @@ a {
 /* text */
 #info{
   color: black;
-  font-family:'catull';
+  font-family:'anon';
   letter-spacing: 3px;
   line-height: 1.6;
   font-weight: 500;

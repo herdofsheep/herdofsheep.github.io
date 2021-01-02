@@ -8,7 +8,6 @@ init()
 function init(){
 
     translateDistance = 100;
-    translateOffset = 0;
 
     document.addEventListener('keydown', function(e) {
         switch (e.key) {
@@ -20,15 +19,28 @@ function init(){
                 break;
         }
     });
+
+    window.addEventListener("resize",setupOffset)
+
     images = document.getElementsByClassName('img');
     focusPos = Array.prototype.indexOf.call(images, images['focus']);
 
+    setupOffset();
     update();
 
 }
 
-function keyPress(){
-
+function setupOffset(){
+    if(window.outerWidth > 1000){
+        translateOffset = 50;
+    }
+    else if(window.outerWidth > 600){
+        translateOffset = 7;
+    }
+    else {
+        translateOffset = 0;
+    }
+    update();
 }
 
 function update(){

@@ -4,6 +4,7 @@ body{
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  text-align: center;
 }
 
 /* links */
@@ -12,6 +13,17 @@ a {
   color: red;
   font-weight: 700;
   text-decoration: none; 
+}
+
+.contents{
+  padding-top:30px;
+  padding: 10px;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 3px white solid;
+  border-right: 3px white solid;
 }
 
 /* thin outline to show container elements */
@@ -33,13 +45,6 @@ a {
 
 .img {
   display: inline-block;
-}
-
-.centerVideo{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width:90%;
 }
 
 /* tool to shift up navigation bar items */
@@ -99,9 +104,6 @@ a {
 }
 
 .textWindow{
-  text-align: center;
-  margin: 10px;
-  margin-top:30px;
   margin-bottom:30px;
 }
 
