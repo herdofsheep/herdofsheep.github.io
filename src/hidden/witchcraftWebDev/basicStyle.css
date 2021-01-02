@@ -1,6 +1,7 @@
 
 /* rules to generally apply */
 body{
+  /* background-image: linear-gradient( pink, #eaeaff, white, white); */
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -49,28 +50,16 @@ a {
 /*navigation arrows*/
 #arrow-left, #arrow-right {
     cursor: pointer;
-}
-
-#arrow-left, #arrow-right {
-  margin: 10px;
-  margin-top: auto;
-  margin-bottom: auto;
-  cursor: pointer;
-  width: 0; 
-  height: 0; 
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
+    fill:#010101
+    /* fill: none;
+    stroke: white;
+    stroke-width: 3px; */
 }
 
 .arrow{
-  width: 100%;
-}
-
-#arrow-left{
-  border-right:20px solid gray; 
-}
-#arrow-right {
-    border-left: 20px solid gray;
+  margin: auto;
+  padding: 10px;
+  width: 500px;
 }
 
 .imageFocus{
