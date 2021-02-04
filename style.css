@@ -32,6 +32,10 @@ a:focus{
   text-align: center;
 }
 
+.heightCap{
+    max-height: 80vh;
+}
+
 /* tool to centralise 1 image wide */
 .centralise {
   display: block;
@@ -512,7 +516,7 @@ a:focus{
   position: fixed;
   width: 20%;
   border-right: 10px white solid;
-  background: black;
+  background: white;
   overflow-y: scroll;
   top: 0;
   bottom: 0;
@@ -538,7 +542,7 @@ a:focus{
 
 .artItem{
   margin-top: 10%;
-  color: pink;
+  color: black;
 }
 
 .artItem:hover, .artItem:focus{
@@ -553,10 +557,10 @@ a:focus{
 /////////////////////////////////////////////////////////*/
 
 .slideContainer {
-  position: inherit;
-  left: 50%;
+  position: fixed;
+  left: 60%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 70%;
   bottom: 10px;
 }
 
@@ -568,7 +572,7 @@ a:focus{
   outline: none;
   background: black;
   outline: none;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   box-shadow: 0 0 0 1.3pt white;
   -webkit-transition: .2s;
   transition: opacity .2s;
@@ -583,6 +587,7 @@ a:focus{
   appearance: none;
   width: 25px;
   height: 25px;
+  opacity: 1;
   background-position: center;
   background-size: contain;
   cursor: pointer;
@@ -592,6 +597,7 @@ a:focus{
   border:none;
   width: 25px;
   height: 25px;
+  opacity: 1;
   background-position: center;
   background-size: contain;
   cursor: pointer;
