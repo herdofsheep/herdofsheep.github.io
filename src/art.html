@@ -11,7 +11,7 @@
       background-size: calc(100%);
       font-size: 50px;
       text-align: center;
-    }
+      }
 
     .slideContainer{
       visibility: hidden;
@@ -25,12 +25,13 @@
       visibility: hidden;
       position: absolute;
       top: 0px;
-    }
+      }
 
     .contents{
       margin-top: 30px;
       position: relative;
       margin: 20px;
+      min-width: min-content
     }
 
     .error{
@@ -41,9 +42,27 @@
     }
 
     .description{
-      background: white;
-      font-size: 20px;
+      font-size: 16px;
+      display: initial;
+      letter-spacing: 1px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
       max-height: 90vh;
+      min-width: min-content
+    }
+
+    .paragraph{
+      background: white;
+      width: 60%;
+      margin: 10px;
+      padding: 10px;
+      }
+
+    .buffer{
+      height: 100vh;
+      width: 0px;
+      padding: 10px;
     }
 
     .slider::-moz-range-thumb {
@@ -111,21 +130,40 @@
           <div class ="contentOption" id="artStatement">
             <div class="contents">
               <div class="description">
-                Megan Bates is a computational artist who works largely with the mediums of code, 3d modelling and paint to produce works about our increasingly complex relationship with machines. Her physics background informs her practice, and she is particularly interested in entanglement/interconnectedness in its various forms, both spiritual and measurable.
-                <br><br>
-                Currently, she works largely with imagined spaces, collaborated between herself and her PC. Renders allow Megan to create photorealistic lighting within impossible environments, and enable her to construct dreamlike worlds intertwining unusual materials to paint liquid pools, misty fogs, and fleshy appendages.
-                <br><br>
-                She takes inspiration from dutch flower paintings- sensuous from a distance, but challenging and disorienting on closer inspection. Her queer experience informs the politics of depicting scenes of ugly but loveable androgynous critters.
-                <!-- <br><br>
-                She takes inspiration from dutch flower paintings- sensuous from a distance, but challenging and disorienting on closer inspection. Her queer experience informs the politics of depicting scenes of ugly but loveable androgynous critters. -->
-                <!-- <br><br>
-                She takes inspiration from dutch flower paintings- sensuous from a distance, but challenging and disorienting on closer inspection. Her queer experience informs the politics of depicting scenes of ugly but loveable androgynous critters.
-                <br><br>
-                She takes inspiration from dutch flower paintings- sensuous from a distance, but challenging and disorienting on closer inspection. Her queer experience informs the politics of depicting scenes of ugly but loveable androgynous critters.
-                <br><br>
-                She takes inspiration from dutch flower paintings- sensuous from a distance, but challenging and disorienting on closer inspection. Her queer experience informs the politics of depicting scenes of ugly but loveable androgynous critters.
-              </div> -->
-            </div>
+                <div class="paragraph">
+                  ARTIST STATEMENT
+                <br>
+                </div>
+                <div class="paragraph">
+                  A phone is an agent through which a specifically modern relationship exists- a site of work, contacting friends, arguing with strangers and looking at porn.
+                <br>
+                </div>
+                <div class="paragraph">
+                  The light from that phone has a narrow gamut of colours, less than those visible to the human eye. The interface of a screen promises a complete experience- Could the highest definition VR be a seamless replacement for an interconnected life? However, there's no denying that the real world just 'feels' different.
+                <br>
+                </div>
+                <div class="paragraph">
+                  Megan Bates is a computational artist who works largely with the media of code and paint. She produces works about our increasingly complex relationship with machines.
+                <br>
+                </div>
+                <div class="paragraph">
+                  Her physics background informs her practice, and she is particularly interested in interconnectedness, both quantifiable and spiritual. Informed by Karen Barad's 'meeting the universe halfway', she explores the relationship between Quantum entanglement and individuality, and queer theory questioning boundaries between the human and non-human. 
+                <br>
+                </div>
+                <div class="paragraph">
+                  She understands herself as part of a co-regulated soup of stressed-out humans, copper wires, fungal roots, twitter threads and carbon emissions. Megan hopes to capture some essence of that soup with empathy extended in unusual directions.
+                <br>
+                </div>
+                <div class="paragraph">
+                  She takes inspiration from Dutch flower paintings such as those by Jan Davidsz de Heem, which she feels succeed at representing this concept by appearing sensuous from a distance, but challenging and disorienting on closer inspection. The entangled phenomena of disgust and eroticism are depicted through this experience of encountering the alien.
+                <br>
+                </div>
+                <div class="paragraph">
+                  Digital rendering allows Megan to create photorealistic lighting within impossible environments, and enable her to construct dreamlike worlds intertwining unusual materials to construct liquid pools, misty fogs, and fleshy appendages. These are then pulled out of the screen, through Megan's process of interpreting and capturing these computational dreams in a spectrum of paint too broad for digitisation.
+                </div>
+                <div class="buffer">
+                </div>
+              </div>
           </div>
           <div class ="contentOption" id="renderPaintings">
             <div class="contents">
