@@ -7,13 +7,17 @@ var links;
 
 var scrollMin, scrollMax;
 
+var scrollDiv
+
 init()
 
 function init(){
 
-    var scrollDiv = document.getElementById('artMain')
+    scrollDiv = document.getElementById('artMain')
     scrollDiv.scrollLeft = 0;
     scrollDiv.addEventListener("scroll", handleScroll)
+    document.getElementById('scroller').addEventListener("input", sliderClick)
+
 
     contentOptions = document.getElementsByClassName('contentOption');
     selection = Array.prototype.indexOf.call(contentOptions, contentOptions['default']);
@@ -37,6 +41,13 @@ function handleScroll(){
 
     document.getElementById('scroller').firstElementChild.setAttribute('value',value)
     document.getElementById('scroller').firstElementChild.value = value
+}
+
+function sliderClick(e){
+    var value = e.srcElement.value
+    var width = document.getElementById('artMain').clientWidth;
+    
+    scrollDiv.scrollLeft = value*width/scrollMax
 }
 
 function updateText(){
