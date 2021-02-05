@@ -58,6 +58,16 @@ function updateText(){
 function linkClick(e){
     var link = e.target.id;
 
+    focusItems = document.getElementsByClassName('focus')
+
+    if(focusItems.length > 0){
+        for (var i=0; i<focusItems.length; i++){
+                focusItems[i].classList.remove('focus')
+        }
+    }
+
+    e.target.classList.add('focus');
+
     document.getElementById('artMain').scrollLeft = 0;
 
     for(var i=0; i<contentOptions.length; i++){
@@ -68,7 +78,7 @@ function linkClick(e){
         contentOptions[link].style.visibility = 'visible'
     }
     else{
-        console.log("haven't made content for this link yet")
+        // alert("haven't made content for this link yet")
     }
 }
 

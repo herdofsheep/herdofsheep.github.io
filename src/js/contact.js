@@ -1,7 +1,11 @@
 
-var email = document.getElementById("email");
+var email = document.getElementById("emailCopy");
 email.addEventListener("click", emailClipboard);
-email.value = email.innerText;
+email.addEventListener("focusout", tooltipReset);
+email.addEventListener("mouseout", tooltipReset);
+
+emailText = document.getElementById("email")
+emailText.value = emailText.innerText;
 
 window.addEventListener("DOMContentLoaded", function() {
         
@@ -51,13 +55,6 @@ function ajax(method, url, data, success, error) {
 
 function emailClipboard(){
 
-    // /* Select the text field */
-    // email.select();
-    // email.setSelectionRange(0, 99999); /* For mobile devices */
-    
-    // /* Copy the text inside the text field */
-    // document.execCommand("copy");
-
     var range = document.createRange();
     range.selectNode(document.getElementById("email"));
     window.getSelection().removeAllRanges(); // clear current selection
@@ -65,7 +62,19 @@ function emailClipboard(){
     document.execCommand("copy");
     window.getSelection().removeAllRanges();// to deselect
 
-    
+    var bubble = document.getElementById("bubbleContents")
+    bubble.innerHTML = "copied to clipboard";
     /* Alert the copied text */
-    alert("Copied to clipboard " + email.value);
+    // alert("Copied to clipboard " + emailText.value);
+}
+
+async function tooltipReset(){
+    const text = await navigator.clipboard.readText();
+    var bubble = document.getElementById("bubbleContents")
+    if(text==emailText.value){
+        bubble.innerHTML = "copied to clipboard";
+    }
+    else{
+        bubble.innerHTML = "click to copy to clipboard"
+    }
 }

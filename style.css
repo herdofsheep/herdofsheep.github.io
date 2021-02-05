@@ -227,12 +227,6 @@ a:focus{
   line-height: 41px;
 }
 
- /* Tooltip container */
- .tooltip {
-  position: relative;
-  display: inline-block;
-}
-
 .saver, .threedsaver{
   position: absolute;
   padding: 20px;
@@ -282,6 +276,12 @@ a:focus{
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////*/
+
+ /* Tooltip container */
+ .tooltip {
+  position: relative;
+  display: inline-block;
+}
 
 /* Tooltip text */
 .tooltip .tooltiptext {
