@@ -33,7 +33,7 @@ a:focus{
 }
 
 .heightCap{
-    max-height: 80vh;
+    max-height: 77vh;
 }
 
 /* tool to centralise 1 image wide */
@@ -143,6 +143,9 @@ a:focus{
 }
 .topMarginOnly2 {
   margin-top: 4.16666%;
+}
+.bottomMargin{
+  margin-bottom: 10%;
 }
 
 /* breather margins for design portfolio homepage */
