@@ -1,7 +1,7 @@
 
 /* rules to generally apply */
 body{
-  margin: 0;
+  margin: 10%;
   padding: 0;
   font-family:'anon';
   overflow-x: hidden;
@@ -90,7 +90,6 @@ a, a {
 }
 
 .textWindow{
-  margin: 10px;
   margin-top:30px;
   margin-bottom:30px;
 }
