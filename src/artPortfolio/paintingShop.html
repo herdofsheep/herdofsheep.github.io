@@ -1,38 +1,58 @@
 <html>
 
-  <style>
-    body {
-      background-image: url("assets/images/optimised/pluto.jpg");
-      background-size: calc(100%/6);
-      background-repeat: repeat;
-    }
-  </style>
-
   <head>
     <title>render paintings</title>
-        <link rel="stylesheet" href="../../style.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="basicStyle.css" type="text/css" charset="utf-8"/>
+    <style>
+
+      .imgLink {
+        display: inline-block;
+        height:100%;
+        transition: opacity 1s, transform 1s;
+      }
+
+      .img{
+        height:100%;
+        width:auto;
+      }
+    </style>
   </head>
-  
+
   <body>
 
-    <div class="centralise topMargin">
-      <a href="../assets/images/renderPaintings/ripple.jpg">
-        <img class="centralise half" src="../assets/images/renderPaintings/ripple.jpg" alt="Ripple Render Painting">
-      </a>
-    </div>
+		<div class="container portfolioSpacer marginTop">
 
-    <div class="centralise topMargin">
-      <a href="../assets/images/renderPaintings/ripple.jpg">
-        <img class="centralise half" src="../assets/images/renderPaintings/ripple.jpg" alt="Ripple Render Painting">
-      </a>
-    </div>
+			<div class="arrow">
+				<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="-3 -3 26 46">
+					<polygon id="arrow-left" onclick="leftClick()" points="0, 20, 20 0, 20, 40" />
+				</svg>
+			</div>
 
-    <div class="centralise topMargin">
-      <a href="../assets/images/renderPaintings/ripple.jpg">
-        <img class="centralise half" src="../assets/images/renderPaintings/ripple.jpg" alt="Ripple Render Painting">
-      </a>
-    </div>
-    
-  </body>
+			<div class="imageFocus">
+
+				<a href="../assets/images/paintings/ripple.jpg" class="imgLink" id="focus"> <img src="../assets/images/optimised/smallRipple.jpg" class="img" alt="Watercolour on archival cotton paper, 310 x 410mm, 2020" /> </a>
+        <a href="../assets/images/paintings/mushroom.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/mushroom.png" class="img" alt="Watercolour on archival cotton paper, 310 x 410mm, 2020" /> </a>
+        <a href="../assets/images/paintings/cloud.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/cloud.png" class="img" alt="Watercolour on archival cotton paper, 310 x 410mm, 2020" /> </a>
+        <a href="../assets/images/paintings/flower.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/flower.png" class="img" alt="Watercolour on archival paper, 300 x 420mm, 2020" /> </a>
+        <a href="../assets/images/paintings/hole.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/hole.png" class="img" alt="Oil on archival paper, 300 x 420mm, 2020" /> </a>
+        <a href="../assets/images/paintings/stillife.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/stillife.png" class="img" alt="Oil on oak block, 200 x 150mm, 2020, SOLD" /> </a>
+        <a href="../assets/images/paintings/window.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/window.png" class="img" alt="Oil on oak block, 200 x 150mm, 2020" /> </a>
+
+			</div>
+
+			<div class="arrow">
+				<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="-3 -3 26 46">
+					<polygon id="arrow-right" onclick="rightClick()" points="0 0, 20 20, 0 40" />
+				</svg>
+			</div>
+					
+		</div>
+
+
+		<div id="info" class="marginTop"> stuff in here </div>
+
+		<script src="../js/shop.js"></script>
+
+	</body>
   
 </html>

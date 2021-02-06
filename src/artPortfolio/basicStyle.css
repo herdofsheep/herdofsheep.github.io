@@ -96,6 +96,7 @@ a {
   text-decoration: none; 
   text-align: justify;
   text-align-last: center;
+  margin: 30px;
 }
 
 .code{
@@ -227,14 +228,14 @@ a {
 /* font */
 @font-face{
   font-family: 'catull';
-  src: url('../../assets/fonts/catull/Catull.ttf') format('truetype');
+  src: url('../assets/fonts/catull/Catull.ttf') format('truetype');
   font-weight: 300;
 }
 
 /* font */
 @font-face{
   font-family: 'anon';
-  src:  url('../../assets/fonts/anon-pro/anon-pro.ttf') format('truetype');
+  src:  url('../assets/fonts/anon-pro/anon-pro.ttf') format('truetype');
   font-weight: 300;
 }
 
