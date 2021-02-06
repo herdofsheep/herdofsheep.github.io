@@ -35,7 +35,7 @@ function init(){
 
 function handleScroll(){
     var scrollPos = document.getElementById('artMain').scrollLeft;
-    var width = document.getElementById('artMain').clientWidth;
+    var width = document.getElementById('artMain').scrollWidth - document.getElementById('artMain').clientWidth;
 
     var value = scrollPos*scrollMax/width;
 
@@ -45,7 +45,7 @@ function handleScroll(){
 
 function sliderClick(e){
     var value = e.srcElement.value
-    var width = document.getElementById('artMain').clientWidth;
+    var width = document.getElementById('artMain').scrollWidth - document.getElementById('artMain').clientWidth;
     
     scrollDiv.scrollLeft = value*width/scrollMax
 }
