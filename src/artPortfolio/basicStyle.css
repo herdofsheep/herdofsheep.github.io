@@ -96,7 +96,21 @@ a {
   text-decoration: none; 
   text-align: justify;
   text-align-last: center;
-  margin: 30px;
+}
+
+.infostyle{
+  color: black;
+  font-family:'anon';
+  letter-spacing: 3px;
+  line-height: 1.6;
+  font-weight: 500;
+  font-size: 16;
+  text-decoration: none; 
+  text-align: justify;
+  text-align-last: center;
+  margin: 0px;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .code{

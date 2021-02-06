@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <title>render paintings</title>
+    <title>paintings</title>
     <link rel="stylesheet" href="basicStyle.css" type="text/css" charset="utf-8"/>
     <style>
 
@@ -15,42 +15,37 @@
       }
 
       .imgLink {
-        display: inline-block;
+        max-height: inherit;
+        display: flex;
         height:100%;
         transition: opacity 1s, transform 1s;
-        outline:3px solid black
       }
 
       .imgAspect{
+        display: inline-block;
         max-height: 100%;
-        width:auto;
-        margin-left: auto;
-        margin-right: auto;
+        margin: auto;
       }
 
       .imageFocus{
         display: flex;
-        height: 75vh;
+        max-height: 70vh;
         width: 90%;
         justify-content: space-around;
-        /* overflow: hidden; */
+        overflow: scroll;
         z-index: 1;
       }
 
-
-      /* .inlineImg{
-        max-width: 90%;
-        max-height: 50vh;
-        margin-left: auto;
-        margin-right: auto;
-        width: auto;
-        height: auto;
-      } */
+      .marginTop{
+        margin-top: 15px;
+      }
 
     </style>
   </head>
 
   <body>
+
+    <div class="marginTop infostyle"> <a href="grid.html">view all</a></div>
 
 		<div class="container flex tall portfolioSpacer marginTop">
 
@@ -67,7 +62,7 @@
         <a href="../assets/images/paintings/cloud.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/cloud.png" class="imgAspect" alt="'Cloud' Watercolour on archival cotton paper, 310 x 410mm, 2020" /> </a>
         <a href="../assets/images/paintings/flower.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/flower.png" class="imgAspect" alt="'Flower' Watercolour on archival paper, 300 x 420mm, 2020" /> </a>
         <a href="../assets/images/paintings/hole.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/hole.png" class="imgAspect" alt="'Hole' Oil on archival paper, 300 x 420mm, 2020" /> </a>
-        <a href="../assets/images/paintings/stillife.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/stillife.png" class="imgAspect" alt="'Bead' Oil on oak block, 200 x 150mm, 2020, SOLD" /> </a>
+        <a href="../assets/images/paintings/stillife.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/stillife.png" class="imgAspect" alt="'Bead' Oil on oak block, 150 x 150mm, 2020, SOLD" /> </a>
         <a href="../assets/images/paintings/window.png" class="imgLink" id="unfocus"> <img src="../assets/images/optimised/window.png" class="imgAspect" alt="'Highgate' Oil on oak block, 200 x 150mm, 2020, SOLD" /> </a>
 
 			</div>
@@ -81,7 +76,8 @@
 		</div>
 
 
-		<div id="info" class="marginTop"> stuff in here </div>
+		<div id="info" class="marginTop infostyle"> stuff in here </div>
+    <div class="marginTop infostyle"> <a href="../contact.html">click here</a> to enquire </div>
 
 		<script src="../js/shop.js"></script>
 
