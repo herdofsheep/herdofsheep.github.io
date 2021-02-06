@@ -39,9 +39,9 @@ function init(){
 
     //make all the images the same width so that the panning behaviour works well
     for(var i=0; i<images.length; i++){
-        images[i].firstElementChild.style.width = "'" + images[0].firstElementChild.clientWidth + "px'"
-        if(images[i].firstElementChild.style.width == "" || images[i].firstElementChild.clientWidth == 0){
-            images[i].firstElementChild.style.width = "" + images[0].firstElementChild.clientHeight*1.3 + "px"
+        images[i].style.width = "'" + document.getElementById("imageFocus").clientWidth + "px'"
+        if(images[i].style.width == "" || images[i].clientWidth == 0){
+            images[i].style.width = "" + document.getElementById("imageFocus").clientWidth + "px"
         }
     }
 
