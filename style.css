@@ -531,12 +531,13 @@ a:focus{
 
 #leftSidebar{
   position: fixed;
-  width: 20%;
+  width: 18%;
   border-right: 10px white solid;
   background: white;
   overflow-y: scroll;
   top: 0;
   bottom: 0;
+  padding: 1%;
 }
 
 #leftSidebar::-webkit-scrollbar {
