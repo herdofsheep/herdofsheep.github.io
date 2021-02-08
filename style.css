@@ -12,12 +12,28 @@ a, a {
   color: #ff4162;
   font-weight: 700;
   text-decoration: none; 
+  display: inline-block;
+}
+
+a::after {
+  display: block;
+  position: inherit;
+  content: attr(title);
+  font-weight: 800;
+  border: 1px solid black;
+  height: 0px;
+  color: transparent;
+  overflow: hidden;
+  visibility: hidden;
+  margin-top: -14;
 }
 
 /* focus (mouse hover) */
 a:hover,
 a:focus{
   color: #ff284d;
+  /* text-shadow: 1px 0px 0px #ff284d; */
+  /* letter-spacing: 1px; */
   font-weight: 800;
   text-decoration: none;
 }
@@ -67,17 +83,12 @@ a:focus{
   width:90%;
 }
 
-/* tool to shift up navigation bar items */
-.shift{
-  position:relative;
-  top:-100px;
-}
-
 /* non-homepage navigation bar styling */
 .navigation{
   position:relative;
   height: 100px;
   z-index: 1;
+  display: flex;
 }
 
 /* header navigation spacing */
@@ -95,22 +106,25 @@ a:focus{
   background: #b7dbd4;
 }
 
+.innerFlower{
+  top:0px
+}
+
 /* home button */
 .flower{
   background-image: url(src/assets/images/flower.png);
   position:relative;
-  top: 100px;
   z-index: 2;
   height:100px;
   width:100px;
   background-position: center;
   background-size: contain;
+  display: block;
 }
 
 .flower:hover, .flower:focus{
   background-image: url(src/assets/images/flowerBold.png);
   position:relative;
-  top: 100px;
   z-index: 2;
   height:100px;
   width:100px;
@@ -547,6 +561,7 @@ a:focus{
   margin-top: 10%;
   color: black;
   width: 90%;
+  display: inline;
 }
 
 .artItem:hover, .artItem:focus{
@@ -554,6 +569,18 @@ a:focus{
   cursor: pointer;
   font-weight: 800;
   text-decoration: none;
+}
+
+.artItem::after {
+  display: block;
+  position: inherit;
+  content: attr(title);
+  font-weight: 800;
+  border: 1px solid black;
+  height: 0px;
+  color: transparent;
+  overflow: hidden;
+  visibility: hidden;
 }
 
 /*/////////////////////////////////////////////////////////

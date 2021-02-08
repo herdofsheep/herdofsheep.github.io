@@ -63,7 +63,6 @@
         padding: 5px;
         font-size: 20;
         color: black;
-        font-weight: 500;
         font-weight: 600;
         letter-spacing: 1px;
         background: white;
@@ -128,8 +127,15 @@
         background: #ff284d;
         padding-bottom: 4px;
         padding-top: 4px;
-        width: 100%;
+        margin: 5px;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
         display: inline-block;
+      }
+
+      .navigator::after{
+        margin-top: 0;
       }
   
       .navigator:hover, .buffer:focus{
@@ -156,6 +162,10 @@
         width: 100%;
         height: auto;
       }
+
+      .topMargin{
+        margin-top: 10px;
+      }
   
     </style>
 
@@ -164,75 +174,75 @@
   <body>
 
         <div id="leftSidebar">
-          <div class ="centralise artItem" id="artStatement">
+          <div class ="centralise" id="artStatement">
             <a href="../index.html" class ="navigator">
               home
             </a>
           </div>
-          <div class ="centralise artItem" id="artStatement">
+          <div class ="centralise" id="artStatement">
             <a href="contact.html" class ="navigator">
               contact
             </a>
           </div>
-          <div class ="centralise artItem focus" id="artStatement">
-            artist statement
+          <div title="artist statement" class ="centralise topMargin focus" id="artStatement">
+            <div class="artItem">artist statement</div>
           </div>
-          <div class ="centralise artItem" id="renderPaintings">
-            render paintings
+          <div title="render paintings" class ="centralise topMargin" id="renderPaintings">
+            <div class="artItem">render paintings</div>
           </div>
-          <div class ="centralise artItem" id="codingExperiments">
-            coding experiments
+          <div title="coding experiments" class ="centralise topMargin" id="codingExperiments">
+            <div class="artItem">coding experiments</div>
           </div>
-          <div class ="centralise artItem" id="noSuchThing">
-            no such thing
+          <div title="no such thing" class ="centralise topMargin" id="noSuchThing">
+            <div class="artItem">no such thing</div>
           </div>
-          <div class ="centralise artItem" id="paintStudies">
-            painting studies
+          <div title="painting studies" class ="centralise topMargin" id="paintStudies">
+            <div class="artItem">painting studies</div>
           </div>
-          <div class ="centralise artItem" id="computationalGarden">
-            computational garden
+          <div title="computational garden" class ="centralise topMargin" id="computationalGarden">
+            <div class="artItem">computational garden</div>
           </div>
-          <div class ="centralise artItem" id="balloon">
-            balloon
+          <div title="balloon" class ="centralise topMargin" id="balloon">
+            <div class="artItem">balloon</div>
           </div>
-          <div class ="centralise artItem" id="digitalSymbiote">
-            digital symbiote
+          <div title="digital symbiote" class ="centralise topMargin" id="digitalSymbiote">
+            <div class="artItem">digital symbiote</div>
           </div>
-          <div class ="centralise artItem" id="gaze">
-            gaze
+          <div title="gaze" class ="centralise topMargin" id="gaze">
+            <div class="artItem">gaze</div>
           </div>
-          <div class ="centralise artItem" id="mathena">
-            medusan and athenian interactions
+          <div title="medusan and athenian interactions" class ="centralise topMargin" id="mathena">
+            <div class="artItem">medusan and athenian interactions</div>
           </div>
-          <div class ="centralise artItem" id="knots">
-            knots
+          <div title="knots" class ="centralise topMargin" id="knots">
+            <div class="artItem">knots</div>
           </div>
-          <div class ="centralise artItem" id="flown">
-            flown
+          <div title="flown" class ="centralise topMargin" id="flown">
+            <div class="artItem">flown</div>
           </div>
-          <div class ="centralise artItem" id="tarot">
-            tarot
+          <div title="tarot" class ="centralise topMargin" id="tarot">
+            <div class="artItem">tarot</div>
           </div>
-          <div class ="centralise artItem" id="oapvr">
-            o.a.p.v.r.
+          <div title="o.a.p.v.r." class ="centralise topMargin" id="oapvr">
+            <div class="artItem">o.a.p.v.r.</div>
           </div>
-          <div class ="centralise artItem" id="planets">
-            planets
+          <div title="planets" class ="centralise topMargin" id="planets">
+            <div class="artItem">planets</div>
           </div>
-          <div class ="centralise artItem" id="clouds">
-            clouds
+          <div title="clouds" class ="centralise topMargin" id="clouds">
+            <div class="artItem">clouds</div>
           </div>
-          <div class ="centralise artItem" id="witchcraftWebDev">
-            witchcraft web dev
+          <div title="witchcraft web dev" class ="centralise topMargin" id="witchcraftWebDev">
+            <div class="artItem">witchcraft web dev</div>
           </div>
-          <div class ="centralise artItem" id="stayingInTouch">
-            staying in touch
+          <div title="staying in touch" class ="centralise topMargin" id="stayingInTouch">
+            <div class="artItem">staying in touch</div>
           </div>
-          <div class ="centralise artItem" id="millingGuide">
-            milling guide
+          <div title="milling guide" class ="centralise topMargin" id="millingGuide">
+            <div class="artItem">milling guide</div>
           </div>
-          <div class ="centralise artItem" id="kite">
-            colour metaphor
+          <div title="colour metaphor" class ="centralise topMargin" id="kite">
+            <div class="artItem">colour metaphor</div>
           </div>
           <br>
           <img src="assets/images/shrom.png" class='full'/>
@@ -715,7 +725,7 @@
               <div class="pieceTitle">colour metaphor</div>
               <div class="description">
                 <div class="paragraph">
-                  <iframe class="vidEmbed" title="vimeo-player" src="https://player.vimeo.com/video/210489434"  width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                  <iframe class="vidEmbed" src="https://player.vimeo.com/video/210489434"  width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
                 <div class="paragraph">
                   A study of colour and materials, 555nm LEDs are strung through a fluorescent pink fabric- as the sun sets, the dominant colours shift from pink through to green, a reversal of the dominant colours the human eye sees at night and day. See the video documentation of this piece 
