@@ -57,6 +57,9 @@ function updateText(){
 
 function linkClick(e){
     var link = e.target.id;
+    if( link==""){
+        link = e.target.parentElement.id
+    }
 
     focusItems = document.getElementsByClassName('focus')
 
