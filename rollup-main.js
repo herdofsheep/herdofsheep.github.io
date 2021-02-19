@@ -21,14 +21,13 @@ const copyConfig = {
     { src: 'node_modules/lodash/lodash.min.js', dest: 'src/build/npm/lodash' },
     { src: 'node_modules/three/build/three.module.js', dest: 'src/build/npm/three' },
     { src: 'node_modules/lit-element/lit-element.js', dest: 'src/build/npm/lit-element' },
-
   ],
 };
 
 // The main JavaScript bundle for modern browsers that support
 // JavaScript modules and other ES2015+ features.
 const config = {
-  input: ['src/js/raycast.js', 'src/js/questionmark.js', 'src/js/mathena.js'],
+  input: ['src/js/raycast.js', 'src/js/questionmark.js', 'src/js/mathena.js', 'src/js/pointTest.js'],
   output: {
     dir: 'src/build/js',
     format: 'es',
