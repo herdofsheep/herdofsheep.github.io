@@ -99,8 +99,6 @@ function onWindowResize() {
     width = document.getElementsByClassName('imageFocus')[0].clientWidth;
     height = document.getElementsByClassName('imageFocus')[0].clientHeight;
 
-    isMiniGallery = document.getElementsByClassName('mini').length
-
     offset = 50
     update();
 
@@ -115,6 +113,13 @@ function updateWidth(){
     for(var i=0; i<images.length; i++){
         images[i].style.maxWidth = "" + document.getElementById("imageFocus").clientWidth + "px"
     }
+
+    // var arr = Array.prototype.slice.call( imageWraps )
+    // var widest = Math.max.apply(Math, arr.map(function(x) { return x.firstElementChild.width; }))
+
+    // for(var i=0; i<imageWraps.length; i++){
+    //     imageWraps[i].style.minWidth = "" + widest + "px"
+    // }
 
     for(var i=0; i<imageWraps.length; i++){
         imageWraps[i].style.minWidth = "" + document.getElementById("imageFocus").clientWidth + "px"
