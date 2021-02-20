@@ -1,8 +1,11 @@
-
-
 var translateDistance;
 var images, focusPos;
 var offset = 50;
+var imageFocus;
+
+let index = 0;
+let x0 = null;
+let locked = false;
 
 init();
 onWindowResize();
@@ -23,6 +26,17 @@ function init(){
         }
     });
 
+    imageFocus = document.getElementsByClassName('imageFocus')[0]
+
+    imageFocus.addEventListener('mousedown', lock, false);
+    imageFocus.addEventListener('touchstart', lock, false);
+
+    imageFocus.addEventListener('mouseup', move, false);
+    imageFocus.addEventListener('touchend', move, false);
+
+    imageFocus.addEventListener('mousemove', drag, false);
+    imageFocus.addEventListener('touchmove', drag, false);
+
     var is_touch_device = 'ontouchstart' in document.documentElement;
     //redirect to homepage if a touch device
     if(is_touch_device){
@@ -33,7 +47,6 @@ function init(){
     }
 
     window.addEventListener( 'resize', onWindowResize.bind(this), false );
-
 
     images = document.getElementsByClassName('imgLink');
 
@@ -121,8 +134,47 @@ function updateWidth(){
     //     imageWraps[i].style.minWidth = "" + widest + "px"
     // }
 
-    for(var i=0; i<imageWraps.length; i++){
-        imageWraps[i].style.minWidth = "" + document.getElementById("imageFocus").clientWidth + "px"
-    }
+    // for(var i=0; i<imageWraps.length; i++){
+    //     imageWraps[i].style.minWidth = "" + document.getElementById("imageFocus").clientWidth + "px"
+    // }
 
 }
+
+///////swiping stuff we hope!///////
+
+function unify(e) { return e.changedTouches ? e.changedTouches[0] : e };
+
+function lock(e) {
+    x0 = unify(e).clientX;
+    imageFocus.classList.toggle('smooth', !(locked = true))
+};
+  
+function drag(e) {
+    e.preventDefault();
+    
+    if(locked) {
+        let w = window.innerWidth;
+        let dx = unify(e).clientX - x0, 
+            f = +(dx/w).toFixed(2);
+            
+        imageFocus.style.setProperty('--i', index - f)
+    }
+};
+  
+function move(e) {
+    if(locked) {
+        let w = window.innerWidth;
+        let dx = unify(e).clientX - x0, s = Math.sign(dx), 
+            f = +(s*dx/w).toFixed(2);
+
+        if((focusPos > 0 || s < 0) && (focusPos < images.length-1 || s > 0) && f > .2) {
+            if(dx<0){
+                rightClick()
+            }
+            if(dx>0){
+                leftClick()
+            }
+            x0 = null
+        }
+    }
+};
