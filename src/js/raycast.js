@@ -91,6 +91,10 @@ class RayCast extends LitElement {
         width: 10px;
         transform: translate(-4px,-9px);
       }
+      #container{
+				top:0px;
+				position: absolute;
+			}
       @media (hover: none) {
         /* behaviour for touch browsers */
         #crosshair {

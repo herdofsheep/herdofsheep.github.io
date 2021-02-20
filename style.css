@@ -242,7 +242,7 @@ a:focus{
 }
 
 .saver, .threedsaver{
-  position: absolute;
+  position: fixed;
   padding: 20px;
   left: 10px;
   bottom: 10px;
@@ -582,6 +582,30 @@ a:focus{
   color: transparent;
   overflow: hidden;
   visibility: hidden;
+}
+
+/*/////////////////////////////////////////////////////////
+/////////////////////  what?? page  ///////////////////////
+/////////////////////////////////////////////////////////*/
+
+.megPhoto{
+  max-width: 50vw;
+  max-height: 45vh;
+  padding-right: 5vh;
+}
+
+.alongside{
+  display: inline-flex;
+  padding-bottom: 5vh;
+}
+
+.alongText{
+  display: block;
+  margin: auto;
+}
+
+.noShadow::after{
+  content: none; 
 }
 
 /*/////////////////////////////////////////////////////////
