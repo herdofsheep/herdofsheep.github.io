@@ -15,13 +15,15 @@
 	</head>
 
 	<body>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js" integrity="sha512-XI02ivhfmEfnk8CEEnJ92ZS6hOqWoWMKF6pxF/tC/DXBVxDXgs2Kmlc9CHA0Aw2dX03nrr8vF54Z6Mqlkuabkw==" crossorigin="anonymous"></script>
+
 		<script type="module">
 
-			import * as THREE from './../../../node_modules/three/build/three.module.js';
-
-			import { GLTFLoader } from './../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+			import { G as GLTFLoader } from './../../build/GLTFLoader.js';
+			import { T as TrackballControls } from './../../build/TrackballControls.js';
 			import { AsciiEffect } from './../../../../node_modules/three/examples/jsm/effects/AsciiEffect.js';
-			import { TrackballControls } from './../../../../node_modules/three/examples/jsm/controls/TrackballControls.js';
+			// import { AsciiEffect } from './../../build/AsciiEffect.js';
 
 			var camera, controls, scene, renderer, effect;
 
@@ -110,7 +112,7 @@
 
 				// effect = new AsciiEffect( renderer, ' .:-+*=%@#', { invert: true } );
 				effect = new AsciiEffect( renderer, ' `.~o*wP03W@', { invert: false } );
-				// effect = new AsciiEffect( renderer, ' .\'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'.split(''));
+				// effect = new AsciiEffect( renderer, ' ./'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'.split(''));
 				effect.setSize( window.innerWidth, window.innerHeight );
 				effect.domElement.style.color = 'black';
 				effect.domElement.style.backgroundColor = 'white';

@@ -17,6 +17,6 @@ file in order to get built.
 Debug pointing files to 
  >   <p>src/js/</p>
 and remember to point to 
- >   <p>src/build/js/</p>
+ >   <p>src/build/</p>
  for deployment.
 
