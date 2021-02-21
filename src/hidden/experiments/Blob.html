@@ -19,19 +19,23 @@
 	
 	<body>
 
-		<script src="../../../node_modules/three/build/three.js"></script>
-		<script src="../../js/three/orbitControls.js"></script>
-		<script src="../../js/three/gltfLoader.js"></script>
-		<script src="../../js/three/detector.js"></script>
 		<script src='../../js/perlin.js'></script>
-		<script src="../../js/three/THREE.MeshLine.js"></script>
+		<script src="../../../node_modules/three/build/three.js"></script>
+		<script src="../../../node_modules/three.meshline/src/THREE.MeshLine.js"></script>
 
+		<script type="module">
 
-		<script>
+			import * as THREE from './../../../node_modules/three/build/three.module.js';
+			// import { MeshLine, MeshLineMaterial } from 'shapeStuff/THREE.MeshLine.js';
+
+			import { GLTFLoader } from './../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+			import { RenderPass } from './../../../node_modules/three/examples/jsm/postprocessing/RenderPass.js';
+			import { HalftonePass } from './../../../node_modules/three/examples/jsm/postprocessing/HalftonePass.js';
+			import { OrbitControls } from './../../../node_modules/three/examples/jsm/controls/OrbitControls.js';
+
 			//let users know if their browser doesn't support webGL
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
-			var camera, scene, renderer, light;
+			var camera, scene, renderer, light, controls;
 			var numz = 60;
 			var num = 300;
 			var geometry;
@@ -105,7 +109,7 @@
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
 				
-				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls = new OrbitControls( camera, renderer.domElement );
 				controls.update();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -116,15 +120,15 @@
 				var t = ( Math.PI * tee)/(num);
 				var z = ( 4* Math.PI * zee)/(numz);
 
-				xParam = mouseX/windowHalfX;
-				yParam = mouseY/windowHalfY;
+				var xParam = mouseX/windowHalfX;
+				var yParam = mouseY/windowHalfY;
 
 				var noisePace = 3
 				var xoff = Math.sin(t)*Math.cos(z)*noisePace;
 				var yoff = Math.sin(t)*Math.sin(z)*noisePace;
 				var zoff = Math.cos(t);
 
-				radius = 1 + noise.perlin3( xoff, yoff, zoff )/3
+				var radius = 1 + noise.perlin3( xoff, yoff, zoff )/3
 				var x = Math.sin(t)*Math.cos(z)*radius;
 				var y = Math.sin(t)*Math.sin(z)*radius;
 				var z = Math.cos(t)*radius;

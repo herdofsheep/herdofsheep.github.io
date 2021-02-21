@@ -782,3 +782,8 @@ else {
 }
 
 }).call(this);
+
+// module.exports = {
+//     MeshLine: MeshLine,
+//     MeshLineMaterial: MeshLineMaterial
+// }
