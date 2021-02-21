@@ -16,18 +16,19 @@
 		</style>
 			
 	</head>
-	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.module.js" integrity="sha512-cwNDDJ0zFqexVpo3ZF1Yxl0u/oVh6PvOT+yLgqwzDU94k3rNmdcRfo4ZJL7f1GiBh7m+fbrkNvV1+ggXHBDZ5g==" crossorigin="anonymous"></script>	
 	<body>
 
 		<script src='../../js/perlin.js'></script>
 		<script src="../experiments/shapeStuff/THREE.MeshLine.js"></script>
 
-
 		<script type="module">
 
-			import * as THREE from './../../build/npm/three/three.module.js';
-			import { OrbitControls } from './../../build/npm/OrbitControls/OrbitControls.js';
-			import { GLTFLoader } from './../../build/npm/GLTFLoader/GLTFLoader.js';
+			import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js';
+
+			import { O as OrbitControls }  from './../../build/OrbitControls.js';
+			import { G as GLTFLoader } from './../../build/GLTFLoader.js';
 
 			var container;
 			var camera, scene, renderer, light;
@@ -143,19 +144,19 @@
 				// var y = (- 0.1 * Math.cos( 2 * t ) - 0.27 * Math.sin( 2 * t ) + 0.38 * Math.cos( 4 * t ) + 0.46 * Math.sin( 4 * t ));
 				// var z = (0.7 * Math.cos( 3 * t ) - 0.4 * Math.sin( 3 * t ));
 
-				x = (( Math.cos( 3 * t ) ) * Math.cos( 2 * t ) );
-				y = (( 2 + Math.cos( 3 * t ) ) * Math.sin( 2 * t ) );
-				z = ( Math.sin( 3 * t ) );
+				var x = (( Math.cos( 3 * t ) ) * Math.cos( 2 * t ) );
+				var y = (( 2 + Math.cos( 3 * t ) ) * Math.sin( 2 * t ) );
+				var z = ( Math.sin( 3 * t ) );
 
-				xoff = Math.cos( r )*Math.sin( r )
-				yoff = Math.sin( r )*Math.cos( r )
-				zoff = Math.sin( r );
+				var xoff = Math.cos( r )*Math.sin( r )
+				var yoff = Math.sin( r )*Math.cos( r )
+				var zoff = Math.sin( r );
 
 				var mult = 10;
 				var mult2 = 20;
-				xPos = x*mult+mult2*xoff;
-				yPos = y*mult+mult2*yoff
-				zPos = z*mult+mult2*zoff
+				var xPos = x*mult+mult2*xoff;
+				var yPos = y*mult+mult2*yoff
+				var zPos = z*mult+mult2*zoff
 
 				var v1 = new THREE.Vector3(xPos,yPos,zPos);
 

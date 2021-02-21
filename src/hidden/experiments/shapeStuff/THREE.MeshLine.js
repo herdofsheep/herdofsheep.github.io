@@ -6,6 +6,8 @@ var root = this
 
 var has_require = typeof require !== 'undefined'
 
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js';
+
 var THREE = root.THREE || has_require && require('three')
 if( !THREE )
 	throw new Error( 'MeshLine requires three.js' )
