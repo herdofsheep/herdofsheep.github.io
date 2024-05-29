@@ -68,15 +68,15 @@
   <head>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
-    <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8"/>
   </head>
   
   <body>
     
     <div id="wrapper">
-      <img id="backgroundImage" src= "assets/images/index/lines.png"></img>
-      <img id="imageLayer" src= "assets/images/index/blank.png"></img>
-      <object id="svgOverlay" type="image/svg+xml" data="assets/svgs/all2.svg" >
+      <img id="backgroundImage" src= "/assets/images/index/lines.png"></img>
+      <img id="imageLayer" src= "/assets/images/index/blank.png"></img>
+      <object id="svgOverlay" type="image/svg+xml" data="/assets/svgs/all2.svg" >
         <!-- fallback image in CSS -->
         svgOverlay   
       </object>
@@ -84,11 +84,11 @@
 
     <div id="tabWithin">
       <!-- <a onfocus="onFocus()" href=""></a> -->
-      <a href="../index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
+      <a href="index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
       <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
-      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="art.html"></a>
-      <a id="work" class ="centralise focusItem" onfocus="onFocus()" href="portfolio.html"></a>
-      <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="what.html"></a>
+      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="/src/art.html"></a>
+      <a id="CV" class ="centralise focusItem" onfocus="onFocus()" href="/src/CV.html"></a>
+      <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="/src/what.html"></a>
     </div>
 
     <script>
@@ -159,21 +159,6 @@
             if(id.slice(0,4) == 'work'){
               document.getElementById('imageLayer').src = workImg.src
             }
-
-            //colourchanging svg test
-            // if(id.slice(0,3) == 'que'){
-            //   allSvgs.queMark.style.fill='yellow'
-            //   allSvgs.queDot.style.fill='yellow'
-            //   allSvgs.queBubble.style.fill='yellow'
-            // }
-            // else if(id.slice(-6) == 'Bubble'){
-            //   allSvgs[id.slice(0,-6)].style.fill='yellow'
-            // }
-            // else{
-            //   allSvgs[id + "Bubble"].style.fill='yellow'
-            // }
-            // e.currentTarget.style.fill='yellow'
-            
           })
 
           path.addEventListener("mouseleave",function(e){
@@ -183,21 +168,6 @@
             focusTarget = ""
 
             document.getElementById('imageLayer').src = blankImg.src
-
-            //colourchanging svg test
-            // if(id.slice(0,3) == 'que'){
-            //   allSvgs.queMark.style.fill='blue'
-            //   allSvgs.queDot.style.fill='blue'
-            //   allSvgs.queBubble.style.fill='blue'
-            // }
-            // else if(id.slice(-6) == 'Bubble'){
-            //   allSvgs[id.slice(0,-6)].style.fill='blue'
-            // }
-            // else{
-            //   allSvgs[id + "Bubble"].style.fill='blue'
-            // }
-            // e.currentTarget.style.fill='blue'
-
           })
 
         }
@@ -210,31 +180,31 @@
         gitImg.onload = function() {
             document.src = this.src;
         }
-        gitImg.src = 'assets/images/index/github.png';
+        gitImg.src = '/assets/images/index/github.png';
 
         mathImg = new Image;
         mathImg.onload = function() {
             document.src = this.src;
         }
-        mathImg.src = 'assets/images/index/art.png';
+        mathImg.src = '/assets/images/index/art.png';
 
         workImg = new Image;
         workImg.onload = function() {
             document.src = this.src;
         }
-        workImg.src = 'assets/images/index/work.png';
+        workImg.src = '/assets/images/index/work.png';
 
         queImg = new Image;
         queImg.onload = function() {
             document.src = this.src;
         }
-        queImg.src = 'assets/images/index/que.png';
+        queImg.src = '/assets/images/index/que.png';
 
-        blankImg = new Image;
+        blankImg = new   Image;
         blankImg.onload = function() {
             document.src = this.src;
         }
-        blankImg.src = 'assets/images/index/blank.png';
+        blankImg.src = '/assets/images/index/blank.png';
 
       }
 
@@ -266,16 +236,16 @@
         var link = ""
 
         if(focusTarget.slice(0,3) == 'que'){
-          link = "what.html";
+          link = "src/what.html";
         }
         if(focusTarget.slice(0,3) == 'git'){
           link = "https://github.com/herdofsheep";
         }
         if(focusTarget.slice(0,4) == 'math'){
-          link = "art.html";
+          link = "src/art.html";
         }
         if(focusTarget.slice(0,4) == 'work'){
-          link = "portfolio.html";
+          link = "src/portfolio.html";
         }
         if(link != ""){
           window.location.href = link;
@@ -288,16 +258,16 @@
         var id = this.event.target.id
 
         if(id.slice(0,3) == 'que'){
-          window.location.href = "what.html";
+          window.location.href = "src/what.html";
         }
         if(id.slice(0,3) == 'git'){
           window.location.href = "https://github.com/herdofsheep";
         }
         if(id.slice(0,4) == 'math'){
-          window.location.href = "art.html";
+          window.location.href = "src/art.html";
         }
         if(id.slice(0,4) == 'work'){
-          window.location.href = "portfolio.html";
+          window.location.href = "src/portfolio.html";
         }
 
       }

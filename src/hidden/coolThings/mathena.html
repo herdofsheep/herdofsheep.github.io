@@ -4,7 +4,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../../../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/public/style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -44,7 +44,7 @@
 				light.position.set( 0, 1, 0 );
 				scene.add( light );
 
-				mathena = loadModel( '../../assets/models/gltf/marble.glb' );
+				mathena = loadModel( '/assets/models/gltf/marble.glb' );
 				scene.add(mathena);
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );

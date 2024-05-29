@@ -44,10 +44,10 @@ function init() {
 
 function importData(){
 
-  $.get('./../../assets/data/f80bd6d9-9a6d-4f4d-8f23-ef63b2c851d4_sun.ill', function(data) {
+  $.get('.//assets/data/f80bd6d9-9a6d-4f4d-8f23-ef63b2c851d4_sun.ill', function(data) {
     setVar(data, 'values')
   });
-  $.get('./../../assets/data/f80bd6d9-9a6d-4f4d-8f23-ef63b2c851d4.pts', function(data) {
+  $.get('.//assets/data/f80bd6d9-9a6d-4f4d-8f23-ef63b2c851d4.pts', function(data) {
     setVar(data, 'points')
   }); 
 

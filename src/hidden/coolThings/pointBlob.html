@@ -6,7 +6,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../../../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/public/style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -19,11 +19,11 @@
 	
 	<body>
 
-		<script src="../../../node_modules/three/build/three.js"></script>
-		<script src="../../js/three/orbitControls.js"></script>
-		<script src="../../js/three/gltfLoader.js"></script>
-		<script src="../../js/three/detector.js"></script>
-		<script src='../../js/perlin.js'></script>
+		<script src="/build/three/build/three.js"></script>
+		<script src="/build/three/orbitControls.js"></script>
+		<script src="/build/three/gltfLoader.js"></script>
+		<script src="/build/three/detector.js"></script>
+		<script src='/js/perlin.js'></script>
 
 
 		<script>
@@ -61,7 +61,7 @@
 				scene.add( light );
         
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../../assets/images/flowerBoldOutline.png' );
+				var sprite = textureLoader.load( '/assets/images/flowerBoldOutline.png' );
 				var pointSize = 0.1;
 				var material = new THREE.PointsMaterial( { size: pointSize, side: THREE.FrontSide, map: sprite, transparent: false } );
 				material.alphaTest = 0.5;

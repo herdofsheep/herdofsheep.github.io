@@ -1,7 +1,7 @@
 
-import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
 import 'lodash';
+import {LitElement, html} from 'lit-element';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';

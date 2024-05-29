@@ -44,7 +44,7 @@ class Mathena3D extends LitElement {
         light.position.set( 0, 1, 0 );
         this.scene.add( light );
 
-        var texture = new THREE.TextureLoader().load( 'assets/images/planets.jpg' );
+        var texture = new THREE.TextureLoader().load( '/assets/images/planets.jpg' );
         var scale = 15;
 
         var geometry = new THREE.PlaneGeometry(1.3847*scale, 0.3000*scale);
@@ -58,7 +58,7 @@ class Mathena3D extends LitElement {
         this.scene.add(backgroundMesh);
 
 
-        this.mathena = this.loadModel( 'assets/models/gltf/mathena.gltf' );
+        this.mathena = this.loadModel( '/assets/models/gltf/mathena.gltf' );
         this.scene.add( this.mathena );
 
         this.renderer = new THREE.WebGLRenderer( { antialias: true } );

@@ -3,7 +3,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../../../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/public/style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -57,7 +57,7 @@
 				// sphere = new THREE.Mesh( new THREE.SphereBufferGeometry( 200, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
 				// scene.add( sphere );
 
-				var loader = new GLTFLoader().setPath( '../../assets/models/gltf/' );
+				var loader = new GLTFLoader().setPath( '/assets/models/gltf/' );
 				loader.load( 'ramesses.gltf', function ( data ) {
 
 					gltf = data;

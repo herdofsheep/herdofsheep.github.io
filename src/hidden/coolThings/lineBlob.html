@@ -6,7 +6,7 @@
 	<head>
 		
 		<title>meganbates</title>
-		<link rel="stylesheet" href="../../../style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/public/style.css" type="text/css" charset="utf-8"/>
 		<style>
 			body{
 		    position: fixed; 
@@ -19,13 +19,12 @@
 	
 	<body>
 
-		<script src="../../build/npm/three/three.module.js"></script>
-		<script src="../../build/npm/OrbitControls/OrbitControls.js"></script>
-		<script src="../../build/npm/GLTFLoader/GLTFLoader.js"></script>
-		<script src="../../js/three/detector.js"></script>
-		<script src='../../js/perlin.js'></script>
-		<script src="../../js/three/THREE.MeshLine.js"></script>
-
+		<script src="/build/three/three.module.js"></script>
+		<script src="/build/three/addons/OrbitControls/OrbitControls.js"></script>
+		<script src="/build/three/addons/loaders/GLTFLoader.js"></script>
+		<script src="/build/js/three/detector.js"></script>
+		<script src='/js/perlin.js'></script>
+		<script src="/js/three/THREE.MeshLine.js"></script>
 
 		<script>
 			//let users know if their browser doesn't support webGL
@@ -64,7 +63,7 @@
 				scene.add( light );
         
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../../assets/images/flowerBoldOutline.png' );
+				var sprite = textureLoader.load( '/assets/images/flowerBoldOutline.png' );
 
 				var material = new MeshLineMaterial({color: 0x000000});
 				material.alphaTest = 0.5;
