@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class QuestionMark extends LitElement {
 

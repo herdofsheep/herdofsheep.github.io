@@ -10,4 +10,8 @@ app.use('/node_modules', express.static(path.join(__dirname, '/node_modules/thre
 // app.use('/three_addon', express.static(path.join(__dirname, '/node_modules')));
 app.use('/jsm', express.static(path.join(__dirname, '/node_modules/three/examples/jsm')));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+
 app.listen(3000, () => console.log('Visit http://127.0.0.1:3000'))
