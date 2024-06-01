@@ -1,0 +1,200 @@
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer;
+  color: red;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contents {
+  background: #1e1e1e;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  display: block;
+}
+
+.outline {
+  border: 1px solid #fff;
+}
+
+.container {
+  text-align: center;
+}
+
+.centralise {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.img {
+  display: inline-block;
+}
+
+.shift {
+  position: relative;
+  top: -100px;
+}
+
+.navigation {
+  z-index: 1;
+  height: 100px;
+  position: relative;
+}
+
+.margin {
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+}
+
+.homelinks {
+  text-align: center;
+  width: 130px;
+  height: 100px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 100px;
+  display: inline-block;
+}
+
+.text {
+  color: #fff;
+  letter-spacing: 3px;
+  text-align: justify;
+  text-align-last: center;
+  font-family: catull;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.code {
+  cursor: auto;
+  color: #73c991;
+  text-align: center;
+  background: #000;
+  font-family: anon;
+  font-size: 18px;
+}
+
+.buffer {
+  margin-top: 30px;
+}
+
+.textWindow {
+  margin-bottom: 30px;
+}
+
+.quarter {
+  width: 24%;
+}
+
+.smallThird {
+  width: 30%;
+}
+
+.third {
+  width: 33%;
+}
+
+.smallHalf {
+  width: 40%;
+}
+
+.half {
+  width: 49%;
+}
+
+.smallFull {
+  width: 90%;
+}
+
+.full {
+  width: 100%;
+}
+
+@media only screen and (device-width >= 320px) and (device-width <= 480px) {
+  .homelinks {
+    width: 200px;
+    font-size: 50px;
+  }
+
+  .portfolioSpacer {
+    max-width: 90%;
+    margin: 4.16666% auto;
+  }
+
+  .portfolioBox {
+    width: 350px;
+    height: 490px;
+  }
+
+  .portfolioTextTwoline {
+    width: 300px;
+    height: 100px;
+    font-size: 30px;
+    line-height: 50px;
+  }
+
+  .portfolioTextOneline {
+    width: 300px;
+    height: 100px;
+    font-size: 30px;
+    line-height: 100px;
+  }
+
+  .quarter {
+    width: 33%;
+  }
+
+  .smallThird {
+    width: 40%;
+  }
+
+  .third {
+    width: 49%;
+  }
+
+  .bigPlanet {
+    width: 75%;
+  }
+
+  .smallHalf {
+    width: 80%;
+  }
+
+  .half {
+    width: 100%;
+  }
+}
+
+@media screen and (device-width >= 1600px) {
+  .portfolioSpacer {
+    max-width: 66.6667%;
+    margin: 4.16666% auto;
+  }
+}
+
+@font-face {
+  font-family: catull;
+  src: url("../../../Catull.6f4d5e02.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: anon;
+  src: url("../../../anon-pro.a20c811e.ttf") format("truetype");
+  font-weight: 300;
+}
+/*# sourceMappingURL=witchcraftWebdev.e1422d98.css.map */

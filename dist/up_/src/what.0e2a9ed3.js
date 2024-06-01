@@ -584,9 +584,11 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"TLhpw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _litElement = require("lit-element");
 var _three = require("three");
 var _lodash = require("lodash");
+var _lodashDefault = parcelHelpers.interopDefault(_lodash);
 var _gltfloaderJs = require("three/examples/jsm/loaders/GLTFLoader.js");
 class QuestionMark extends (0, _litElement.LitElement) {
     static get properties() {
@@ -675,7 +677,7 @@ class QuestionMark extends (0, _litElement.LitElement) {
         this.camera.lookAt(this.que.position);
     }
     duplicate() {
-        var found = _.get(this.que, [
+        var found = (0, _lodashDefault.default).get(this.que, [
             "children",
             0,
             "children"
@@ -709,6 +711,6 @@ class QuestionMark extends (0, _litElement.LitElement) {
 }
 window.customElements.define("question-mark", QuestionMark);
 
-},{"lit-element":"kvK5P","three":"ktPTu","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF"}]},["exZBv","TLhpw"], "TLhpw", "parcelRequire26b9")
+},{"lit-element":"kvK5P","three":"ktPTu","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["exZBv","TLhpw"], "TLhpw", "parcelRequire26b9")
 
 //# sourceMappingURL=what.0e2a9ed3.js.map

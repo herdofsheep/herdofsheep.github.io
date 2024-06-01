@@ -1,7 +1,7 @@
 
 import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
-import 'lodash';
+import _ from 'lodash';
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';

@@ -1,0 +1,1115 @@
+<script src="/up_/src/hidden/coolThings/Ascii.eb297657.js"></script><script src="/up_/src/hidden/coolThings/pointBlob.04930d8b.js"></script>
+
+<script>// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        this
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      return res === false ? {} : newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+
+      // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+})({"3l8i4":[function(require,module,exports) {
+var global = arguments[3];
+var HMR_HOST = null;
+var HMR_PORT = 1234;
+var HMR_SECURE = false;
+var HMR_ENV_HASH = "d6ea1d42532a7575";
+var HMR_USE_SSE = false;
+module.bundle.HMR_BUNDLE_ID = "4684019505d58640";
+"use strict";
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: {|[string]: mixed|};
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
+}
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+declare var HMR_USE_SSE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+    OldModule.call(this, moduleName);
+    this.hot = {
+        data: module.bundle.hotData[moduleName],
+        _acceptCallbacks: [],
+        _disposeCallbacks: [],
+        accept: function(fn) {
+            this._acceptCallbacks.push(fn || function() {});
+        },
+        dispose: function(fn) {
+            this._disposeCallbacks.push(fn);
+        }
+    };
+    module.bundle.hotData[moduleName] = undefined;
+}
+module.bundle.Module = Module;
+module.bundle.hotData = {};
+var checkedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
+function getHostname() {
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
+}
+function getPort() {
+    return HMR_PORT || location.port;
+}
+// eslint-disable-next-line no-redeclare
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
+    var hostname = getHostname();
+    var port = getPort();
+    var protocol = HMR_SECURE || location.protocol == "https:" && ![
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0"
+    ].includes(hostname) ? "wss" : "ws";
+    var ws;
+    if (HMR_USE_SSE) ws = new EventSource("/__parcel_hmr");
+    else try {
+        ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/");
+    } catch (err) {
+        if (err.message) console.error(err.message);
+        ws = {};
+    }
+    // Web extension context
+    var extCtx = typeof browser === "undefined" ? typeof chrome === "undefined" ? null : chrome : browser;
+    // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    }
+    // $FlowFixMe
+    ws.onmessage = async function(event /*: {data: string, ...} */ ) {
+        checkedAssets = {} /*: {|[string]: boolean|} */ ;
+        assetsToAccept = [];
+        assetsToDispose = [];
+        var data /*: HMRMessage */  = JSON.parse(event.data);
+        if (data.type === "update") {
+            // Remove error overlay if there is one
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH);
+            // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            });
+            if (handled) {
+                console.clear();
+                // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
+                // Dispose all old assets.
+                let processedAssets = {} /*: {|[string]: boolean|} */ ;
+                for(let i = 0; i < assetsToDispose.length; i++){
+                    let id = assetsToDispose[i][1];
+                    if (!processedAssets[id]) {
+                        hmrDispose(assetsToDispose[i][0], id);
+                        processedAssets[id] = true;
+                    }
+                }
+                // Run accept callbacks. This will also re-execute other disposed assets in topological order.
+                processedAssets = {};
+                for(let i = 0; i < assetsToAccept.length; i++){
+                    let id = assetsToAccept[i][1];
+                    if (!processedAssets[id]) {
+                        hmrAccept(assetsToAccept[i][0], id);
+                        processedAssets[id] = true;
+                    }
+                }
+            } else fullReload();
+        }
+        if (data.type === "error") {
+            // Log parcel errors to console
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
+            }
+            if (typeof document !== "undefined") {
+                // Render the fancy html overlay
+                removeErrorOverlay();
+                var overlay = createErrorOverlay(data.diagnostics.html);
+                // $FlowFixMe
+                document.body.appendChild(overlay);
+            }
+        }
+    };
+    if (ws instanceof WebSocket) {
+        ws.onerror = function(e) {
+            if (e.message) console.error(e.message);
+        };
+        ws.onclose = function() {
+            console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
+        };
+    }
+}
+function removeErrorOverlay() {
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+        overlay.remove();
+        console.log("[parcel] \u2728 Error resolved");
+    }
+}
+function createErrorOverlay(diagnostics) {
+    var overlay = document.createElement("div");
+    overlay.id = OVERLAY_ID;
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          \u{1F6A8} ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>\u{1F4DD} <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
+    }
+    errorHTML += "</div>";
+    overlay.innerHTML = errorHTML;
+    return overlay;
+}
+function fullReload() {
+    if ("reload" in location) location.reload();
+    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
+}
+function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
+    var modules = bundle.modules;
+    if (!modules) return [];
+    var parents = [];
+    var k, d, dep;
+    for(k in modules)for(d in modules[k][1]){
+        dep = modules[k][1][d];
+        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
+            bundle,
+            k
+        ]);
+    }
+    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
+    return parents;
+}
+function updateLink(link) {
+    var href = link.getAttribute("href");
+    if (!href) return;
+    var newLink = link.cloneNode();
+    newLink.onload = function() {
+        if (link.parentNode !== null) // $FlowFixMe
+        link.parentNode.removeChild(link);
+    };
+    newLink.setAttribute("href", // $FlowFixMe
+    href.split("?")[0] + "?" + Date.now());
+    // $FlowFixMe
+    link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+    if (cssTimeout) return;
+    cssTimeout = setTimeout(function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for(var i = 0; i < links.length; i++){
+            // $FlowFixMe[incompatible-type]
+            var href /*: string */  = links[i].getAttribute("href");
+            var hostname = getHostname();
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
+            if (!absolute) updateLink(links[i]);
+        }
+        cssTimeout = null;
+    }, 50);
+}
+function hmrDownload(asset) {
+    if (asset.type === "js") {
+        if (typeof document !== "undefined") {
+            let script = document.createElement("script");
+            script.src = asset.url + "?t=" + Date.now();
+            if (asset.outputFormat === "esmodule") script.type = "module";
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === "function") {
+            // Worker scripts
+            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + "?t=" + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension fix
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                        extCtx.runtime.reload();
+                        return;
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
+function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+        if (deps) {
+            if (modules[asset.id]) {
+                // Remove dependencies that are removed and will become orphaned.
+                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
+                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
+                }
+            }
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+            // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
+            modules[asset.id] = [
+                fn,
+                deps
+            ];
+        } else if (bundle.parent) hmrApply(bundle.parent, asset);
+    }
+}
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
+    if (!modules) return;
+    if (modules[id]) {
+        // Collect dependencies that will become orphaned when this module is deleted.
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
+            if (parents.length === 1) orphans.push(deps[dep]);
+        }
+        // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
+        delete modules[id];
+        delete bundle.cache[id];
+        // Now delete the orphans.
+        orphans.forEach((id)=>{
+            hmrDelete(module.bundle.root, id);
+        });
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
+}
+function hmrAcceptCheck(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
+    // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
+    while(parents.length > 0){
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
+        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
+        accepted = true;
+        else {
+            // Otherwise, queue the parents in the next level upward.
+            let p = getParents(module.bundle.root, v[1]);
+            if (p.length === 0) {
+                // If there are no parents, then we've reached an entry without accepting. Reload.
+                accepted = false;
+                break;
+            }
+            parents.push(...p);
+        }
+    }
+    return accepted;
+}
+function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
+        // If we reached the root bundle without finding where the asset should go,
+        // there's nothing to do. Mark as "accepted" so we don't reload the page.
+        if (!bundle.parent) return true;
+        return hmrAcceptCheck(bundle.parent, id, depsByBundle);
+    }
+    if (checkedAssets[id]) return true;
+    checkedAssets[id] = true;
+    var cached = bundle.cache[id];
+    assetsToDispose.push([
+        bundle,
+        id
+    ]);
+    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) {
+        assetsToAccept.push([
+            bundle,
+            id
+        ]);
+        return true;
+    }
+}
+function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    var cached = bundle.cache[id];
+    bundle.hotData[id] = {};
+    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
+    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
+        cb(bundle.hotData[id]);
+    });
+    delete bundle.cache[id];
+}
+function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    // Execute the module.
+    bundle(id);
+    // Run the accept callbacks in the new version of the module.
+    var cached = bundle.cache[id];
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
+        var assetsToAlsoAccept = cb(function() {
+            return getParents(module.bundle.root, id);
+        });
+        if (assetsToAlsoAccept && assetsToAccept.length) {
+            assetsToAlsoAccept.forEach(function(a) {
+                hmrDispose(a[0], a[1]);
+            });
+            // $FlowFixMe[method-unbinding]
+            assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+        }
+    });
+}
+
+},{}],"5AgIT":[function(require,module,exports) {
+var _threeMinJs = require("/node_modules/three/build/three.min.js");
+if (!is_browser_compatible()) document.getElementById("oldie").style.display = "block";
+var container, stats;
+var camera, scene, renderer;
+var mesh, texture, geometry, materials, material, current_material;
+var materialFilm, rtTexture1, cameraOrtho, scenePost, quad;
+var light, pointLight;
+var effect, resolution, numBlobs;
+var worldWidth = 128, worldDepth = 128, worldHalfWidth = worldWidth / 2, worldHalfDepth = worldDepth / 2;
+var mouseX = 0, mouseY = 0, lat = 0, lon = 0, phy = 0, theta = 0;
+var direction = new _threeMinJs.Vector3(), moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+var effectController;
+init();
+setInterval(loop, 1000 / 60);
+//loop();
+function init() {
+    container = document.getElementById("container");
+    camera = new _threeMinJs.Camera(50, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.set(0, 0, 2000);
+    scene = new _threeMinJs.Scene();
+    light = new _threeMinJs.DirectionalLight(0xffffff);
+    light.position.x = 0.5;
+    light.position.y = 0.5;
+    light.position.z = 1;
+    light.position.normalize();
+    scene.add(light);
+    pointLight = new _threeMinJs.PointLight(0xff3300);
+    pointLight.position.x = 0;
+    pointLight.position.y = 0;
+    pointLight.position.z = 100;
+    scene.add(pointLight);
+    /*
+     var lightMesh = new THREE.Mesh( new Sphere( 5, 16, 8 ), new THREE.MeshBasicMaterial( { color: 0xff0000 } ) );
+     lightMesh.position = pointLight.position;
+     scene.addObject( lightMesh );
+     */ // toon shaders
+    function createShaderMaterial(id1, light) {
+        var smaterial, shader, vs, fs, u;
+        //   shader = ShaderExtras[ id ];
+        //   u = Uniforms.clone(shader.uniforms);
+        //   vs = shader.vertex_shader;
+        //   fs = shader.fragment_shader;
+        smaterial = new _threeMinJs.MeshShaderMaterial({});
+        smaterial.uniforms.uDirLightPos.value = light.position;
+        smaterial.uniforms.uDirLightColor.value = light.color;
+        return smaterial;
+    }
+    var toonMaterial5 = createShaderMaterial("toon5", light), toonMaterial3 = createShaderMaterial("toon3", light), hatchingMaterial = createShaderMaterial("hatching", light), hatchingMaterial2 = createShaderMaterial("hatching", light), dottedMaterial = createShaderMaterial("dotted", light), dottedMaterial2 = createShaderMaterial("dotted", light);
+    hatchingMaterial2.uniforms.uBaseColor.value.setRGB(0, 0, 0);
+    hatchingMaterial2.uniforms.uLineColor1.value.setHSV(0, 0.9, 0.9);
+    hatchingMaterial2.uniforms.uLineColor2.value.setHSV(0, 0.9, 0.9);
+    hatchingMaterial2.uniforms.uLineColor3.value.setHSV(0, 0.9, 0.9);
+    hatchingMaterial2.uniforms.uLineColor4.value.setHSV(0.1, 0.9, 0.9);
+    dottedMaterial2.uniforms.uBaseColor.value.setRGB(0, 0, 0);
+    dottedMaterial2.uniforms.uLineColor1.value.setHSV(0.05, 1.0, 1.0);
+    // environment map
+    var path = "../../shared/textures/cube/SwedishRoyalCastle/";
+    var format = ".jpg";
+    var urls = [
+        path + "px" + format,
+        path + "nx" + format,
+        path + "py" + format,
+        path + "ny" + format,
+        path + "pz" + format,
+        path + "nz" + format
+    ];
+    var images = ImageUtils.loadArray(urls);
+    var reflectionCube = new _threeMinJs.Texture(images);
+    var refractionCube = new _threeMinJs.Texture(images, new _threeMinJs.CubeRefractionMapping());
+    materials = {
+        "chrome": {
+            m: new _threeMinJs.MeshLambertMaterial({
+                color: 0xffffff,
+                env_map: reflectionCube
+            }),
+            h: 0,
+            s: 0,
+            v: 1
+        },
+        "liquid": {
+            m: new _threeMinJs.MeshLambertMaterial({
+                color: 0xffffff,
+                env_map: refractionCube,
+                refraction_ratio: 0.85
+            }),
+            h: 0,
+            s: 0,
+            v: 1
+        },
+        "shiny": {
+            m: new _threeMinJs.MeshPhongMaterial({
+                color: 0x550000,
+                specular: 0x220000,
+                env_map: reflectionCube,
+                combine: _threeMinJs.MixOperation,
+                reflectivity: 0.3
+            }),
+            h: 0,
+            s: 0.9,
+            v: 0.3
+        },
+        "matte": {
+            m: new _threeMinJs.MeshLambertMaterial({
+                color: 0xffffff
+            }),
+            h: 0,
+            s: 0,
+            v: 1
+        },
+        "toon5": {
+            m: toonMaterial5,
+            h: 0.2,
+            s: 0.5,
+            v: 1
+        },
+        "toon3": {
+            m: toonMaterial3,
+            h: 0.4,
+            s: 0.5,
+            v: 1
+        },
+        "hatching": {
+            m: hatchingMaterial,
+            h: 0.2,
+            s: 0.2,
+            v: 1
+        },
+        "hatching2": {
+            m: hatchingMaterial2,
+            h: 0.0,
+            s: 0.9,
+            v: 0.9
+        },
+        "dotted": {
+            m: dottedMaterial,
+            h: 0.2,
+            s: 0.2,
+            v: 1
+        },
+        "dotted2": {
+            m: dottedMaterial2,
+            h: 0.1,
+            s: 1.0,
+            v: 1
+        }
+    };
+    material = new _threeMinJs.MeshLambertMaterial({
+        ambient: 0x030303,
+        color: 0xdddddd,
+        specular: 0xffaa00,
+        shininess: 10
+    });
+    resolution = 28;
+    numBlobs = 10;
+    current_material = "shiny";
+    effect = new _threeMinJs.MarchingCubes(resolution, materials[current_material].m);
+    effect.position.x = 0;
+    effect.position.y = 0;
+    effect.position.z = 0;
+    effect.scale.x = effect.scale.y = effect.scale.z = 700;
+    effect.updateMatrix();
+    scene.addObject(effect);
+    // postprocessing
+    scenePost = new _threeMinJs.Scene();
+    cameraOrtho = new _threeMinJs.Camera();
+    cameraOrtho.projectionMatrix = _threeMinJs.Matrix4.makeOrtho(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -10000, 10000);
+    cameraOrtho.position.z = 100;
+    rtTexture1 = new _threeMinJs.RenderTarget(window.innerWidth, window.innerHeight, {
+        min_filter: _threeMinJs.LinearFilter,
+        mag_filter: _threeMinJs.NearestFilter
+    });
+    var film_shader = ShaderUtils.lib["film"];
+    var film_uniforms = Uniforms.clone(film_shader.uniforms);
+    film_uniforms["tDiffuse"].texture = rtTexture1;
+    materialFilm = new _threeMinJs.MeshShaderMaterial({
+        uniforms: film_uniforms,
+        vertex_shader: film_shader.vertex_shader,
+        fragment_shader: film_shader.fragment_shader
+    });
+    materialFilm.uniforms.grayscale.value = 0;
+    var plane = new Plane(window.innerWidth, window.innerHeight);
+    quad = new _threeMinJs.Mesh(plane, materialFilm);
+    quad.position.z = -500;
+    scenePost.addObject(quad);
+    renderer = new _threeMinJs.WebGLRenderer({
+        clearColor: 0x000000,
+        clearAlpha: 1
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.innerHTML = "";
+    container.appendChild(renderer.domElement);
+    stats = new Stats();
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.top = "0px";
+    container.appendChild(stats.domElement);
+    document.addEventListener("mousedown", onDocumentMouseDown, false);
+    document.addEventListener("mouseup", onDocumentMouseUp, false);
+    document.addEventListener("mousemove", onDocumentMouseMove, false);
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+    }, false);
+    document.addEventListener("keydown", onDocumentKeyDown, false);
+    document.addEventListener("keyup", onDocumentKeyUp, false);
+    setupGui();
+}
+function setupGui() {
+    var createHandler = function(id1) {
+        return function() {
+            var mat_old = materials[current_material];
+            mat_old.h = m_h.getValue();
+            mat_old.s = m_s.getValue();
+            mat_old.v = m_v.getValue();
+            current_material = id1;
+            var mat = materials[id1];
+            effect.materials = [
+                mat.m
+            ];
+            m_h.setValue(mat.h);
+            m_s.setValue(mat.s);
+            m_v.setValue(mat.v);
+            mm.setValue(current_material);
+        };
+    };
+    function toggle(e) {
+        if (e.style.display == "block") e.style.display = "none";
+        else e.style.display = "block";
+    }
+    effectController = {
+        material: "shiny",
+        speed: 1.0,
+        numBlobs: 10,
+        resolution: 28,
+        isolation: 80,
+        floor: true,
+        wallx: false,
+        wallz: false,
+        hue: 0.0,
+        saturation: 0.9,
+        value: 0.3,
+        lhue: 0.04,
+        lsaturation: 1.0,
+        lvalue: 1.0,
+        lx: 0.5,
+        ly: 0.5,
+        lz: 1.0,
+        postprocessing: false,
+        h_m: function() {
+            for(var i1 = 0; i1 < g_m.length; i1++)toggle(g_m[i1].domElement);
+        },
+        h_c: function() {
+            for(var i1 = 0; i1 < g_c.length; i1++)toggle(g_c[i1].domElement);
+        },
+        h_pc: function() {
+            for(var i1 = 0; i1 < g_pc.length; i1++)toggle(g_pc[i1].domElement);
+        },
+        h_do: function() {
+            for(var i1 = 0; i1 < g_do.length; i1++)toggle(g_do[i1].domElement);
+        },
+        h_s: function() {
+            for(var i1 = 0; i1 < g_s.length; i1++)toggle(g_s[i1].domElement);
+        },
+        h_r: function() {
+            for(var i1 = 0; i1 < g_r.length; i1++)toggle(g_r[i1].domElement);
+        },
+        dummy: function() {}
+    };
+    var e1, e2, e3, e4, e5, e6, h, m_h, m_s, m_v, g_m = [], g_c, g_pc, g_do, g_s, g_r, mm, gui = new GUI();
+    // material (type)
+    mm = gui.add(effectController, "material");
+    mm.domElement.style.display = "none";
+    h = gui.add(effectController, "h_m").name("Materials");
+    setGuiHeaderStyle(h, 0, 65, 50);
+    for(var m in materials){
+        effectController[m] = createHandler(m);
+        e1 = gui.add(effectController, m).name(m);
+        setGuiElementStyle([
+            e1
+        ], 0, 65, 50, "block");
+        g_m.push(e1);
+    }
+    // material (color)
+    h = gui.add(effectController, "h_c").name("Material color");
+    m_h = gui.add(effectController, "hue", 0.0, 1.0, 0.025);
+    m_s = gui.add(effectController, "saturation", 0.0, 1.0, 0.025);
+    m_v = gui.add(effectController, "value", 0.0, 1.0, 0.025);
+    g_c = [
+        m_h,
+        m_s,
+        m_v
+    ];
+    setGuiHeaderStyle(h, 20, 65, 50);
+    setGuiElementStyle(g_c, 20, 65, 50, "block");
+    // light (point)
+    h = gui.add(effectController, "h_pc").name("Point light color");
+    e1 = gui.add(effectController, "lhue", 0.0, 1.0, 0.025).name("hue");
+    e2 = gui.add(effectController, "lsaturation", 0.0, 1.0, 0.025).name("saturation");
+    e3 = gui.add(effectController, "lvalue", 0.0, 1.0, 0.025).name("value");
+    g_pc = [
+        e1,
+        e2,
+        e3
+    ];
+    setGuiHeaderStyle(h, 50, 65, 50);
+    setGuiElementStyle(g_pc, 50, 65, 50);
+    // light (directional)
+    h = gui.add(effectController, "h_do").name("Directional light orientation");
+    e1 = gui.add(effectController, "lx", -1, 1.0, 0.025).name("x");
+    e2 = gui.add(effectController, "ly", -1, 1.0, 0.025).name("y");
+    e3 = gui.add(effectController, "lz", -1, 1.0, 0.025).name("z");
+    g_do = [
+        e1,
+        e2,
+        e3
+    ];
+    setGuiHeaderStyle(h, 80, 65, 50);
+    setGuiElementStyle(g_do, 80, 65, 50);
+    // simulation
+    h = gui.add(effectController, "h_s").name("Simulation");
+    e1 = gui.add(effectController, "speed", 0.1, 8.0, 0.05);
+    e2 = gui.add(effectController, "numBlobs", 1, 50, 1);
+    e3 = gui.add(effectController, "resolution", 14, 40, 1);
+    e4 = gui.add(effectController, "isolation", 10, 300, 1);
+    e5 = gui.add(effectController, "floor");
+    e6 = gui.add(effectController, "wallx");
+    e7 = gui.add(effectController, "wallz");
+    e5.updateDisplay();
+    e6.updateDisplay();
+    e7.updateDisplay();
+    g_s = [
+        e1,
+        e2,
+        e3,
+        e4,
+        e5,
+        e6,
+        e7
+    ];
+    setGuiHeaderStyle(h, 200, 65, 50);
+    setGuiElementStyle(g_s, 200, 65, 50, "block");
+    // rendering
+    h = gui.add(effectController, "h_r").name("Rendering");
+    e1 = gui.add(effectController, "postprocessing");
+    g_r = [
+        e1
+    ];
+    setGuiHeaderStyle(h, 225, 65, 50);
+    setGuiElementStyle(g_r, 225, 65, 50, "block");
+    // save
+    e1 = gui.add(GUI, "saveURL").name("Save to URL");
+    setGuiHeaderStyle(e1, 250, 65, 50, "block");
+    gui.domElement.style.backgroundColor = "#222";
+    // restore material from URL
+    id = mm.getValue();
+    current_material = id;
+    var mat = materials[id];
+    effect.materials = [
+        mat.m
+    ];
+}
+function setGuiHeaderStyle(g, h, s, v) {
+    var color = "hsl(" + h + "," + s + "%, " + v + "%)";
+    g.domElement.style.borderLeft = "solid 5px " + color;
+    g.domElement.style.background = color;
+    g.domElement.style.fontWeight = "bold";
+}
+function setGuiElementStyle(a, h, s, v, display) {
+    var s, color = "hsl(" + h + "," + s + "%, " + v + "%)";
+    for(i = 0; i < a.length; i++){
+        s = a[i].domElement.style;
+        s.borderLeft = "solid 5px " + color;
+        s.display = display ? display : "none";
+    }
+}
+function onDocumentMouseDown(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    switch(event.button){
+        case 0:
+            moveForward = true;
+            break;
+        case 2:
+            moveBackward = true;
+            break;
+    }
+}
+function onDocumentMouseUp(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    switch(event.button){
+        case 0:
+            moveForward = false;
+            break;
+        case 2:
+            moveBackward = false;
+            break;
+    }
+}
+function onDocumentMouseMove(event) {
+    mouseX = event.clientX - windowHalfX;
+    mouseY = event.clientY - windowHalfY;
+}
+function onDocumentKeyDown(event) {
+    switch(event.keyCode){
+        case 38:
+        /*up*/ case 87:
+            /*W*/ moveForward = true;
+            break;
+        case 37:
+        /*left*/ case 65:
+            /*A*/ moveLeft = true;
+            break;
+        case 40:
+        /*down*/ case 83:
+            /*S*/ moveBackward = true;
+            break;
+        case 39:
+        /*right*/ case 68:
+            /*D*/ moveRight = true;
+            break;
+    }
+}
+function onDocumentKeyUp(event) {
+    switch(event.keyCode){
+        case 38:
+        /*up*/ case 87:
+            /*W*/ moveForward = false;
+            break;
+        case 37:
+        /*left*/ case 65:
+            /*A*/ moveLeft = false;
+            break;
+        case 40:
+        /*down*/ case 83:
+            /*S*/ moveBackward = false;
+            break;
+        case 39:
+        /*right*/ case 68:
+            /*D*/ moveRight = false;
+            break;
+    }
+}
+var u, delta, time = 0, last = new Date().getTime();
+function loop() {
+    current = new Date().getTime();
+    delta = current - last;
+    last = current;
+    time += delta * effectController.speed * 0.0002;
+    /*
+     if ( moveForward )  camera.translateZ( - 10 );
+     if ( moveBackward ) camera.translateZ( 10 );
+     if ( moveLeft )     camera.translateX( - 10 );
+     if ( moveRight )    camera.translateX( 10 );
+     */ lon += mouseX * 0.004;
+    lat -= mouseY * 0.004;
+    lat = Math.max(-85, Math.min(85, lat));
+    phi = (90 - lat) * Math.PI / 180;
+    theta = lon * Math.PI / 180;
+    /*
+     camera.target.position.x = 100 * Math.sin( phi ) * Math.cos( theta ) + camera.position.x;
+     camera.target.position.y = 100 * Math.cos( phi ) + camera.position.y;
+     camera.target.position.z = 100 * Math.sin( phi ) * Math.sin( theta ) + camera.position.z;
+     */ //pointLight.position.z = 800* Math.sin( 3*time );
+    //pointLight.position.x = 800* Math.cos( 3*time );
+    camera.position.x += (mouseX - camera.position.x) * .025;
+    camera.position.y += (-mouseY - camera.position.y) * .025;
+    // marching cubes
+    if (effectController.resolution != resolution) {
+        resolution = effectController.resolution;
+        effect.init(resolution);
+    }
+    if (effectController.isolation != effect.isolation) effect.isolation = effectController.isolation;
+    updateCubes(effect, time, effectController.numBlobs, effectController.floor, effectController.wallx, effectController.wallz);
+    // materials
+    if (effect.materials[0] instanceof _threeMinJs.MeshShaderMaterial) {
+        if (current_material == "dotted2") effect.materials[0].uniforms.uLineColor1.value.setHSV(effectController.hue, effectController.saturation, effectController.value);
+        else if (current_material == "hatching2") {
+            u = effect.materials[0].uniforms;
+            u.uLineColor1.value.setHSV(effectController.hue, effectController.saturation, effectController.value);
+            u.uLineColor2.value.setHSV(effectController.hue, effectController.saturation, effectController.value);
+            u.uLineColor3.value.setHSV(effectController.hue, effectController.saturation, effectController.value);
+            u.uLineColor4.value.setHSV(effectController.hue + 0.2, effectController.saturation, effectController.value);
+        } else effect.materials[0].uniforms.uBaseColor.value.setHSV(effectController.hue, effectController.saturation, effectController.value);
+    } else effect.materials[0].color.setHSV(effectController.hue, effectController.saturation, effectController.value);
+    // lights
+    light.position.set(effectController.lx, effectController.ly, effectController.lz);
+    light.position.normalize();
+    pointLight.color.setHSV(effectController.lhue, effectController.lsaturation, effectController.lvalue);
+    if (effectController.postprocessing) {
+        materialFilm.uniforms.time.value += 0.01;
+        renderer.render(scene, camera, rtTexture1);
+        renderer.render(scenePost, cameraOrtho);
+    } else renderer.render(scene, camera);
+    stats.update();
+}
+// this controls content of marching cubes voxel field
+function updateCubes(object, time, numblobs, floor, wallx, wallz) {
+    object.reset();
+    // fill the field with some metaballs
+    var i1, ballx, bally, ballz, subtract, strength;
+    subtract = 12;
+    strength = 1.2 / ((Math.sqrt(numblobs) - 1) / 4 + 1);
+    for(i1 = 0; i1 < numblobs; i1++){
+        ballx = Math.sin(i1 + 1.26 * time * (1.03 + 0.5 * Math.cos(0.21 * i1))) * 0.27 + 0.5;
+        bally = Math.abs(Math.cos(i1 + 1.12 * time * Math.cos(1.22 + 0.1424 * i1))) * 0.77; // dip into the floor
+        ballz = Math.cos(i1 + 1.32 * time * 0.1 * Math.sin(0.92 + 0.53 * i1)) * 0.27 + 0.5;
+        object.addBall(ballx, bally, ballz, strength, subtract);
+    }
+    if (floor) object.addPlaneY(2, 12);
+    if (wallz) object.addPlaneZ(2, 12);
+    if (wallx) object.addPlaneX(2, 12);
+}
+function is_browser_compatible() {
+    // WebGL support
+    try {
+        var test = new Float32Array(1);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+},{"/node_modules/three/build/three.min.js":"b9nl6"}]},["3l8i4","5AgIT"], "5AgIT", "parcelRequire26b9")
+
+</script>
+  
