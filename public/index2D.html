@@ -84,7 +84,7 @@
 
     <div id="tabWithin">
       <!-- <a onfocus="onFocus()" href=""></a> -->
-      <a href="../index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
+      <a href="index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
       <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
       <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="/src/art.html"></a>
       <a id="CV" class ="centralise focusItem" onfocus="onFocus()" href="/src/CV.html"></a>
@@ -236,16 +236,16 @@
         var link = ""
 
         if(focusTarget.slice(0,3) == 'que'){
-          link = "src/what.html";
+          link = "/src/what.html";
         }
         if(focusTarget.slice(0,3) == 'git'){
           link = "https://github.com/herdofsheep";
         }
         if(focusTarget.slice(0,4) == 'math'){
-          link = "src/art.html";
+          link = "/src/art.html";
         }
         if(focusTarget.slice(0,4) == 'work'){
-          link = "src/portfolio.html";
+          link = "/src/portfolio.html";
         }
         if(link != ""){
           window.location.href = link;
@@ -258,16 +258,16 @@
         var id = this.event.target.id
 
         if(id.slice(0,3) == 'que'){
-          window.location.href = "src/what.html";
+          window.location.href = "/src/what.html";
         }
         if(id.slice(0,3) == 'git'){
           window.location.href = "https://github.com/herdofsheep";
         }
         if(id.slice(0,4) == 'math'){
-          window.location.href = "src/art.html";
+          window.location.href = "/src/art.html";
         }
         if(id.slice(0,4) == 'work'){
-          window.location.href = "src/portfolio.html";
+          window.location.href = "/src/portfolio.html";
         }
 
       }

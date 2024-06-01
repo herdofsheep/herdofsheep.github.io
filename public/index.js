@@ -1,6 +1,6 @@
 
 import * as THREE from 'three';
-import 'lodash';
+import _ from 'lodash';
 import {LitElement, html} from 'lit-element';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -118,7 +118,7 @@ class RayCast extends LitElement {
     this.animate();
   }
 
-  init() {
+  async init() {
 
     this.container = this.shadowRoot.getElementById( "container" );
 
@@ -144,15 +144,14 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.files = ['que', 'work', 'github', 'math'];
-
-    this.work = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
-    this.workBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
-    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
-    this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
-    this.githubBig = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
-    this.math = this.loadModel( '/src/assets/models/gltf/math.glb' );
-    this.mathBig = this.loadModel( '/src/assets/models/gltf/mathBig.glb' );
+    this.work = this.loadModel( '/assets/models/gltf/radcam.glb' );
+    this.workBig = this.loadModel( '/assets/models/gltf/radcamBig.glb' );
+    this.que = this.loadModel( '/assets/models/gltf/questionmark.glb' );
+    this.queBig = this.loadModel( '/assets/models/gltf/questionmarkBig.glb' );
+    this.github = this.loadModel( '/assets/models/gltf/github.glb' );
+    this.githubBig = this.loadModel( '/assets/models/gltf/githubBig.glb' );
+    this.math = this.loadModel( '/assets/models/gltf/math.glb' );
+    this.mathBig = this.loadModel( '/assets/models/gltf/mathBig.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -192,19 +191,27 @@ class RayCast extends LitElement {
 
   }
 
-  loadModel( url ){
+  async loadModel(url) {
     var loader = new GLTFLoader();
-    var model = new THREE.Group;
+    // var model = new THREE.Group();
+    const loadedData = await loader.loadAsync(url);
 
-    loader.load( url , function ( gltf ) {
+    // loader.load(
+    //     url,
+    //     function (gltf) {
+    //         gltf.scene.traverse(function (child) {
+    //             // Perform operations on the child
+    //         });
+    //         model.add(gltf.scene);
+    //     },
+    //     undefined,
+    //     function (error) {
+    //         console.error('An error happened while loading the model:', error);
+    //         // Handle the error, maybe by loading a fallback model or showing an error message
+    //     }
+    // );
 
-        gltf.scene.traverse( function ( child ) {});
-        model.add( gltf.scene );
-
-    } );
-
-    return model;
-
+    return await loader.loadAsync(url);;
   }
 
   animate() {
@@ -463,7 +470,7 @@ class RayCast extends LitElement {
       this.infoVisible = "visible"
 
       if(data.type == 'work'){
-        this.link = "src/portfolio.html";
+        this.link = "/src/portfolio.html";
         debugWindow.innerHTML = 'work portfolio'
       }
       if(data.type == 'github'){
@@ -471,11 +478,11 @@ class RayCast extends LitElement {
         debugWindow.innerHTML = 'github'
       }
       if(data.type == 'que'){
-        this.link = "src/what.html";
+        this.link = "/src/what.html";
         debugWindow.innerHTML = "what's this?"
       }
       if(data.type == 'math'){
-        this.link = "src/art.html";
+        this.link = "/src/art.html";
         debugWindow.innerHTML = "art portfolio"
       }
 

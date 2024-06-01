@@ -285,7 +285,7 @@ class SimplerRayCast extends LitElement {
 
     if( id>0 ){
       this.cursorType = "pointer";
-      this.link = "src/what.html";
+      this.link = "/src/what.html";
       this.canClick = true;
     }
 
@@ -315,7 +315,7 @@ class SimplerRayCast extends LitElement {
 
   clickLink(){
     if(this.canClick){
-      window.location.href = "src/what.html";
+      window.location.href = "/src/what.html";
     }
   }
 
