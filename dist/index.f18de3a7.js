@@ -1054,540 +1054,465 @@ class RayCast extends (0, _litElement.LitElement) {
 }
 window.customElements.define("ray-cast", RayCast);
 
-},{"three":"ktPTu","three/examples/jsm/controls/TrackballControls.js":"1AMKo","lit-element":"kvK5P","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF","three/examples/jsm/utils/BufferGeometryUtils.js":"5o7x9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1AMKo":[function(require,module,exports) {
+},{"lit-element":"kvK5P","three":"ktPTu","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF","three/examples/jsm/controls/TrackballControls.js":"1AMKo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","three/examples/jsm/utils/BufferGeometryUtils.js":"5o7x9"}],"1AMKo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "TrackballControls", ()=>TrackballControls);
-var _threeModuleJs = require("../../../build/three.module.js");
-var TrackballControls = function(object, domElement) {
-    if (domElement === undefined) console.warn('THREE.TrackballControls: The second parameter "domElement" is now mandatory.');
-    if (domElement === document) console.error('THREE.TrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.');
-    var scope = this;
-    var STATE = {
-        NONE: -1,
-        ROTATE: 0,
-        ZOOM: 1,
-        PAN: 2,
-        TOUCH_ROTATE: 3,
-        TOUCH_ZOOM_PAN: 4
-    };
-    this.object = object;
-    this.domElement = domElement;
-    // API
-    this.enabled = true;
-    this.screen = {
-        left: 0,
-        top: 0,
-        width: 0,
-        height: 0
-    };
-    this.rotateSpeed = 1.0;
-    this.zoomSpeed = 1.2;
-    this.panSpeed = 0.3;
-    this.noRotate = false;
-    this.noZoom = false;
-    this.noPan = false;
-    this.staticMoving = false;
-    this.dynamicDampingFactor = 0.2;
-    this.minDistance = 0;
-    this.maxDistance = Infinity;
-    this.keys = [
-        65 /*A*/ ,
-        83 /*S*/ ,
-        68 /*D*/ 
-    ];
-    this.mouseButtons = {
-        LEFT: (0, _threeModuleJs.MOUSE).ROTATE,
-        MIDDLE: (0, _threeModuleJs.MOUSE).ZOOM,
-        RIGHT: (0, _threeModuleJs.MOUSE).PAN
-    };
-    // internals
-    this.target = new (0, _threeModuleJs.Vector3)();
-    var EPS = 0.000001;
-    var lastPosition = new (0, _threeModuleJs.Vector3)();
-    var lastZoom = 1;
-    var _state = STATE.NONE, _keyState = STATE.NONE, _eye = new (0, _threeModuleJs.Vector3)(), _movePrev = new (0, _threeModuleJs.Vector2)(), _moveCurr = new (0, _threeModuleJs.Vector2)(), _lastAxis = new (0, _threeModuleJs.Vector3)(), _lastAngle = 0, _zoomStart = new (0, _threeModuleJs.Vector2)(), _zoomEnd = new (0, _threeModuleJs.Vector2)(), _touchZoomDistanceStart = 0, _touchZoomDistanceEnd = 0, _panStart = new (0, _threeModuleJs.Vector2)(), _panEnd = new (0, _threeModuleJs.Vector2)();
-    // for reset
-    this.target0 = this.target.clone();
-    this.position0 = this.object.position.clone();
-    this.up0 = this.object.up.clone();
-    this.zoom0 = this.object.zoom;
-    // events
-    var changeEvent = {
-        type: "change"
-    };
-    var startEvent = {
-        type: "start"
-    };
-    var endEvent = {
-        type: "end"
-    };
-    // methods
-    this.handleResize = function() {
-        var box = scope.domElement.getBoundingClientRect();
-        // adjustments come from similar code in the jquery offset() function
-        var d = scope.domElement.ownerDocument.documentElement;
-        scope.screen.left = box.left + window.pageXOffset - d.clientLeft;
-        scope.screen.top = box.top + window.pageYOffset - d.clientTop;
-        scope.screen.width = box.width;
-        scope.screen.height = box.height;
-    };
-    var getMouseOnScreen = function() {
-        var vector = new (0, _threeModuleJs.Vector2)();
-        return function getMouseOnScreen(pageX, pageY) {
-            vector.set((pageX - scope.screen.left) / scope.screen.width, (pageY - scope.screen.top) / scope.screen.height);
-            return vector;
+var _three = require("three");
+const _changeEvent = {
+    type: "change"
+};
+const _startEvent = {
+    type: "start"
+};
+const _endEvent = {
+    type: "end"
+};
+class TrackballControls extends (0, _three.EventDispatcher) {
+    constructor(object, domElement){
+        super();
+        if (domElement === undefined) console.warn('THREE.TrackballControls: The second parameter "domElement" is now mandatory.');
+        if (domElement === document) console.error('THREE.TrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.');
+        const scope = this;
+        const STATE = {
+            NONE: -1,
+            ROTATE: 0,
+            ZOOM: 1,
+            PAN: 2,
+            TOUCH_ROTATE: 3,
+            TOUCH_ZOOM_PAN: 4
         };
-    }();
-    var getMouseOnCircle = function() {
-        var vector = new (0, _threeModuleJs.Vector2)();
-        return function getMouseOnCircle(pageX, pageY) {
-            vector.set((pageX - scope.screen.width * 0.5 - scope.screen.left) / (scope.screen.width * 0.5), (scope.screen.height + 2 * (scope.screen.top - pageY)) / scope.screen.width // screen.width intentional
-            );
-            return vector;
+        this.object = object;
+        this.domElement = domElement;
+        this.domElement.style.touchAction = "none"; // disable touch scroll
+        // API
+        this.enabled = true;
+        this.screen = {
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
         };
-    }();
-    this.rotateCamera = function() {
-        var axis = new (0, _threeModuleJs.Vector3)(), quaternion = new (0, _threeModuleJs.Quaternion)(), eyeDirection = new (0, _threeModuleJs.Vector3)(), objectUpDirection = new (0, _threeModuleJs.Vector3)(), objectSidewaysDirection = new (0, _threeModuleJs.Vector3)(), moveDirection = new (0, _threeModuleJs.Vector3)(), angle;
-        return function rotateCamera() {
-            moveDirection.set(_moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0);
-            angle = moveDirection.length();
-            if (angle) {
-                _eye.copy(scope.object.position).sub(scope.target);
-                eyeDirection.copy(_eye).normalize();
-                objectUpDirection.copy(scope.object.up).normalize();
-                objectSidewaysDirection.crossVectors(objectUpDirection, eyeDirection).normalize();
-                objectUpDirection.setLength(_moveCurr.y - _movePrev.y);
-                objectSidewaysDirection.setLength(_moveCurr.x - _movePrev.x);
-                moveDirection.copy(objectUpDirection.add(objectSidewaysDirection));
-                axis.crossVectors(moveDirection, _eye).normalize();
-                angle *= scope.rotateSpeed;
-                quaternion.setFromAxisAngle(axis, angle);
-                _eye.applyQuaternion(quaternion);
-                scope.object.up.applyQuaternion(quaternion);
-                _lastAxis.copy(axis);
-                _lastAngle = angle;
-            } else if (!scope.staticMoving && _lastAngle) {
-                _lastAngle *= Math.sqrt(1.0 - scope.dynamicDampingFactor);
-                _eye.copy(scope.object.position).sub(scope.target);
-                quaternion.setFromAxisAngle(_lastAxis, _lastAngle);
-                _eye.applyQuaternion(quaternion);
-                scope.object.up.applyQuaternion(quaternion);
-            }
-            _movePrev.copy(_moveCurr);
+        this.rotateSpeed = 1.0;
+        this.zoomSpeed = 1.2;
+        this.panSpeed = 0.3;
+        this.noRotate = false;
+        this.noZoom = false;
+        this.noPan = false;
+        this.staticMoving = false;
+        this.dynamicDampingFactor = 0.2;
+        this.minDistance = 0;
+        this.maxDistance = Infinity;
+        this.keys = [
+            "KeyA" /*A*/ ,
+            "KeyS" /*S*/ ,
+            "KeyD" /*D*/ 
+        ];
+        this.mouseButtons = {
+            LEFT: (0, _three.MOUSE).ROTATE,
+            MIDDLE: (0, _three.MOUSE).DOLLY,
+            RIGHT: (0, _three.MOUSE).PAN
         };
-    }();
-    this.zoomCamera = function() {
-        var factor;
-        if (_state === STATE.TOUCH_ZOOM_PAN) {
-            factor = _touchZoomDistanceStart / _touchZoomDistanceEnd;
-            _touchZoomDistanceStart = _touchZoomDistanceEnd;
-            if (scope.object.isPerspectiveCamera) _eye.multiplyScalar(factor);
-            else if (scope.object.isOrthographicCamera) {
-                scope.object.zoom *= factor;
-                scope.object.updateProjectionMatrix();
-            } else console.warn("THREE.TrackballControls: Unsupported camera type");
-        } else {
-            factor = 1.0 + (_zoomEnd.y - _zoomStart.y) * scope.zoomSpeed;
-            if (factor !== 1.0 && factor > 0.0) {
+        // internals
+        this.target = new (0, _three.Vector3)();
+        const EPS = 0.000001;
+        const lastPosition = new (0, _three.Vector3)();
+        let lastZoom = 1;
+        let _state = STATE.NONE, _keyState = STATE.NONE, _touchZoomDistanceStart = 0, _touchZoomDistanceEnd = 0, _lastAngle = 0;
+        const _eye = new (0, _three.Vector3)(), _movePrev = new (0, _three.Vector2)(), _moveCurr = new (0, _three.Vector2)(), _lastAxis = new (0, _three.Vector3)(), _zoomStart = new (0, _three.Vector2)(), _zoomEnd = new (0, _three.Vector2)(), _panStart = new (0, _three.Vector2)(), _panEnd = new (0, _three.Vector2)(), _pointers = [], _pointerPositions = {};
+        // for reset
+        this.target0 = this.target.clone();
+        this.position0 = this.object.position.clone();
+        this.up0 = this.object.up.clone();
+        this.zoom0 = this.object.zoom;
+        // methods
+        this.handleResize = function() {
+            const box = scope.domElement.getBoundingClientRect();
+            // adjustments come from similar code in the jquery offset() function
+            const d = scope.domElement.ownerDocument.documentElement;
+            scope.screen.left = box.left + window.pageXOffset - d.clientLeft;
+            scope.screen.top = box.top + window.pageYOffset - d.clientTop;
+            scope.screen.width = box.width;
+            scope.screen.height = box.height;
+        };
+        const getMouseOnScreen = function() {
+            const vector = new (0, _three.Vector2)();
+            return function getMouseOnScreen(pageX, pageY) {
+                vector.set((pageX - scope.screen.left) / scope.screen.width, (pageY - scope.screen.top) / scope.screen.height);
+                return vector;
+            };
+        }();
+        const getMouseOnCircle = function() {
+            const vector = new (0, _three.Vector2)();
+            return function getMouseOnCircle(pageX, pageY) {
+                vector.set((pageX - scope.screen.width * 0.5 - scope.screen.left) / (scope.screen.width * 0.5), (scope.screen.height + 2 * (scope.screen.top - pageY)) / scope.screen.width // screen.width intentional
+                );
+                return vector;
+            };
+        }();
+        this.rotateCamera = function() {
+            const axis = new (0, _three.Vector3)(), quaternion = new (0, _three.Quaternion)(), eyeDirection = new (0, _three.Vector3)(), objectUpDirection = new (0, _three.Vector3)(), objectSidewaysDirection = new (0, _three.Vector3)(), moveDirection = new (0, _three.Vector3)();
+            return function rotateCamera() {
+                moveDirection.set(_moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0);
+                let angle = moveDirection.length();
+                if (angle) {
+                    _eye.copy(scope.object.position).sub(scope.target);
+                    eyeDirection.copy(_eye).normalize();
+                    objectUpDirection.copy(scope.object.up).normalize();
+                    objectSidewaysDirection.crossVectors(objectUpDirection, eyeDirection).normalize();
+                    objectUpDirection.setLength(_moveCurr.y - _movePrev.y);
+                    objectSidewaysDirection.setLength(_moveCurr.x - _movePrev.x);
+                    moveDirection.copy(objectUpDirection.add(objectSidewaysDirection));
+                    axis.crossVectors(moveDirection, _eye).normalize();
+                    angle *= scope.rotateSpeed;
+                    quaternion.setFromAxisAngle(axis, angle);
+                    _eye.applyQuaternion(quaternion);
+                    scope.object.up.applyQuaternion(quaternion);
+                    _lastAxis.copy(axis);
+                    _lastAngle = angle;
+                } else if (!scope.staticMoving && _lastAngle) {
+                    _lastAngle *= Math.sqrt(1.0 - scope.dynamicDampingFactor);
+                    _eye.copy(scope.object.position).sub(scope.target);
+                    quaternion.setFromAxisAngle(_lastAxis, _lastAngle);
+                    _eye.applyQuaternion(quaternion);
+                    scope.object.up.applyQuaternion(quaternion);
+                }
+                _movePrev.copy(_moveCurr);
+            };
+        }();
+        this.zoomCamera = function() {
+            let factor;
+            if (_state === STATE.TOUCH_ZOOM_PAN) {
+                factor = _touchZoomDistanceStart / _touchZoomDistanceEnd;
+                _touchZoomDistanceStart = _touchZoomDistanceEnd;
                 if (scope.object.isPerspectiveCamera) _eye.multiplyScalar(factor);
                 else if (scope.object.isOrthographicCamera) {
-                    scope.object.zoom /= factor;
+                    scope.object.zoom *= factor;
                     scope.object.updateProjectionMatrix();
                 } else console.warn("THREE.TrackballControls: Unsupported camera type");
-            }
-            if (scope.staticMoving) _zoomStart.copy(_zoomEnd);
-            else _zoomStart.y += (_zoomEnd.y - _zoomStart.y) * this.dynamicDampingFactor;
-        }
-    };
-    this.panCamera = function() {
-        var mouseChange = new (0, _threeModuleJs.Vector2)(), objectUp = new (0, _threeModuleJs.Vector3)(), pan = new (0, _threeModuleJs.Vector3)();
-        return function panCamera() {
-            mouseChange.copy(_panEnd).sub(_panStart);
-            if (mouseChange.lengthSq()) {
-                if (scope.object.isOrthographicCamera) {
-                    var scale_x = (scope.object.right - scope.object.left) / scope.object.zoom / scope.domElement.clientWidth;
-                    var scale_y = (scope.object.top - scope.object.bottom) / scope.object.zoom / scope.domElement.clientWidth;
-                    mouseChange.x *= scale_x;
-                    mouseChange.y *= scale_y;
+            } else {
+                factor = 1.0 + (_zoomEnd.y - _zoomStart.y) * scope.zoomSpeed;
+                if (factor !== 1.0 && factor > 0.0) {
+                    if (scope.object.isPerspectiveCamera) _eye.multiplyScalar(factor);
+                    else if (scope.object.isOrthographicCamera) {
+                        scope.object.zoom /= factor;
+                        scope.object.updateProjectionMatrix();
+                    } else console.warn("THREE.TrackballControls: Unsupported camera type");
                 }
-                mouseChange.multiplyScalar(_eye.length() * scope.panSpeed);
-                pan.copy(_eye).cross(scope.object.up).setLength(mouseChange.x);
-                pan.add(objectUp.copy(scope.object.up).setLength(mouseChange.y));
-                scope.object.position.add(pan);
-                scope.target.add(pan);
-                if (scope.staticMoving) _panStart.copy(_panEnd);
-                else _panStart.add(mouseChange.subVectors(_panEnd, _panStart).multiplyScalar(scope.dynamicDampingFactor));
+                if (scope.staticMoving) _zoomStart.copy(_zoomEnd);
+                else _zoomStart.y += (_zoomEnd.y - _zoomStart.y) * this.dynamicDampingFactor;
             }
         };
-    }();
-    this.checkDistances = function() {
-        if (!scope.noZoom || !scope.noPan) {
-            if (_eye.lengthSq() > scope.maxDistance * scope.maxDistance) {
-                scope.object.position.addVectors(scope.target, _eye.setLength(scope.maxDistance));
-                _zoomStart.copy(_zoomEnd);
+        this.panCamera = function() {
+            const mouseChange = new (0, _three.Vector2)(), objectUp = new (0, _three.Vector3)(), pan = new (0, _three.Vector3)();
+            return function panCamera() {
+                mouseChange.copy(_panEnd).sub(_panStart);
+                if (mouseChange.lengthSq()) {
+                    if (scope.object.isOrthographicCamera) {
+                        const scale_x = (scope.object.right - scope.object.left) / scope.object.zoom / scope.domElement.clientWidth;
+                        const scale_y = (scope.object.top - scope.object.bottom) / scope.object.zoom / scope.domElement.clientWidth;
+                        mouseChange.x *= scale_x;
+                        mouseChange.y *= scale_y;
+                    }
+                    mouseChange.multiplyScalar(_eye.length() * scope.panSpeed);
+                    pan.copy(_eye).cross(scope.object.up).setLength(mouseChange.x);
+                    pan.add(objectUp.copy(scope.object.up).setLength(mouseChange.y));
+                    scope.object.position.add(pan);
+                    scope.target.add(pan);
+                    if (scope.staticMoving) _panStart.copy(_panEnd);
+                    else _panStart.add(mouseChange.subVectors(_panEnd, _panStart).multiplyScalar(scope.dynamicDampingFactor));
+                }
+            };
+        }();
+        this.checkDistances = function() {
+            if (!scope.noZoom || !scope.noPan) {
+                if (_eye.lengthSq() > scope.maxDistance * scope.maxDistance) {
+                    scope.object.position.addVectors(scope.target, _eye.setLength(scope.maxDistance));
+                    _zoomStart.copy(_zoomEnd);
+                }
+                if (_eye.lengthSq() < scope.minDistance * scope.minDistance) {
+                    scope.object.position.addVectors(scope.target, _eye.setLength(scope.minDistance));
+                    _zoomStart.copy(_zoomEnd);
+                }
             }
-            if (_eye.lengthSq() < scope.minDistance * scope.minDistance) {
-                scope.object.position.addVectors(scope.target, _eye.setLength(scope.minDistance));
-                _zoomStart.copy(_zoomEnd);
-            }
-        }
-    };
-    this.update = function() {
-        _eye.subVectors(scope.object.position, scope.target);
-        if (!scope.noRotate) scope.rotateCamera();
-        if (!scope.noZoom) scope.zoomCamera();
-        if (!scope.noPan) scope.panCamera();
-        scope.object.position.addVectors(scope.target, _eye);
-        if (scope.object.isPerspectiveCamera) {
-            scope.checkDistances();
+        };
+        this.update = function() {
+            _eye.subVectors(scope.object.position, scope.target);
+            if (!scope.noRotate) scope.rotateCamera();
+            if (!scope.noZoom) scope.zoomCamera();
+            if (!scope.noPan) scope.panCamera();
+            scope.object.position.addVectors(scope.target, _eye);
+            if (scope.object.isPerspectiveCamera) {
+                scope.checkDistances();
+                scope.object.lookAt(scope.target);
+                if (lastPosition.distanceToSquared(scope.object.position) > EPS) {
+                    scope.dispatchEvent(_changeEvent);
+                    lastPosition.copy(scope.object.position);
+                }
+            } else if (scope.object.isOrthographicCamera) {
+                scope.object.lookAt(scope.target);
+                if (lastPosition.distanceToSquared(scope.object.position) > EPS || lastZoom !== scope.object.zoom) {
+                    scope.dispatchEvent(_changeEvent);
+                    lastPosition.copy(scope.object.position);
+                    lastZoom = scope.object.zoom;
+                }
+            } else console.warn("THREE.TrackballControls: Unsupported camera type");
+        };
+        this.reset = function() {
+            _state = STATE.NONE;
+            _keyState = STATE.NONE;
+            scope.target.copy(scope.target0);
+            scope.object.position.copy(scope.position0);
+            scope.object.up.copy(scope.up0);
+            scope.object.zoom = scope.zoom0;
+            scope.object.updateProjectionMatrix();
+            _eye.subVectors(scope.object.position, scope.target);
             scope.object.lookAt(scope.target);
-            if (lastPosition.distanceToSquared(scope.object.position) > EPS) {
-                scope.dispatchEvent(changeEvent);
-                lastPosition.copy(scope.object.position);
+            scope.dispatchEvent(_changeEvent);
+            lastPosition.copy(scope.object.position);
+            lastZoom = scope.object.zoom;
+        };
+        // listeners
+        function onPointerDown(event) {
+            if (scope.enabled === false) return;
+            if (_pointers.length === 0) {
+                scope.domElement.ownerDocument.addEventListener("pointermove", onPointerMove);
+                scope.domElement.ownerDocument.addEventListener("pointerup", onPointerUp);
             }
-        } else if (scope.object.isOrthographicCamera) {
-            scope.object.lookAt(scope.target);
-            if (lastPosition.distanceToSquared(scope.object.position) > EPS || lastZoom !== scope.object.zoom) {
-                scope.dispatchEvent(changeEvent);
-                lastPosition.copy(scope.object.position);
-                lastZoom = scope.object.zoom;
+            //
+            addPointer(event);
+            if (event.pointerType === "touch") onTouchStart(event);
+            else onMouseDown(event);
+        }
+        function onPointerMove(event) {
+            if (scope.enabled === false) return;
+            if (event.pointerType === "touch") onTouchMove(event);
+            else onMouseMove(event);
+        }
+        function onPointerUp(event) {
+            if (scope.enabled === false) return;
+            if (event.pointerType === "touch") onTouchEnd(event);
+            else onMouseUp();
+            //
+            removePointer(event);
+            if (_pointers.length === 0) {
+                scope.domElement.ownerDocument.removeEventListener("pointermove", onPointerMove);
+                scope.domElement.ownerDocument.removeEventListener("pointerup", onPointerUp);
             }
-        } else console.warn("THREE.TrackballControls: Unsupported camera type");
-    };
-    this.reset = function() {
-        _state = STATE.NONE;
-        _keyState = STATE.NONE;
-        scope.target.copy(scope.target0);
-        scope.object.position.copy(scope.position0);
-        scope.object.up.copy(scope.up0);
-        scope.object.zoom = scope.zoom0;
-        scope.object.updateProjectionMatrix();
-        _eye.subVectors(scope.object.position, scope.target);
-        scope.object.lookAt(scope.target);
-        scope.dispatchEvent(changeEvent);
-        lastPosition.copy(scope.object.position);
-        lastZoom = scope.object.zoom;
-    };
-    // listeners
-    function onPointerDown(event) {
-        if (scope.enabled === false) return;
-        switch(event.pointerType){
-            case "mouse":
-            case "pen":
-                onMouseDown(event);
-                break;
         }
-    }
-    function onPointerMove(event) {
-        if (scope.enabled === false) return;
-        switch(event.pointerType){
-            case "mouse":
-            case "pen":
-                onMouseMove(event);
-                break;
+        function onPointerCancel(event) {
+            removePointer(event);
         }
-    }
-    function onPointerUp(event) {
-        if (scope.enabled === false) return;
-        switch(event.pointerType){
-            case "mouse":
-            case "pen":
-                onMouseUp(event);
-                break;
+        function keydown(event) {
+            if (scope.enabled === false) return;
+            window.removeEventListener("keydown", keydown);
+            if (_keyState !== STATE.NONE) return;
+            else if (event.code === scope.keys[STATE.ROTATE] && !scope.noRotate) _keyState = STATE.ROTATE;
+            else if (event.code === scope.keys[STATE.ZOOM] && !scope.noZoom) _keyState = STATE.ZOOM;
+            else if (event.code === scope.keys[STATE.PAN] && !scope.noPan) _keyState = STATE.PAN;
         }
-    }
-    function keydown(event) {
-        if (scope.enabled === false) return;
-        window.removeEventListener("keydown", keydown);
-        if (_keyState !== STATE.NONE) return;
-        else if (event.keyCode === scope.keys[STATE.ROTATE] && !scope.noRotate) _keyState = STATE.ROTATE;
-        else if (event.keyCode === scope.keys[STATE.ZOOM] && !scope.noZoom) _keyState = STATE.ZOOM;
-        else if (event.keyCode === scope.keys[STATE.PAN] && !scope.noPan) _keyState = STATE.PAN;
-    }
-    function keyup() {
-        if (scope.enabled === false) return;
-        _keyState = STATE.NONE;
-        window.addEventListener("keydown", keydown, false);
-    }
-    function onMouseDown(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (_state === STATE.NONE) switch(event.button){
-            case scope.mouseButtons.LEFT:
-                _state = STATE.ROTATE;
-                break;
-            case scope.mouseButtons.MIDDLE:
-                _state = STATE.ZOOM;
-                break;
-            case scope.mouseButtons.RIGHT:
-                _state = STATE.PAN;
-                break;
-            default:
-                _state = STATE.NONE;
+        function keyup() {
+            if (scope.enabled === false) return;
+            _keyState = STATE.NONE;
+            window.addEventListener("keydown", keydown);
         }
-        var state = _keyState !== STATE.NONE ? _keyState : _state;
-        if (state === STATE.ROTATE && !scope.noRotate) {
-            _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
-            _movePrev.copy(_moveCurr);
-        } else if (state === STATE.ZOOM && !scope.noZoom) {
-            _zoomStart.copy(getMouseOnScreen(event.pageX, event.pageY));
-            _zoomEnd.copy(_zoomStart);
-        } else if (state === STATE.PAN && !scope.noPan) {
-            _panStart.copy(getMouseOnScreen(event.pageX, event.pageY));
-            _panEnd.copy(_panStart);
-        }
-        scope.domElement.ownerDocument.addEventListener("pointermove", onPointerMove, false);
-        scope.domElement.ownerDocument.addEventListener("pointerup", onPointerUp, false);
-        scope.dispatchEvent(startEvent);
-    }
-    function onMouseMove(event) {
-        if (scope.enabled === false) return;
-        event.preventDefault();
-        event.stopPropagation();
-        var state = _keyState !== STATE.NONE ? _keyState : _state;
-        if (state === STATE.ROTATE && !scope.noRotate) {
-            _movePrev.copy(_moveCurr);
-            _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
-        } else if (state === STATE.ZOOM && !scope.noZoom) _zoomEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
-        else if (state === STATE.PAN && !scope.noPan) _panEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
-    }
-    function onMouseUp(event) {
-        if (scope.enabled === false) return;
-        event.preventDefault();
-        event.stopPropagation();
-        _state = STATE.NONE;
-        scope.domElement.ownerDocument.removeEventListener("pointermove", onPointerMove);
-        scope.domElement.ownerDocument.removeEventListener("pointerup", onPointerUp);
-        scope.dispatchEvent(endEvent);
-    }
-    function mousewheel(event) {
-        if (scope.enabled === false) return;
-        if (scope.noZoom === true) return;
-        event.preventDefault();
-        event.stopPropagation();
-        switch(event.deltaMode){
-            case 2:
-                // Zoom in pages
-                _zoomStart.y -= event.deltaY * 0.025;
-                break;
-            case 1:
-                // Zoom in lines
-                _zoomStart.y -= event.deltaY * 0.01;
-                break;
-            default:
-                // undefined, 0, assume pixels
-                _zoomStart.y -= event.deltaY * 0.00025;
-                break;
-        }
-        scope.dispatchEvent(startEvent);
-        scope.dispatchEvent(endEvent);
-    }
-    function touchstart(event) {
-        if (scope.enabled === false) return;
-        event.preventDefault();
-        switch(event.touches.length){
-            case 1:
-                _state = STATE.TOUCH_ROTATE;
-                _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
+        function onMouseDown(event) {
+            if (_state === STATE.NONE) switch(event.button){
+                case scope.mouseButtons.LEFT:
+                    _state = STATE.ROTATE;
+                    break;
+                case scope.mouseButtons.MIDDLE:
+                    _state = STATE.ZOOM;
+                    break;
+                case scope.mouseButtons.RIGHT:
+                    _state = STATE.PAN;
+                    break;
+                default:
+                    _state = STATE.NONE;
+            }
+            const state = _keyState !== STATE.NONE ? _keyState : _state;
+            if (state === STATE.ROTATE && !scope.noRotate) {
+                _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
                 _movePrev.copy(_moveCurr);
-                break;
-            default:
-                _state = STATE.TOUCH_ZOOM_PAN;
-                var dx = event.touches[0].pageX - event.touches[1].pageX;
-                var dy = event.touches[0].pageY - event.touches[1].pageY;
-                _touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt(dx * dx + dy * dy);
-                var x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-                var y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-                _panStart.copy(getMouseOnScreen(x, y));
+            } else if (state === STATE.ZOOM && !scope.noZoom) {
+                _zoomStart.copy(getMouseOnScreen(event.pageX, event.pageY));
+                _zoomEnd.copy(_zoomStart);
+            } else if (state === STATE.PAN && !scope.noPan) {
+                _panStart.copy(getMouseOnScreen(event.pageX, event.pageY));
                 _panEnd.copy(_panStart);
-                break;
+            }
+            scope.domElement.ownerDocument.addEventListener("pointermove", onPointerMove);
+            scope.domElement.ownerDocument.addEventListener("pointerup", onPointerUp);
+            scope.dispatchEvent(_startEvent);
         }
-        scope.dispatchEvent(startEvent);
-    }
-    function touchmove(event) {
-        if (scope.enabled === false) return;
-        event.preventDefault();
-        event.stopPropagation();
-        switch(event.touches.length){
-            case 1:
+        function onMouseMove(event) {
+            const state = _keyState !== STATE.NONE ? _keyState : _state;
+            if (state === STATE.ROTATE && !scope.noRotate) {
                 _movePrev.copy(_moveCurr);
-                _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
-                break;
-            default:
-                var dx = event.touches[0].pageX - event.touches[1].pageX;
-                var dy = event.touches[0].pageY - event.touches[1].pageY;
-                _touchZoomDistanceEnd = Math.sqrt(dx * dx + dy * dy);
-                var x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-                var y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-                _panEnd.copy(getMouseOnScreen(x, y));
-                break;
+                _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
+            } else if (state === STATE.ZOOM && !scope.noZoom) _zoomEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
+            else if (state === STATE.PAN && !scope.noPan) _panEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
         }
-    }
-    function touchend(event) {
-        if (scope.enabled === false) return;
-        switch(event.touches.length){
-            case 0:
-                _state = STATE.NONE;
-                break;
-            case 1:
-                _state = STATE.TOUCH_ROTATE;
-                _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
-                _movePrev.copy(_moveCurr);
-                break;
+        function onMouseUp() {
+            _state = STATE.NONE;
+            scope.domElement.ownerDocument.removeEventListener("pointermove", onPointerMove);
+            scope.domElement.ownerDocument.removeEventListener("pointerup", onPointerUp);
+            scope.dispatchEvent(_endEvent);
         }
-        scope.dispatchEvent(endEvent);
+        function onMouseWheel(event) {
+            if (scope.enabled === false) return;
+            if (scope.noZoom === true) return;
+            event.preventDefault();
+            switch(event.deltaMode){
+                case 2:
+                    // Zoom in pages
+                    _zoomStart.y -= event.deltaY * 0.025;
+                    break;
+                case 1:
+                    // Zoom in lines
+                    _zoomStart.y -= event.deltaY * 0.01;
+                    break;
+                default:
+                    // undefined, 0, assume pixels
+                    _zoomStart.y -= event.deltaY * 0.00025;
+                    break;
+            }
+            scope.dispatchEvent(_startEvent);
+            scope.dispatchEvent(_endEvent);
+        }
+        function onTouchStart(event) {
+            trackPointer(event);
+            switch(_pointers.length){
+                case 1:
+                    _state = STATE.TOUCH_ROTATE;
+                    _moveCurr.copy(getMouseOnCircle(_pointers[0].pageX, _pointers[0].pageY));
+                    _movePrev.copy(_moveCurr);
+                    break;
+                default:
+                    _state = STATE.TOUCH_ZOOM_PAN;
+                    const dx = _pointers[0].pageX - _pointers[1].pageX;
+                    const dy = _pointers[0].pageY - _pointers[1].pageY;
+                    _touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt(dx * dx + dy * dy);
+                    const x = (_pointers[0].pageX + _pointers[1].pageX) / 2;
+                    const y = (_pointers[0].pageY + _pointers[1].pageY) / 2;
+                    _panStart.copy(getMouseOnScreen(x, y));
+                    _panEnd.copy(_panStart);
+                    break;
+            }
+            scope.dispatchEvent(_startEvent);
+        }
+        function onTouchMove(event) {
+            trackPointer(event);
+            switch(_pointers.length){
+                case 1:
+                    _movePrev.copy(_moveCurr);
+                    _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
+                    break;
+                default:
+                    const position = getSecondPointerPosition(event);
+                    const dx = event.pageX - position.x;
+                    const dy = event.pageY - position.y;
+                    _touchZoomDistanceEnd = Math.sqrt(dx * dx + dy * dy);
+                    const x = (event.pageX + position.x) / 2;
+                    const y = (event.pageY + position.y) / 2;
+                    _panEnd.copy(getMouseOnScreen(x, y));
+                    break;
+            }
+        }
+        function onTouchEnd(event) {
+            switch(_pointers.length){
+                case 0:
+                    _state = STATE.NONE;
+                    break;
+                case 1:
+                    _state = STATE.TOUCH_ROTATE;
+                    _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
+                    _movePrev.copy(_moveCurr);
+                    break;
+            }
+            scope.dispatchEvent(_endEvent);
+        }
+        function contextmenu(event) {
+            if (scope.enabled === false) return;
+            event.preventDefault();
+        }
+        function addPointer(event) {
+            _pointers.push(event);
+        }
+        function removePointer(event) {
+            delete _pointerPositions[event.pointerId];
+            for(let i = 0; i < _pointers.length; i++)if (_pointers[i].pointerId == event.pointerId) {
+                _pointers.splice(i, 1);
+                return;
+            }
+        }
+        function trackPointer(event) {
+            let position = _pointerPositions[event.pointerId];
+            if (position === undefined) {
+                position = new (0, _three.Vector2)();
+                _pointerPositions[event.pointerId] = position;
+            }
+            position.set(event.pageX, event.pageY);
+        }
+        function getSecondPointerPosition(event) {
+            const pointer = event.pointerId === _pointers[0].pointerId ? _pointers[1] : _pointers[0];
+            return _pointerPositions[pointer.pointerId];
+        }
+        this.dispose = function() {
+            scope.domElement.removeEventListener("contextmenu", contextmenu);
+            scope.domElement.removeEventListener("pointerdown", onPointerDown);
+            scope.domElement.removeEventListener("pointercancel", onPointerCancel);
+            scope.domElement.removeEventListener("wheel", onMouseWheel);
+            window.removeEventListener("keydown", keydown);
+            window.removeEventListener("keyup", keyup);
+        };
+        this.domElement.addEventListener("contextmenu", contextmenu);
+        this.domElement.addEventListener("pointerdown", onPointerDown);
+        this.domElement.addEventListener("pointercancel", onPointerCancel);
+        this.domElement.addEventListener("wheel", onMouseWheel, {
+            passive: false
+        });
+        window.addEventListener("keydown", keydown);
+        window.addEventListener("keyup", keyup);
+        this.handleResize();
+        // force an update at start
+        this.update();
     }
-    function contextmenu(event) {
-        if (scope.enabled === false) return;
-        event.preventDefault();
-    }
-    this.dispose = function() {
-        scope.domElement.removeEventListener("contextmenu", contextmenu, false);
-        scope.domElement.removeEventListener("pointerdown", onPointerDown, false);
-        scope.domElement.removeEventListener("wheel", mousewheel, false);
-        scope.domElement.removeEventListener("touchstart", touchstart, false);
-        scope.domElement.removeEventListener("touchend", touchend, false);
-        scope.domElement.removeEventListener("touchmove", touchmove, false);
-        scope.domElement.ownerDocument.removeEventListener("pointermove", onPointerMove, false);
-        scope.domElement.ownerDocument.removeEventListener("pointerup", onPointerUp, false);
-        window.removeEventListener("keydown", keydown, false);
-        window.removeEventListener("keyup", keyup, false);
-    };
-    this.domElement.addEventListener("contextmenu", contextmenu, false);
-    this.domElement.addEventListener("pointerdown", onPointerDown, false);
-    this.domElement.addEventListener("wheel", mousewheel, false);
-    this.domElement.addEventListener("touchstart", touchstart, false);
-    this.domElement.addEventListener("touchend", touchend, false);
-    this.domElement.addEventListener("touchmove", touchmove, false);
-    this.domElement.ownerDocument.addEventListener("pointermove", onPointerMove, false);
-    this.domElement.ownerDocument.addEventListener("pointerup", onPointerUp, false);
-    window.addEventListener("keydown", keydown, false);
-    window.addEventListener("keyup", keyup, false);
-    this.handleResize();
-    // force an update at start
-    this.update();
-};
-TrackballControls.prototype = Object.create((0, _threeModuleJs.EventDispatcher).prototype);
-TrackballControls.prototype.constructor = TrackballControls;
+}
 
-},{"../../../build/three.module.js":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5o7x9":[function(require,module,exports) {
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5o7x9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "BufferGeometryUtils", ()=>BufferGeometryUtils);
-var _threeModuleJs = require("../../../build/three.module.js");
-var BufferGeometryUtils = {
-    computeTangents: function(geometry) {
-        var index = geometry.index;
-        var attributes = geometry.attributes;
-        // based on http://www.terathon.com/code/tangent.html
-        // (per vertex tangents)
-        if (index === null || attributes.position === undefined || attributes.normal === undefined || attributes.uv === undefined) {
-            console.error("THREE.BufferGeometryUtils: .computeTangents() failed. Missing required attributes (index, position, normal or uv)");
-            return;
-        }
-        var indices = index.array;
-        var positions = attributes.position.array;
-        var normals = attributes.normal.array;
-        var uvs = attributes.uv.array;
-        var nVertices = positions.length / 3;
-        if (attributes.tangent === undefined) geometry.setAttribute("tangent", new (0, _threeModuleJs.BufferAttribute)(new Float32Array(4 * nVertices), 4));
-        var tangents = attributes.tangent.array;
-        var tan1 = [], tan2 = [];
-        for(var i = 0; i < nVertices; i++){
-            tan1[i] = new (0, _threeModuleJs.Vector3)();
-            tan2[i] = new (0, _threeModuleJs.Vector3)();
-        }
-        var vA = new (0, _threeModuleJs.Vector3)(), vB = new (0, _threeModuleJs.Vector3)(), vC = new (0, _threeModuleJs.Vector3)(), uvA = new (0, _threeModuleJs.Vector2)(), uvB = new (0, _threeModuleJs.Vector2)(), uvC = new (0, _threeModuleJs.Vector2)(), sdir = new (0, _threeModuleJs.Vector3)(), tdir = new (0, _threeModuleJs.Vector3)();
-        function handleTriangle(a, b, c) {
-            vA.fromArray(positions, a * 3);
-            vB.fromArray(positions, b * 3);
-            vC.fromArray(positions, c * 3);
-            uvA.fromArray(uvs, a * 2);
-            uvB.fromArray(uvs, b * 2);
-            uvC.fromArray(uvs, c * 2);
-            vB.sub(vA);
-            vC.sub(vA);
-            uvB.sub(uvA);
-            uvC.sub(uvA);
-            var r = 1.0 / (uvB.x * uvC.y - uvC.x * uvB.y);
-            // silently ignore degenerate uv triangles having coincident or colinear vertices
-            if (!isFinite(r)) return;
-            sdir.copy(vB).multiplyScalar(uvC.y).addScaledVector(vC, -uvB.y).multiplyScalar(r);
-            tdir.copy(vC).multiplyScalar(uvB.x).addScaledVector(vB, -uvC.x).multiplyScalar(r);
-            tan1[a].add(sdir);
-            tan1[b].add(sdir);
-            tan1[c].add(sdir);
-            tan2[a].add(tdir);
-            tan2[b].add(tdir);
-            tan2[c].add(tdir);
-        }
-        var groups = geometry.groups;
-        if (groups.length === 0) groups = [
-            {
-                start: 0,
-                count: indices.length
-            }
-        ];
-        for(var i = 0, il = groups.length; i < il; ++i){
-            var group = groups[i];
-            var start = group.start;
-            var count = group.count;
-            for(var j = start, jl = start + count; j < jl; j += 3)handleTriangle(indices[j + 0], indices[j + 1], indices[j + 2]);
-        }
-        var tmp = new (0, _threeModuleJs.Vector3)(), tmp2 = new (0, _threeModuleJs.Vector3)();
-        var n = new (0, _threeModuleJs.Vector3)(), n2 = new (0, _threeModuleJs.Vector3)();
-        var w, t, test;
-        function handleVertex(v) {
-            n.fromArray(normals, v * 3);
-            n2.copy(n);
-            t = tan1[v];
-            // Gram-Schmidt orthogonalize
-            tmp.copy(t);
-            tmp.sub(n.multiplyScalar(n.dot(t))).normalize();
-            // Calculate handedness
-            tmp2.crossVectors(n2, t);
-            test = tmp2.dot(tan2[v]);
-            w = test < 0.0 ? -1 : 1.0;
-            tangents[v * 4] = tmp.x;
-            tangents[v * 4 + 1] = tmp.y;
-            tangents[v * 4 + 2] = tmp.z;
-            tangents[v * 4 + 3] = w;
-        }
-        for(var i = 0, il = groups.length; i < il; ++i){
-            var group = groups[i];
-            var start = group.start;
-            var count = group.count;
-            for(var j = start, jl = start + count; j < jl; j += 3){
-                handleVertex(indices[j + 0]);
-                handleVertex(indices[j + 1]);
-                handleVertex(indices[j + 2]);
-            }
-        }
-    },
+var _three = require("three");
+class BufferGeometryUtils {
+    static computeTangents(geometry) {
+        geometry.computeTangents();
+        console.warn("THREE.BufferGeometryUtils: .computeTangents() has been removed. Use BufferGeometry.computeTangents() instead.");
+    }
     /**
 	 * @param  {Array<BufferGeometry>} geometries
 	 * @param  {Boolean} useGroups
 	 * @return {BufferGeometry}
-	 */ mergeBufferGeometries: function(geometries, useGroups) {
-        var isIndexed = geometries[0].index !== null;
-        var attributesUsed = new Set(Object.keys(geometries[0].attributes));
-        var morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
-        var attributes = {};
-        var morphAttributes = {};
-        var morphTargetsRelative = geometries[0].morphTargetsRelative;
-        var mergedGeometry = new (0, _threeModuleJs.BufferGeometry)();
-        var offset = 0;
-        for(var i = 0; i < geometries.length; ++i){
-            var geometry = geometries[i];
-            var attributesCount = 0;
+	 */ static mergeBufferGeometries(geometries, useGroups = false) {
+        const isIndexed = geometries[0].index !== null;
+        const attributesUsed = new Set(Object.keys(geometries[0].attributes));
+        const morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
+        const attributes = {};
+        const morphAttributes = {};
+        const morphTargetsRelative = geometries[0].morphTargetsRelative;
+        const mergedGeometry = new (0, _three.BufferGeometry)();
+        let offset = 0;
+        for(let i = 0; i < geometries.length; ++i){
+            const geometry = geometries[i];
+            let attributesCount = 0;
             // ensure that all geometries are indexed, or none
             if (isIndexed !== (geometry.index !== null)) {
                 console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.");
                 return null;
             }
             // gather attributes, exit early if they're different
-            for(var name in geometry.attributes){
+            for(const name in geometry.attributes){
                 if (!attributesUsed.has(name)) {
                     console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.');
                     return null;
@@ -1606,7 +1531,7 @@ var BufferGeometryUtils = {
                 console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ". .morphTargetsRelative must be consistent throughout all geometries.");
                 return null;
             }
-            for(var name in geometry.morphAttributes){
+            for(const name in geometry.morphAttributes){
                 if (!morphAttributesUsed.has(name)) {
                     console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index " + i + ".  .morphAttributes must be consistent throughout all geometries.");
                     return null;
@@ -1618,7 +1543,7 @@ var BufferGeometryUtils = {
             mergedGeometry.userData.mergedUserData = mergedGeometry.userData.mergedUserData || [];
             mergedGeometry.userData.mergedUserData.push(geometry.userData);
             if (useGroups) {
-                var count;
+                let count;
                 if (isIndexed) count = geometry.index.count;
                 else if (geometry.attributes.position !== undefined) count = geometry.attributes.position.count;
                 else {
@@ -1631,18 +1556,18 @@ var BufferGeometryUtils = {
         }
         // merge indices
         if (isIndexed) {
-            var indexOffset = 0;
-            var mergedIndex = [];
-            for(var i = 0; i < geometries.length; ++i){
-                var index = geometries[i].index;
-                for(var j = 0; j < index.count; ++j)mergedIndex.push(index.getX(j) + indexOffset);
+            let indexOffset = 0;
+            const mergedIndex = [];
+            for(let i = 0; i < geometries.length; ++i){
+                const index = geometries[i].index;
+                for(let j = 0; j < index.count; ++j)mergedIndex.push(index.getX(j) + indexOffset);
                 indexOffset += geometries[i].attributes.position.count;
             }
             mergedGeometry.setIndex(mergedIndex);
         }
         // merge attributes
-        for(var name in attributes){
-            var mergedAttribute = this.mergeBufferAttributes(attributes[name]);
+        for(const name in attributes){
+            const mergedAttribute = this.mergeBufferAttributes(attributes[name]);
             if (!mergedAttribute) {
                 console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " attribute.");
                 return null;
@@ -1650,15 +1575,15 @@ var BufferGeometryUtils = {
             mergedGeometry.setAttribute(name, mergedAttribute);
         }
         // merge morph attributes
-        for(var name in morphAttributes){
-            var numMorphTargets = morphAttributes[name][0].length;
+        for(const name in morphAttributes){
+            const numMorphTargets = morphAttributes[name][0].length;
             if (numMorphTargets === 0) break;
             mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
             mergedGeometry.morphAttributes[name] = [];
-            for(var i = 0; i < numMorphTargets; ++i){
-                var morphAttributesToMerge = [];
-                for(var j = 0; j < morphAttributes[name].length; ++j)morphAttributesToMerge.push(morphAttributes[name][j][i]);
-                var mergedMorphAttribute = this.mergeBufferAttributes(morphAttributesToMerge);
+            for(let i = 0; i < numMorphTargets; ++i){
+                const morphAttributesToMerge = [];
+                for(let j = 0; j < morphAttributes[name].length; ++j)morphAttributesToMerge.push(morphAttributes[name][j][i]);
+                const mergedMorphAttribute = this.mergeBufferAttributes(morphAttributesToMerge);
                 if (!mergedMorphAttribute) {
                     console.error("THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the " + name + " morphAttribute.");
                     return null;
@@ -1667,17 +1592,17 @@ var BufferGeometryUtils = {
             }
         }
         return mergedGeometry;
-    },
+    }
     /**
 	 * @param {Array<BufferAttribute>} attributes
 	 * @return {BufferAttribute}
-	 */ mergeBufferAttributes: function(attributes) {
-        var TypedArray;
-        var itemSize;
-        var normalized;
-        var arrayLength = 0;
-        for(var i = 0; i < attributes.length; ++i){
-            var attribute = attributes[i];
+	 */ static mergeBufferAttributes(attributes) {
+        let TypedArray;
+        let itemSize;
+        let normalized;
+        let arrayLength = 0;
+        for(let i = 0; i < attributes.length; ++i){
+            const attribute = attributes[i];
             if (attribute.isInterleavedBufferAttribute) {
                 console.error("THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. InterleavedBufferAttributes are not supported.");
                 return null;
@@ -1699,26 +1624,26 @@ var BufferGeometryUtils = {
             }
             arrayLength += attribute.array.length;
         }
-        var array = new TypedArray(arrayLength);
-        var offset = 0;
-        for(var i = 0; i < attributes.length; ++i){
+        const array = new TypedArray(arrayLength);
+        let offset = 0;
+        for(let i = 0; i < attributes.length; ++i){
             array.set(attributes[i].array, offset);
             offset += attributes[i].array.length;
         }
-        return new (0, _threeModuleJs.BufferAttribute)(array, itemSize, normalized);
-    },
+        return new (0, _three.BufferAttribute)(array, itemSize, normalized);
+    }
     /**
 	 * @param {Array<BufferAttribute>} attributes
 	 * @return {Array<InterleavedBufferAttribute>}
-	 */ interleaveAttributes: function(attributes) {
+	 */ static interleaveAttributes(attributes) {
         // Interleaves the provided attributes into an InterleavedBuffer and returns
         // a set of InterleavedBufferAttributes for each attribute
-        var TypedArray;
-        var arrayLength = 0;
-        var stride = 0;
+        let TypedArray;
+        let arrayLength = 0;
+        let stride = 0;
         // calculate the the length and type of the interleavedBuffer
-        for(var i = 0, l = attributes.length; i < l; ++i){
-            var attribute = attributes[i];
+        for(let i = 0, l = attributes.length; i < l; ++i){
+            const attribute = attributes[i];
             if (TypedArray === undefined) TypedArray = attribute.array.constructor;
             if (TypedArray !== attribute.array.constructor) {
                 console.error("AttributeBuffers of different types cannot be interleaved");
@@ -1728,94 +1653,94 @@ var BufferGeometryUtils = {
             stride += attribute.itemSize;
         }
         // Create the set of buffer attributes
-        var interleavedBuffer = new (0, _threeModuleJs.InterleavedBuffer)(new TypedArray(arrayLength), stride);
-        var offset = 0;
-        var res = [];
-        var getters = [
+        const interleavedBuffer = new (0, _three.InterleavedBuffer)(new TypedArray(arrayLength), stride);
+        let offset = 0;
+        const res = [];
+        const getters = [
             "getX",
             "getY",
             "getZ",
             "getW"
         ];
-        var setters = [
+        const setters = [
             "setX",
             "setY",
             "setZ",
             "setW"
         ];
-        for(var j = 0, l = attributes.length; j < l; j++){
-            var attribute = attributes[j];
-            var itemSize = attribute.itemSize;
-            var count = attribute.count;
-            var iba = new (0, _threeModuleJs.InterleavedBufferAttribute)(interleavedBuffer, itemSize, offset, attribute.normalized);
+        for(let j = 0, l = attributes.length; j < l; j++){
+            const attribute = attributes[j];
+            const itemSize = attribute.itemSize;
+            const count = attribute.count;
+            const iba = new (0, _three.InterleavedBufferAttribute)(interleavedBuffer, itemSize, offset, attribute.normalized);
             res.push(iba);
             offset += itemSize;
             // Move the data for each attribute into the new interleavedBuffer
             // at the appropriate offset
-            for(var c = 0; c < count; c++)for(var k = 0; k < itemSize; k++)iba[setters[k]](c, attribute[getters[k]](c));
+            for(let c = 0; c < count; c++)for(let k = 0; k < itemSize; k++)iba[setters[k]](c, attribute[getters[k]](c));
         }
         return res;
-    },
+    }
     /**
 	 * @param {Array<BufferGeometry>} geometry
 	 * @return {number}
-	 */ estimateBytesUsed: function(geometry) {
+	 */ static estimateBytesUsed(geometry) {
         // Return the estimated memory used by this geometry in bytes
         // Calculate using itemSize, count, and BYTES_PER_ELEMENT to account
         // for InterleavedBufferAttributes.
-        var mem = 0;
-        for(var name in geometry.attributes){
-            var attr = geometry.getAttribute(name);
+        let mem = 0;
+        for(const name in geometry.attributes){
+            const attr = geometry.getAttribute(name);
             mem += attr.count * attr.itemSize * attr.array.BYTES_PER_ELEMENT;
         }
-        var indices = geometry.getIndex();
+        const indices = geometry.getIndex();
         mem += indices ? indices.count * indices.itemSize * indices.array.BYTES_PER_ELEMENT : 0;
         return mem;
-    },
+    }
     /**
 	 * @param {BufferGeometry} geometry
 	 * @param {number} tolerance
 	 * @return {BufferGeometry>}
-	 */ mergeVertices: function(geometry, tolerance = 1e-4) {
+	 */ static mergeVertices(geometry, tolerance = 1e-4) {
         tolerance = Math.max(tolerance, Number.EPSILON);
         // Generate an index buffer if the geometry doesn't have one, or optimize it
         // if it's already available.
-        var hashToIndex = {};
-        var indices = geometry.getIndex();
-        var positions = geometry.getAttribute("position");
-        var vertexCount = indices ? indices.count : positions.count;
+        const hashToIndex = {};
+        const indices = geometry.getIndex();
+        const positions = geometry.getAttribute("position");
+        const vertexCount = indices ? indices.count : positions.count;
         // next value for triangle indices
-        var nextIndex = 0;
+        let nextIndex = 0;
         // attributes and new attribute arrays
-        var attributeNames = Object.keys(geometry.attributes);
-        var attrArrays = {};
-        var morphAttrsArrays = {};
-        var newIndices = [];
-        var getters = [
+        const attributeNames = Object.keys(geometry.attributes);
+        const attrArrays = {};
+        const morphAttrsArrays = {};
+        const newIndices = [];
+        const getters = [
             "getX",
             "getY",
             "getZ",
             "getW"
         ];
         // initialize the arrays
-        for(var i = 0, l = attributeNames.length; i < l; i++){
-            var name = attributeNames[i];
+        for(let i = 0, l = attributeNames.length; i < l; i++){
+            const name = attributeNames[i];
             attrArrays[name] = [];
-            var morphAttr = geometry.morphAttributes[name];
+            const morphAttr = geometry.morphAttributes[name];
             if (morphAttr) morphAttrsArrays[name] = new Array(morphAttr.length).fill().map(()=>[]);
         }
         // convert the error tolerance to an amount of decimal places to truncate to
-        var decimalShift = Math.log10(1 / tolerance);
-        var shiftMultiplier = Math.pow(10, decimalShift);
-        for(var i = 0; i < vertexCount; i++){
-            var index = indices ? indices.getX(i) : i;
+        const decimalShift = Math.log10(1 / tolerance);
+        const shiftMultiplier = Math.pow(10, decimalShift);
+        for(let i = 0; i < vertexCount; i++){
+            const index = indices ? indices.getX(i) : i;
             // Generate a hash for the vertex attributes at the current index 'i'
-            var hash = "";
-            for(var j = 0, l = attributeNames.length; j < l; j++){
-                var name = attributeNames[j];
-                var attribute = geometry.getAttribute(name);
-                var itemSize = attribute.itemSize;
-                for(var k = 0; k < itemSize; k++)// double tilde truncates the decimal value
+            let hash = "";
+            for(let j = 0, l = attributeNames.length; j < l; j++){
+                const name = attributeNames[j];
+                const attribute = geometry.getAttribute(name);
+                const itemSize = attribute.itemSize;
+                for(let k = 0; k < itemSize; k++)// double tilde truncates the decimal value
                 hash += `${~~(attribute[getters[k]](index) * shiftMultiplier)},`;
             }
             // Add another reference to the vertex if it's already
@@ -1823,17 +1748,17 @@ var BufferGeometryUtils = {
             if (hash in hashToIndex) newIndices.push(hashToIndex[hash]);
             else {
                 // copy data to the new index in the attribute arrays
-                for(var j = 0, l = attributeNames.length; j < l; j++){
-                    var name = attributeNames[j];
-                    var attribute = geometry.getAttribute(name);
-                    var morphAttr = geometry.morphAttributes[name];
-                    var itemSize = attribute.itemSize;
-                    var newarray = attrArrays[name];
-                    var newMorphArrays = morphAttrsArrays[name];
-                    for(var k = 0; k < itemSize; k++){
-                        var getterFunc = getters[k];
+                for(let j = 0, l = attributeNames.length; j < l; j++){
+                    const name = attributeNames[j];
+                    const attribute = geometry.getAttribute(name);
+                    const morphAttr = geometry.morphAttributes[name];
+                    const itemSize = attribute.itemSize;
+                    const newarray = attrArrays[name];
+                    const newMorphArrays = morphAttrsArrays[name];
+                    for(let k = 0; k < itemSize; k++){
+                        const getterFunc = getters[k];
                         newarray.push(attribute[getterFunc](index));
-                        if (morphAttr) for(var m = 0, ml = morphAttr.length; m < ml; m++)newMorphArrays[m].push(morphAttr[m][getterFunc](index));
+                        if (morphAttr) for(let m = 0, ml = morphAttr.length; m < ml; m++)newMorphArrays[m].push(morphAttr[m][getterFunc](index));
                     }
                 }
                 hashToIndex[hash] = nextIndex;
@@ -1844,41 +1769,41 @@ var BufferGeometryUtils = {
         // Generate typed arrays from new attribute arrays and update
         // the attributeBuffers
         const result = geometry.clone();
-        for(var i = 0, l = attributeNames.length; i < l; i++){
-            var name = attributeNames[i];
-            var oldAttribute = geometry.getAttribute(name);
-            var buffer = new oldAttribute.array.constructor(attrArrays[name]);
-            var attribute = new (0, _threeModuleJs.BufferAttribute)(buffer, oldAttribute.itemSize, oldAttribute.normalized);
+        for(let i = 0, l = attributeNames.length; i < l; i++){
+            const name = attributeNames[i];
+            const oldAttribute = geometry.getAttribute(name);
+            const buffer = new oldAttribute.array.constructor(attrArrays[name]);
+            const attribute = new (0, _three.BufferAttribute)(buffer, oldAttribute.itemSize, oldAttribute.normalized);
             result.setAttribute(name, attribute);
             // Update the attribute arrays
-            if (name in morphAttrsArrays) for(var j = 0; j < morphAttrsArrays[name].length; j++){
-                var oldMorphAttribute = geometry.morphAttributes[name][j];
-                var buffer = new oldMorphAttribute.array.constructor(morphAttrsArrays[name][j]);
-                var morphAttribute = new (0, _threeModuleJs.BufferAttribute)(buffer, oldMorphAttribute.itemSize, oldMorphAttribute.normalized);
+            if (name in morphAttrsArrays) for(let j = 0; j < morphAttrsArrays[name].length; j++){
+                const oldMorphAttribute = geometry.morphAttributes[name][j];
+                const buffer = new oldMorphAttribute.array.constructor(morphAttrsArrays[name][j]);
+                const morphAttribute = new (0, _three.BufferAttribute)(buffer, oldMorphAttribute.itemSize, oldMorphAttribute.normalized);
                 result.morphAttributes[name][j] = morphAttribute;
             }
         }
         // indices
         result.setIndex(newIndices);
         return result;
-    },
+    }
     /**
 	 * @param {BufferGeometry} geometry
 	 * @param {number} drawMode
 	 * @return {BufferGeometry>}
-	 */ toTrianglesDrawMode: function(geometry, drawMode) {
-        if (drawMode === (0, _threeModuleJs.TrianglesDrawMode)) {
+	 */ static toTrianglesDrawMode(geometry, drawMode) {
+        if (drawMode === (0, _three.TrianglesDrawMode)) {
             console.warn("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Geometry already defined as triangles.");
             return geometry;
         }
-        if (drawMode === (0, _threeModuleJs.TriangleFanDrawMode) || drawMode === (0, _threeModuleJs.TriangleStripDrawMode)) {
-            var index = geometry.getIndex();
+        if (drawMode === (0, _three.TriangleFanDrawMode) || drawMode === (0, _three.TriangleStripDrawMode)) {
+            let index = geometry.getIndex();
             // generate index if not present
             if (index === null) {
-                var indices = [];
-                var position = geometry.getAttribute("position");
+                const indices = [];
+                const position = geometry.getAttribute("position");
                 if (position !== undefined) {
-                    for(var i = 0; i < position.count; i++)indices.push(i);
+                    for(let i = 0; i < position.count; i++)indices.push(i);
                     geometry.setIndex(indices);
                     index = geometry.getIndex();
                 } else {
@@ -1887,17 +1812,17 @@ var BufferGeometryUtils = {
                 }
             }
             //
-            var numberOfTriangles = index.count - 2;
-            var newIndices = [];
-            if (drawMode === (0, _threeModuleJs.TriangleFanDrawMode)) // gl.TRIANGLE_FAN
-            for(var i = 1; i <= numberOfTriangles; i++){
+            const numberOfTriangles = index.count - 2;
+            const newIndices = [];
+            if (drawMode === (0, _three.TriangleFanDrawMode)) // gl.TRIANGLE_FAN
+            for(let i = 1; i <= numberOfTriangles; i++){
                 newIndices.push(index.getX(0));
                 newIndices.push(index.getX(i));
                 newIndices.push(index.getX(i + 1));
             }
             else {
                 // gl.TRIANGLE_STRIP
-                for(var i = 0; i < numberOfTriangles; i++)if (i % 2 === 0) {
+                for(let i = 0; i < numberOfTriangles; i++)if (i % 2 === 0) {
                     newIndices.push(index.getX(i));
                     newIndices.push(index.getX(i + 1));
                     newIndices.push(index.getX(i + 2));
@@ -1909,7 +1834,7 @@ var BufferGeometryUtils = {
             }
             if (newIndices.length / 3 !== numberOfTriangles) console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unable to generate correct amount of triangles.");
             // build final geometry
-            var newGeometry = geometry.clone();
+            const newGeometry = geometry.clone();
             newGeometry.setIndex(newIndices);
             newGeometry.clearGroups();
             return newGeometry;
@@ -1918,8 +1843,150 @@ var BufferGeometryUtils = {
             return geometry;
         }
     }
-};
+    /**
+	 * Calculates the morphed attributes of a morphed/skinned BufferGeometry.
+	 * Helpful for Raytracing or Decals.
+	 * @param {Mesh | Line | Points} object An instance of Mesh, Line or Points.
+	 * @return {Object} An Object with original position/normal attributes and morphed ones.
+	 */ static computeMorphedAttributes(object) {
+        if (object.geometry.isBufferGeometry !== true) {
+            console.error("THREE.BufferGeometryUtils: Geometry is not of type BufferGeometry.");
+            return null;
+        }
+        const _vA = new (0, _three.Vector3)();
+        const _vB = new (0, _three.Vector3)();
+        const _vC = new (0, _three.Vector3)();
+        const _tempA = new (0, _three.Vector3)();
+        const _tempB = new (0, _three.Vector3)();
+        const _tempC = new (0, _three.Vector3)();
+        const _morphA = new (0, _three.Vector3)();
+        const _morphB = new (0, _three.Vector3)();
+        const _morphC = new (0, _three.Vector3)();
+        function _calculateMorphedAttributeData(object, material, attribute, morphAttribute, morphTargetsRelative, a, b, c, modifiedAttributeArray) {
+            _vA.fromBufferAttribute(attribute, a);
+            _vB.fromBufferAttribute(attribute, b);
+            _vC.fromBufferAttribute(attribute, c);
+            const morphInfluences = object.morphTargetInfluences;
+            if (material.morphTargets && morphAttribute && morphInfluences) {
+                _morphA.set(0, 0, 0);
+                _morphB.set(0, 0, 0);
+                _morphC.set(0, 0, 0);
+                for(let i = 0, il = morphAttribute.length; i < il; i++){
+                    const influence = morphInfluences[i];
+                    const morph = morphAttribute[i];
+                    if (influence === 0) continue;
+                    _tempA.fromBufferAttribute(morph, a);
+                    _tempB.fromBufferAttribute(morph, b);
+                    _tempC.fromBufferAttribute(morph, c);
+                    if (morphTargetsRelative) {
+                        _morphA.addScaledVector(_tempA, influence);
+                        _morphB.addScaledVector(_tempB, influence);
+                        _morphC.addScaledVector(_tempC, influence);
+                    } else {
+                        _morphA.addScaledVector(_tempA.sub(_vA), influence);
+                        _morphB.addScaledVector(_tempB.sub(_vB), influence);
+                        _morphC.addScaledVector(_tempC.sub(_vC), influence);
+                    }
+                }
+                _vA.add(_morphA);
+                _vB.add(_morphB);
+                _vC.add(_morphC);
+            }
+            if (object.isSkinnedMesh) {
+                object.boneTransform(a, _vA);
+                object.boneTransform(b, _vB);
+                object.boneTransform(c, _vC);
+            }
+            modifiedAttributeArray[a * 3 + 0] = _vA.x;
+            modifiedAttributeArray[a * 3 + 1] = _vA.y;
+            modifiedAttributeArray[a * 3 + 2] = _vA.z;
+            modifiedAttributeArray[b * 3 + 0] = _vB.x;
+            modifiedAttributeArray[b * 3 + 1] = _vB.y;
+            modifiedAttributeArray[b * 3 + 2] = _vB.z;
+            modifiedAttributeArray[c * 3 + 0] = _vC.x;
+            modifiedAttributeArray[c * 3 + 1] = _vC.y;
+            modifiedAttributeArray[c * 3 + 2] = _vC.z;
+        }
+        const geometry = object.geometry;
+        const material = object.material;
+        let a, b, c;
+        const index = geometry.index;
+        const positionAttribute = geometry.attributes.position;
+        const morphPosition = geometry.morphAttributes.position;
+        const morphTargetsRelative = geometry.morphTargetsRelative;
+        const normalAttribute = geometry.attributes.normal;
+        const morphNormal = geometry.morphAttributes.position;
+        const groups = geometry.groups;
+        const drawRange = geometry.drawRange;
+        let i, j, il, jl;
+        let group, groupMaterial;
+        let start, end;
+        const modifiedPosition = new Float32Array(positionAttribute.count * positionAttribute.itemSize);
+        const modifiedNormal = new Float32Array(normalAttribute.count * normalAttribute.itemSize);
+        if (index !== null) {
+            // indexed buffer geometry
+            if (Array.isArray(material)) for(i = 0, il = groups.length; i < il; i++){
+                group = groups[i];
+                groupMaterial = material[group.materialIndex];
+                start = Math.max(group.start, drawRange.start);
+                end = Math.min(group.start + group.count, drawRange.start + drawRange.count);
+                for(j = start, jl = end; j < jl; j += 3){
+                    a = index.getX(j);
+                    b = index.getX(j + 1);
+                    c = index.getX(j + 2);
+                    _calculateMorphedAttributeData(object, groupMaterial, positionAttribute, morphPosition, morphTargetsRelative, a, b, c, modifiedPosition);
+                    _calculateMorphedAttributeData(object, groupMaterial, normalAttribute, morphNormal, morphTargetsRelative, a, b, c, modifiedNormal);
+                }
+            }
+            else {
+                start = Math.max(0, drawRange.start);
+                end = Math.min(index.count, drawRange.start + drawRange.count);
+                for(i = start, il = end; i < il; i += 3){
+                    a = index.getX(i);
+                    b = index.getX(i + 1);
+                    c = index.getX(i + 2);
+                    _calculateMorphedAttributeData(object, material, positionAttribute, morphPosition, morphTargetsRelative, a, b, c, modifiedPosition);
+                    _calculateMorphedAttributeData(object, material, normalAttribute, morphNormal, morphTargetsRelative, a, b, c, modifiedNormal);
+                }
+            }
+        } else if (positionAttribute !== undefined) {
+            // non-indexed buffer geometry
+            if (Array.isArray(material)) for(i = 0, il = groups.length; i < il; i++){
+                group = groups[i];
+                groupMaterial = material[group.materialIndex];
+                start = Math.max(group.start, drawRange.start);
+                end = Math.min(group.start + group.count, drawRange.start + drawRange.count);
+                for(j = start, jl = end; j < jl; j += 3){
+                    a = j;
+                    b = j + 1;
+                    c = j + 2;
+                    _calculateMorphedAttributeData(object, groupMaterial, positionAttribute, morphPosition, morphTargetsRelative, a, b, c, modifiedPosition);
+                    _calculateMorphedAttributeData(object, groupMaterial, normalAttribute, morphNormal, morphTargetsRelative, a, b, c, modifiedNormal);
+                }
+            }
+            else {
+                start = Math.max(0, drawRange.start);
+                end = Math.min(positionAttribute.count, drawRange.start + drawRange.count);
+                for(i = start, il = end; i < il; i += 3){
+                    a = i;
+                    b = i + 1;
+                    c = i + 2;
+                    _calculateMorphedAttributeData(object, material, positionAttribute, morphPosition, morphTargetsRelative, a, b, c, modifiedPosition);
+                    _calculateMorphedAttributeData(object, material, normalAttribute, morphNormal, morphTargetsRelative, a, b, c, modifiedNormal);
+                }
+            }
+        }
+        const morphedPositionAttribute = new (0, _three.Float32BufferAttribute)(modifiedPosition, 3);
+        const morphedNormalAttribute = new (0, _three.Float32BufferAttribute)(modifiedNormal, 3);
+        return {
+            positionAttribute: positionAttribute,
+            normalAttribute: normalAttribute,
+            morphedPositionAttribute: morphedPositionAttribute,
+            morphedNormalAttribute: morphedNormalAttribute
+        };
+    }
+}
 
-},{"../../../build/three.module.js":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["gmIOE","7SwCM"], "7SwCM", "parcelRequire26b9")
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["gmIOE","7SwCM"], "7SwCM", "parcelRequire26b9")
 
 //# sourceMappingURL=index.f18de3a7.js.map
