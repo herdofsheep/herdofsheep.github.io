@@ -1,0 +1,496 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: arlon;
+  overflow-x: hidden;
+}
+
+a, a {
+  color: #ff4162;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:after {
+  position: inherit;
+  content: attr(title);
+  color: #0000;
+  visibility: hidden;
+  border: 1px solid #000;
+  height: 0;
+  margin-top: -.78ex;
+  font-weight: 800;
+  display: block;
+  overflow: hidden;
+}
+
+a:hover, a:focus {
+  color: #ff284d;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.outline {
+  border: 1px solid #fff;
+}
+
+.container {
+  text-align: center;
+}
+
+.heightCap {
+  max-height: 60vh;
+}
+
+.centralise {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.img {
+  display: inline-block;
+}
+
+.roundimg {
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bubbleimg {
+  width: 100px;
+  height: 100px;
+}
+
+.centerVideo {
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.navigation {
+  z-index: 1;
+  height: 100px;
+  display: flex;
+  position: relative;
+}
+
+.margin {
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+}
+
+.pink {
+  background: pink;
+}
+
+.paleBlue {
+  background: #b7dbd4;
+}
+
+.innerFlower {
+  top: 0;
+}
+
+.flower {
+  z-index: 2;
+  background-image: url("flower.a29135dc.png");
+  background-position: center;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  display: block;
+  position: relative;
+}
+
+.flower:hover, .flower:focus {
+  z-index: 2;
+  background-image: url("flowerBold.bd3d7053.png");
+  background-position: center;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.homelinks {
+  text-align: center;
+  width: 130px;
+  height: 100px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 100px;
+  display: inline-block;
+}
+
+.topMargin {
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+}
+
+.topMarginOnly {
+  margin-top: 1.5%;
+}
+
+.topMargin2 {
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+.topMarginOnly2 {
+  margin-top: 4.16666%;
+}
+
+.bottomMargin {
+  margin-bottom: 10%;
+}
+
+.portfolioSpacer {
+  max-width: 83.3333%;
+  margin: 4.16666% auto;
+}
+
+.portfolioTextTwoline {
+  color: #fff;
+  text-align: center;
+  background: #000;
+  width: 160px;
+  height: 50px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  line-height: 25px;
+  display: inline-block;
+}
+
+.portfolioTextOneline {
+  color: #fff;
+  text-align: center;
+  background: #000;
+  width: 160px;
+  height: 50px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  line-height: 50px;
+  display: inline-block;
+}
+
+.portfolioBox {
+  vertical-align: top;
+  text-align: center;
+  width: 250px;
+  height: 350px;
+  margin: 2.5% 4.16666%;
+  display: inline-block;
+}
+
+.text {
+  color: #000;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.explainText {
+  color: #fff;
+  text-align: center;
+  margin: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.justifyText {
+  text-align: justify;
+  text-align-last: center;
+}
+
+.textSpacer {
+  line-height: 3ex;
+}
+
+.saver, .threedsaver {
+  z-index: 1000;
+  width: 150px;
+  padding: 20px;
+  font-size: 30px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.saver {
+  color: #fff;
+  background: none;
+  border: solid;
+  font-weight: 400;
+}
+
+.threedsaver {
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  font-weight: 600;
+  box-shadow: 0 0 0 1.3pt #000;
+}
+
+.saver:hover, .saver:focus {
+  color: #fff;
+  background: #000;
+  font-weight: 400;
+}
+
+.threedsaver:hover, .threedsaver:focus {
+  color: #000;
+  font-weight: 900;
+  box-shadow: 0 0 0 4pt #000;
+}
+
+.grabcursor {
+  cursor: grab;
+}
+
+.tooltip {
+  display: inline-block;
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  color: #000;
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  background-color: #fff;
+  border: 5px solid #000;
+  border-radius: 45%;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  margin-left: -60px;
+  padding: 5px 0;
+  transition: opacity .3s;
+  display: flex;
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+}
+
+.tooltip .tooltiptext:before {
+  content: "";
+  border: 20px solid #0000;
+  border-top-color: #000;
+  margin-left: -20px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+
+.tooltip .tooltiptext:after {
+  content: "";
+  border: 12px solid #0000;
+  border-top-color: #fff;
+  margin-left: -12px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.quarter {
+  width: 24%;
+}
+
+.smallThird {
+  width: 30%;
+}
+
+.third {
+  width: 33%;
+}
+
+.smallHalf {
+  width: 40%;
+}
+
+.half {
+  width: 49%;
+}
+
+.bigPlanet {
+  width: 50%;
+}
+
+.smallFull {
+  width: 90%;
+}
+
+.full {
+  width: 100%;
+}
+
+.fullScreen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.megPhoto {
+  max-width: 50vw;
+  max-height: 45vh;
+  padding-right: 5vh;
+}
+
+.alongside {
+  padding-bottom: 5vh;
+  display: inline-flex;
+}
+
+.alongText {
+  margin: auto;
+  display: block;
+}
+
+.noShadow:after {
+  content: none;
+}
+
+.slideContainer {
+  width: 70%;
+  position: fixed;
+  bottom: 10px;
+  left: 60%;
+  transform: translateX(-50%);
+}
+
+.slider {
+  -webkit-appearance: none;
+  -webkit-transition: all .2s;
+  background: #fff;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  height: 25px;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  box-shadow: 0 0 0 3px #000;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  cursor: pointer;
+  background: center / contain;
+  width: 25px;
+  height: 25px;
+}
+
+.slider::-moz-range-thumb {
+  cursor: pointer;
+  background: center / contain;
+  border: none;
+  width: 25px;
+  height: 25px;
+}
+
+@media only screen and (device-width >= 320px) and (device-width <= 480px) {
+  .homelinks {
+    width: 200px;
+    font-size: 50px;
+  }
+
+  .portfolioSpacer {
+    max-width: 90%;
+    margin: 4.16666% auto;
+  }
+
+  .portfolioBox {
+    width: 350px;
+    height: 490px;
+  }
+
+  .portfolioTextTwoline {
+    width: 300px;
+    height: 100px;
+    font-size: 30px;
+    line-height: 50px;
+  }
+
+  .portfolioTextOneline {
+    width: 300px;
+    height: 100px;
+    font-size: 30px;
+    line-height: 100px;
+  }
+
+  .quarter {
+    width: 33%;
+  }
+
+  .smallThird {
+    width: 40%;
+  }
+
+  .third {
+    width: 49%;
+  }
+
+  .bigPlanet {
+    width: 75%;
+  }
+
+  .smallHalf {
+    width: 80%;
+  }
+
+  .half {
+    width: 100%;
+  }
+}
+
+@media screen and (device-width >= 1600px) {
+  .portfolioSpacer {
+    max-width: 66.6667%;
+    margin: 4.16666% auto;
+  }
+}
+
+@font-face {
+  font-family: arlon;
+  src: url("arlon-light.ba8bb623.woff") format("woff"), url("arlon-light.7e0a6c7b.woff2") format("woff2"), url("arlon-light.520c7167.ttf") format("truetype"), url("arlon-light.4d34534b.otf") format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: arlon;
+  src: url("arlon-light.ba8bb623.woff") format("woff"), url("arlon-light.7e0a6c7b.woff2") format("woff2"), url("arlon-light.520c7167.ttf") format("truetype"), url("arlon-light.4d34534b.otf") format("opentype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: arlon;
+  src: url("arlon-semibold.765cb856.woff") format("woff"), url("arlon-semibold.2a7c4a08.woff2") format("woff2"), url("arlon-semibold.d06a778e.ttf") format("truetype"), url("arlon-semibold.39850bc6.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: arlon;
+  src: url("arlon-ultrabold.4ea4457e.woff") format("woff"), url("arlon-ultrabold.233649a9.woff2") format("woff2"), url("arlon-ultrabold.fc7867a0.ttf") format("truetype"), url("arlon-ultrabold.bbcd139c.otf") format("opentype");
+  font-weight: 900;
+}
+/*# sourceMappingURL=index.83d9161e.css.map */

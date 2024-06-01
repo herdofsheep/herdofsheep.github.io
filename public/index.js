@@ -1,11 +1,11 @@
 
+import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
 import _ from 'lodash';
-import {LitElement, html} from 'lit-element';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class RayCast extends LitElement {
   static get properties() {
@@ -118,7 +118,7 @@ class RayCast extends LitElement {
     this.animate();
   }
 
-  async init() {
+  init() {
 
     this.container = this.shadowRoot.getElementById( "container" );
 
@@ -144,6 +144,7 @@ class RayCast extends LitElement {
     this.scene.add( light );
 
     this.files = ['que', 'work', 'github', 'math'];
+
     this.work = this.loadModel( '/assets/models/gltf/radcam.glb' );
     this.workBig = this.loadModel( '/assets/models/gltf/radcamBig.glb' );
     this.que = this.loadModel( '/assets/models/gltf/questionmark.glb' );
@@ -191,27 +192,19 @@ class RayCast extends LitElement {
 
   }
 
-  async loadModel(url) {
+  loadModel( url ){
     var loader = new GLTFLoader();
-    // var model = new THREE.Group();
-    const loadedData = await loader.loadAsync(url);
+    var model = new THREE.Group;
 
-    // loader.load(
-    //     url,
-    //     function (gltf) {
-    //         gltf.scene.traverse(function (child) {
-    //             // Perform operations on the child
-    //         });
-    //         model.add(gltf.scene);
-    //     },
-    //     undefined,
-    //     function (error) {
-    //         console.error('An error happened while loading the model:', error);
-    //         // Handle the error, maybe by loading a fallback model or showing an error message
-    //     }
-    // );
+    loader.load( url , function ( gltf ) {
 
-    return await loader.loadAsync(url);;
+        gltf.scene.traverse( function ( child ) {});
+        model.add( gltf.scene );
+
+    } );
+
+    return model;
+
   }
 
   animate() {
@@ -348,10 +341,10 @@ class RayCast extends LitElement {
       ) );
       this.scene.add( this.highlightShape[files[i]] );
 
-      this.objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
+      this.objects = new THREE.Mesh( mergeGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
       this.scene.add( this.objects );
   
-      this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
+      this.pickingScene.add( new THREE.Mesh( mergeGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
   
 
     }
@@ -391,7 +384,7 @@ class RayCast extends LitElement {
             var mesh = hasLittleMeshGroup.children[j].geometry
             meshes.push(mesh)
           }
-          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          var groupMeshes = mergeGeometries( meshes )
           clone['data'] = groupMeshes;
         }
       }
@@ -410,7 +403,7 @@ class RayCast extends LitElement {
             var mesh = hasBigMeshGroup.children[j].geometry
             meshes.push(mesh)
           }
-          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
+          var groupMeshes = mergeGeometries( meshes )
           clone['bigData'] = groupMeshes;
         }
       }
@@ -470,7 +463,7 @@ class RayCast extends LitElement {
       this.infoVisible = "visible"
 
       if(data.type == 'work'){
-        this.link = "/src/portfolio.html";
+        this.link = "src/portfolio.html";
         debugWindow.innerHTML = 'work portfolio'
       }
       if(data.type == 'github'){
@@ -478,11 +471,11 @@ class RayCast extends LitElement {
         debugWindow.innerHTML = 'github'
       }
       if(data.type == 'que'){
-        this.link = "/src/what.html";
+        this.link = "src/what.html";
         debugWindow.innerHTML = "what's this?"
       }
       if(data.type == 'math'){
-        this.link = "/src/art.html";
+        this.link = "src/art.html";
         debugWindow.innerHTML = "art portfolio"
       }
 

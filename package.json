@@ -4,19 +4,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node app.cjs",
-    "dev": "nodemon app.cjs",
-    "build": "parcel build public/index.html"
+    "start": "NODE_ENV=production node app.cjs",
+    "dev": "NODE_ENV=development nodemon app.cjs",
+    "build": "parcel build public/index.html",
+    "watch": "parcel watch public/index.html"
   },
   "dependencies": {
     "express": "^4.19.2",
-    "http-proxy-middleware": "^3.0.0",
     "lit-element": "^4.0.5",
     "lodash": "^4.17.21",
-    "nodemon": "^3.1.2",
-    "three": "^0.157.0"
+    "three": "^0.157.0",
+    "three-buffer-geometry-utils": "^1.0.0"
   },
   "devDependencies": {
+    "nodemon": "^3.1.2",
     "parcel": "^2.12.0"
   }
 }
