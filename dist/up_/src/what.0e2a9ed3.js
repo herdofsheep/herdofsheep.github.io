@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"eVmte":[function(require,module,exports) {
+})({"exZBv":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = 51671;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
@@ -709,6 +709,6 @@ class QuestionMark extends (0, _litElement.LitElement) {
 }
 window.customElements.define("question-mark", QuestionMark);
 
-},{"lit-element":"kvK5P","three":"ktPTu","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF"}]},["eVmte","TLhpw"], "TLhpw", "parcelRequire26b9")
+},{"lit-element":"kvK5P","three":"ktPTu","lodash":"3qBDj","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF"}]},["exZBv","TLhpw"], "TLhpw", "parcelRequire26b9")
 
 //# sourceMappingURL=what.0e2a9ed3.js.map

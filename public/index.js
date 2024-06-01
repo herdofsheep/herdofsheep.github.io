@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class RayCast extends LitElement {
   static get properties() {
@@ -341,10 +341,10 @@ class RayCast extends LitElement {
       ) );
       this.scene.add( this.highlightShape[files[i]] );
 
-      this.objects = new THREE.Mesh( mergeGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
+      this.objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
       this.scene.add( this.objects );
   
-      this.pickingScene.add( new THREE.Mesh( mergeGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
+      this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
   
 
     }
@@ -384,7 +384,7 @@ class RayCast extends LitElement {
             var mesh = hasLittleMeshGroup.children[j].geometry
             meshes.push(mesh)
           }
-          var groupMeshes = mergeGeometries( meshes )
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
           clone['data'] = groupMeshes;
         }
       }
@@ -403,7 +403,7 @@ class RayCast extends LitElement {
             var mesh = hasBigMeshGroup.children[j].geometry
             meshes.push(mesh)
           }
-          var groupMeshes = mergeGeometries( meshes )
+          var groupMeshes = BufferGeometryUtils.mergeBufferGeometries( meshes )
           clone['bigData'] = groupMeshes;
         }
       }
