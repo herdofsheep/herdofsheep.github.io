@@ -1,5 +1,5 @@
 'use strict'
-
+import * as THREE from 'three';
 var container = document.getElementById( 'container' );
 
 var scene = new THREE.Scene();

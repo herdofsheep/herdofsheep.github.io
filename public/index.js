@@ -1,8 +1,9 @@
 
-import {LitElement, html} from 'lit-element';
+import { LitElement, html } from 'lit-element';
 import * as THREE from 'three';
 import _ from 'lodash';
 
+const fs = require('fs');
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -193,6 +194,10 @@ class RayCast extends LitElement {
   }
 
   loadModel( url ){
+    if (!fs.existsSync(url)) {
+      console.log('file not found')
+      return null;
+    }
     var loader = new GLTFLoader();
     var model = new THREE.Group;
 
