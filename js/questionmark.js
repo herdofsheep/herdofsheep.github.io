@@ -1,9 +1,8 @@
-import {LitElement, html} from 'lit-element';
+import {LitElement} from 'lit-element';
 import * as THREE from 'three';
-import 'lodash';
+import _ from 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class QuestionMark extends LitElement {
 

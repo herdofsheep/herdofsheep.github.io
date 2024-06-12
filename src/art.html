@@ -4,7 +4,7 @@
 
     <title>art</title>
     <link rel="stylesheet" href="/public/style.css" type="text/css" charset="utf-8"/>
-    <script src="/js/cursorShenanigans.js"></script>
+    <script type="module" src="/js/cursorShenanigans.js"></script>
 
     <style>
 
@@ -699,23 +699,6 @@
 
 
 
-          <div class ="contentOption" id="millingGuide">
-            <div class="contents">
-              <div class="pieceTitle">milling guide</div>
-              <div class="description">
-                <div class="paragraph">
-                  A guide on how to design and build a customised PCB milled circuit board. You can read it
-                  <a href="/assets/pdf/MILLING%20GUIDE.pdf" target="_blank">here.</a>
-                </div>
-                <a href="/assets/pdf/MILLING%20GUIDE.pdf" class="imgWrap" target="_blank">
-                  <img class="img inlineImg" src="/assets/images/board.png" alt="Customised circuitboard">
-                </a>
-              </div>
-            </div>
-          </div>
-
-
-
           <div class ="contentOption" id="kite">
             <div class="contents">
               <div class="pieceTitle">colour metaphor</div>
@@ -742,12 +725,12 @@
           <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
         </div>
 
-      <script>
+      <script type="module">
         new fairyDustCursor({
           colors: ["#ff284d"]
         });
       </script>
-      <script src="/js/art.js"></script>
+      <script type="module" src="/js/art.js"></script>
 
   </body>
   

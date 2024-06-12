@@ -17,13 +17,11 @@
 	
 	<body>
 
-		<script src="/node_modules/three/build/three.min.js"></script>
-
 
 		<script type="module">
-
-			import { O as OrbitControls }  from './../../build/OrbitControls.js';
-			import { G as GLTFLoader } from './../../build/GLTFLoader.js';
+			import * as THREE from 'three';
+			import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+			import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 			var container;
 			var camera, scene, renderer, light, controls;

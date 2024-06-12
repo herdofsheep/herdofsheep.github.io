@@ -1,12 +1,12 @@
 
 import {LitElement, html} from 'lit-element';
 import * as THREE from 'three';
-import 'lodash';
+import _ from 'lodash';
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class SimplerRayCast extends LitElement {
   static get properties() {
@@ -285,7 +285,7 @@ class SimplerRayCast extends LitElement {
 
     if( id>0 ){
       this.cursorType = "pointer";
-      this.link = "src/what.html";
+      this.link = "/src/what.html";
       this.canClick = true;
     }
 
@@ -315,7 +315,7 @@ class SimplerRayCast extends LitElement {
 
   clickLink(){
     if(this.canClick){
-      window.location.href = "src/what.html";
+      window.location.href = "/src/what.html";
     }
   }
 

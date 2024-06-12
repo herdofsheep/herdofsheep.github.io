@@ -9,7 +9,7 @@ let points, values
 let points_arr, values_arr
 
 import * as THREE from 'three';
-import 'lodash';
+import _ from 'lodash';
 import * as d3 from "d3";
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';

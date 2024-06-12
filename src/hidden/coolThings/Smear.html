@@ -19,14 +19,14 @@
 	
 	<body>
 
-		<script src='/js/perlin.js'></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.module.js" integrity="sha512-cwNDDJ0zFqexVpo3ZF1Yxl0u/oVh6PvOT+yLgqwzDU94k3rNmdcRfo4ZJL7f1GiBh7m+fbrkNvV1+ggXHBDZ5g==" crossorigin="anonymous"></script>		
-		<script src="/build/three.meshline/src/THREE.MeshLine.js"></script>
+		<script type="module" src='/js/perlin.js'></script>
 
 		<script type="module">
 
-			import { O as OrbitControls }  from '/build/OrbitControls.js';
-			import { G as GLTFLoader } from '/build/GLTFLoader.js';
+			import * as THREE from 'three';
+			import { MeshLine, MeshLineMaterial } from 'three.meshline/src/THREE.MeshLine.js';
+			import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+			import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 			var container;
 			var camera, scene, renderer, light;
@@ -61,7 +61,7 @@
 				scene.add( light );
         
 				var textureLoader = new THREE.TextureLoader();
-				var sprite = textureLoader.load( '../../assets/images/flowerBoldOutline.png' );
+				var sprite = textureLoader.load( '/assets/images/flowerBoldOutline.png' );
 
 				var material = new MeshLineMaterial({color: 0x000000});
 				material.alphaTest = 0.5;

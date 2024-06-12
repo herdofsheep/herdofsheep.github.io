@@ -1,8 +1,9 @@
 
+import { LitElement, html } from 'lit-element';
 import * as THREE from 'three';
-import 'lodash';
-import {LitElement, html} from 'lit-element';
+import _ from 'lodash';
 
+const fs = require('fs');
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -145,14 +146,14 @@ class RayCast extends LitElement {
 
     this.files = ['que', 'work', 'github', 'math'];
 
-    this.work = this.loadModel( '/src/assets/models/gltf/radcam.glb' );
-    this.workBig = this.loadModel( '/src/assets/models/gltf/radcamBig.glb' );
-    this.que = this.loadModel( '/src/assets/models/gltf/questionmark.glb' );
-    this.queBig = this.loadModel( '/src/assets/models/gltf/questionmarkBig.glb' );
-    this.github = this.loadModel( '/src/assets/models/gltf/github.glb' );
-    this.githubBig = this.loadModel( '/src/assets/models/gltf/githubBig.glb' );
-    this.math = this.loadModel( '/src/assets/models/gltf/math.glb' );
-    this.mathBig = this.loadModel( '/src/assets/models/gltf/mathBig.glb' );
+    this.work = this.loadModel( '/assets/models/gltf/radcam.glb' );
+    this.workBig = this.loadModel( '/assets/models/gltf/radcamBig.glb' );
+    this.que = this.loadModel( '/assets/models/gltf/questionmark.glb' );
+    this.queBig = this.loadModel( '/assets/models/gltf/questionmarkBig.glb' );
+    this.github = this.loadModel( '/assets/models/gltf/github.glb' );
+    this.githubBig = this.loadModel( '/assets/models/gltf/githubBig.glb' );
+    this.math = this.loadModel( '/assets/models/gltf/math.glb' );
+    this.mathBig = this.loadModel( '/assets/models/gltf/mathBig.glb' );
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -193,6 +194,10 @@ class RayCast extends LitElement {
   }
 
   loadModel( url ){
+    if (!fs.existsSync(url)) {
+      console.log('file not found')
+      return null;
+    }
     var loader = new GLTFLoader();
     var model = new THREE.Group;
 

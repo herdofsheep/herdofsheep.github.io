@@ -19,16 +19,15 @@
 	
 	<body>
 
-		<script src='/js/perlin.js'></script>
-		<script src="/node_modules/three/build/three.js"></script>
-		<script src="/build/three.meshline/src/THREE.MeshLine.js"></script>
+		<script type="module" src='/js/perlin.js'></script>
 
 		<script type="module">
 
-			import * as THREE from './../../../node_modules/three/build/three.module.js';
-			// import { MeshLine, MeshLineMaterial } from 'shapeStuff/THREE.MeshLine.js';
+			import * as THREE from 'three';
+			import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-			import { GLTFLoader } from './../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+			import { MeshLine, MeshLineMaterial } from 'three.meshline/src/THREE.MeshLine.js';
+
 			import { RenderPass } from './../../../node_modules/three/examples/jsm/postprocessing/RenderPass.js';
 			import { HalftonePass } from './../../../node_modules/three/examples/jsm/postprocessing/HalftonePass.js';
 			import { OrbitControls } from './../../../node_modules/three/examples/jsm/controls/OrbitControls.js';

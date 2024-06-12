@@ -66,7 +66,6 @@
   </style>
 
   <head>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
     <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8"/>
   </head>
@@ -91,7 +90,7 @@
       <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="/src/what.html"></a>
     </div>
 
-    <script>
+    <script type="module">
 
       var allSvgs;
       var gitImg, mathImg, queImg, workImg;
@@ -236,16 +235,16 @@
         var link = ""
 
         if(focusTarget.slice(0,3) == 'que'){
-          link = "src/what.html";
+          link = "/src/what.html";
         }
         if(focusTarget.slice(0,3) == 'git'){
           link = "https://github.com/herdofsheep";
         }
         if(focusTarget.slice(0,4) == 'math'){
-          link = "src/art.html";
+          link = "/src/art.html";
         }
         if(focusTarget.slice(0,4) == 'work'){
-          link = "src/portfolio.html";
+          link = "/src/portfolio.html";
         }
         if(link != ""){
           window.location.href = link;
@@ -258,16 +257,16 @@
         var id = this.event.target.id
 
         if(id.slice(0,3) == 'que'){
-          window.location.href = "src/what.html";
+          window.location.href = "/src/what.html";
         }
         if(id.slice(0,3) == 'git'){
           window.location.href = "https://github.com/herdofsheep";
         }
         if(id.slice(0,4) == 'math'){
-          window.location.href = "src/art.html";
+          window.location.href = "/src/art.html";
         }
         if(id.slice(0,4) == 'work'){
-          window.location.href = "src/portfolio.html";
+          window.location.href = "/src/portfolio.html";
         }
 
       }

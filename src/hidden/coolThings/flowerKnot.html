@@ -19,9 +19,9 @@
 	
 	<body>
 
-		<script src="/node_modules/three/build/three.js"></script>
-
-		<script>
+		<script type="module">
+			import * as THREE from 'three';
+			import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 			//let users know if their browser doesn't support webGL
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
@@ -61,7 +61,7 @@
 				material.alphaTest = 0.5;
 				material.opacity = 0.99;
 				
-				geometry = new THREE.Geometry();
+				geometry = new THREE.BufferGeometry();
 
 				for ( var i = 0; i < 361; i += 1 ) {
 
@@ -81,7 +81,7 @@
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
 				
-				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls = new OrbitControls( camera, renderer.domElement );
 				controls.update();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );

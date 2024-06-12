@@ -6,8 +6,8 @@
     <title>Unity WebGL Player | Balloon</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
+    <script type="module" src="TemplateData/UnityProgress.js"></script>
+    <script type="module" src="Build/UnityLoader.js"></script>
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/balloon.json", {onProgress: UnityProgress});
     </script>
