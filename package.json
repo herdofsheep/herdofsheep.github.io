@@ -5,7 +5,8 @@
   "description": "",
   "scripts": {
     "start": "node app.cjs",
-    "dev": "parcel serve public/index.html",
+    "dev": "nodemon app.cjs",
+    "parcel-dev": "parcel serve public/index.html",
     "build": "parcel build public/index.html",
     "watch": "parcel watch public/index.html"
   },
@@ -14,11 +15,14 @@
     "lil-gui": "^0.19.2",
     "lit-element": "^4.0.5",
     "lodash": "^4.17.21",
-    "three": "^0.130.0",
+    "three": "^0.165.0",
     "three.meshline": "^1.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.2",
-    "parcel": "^2.12.0"
+    "parcel": "^2.12.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "typescript": "^5.4.5"
   }
 }

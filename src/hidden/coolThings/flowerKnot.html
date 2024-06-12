@@ -61,7 +61,7 @@
 				material.alphaTest = 0.5;
 				material.opacity = 0.99;
 				
-				geometry = new THREE.Geometry();
+				geometry = new THREE.BufferGeometry();
 
 				for ( var i = 0; i < 361; i += 1 ) {
 
@@ -81,7 +81,7 @@
 				container.appendChild( renderer.domElement );
 				window.addEventListener( 'resize', onWindowResize, false );
 				
-				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls = new OrbitControls( camera, renderer.domElement );
 				controls.update();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
