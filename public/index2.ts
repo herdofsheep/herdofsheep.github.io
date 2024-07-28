@@ -3,69 +3,42 @@ import { LitElement, html } from 'lit-element';
 import * as THREE from 'three';
 import _ from 'lodash';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+// import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 class RayCast extends LitElement {
   mouse: THREE.Vector2;
   mousePosX: string;
   mousePosY: string;
-  beganTouching: boolean;
-  offset: THREE.Vector3;
-  duplicated: boolean;
-  pickingData: never[];
-  cursorType: string;
-  canClick: boolean;
-  link: string;
   container: HTMLElement | null;
-  infoVisible: string;
-  YCenter: string;
-  XCenter: string;
   camera: THREE.PerspectiveCamera;
   scene: THREE.Scene;
-  pickingScene: THREE.Scene;
-  pickingTexture: THREE.WebGLRenderTarget;
-  files: string[];
-  work: THREE.Group;
-  workBig: THREE.Group;
-  que: THREE.Group;
-  queBig: THREE.Group;
-  github: THREE.Group;
-  githubBig: THREE.Group;
-  math: THREE.Group;
-  mathBig: THREE.Group;
+  mesh: THREE.InstancedMesh;
+  count: number;
+  color: THREE.Color;
+  white: THREE.Color;
   renderer: THREE.WebGLRenderer;
-  controls: TrackballControls;
+  controls: OrbitControls;
   raycaster: THREE.Raycaster;
+  XCenter: string;
+  YCenter: string;
 
   constructor() {
     super();
+    this.startAnimation = this.startAnimation.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
     this.mousePosX = "0px";
-    this.beganTouching = false;
-    this.offset = new THREE.Vector3( 1, 1, 1 );
-    this.duplicated = false;
-    this.pickingData = [];
-    this.cursorType = 'grab';
-    this.canClick = false;
-    this.link = ""
-    this.XCenter = window.innerWidth/2 + "px";
-    this.YCenter = window.innerHeight/2 + "px";
-    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
     this.scene = new THREE.Scene();
-    this.pickingScene = new THREE.Scene();
-    this.pickingTexture = new THREE.WebGLRenderTarget( 1, 1 );
-    this.files = ['que', 'work', 'github', 'math'];
-    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
-    this.controls = new TrackballControls( this.camera, this.renderer.domElement );
+    this.color = new THREE.Color();
+    this.white = new THREE.Color().setHex(0xffffff);
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.raycaster = new THREE.Raycaster();
-    this.addEventListener('click', this.clickLink);
-    this.addEventListener('touchstart', this.touchStart)
-    this.addEventListener("touchmove", this.touchMove);
-    this.addEventListener("touchcancel", this.touchMove);
-    this.addEventListener('touchend', this.touchEnd)
   }
 
   render(){
@@ -134,55 +107,72 @@ class RayCast extends LitElement {
   init() {
     this.container = this.shadowRoot?.getElementById("container") as HTMLElement;
 
-    this.camera.position.z = 1000;
+    this.XCenter = window.innerWidth/2 + "px";
+    this.YCenter = window.innerHeight/2 + "px";
 
     this.mousePosX = this.XCenter;
     this.mousePosY = this.YCenter;
 
-    this.scene.background = new THREE.Color( 0x424242 );
-    this.scene.add( new THREE.AmbientLight( 0x555555 ) );
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    const amount = parseInt(window.location.search.slice(1)) || 10;
 
-    const light = new THREE.SpotLight( 0xffffff, 1.5 );
-    light.position.set( 0, 500, 20000 );
-    this.scene.add( light );
+    this.camera.position.set(amount, amount, amount);
+    this.camera.lookAt(0, 0, 0);
+  
+    const light = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
+    light.position.set(0, 1, 0);
+    this.scene.add(light);
+  
+    const geometry = new THREE.IcosahedronGeometry(0.5, 3);
+    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+    const count = Math.pow(amount, 3);
 
-    this.work = this.loadModel( '/assets/models/gltf/radcam.glb' );
-    this.workBig = this.loadModel( '/assets/models/gltf/radcamBig.glb' );
-    this.que = this.loadModel( '/assets/models/gltf/questionmark.glb' );
-    this.queBig = this.loadModel( '/assets/models/gltf/questionmarkBig.glb' );
-    this.github = this.loadModel( '/assets/models/gltf/github.glb' );
-    this.githubBig = this.loadModel( '/assets/models/gltf/githubBig.glb' );
-    this.math = this.loadModel( '/assets/models/gltf/math.glb' );
-    this.mathBig = this.loadModel( '/assets/models/gltf/mathBig.glb' );
-    
-    this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    this.container.appendChild( this.renderer.domElement );
+    this.mesh = new THREE.InstancedMesh(geometry, material, count);
+  
+    let i = 0;
+    const offset = (amount - 1) / 2;
+  
+    const matrix = new THREE.Matrix4();
+  
+    for (let x = 0; x < amount; x++) {
+  
+      for (let y = 0; y < amount; y++) {
+  
+        for (let z = 0; z < amount; z++) {
+  
+          matrix.setPosition(offset - x, offset - y, offset - z);
+  
+          this.mesh.setMatrixAt(i, matrix);
+          this.mesh.setColorAt(i, this.color);
+  
+          i++;
+  
+        }
+  
+      }
+  
+    }
+    this.scene.add(this.mesh);
 
-    this.controls.rotateSpeed = -1.0;
-    this.controls.zoomSpeed = 1.2;
-    this.controls.panSpeed = -0.8;
-    this.controls.noZoom = false;
-    this.controls.noPan = false;
-    this.controls.staticMoving = true;
-    this.controls.dynamicDampingFactor = 0.3;
-
-    this.renderer.domElement.addEventListener( 'mousemove', this.onMouseMove.bind(this) );
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.container.appendChild( this.renderer.domElement );
     this.renderer.setAnimationLoop(this.startAnimation);
-
-    window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
+  
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.enableZoom = false;
+    this.controls.enablePan = false;
+  
+    window.addEventListener('resize', this.onWindowResize);
+    document.addEventListener('mousemove', this.onMouseMove);
+    this.parentElement.children.loading.style.visibility = 'hidden'
   }
 
   onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
-    this.XCenter = window.innerWidth/2 + 'px';
-    this.YCenter = window.innerHeight/2 + 'px';
-    this.mousePosX = this.XCenter;
-    this.mousePosY = this.YCenter;
   }
 
   onMouseMove( event ) {
@@ -194,378 +184,31 @@ class RayCast extends LitElement {
     this.mousePosY = this.mouse.y + 15 + 'px';
   }
 
-  loadModel( url ){
-    var loader = new GLTFLoader();
-    var model = new THREE.Group;
-
-    loader.load( url , function ( gltf ) {
-
-        gltf.scene.traverse( function ( child ) {});
-        model.add( gltf.scene );
-
-    } );
-
-    return model;
-
-  }
-
   startAnimation() {
-    window.requestAnimationFrame( () => this.startAnimation() );
-    if(this.duplicated == false){
-        this.duplicate();
-    }
-    if(this.duplicated == true){
-      this.threeRender();
-    }
-  }
-
-  threeRender() {
     this.controls.update();
+  
     this.raycaster.setFromCamera(this.mouse, this.camera);
-
-    this.pick();
-
-    this.renderer.render( this.scene, this.camera );
-  }
-
-  duplicate() {
-
-    var files = this.files;
-
-    const geometriesDrawn = {};
-    const geometriesPicking = {};
-
-    const matrix = new THREE.Matrix4();
-    const quaternion = new THREE.Quaternion();
-    const color = new THREE.Color();
-
-    const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
-    const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
-    const geometriesTypes = []
-
-    var clones = this.cloneFiles(files)
-    if(clones == null){
-      return;
-    }
-
-    //hide the loading label
-    if (this.parentElement) {
-      this.parentElement.children.loading.style.visibility = 'hidden';
-    }
-
-    for (var i in files){
-      var currentType = files[i]
-      geometriesDrawn[currentType] = [];
-      geometriesPicking[currentType] = [];
-    }
-
-    for ( let i = 1; i < 51; i ++ ) {
-
-      var randomPick = Math.floor(Math.random() * files.length);  
-      var objectThisTime = clones[randomPick];
-      var smallObject = objectThisTime.data.clone();
-
-      const position = new THREE.Vector3();
-      position.x = Math.random() * 10000 - 5000;
-      position.y = Math.random() * 6000 - 3000;
-      position.z = Math.random() * 8000 - 4000;
-
-      const rotation = new THREE.Euler();
-      rotation.x = Math.random() * 2 * Math.PI;
-      rotation.y = Math.random() * 2 * Math.PI;
-      rotation.z = Math.random() * 2 * Math.PI;
-
-      var scaleSize = 50;
-      const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
-
-      quaternion.setFromEuler( rotation );
-      matrix.compose( position, quaternion, scale );
-
-      smallObject.applyMatrix4( matrix );
-
-      // give the peep's vertices a random color, to be displayed
-
-      this.applyVertexColors( smallObject, color.setHex( 0x060606 ) );
-
-      geometriesDrawn[objectThisTime.type].push( smallObject );
-
-      // give the peep's vertices a color corresponding to the "id"
-
-      smallObject = smallObject.clone();
-
-      this.applyVertexColors( smallObject, color.setHex( i ) );
-
-      geometriesPicking[objectThisTime.type].push( smallObject );
-
-      this.pickingData[ i ] = {
-
-        position: position,
-        rotation: rotation,
-        scale: scale,
-        type: objectThisTime.type
-
-      };
-
-    }
-
-    this.highlightShape = {}
-
-    for (var i in files){
-
-      var type = files[i]
-
-      if(type == 'work'){
-        //0xc96833 --orange
-        //0x000422 --darkblue
-        var highlightColor = 0xc96833;
-      }
-      if(type == 'github'){
-        //0x21023a --dark purple
-        //0x380860 --bright purple
-        //0x370e42 --pinkier purple
-        var highlightColor = 0x370e42;
-      }
-      if(type == 'que'){
-        var highlightColor = 0xff4162;
-      }
-      if(type == 'math'){
-        //0xd5fdd5 --paler green
-        var highlightColor = 0xbfe3bf;
-      }
-
-      this.highlightShape[files[i]] = new THREE.Mesh(
-        clones[i].bigData,
-        new THREE.MeshPhongMaterial( { color: highlightColor, flatShading: false, shininess: 150	}
-      ) );
-      this.scene.add( this.highlightShape[files[i]] );
-
-      this.objects = new THREE.Mesh( mergeGeometries( geometriesDrawn[files[i]] ), defaultMaterial );
-      this.scene.add( this.objects );
   
-      this.pickingScene.add( new THREE.Mesh( mergeGeometries( geometriesPicking[files[i]] ), pickingMaterial ) );
+    const intersection = this.raycaster.intersectObject(this.mesh);
   
-
-    }
-
-    this.duplicated = true;
-
-  }
-
-  cloneFiles(files){
-
-    for (var i in files){
-      var found = _.get(this,[files[i],'children',0,'children'],null);
-      var foundBig = _.get(this,[files[i]+'Big','children',0,'children'],null);
-      if(found == null || foundBig == null){
-        return null;
-      }
-    }
-
-    var clones = [];
-
-    for (var i in files){
-
-      var clone = {};
-      var currentType = files[i];
-
-      var littleMesh = _.get(this,[currentType,'children',0,'children']);
-      var hasLittleMesh = littleMesh.find(x=>x.type=='Mesh');
-
-      if(hasLittleMesh){
-        clone['data'] = littleMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else{
-        var hasLittleMeshGroup = littleMesh.find(x=>x.type=='Group')
-        if( hasLittleMeshGroup ){
-          var meshes = []
-          for(var j=0; j < hasLittleMeshGroup.children.length; j++){
-            var mesh = hasLittleMeshGroup.children[j].geometry
-            meshes.push(mesh)
-          }
-          var groupMeshes = mergeGeometries( meshes )
-          clone['data'] = groupMeshes;
-        }
-      }
-
-      var bigMesh = _.get(this,[currentType+'Big','children',0,'children']);
-      var hasBigMesh = bigMesh.find(x=>x.type=='Mesh')
-
-      if(hasBigMesh){
-        clone['bigData'] = bigMesh.find(x=>x.type=='Mesh').geometry;
-      }
-      else{
-        var hasBigMeshGroup = bigMesh.find(x=>x.type=='Group')
-        if( hasBigMeshGroup ){
-          var meshes = []
-          for(var j=0; j < hasBigMeshGroup.children.length; j++){
-            var mesh = hasBigMeshGroup.children[j].geometry
-            meshes.push(mesh)
-          }
-          var groupMeshes = mergeGeometries( meshes )
-          clone['bigData'] = groupMeshes;
-        }
-      }
-
-      clone['type'] = currentType
-      clones.push(clone);
-
-    }
-
-    return clones;
-
-  }
-
-  pick() {
-
-    const intersection = this.raycaster.intersectObject(mesh);
-
     if (intersection.length > 0) {
   
       const instanceId = intersection[0].instanceId;
   
-      mesh.getColorAt(instanceId, color);
+      this.mesh.getColorAt(instanceId,this.color);
   
-      if (color.equals(white)) {
+      if (this.color.equals(this.white)) {
   
-        mesh.setColorAt(instanceId, color.setHex(Math.random() * 0xffffff));
+        this.mesh.setColorAt(instanceId, this.color.setHex(Math.random() * 0xffffff));
   
-        mesh.instanceColor.needsUpdate = true;
+        this.mesh.instanceColor.needsUpdate = true;
   
       }
   
     }
-
-    // //render the picking scene off-screen
-
-    // // set the view offset to represent just a single pixel under the mouse
-
-    // var mouseX = this.mouse.x;
-    // var mouseY = this.mouse.y;
-
-    // var touchScreen = window.matchMedia("(hover: none)").matches;
-
-    // if(touchScreen){
-    //   mouseX = this.XCenter.replace('px', '');
-    //   mouseY = this.YCenter.replace('px', '');
-    // }
-
-    // this.camera.setViewOffset( this.renderer.domElement.width, this.renderer.domElement.height, mouseX * window.devicePixelRatio | 0, mouseY * window.devicePixelRatio | 0, 1, 1 );
-
-    // // render the scene
-
-    // this.renderer.setRenderTarget( this.pickingTexture );
-    // this.renderer.render( this.pickingScene, this.camera );
-
-    // // clear the view offset so rendering returns to normal
-
-    // this.camera.clearViewOffset();
-
-    // //create buffer for reading single pixel
-
-    // const pixelBuffer = new Uint8Array( 4 );
-
-    // //read the pixel
-
-    // this.renderer.readRenderTargetPixels( this.pickingTexture, 0, 0, 1, 1, pixelBuffer );
-
-    //interpret the pixel as an ID
-
-    const id = ( pixelBuffer[ 0 ] << 16 ) | ( pixelBuffer[ 1 ] << 8 ) | ( pixelBuffer[ 2 ] );
-    const data = this.pickingData[ id ];
-    var debugWindow = this.shadowRoot.getElementById( "infoText" );
-
-    if( id>0 ){
-      this.cursorType = "pointer";
-      this.infoVisible = "visible"
-
-      if(data.type == 'work'){
-        this.link = "src/portfolio.html";
-        debugWindow.innerHTML = 'work portfolio'
-      }
-      if(data.type == 'github'){
-        this.link = "https://github.com/herdofsheep";
-        debugWindow.innerHTML = 'github'
-      }
-      if(data.type == 'que'){
-        this.link = "src/what.html";
-        debugWindow.innerHTML = "what's this?"
-      }
-      if(data.type == 'math'){
-        this.link = "src/art.html";
-        debugWindow.innerHTML = "art portfolio"
-      }
-
-      this.canClick = true;
-    }
-    else{
-      this.infoVisible = "hidden"
-    }
-
-    if ( data  && id > 0 ) {
-
-      //move our highlightShape so that it surrounds the picked object
-
-      if ( data.position && data.rotation && data.scale && data.type ) {
-
-        this.highlightShape[data.type].position.copy( data.position );
-        this.highlightShape[data.type].rotation.copy( data.rotation );
-        this.highlightShape[data.type].scale.copy( data.scale ).add( this.offset );
-        this.highlightShape[data.type].visible = true;
-
-      }
-
-    } 
-    else {
-
-      for (var i in this.files){
-        this.highlightShape[this.files[i]].visible = false;
-      }
-      this.cursorType = "cell";
-      this.canClick = false;
-
-    }
-
+  
+    this.renderer.render(this.scene, this.camera);
   }
-
-  clickLink(){
-    if(this.canClick){
-      window.location.href = this.link;
-    }
-  }
-
-  touchStart(){
-    if(this.canClick){
-      this.beganTouching = true
-    }
-  }
-
-  touchMove(){
-    this.beganTouching = false;
-  }
-
-  touchEnd(){
-    if(this.canClick && this.beganTouching){
-      window.location.href = this.link;
-    }
-  }
-
-  applyVertexColors( geometry, color ) {
-
-    const position = geometry.attributes.position;
-    const colors = [];
-
-    for ( let i = 0; i < position.count; i ++ ) {
-
-      colors.push( color.r, color.g, color.b );
-
-    }
-
-    geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-
-  }
-
-
-
 }
 
 window.customElements.define('ray-cast', RayCast);
