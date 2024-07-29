@@ -15,15 +15,15 @@ class RayCast extends LitElement {
   camera: THREE.PerspectiveCamera;
   scene: THREE.Scene;
   count: number;
-  color: THREE.Color;
-  white: THREE.Color;
+  dark_grey: THREE.Color;
   renderer: THREE.WebGLRenderer;
   controls: TrackballControls;
   raycaster: THREE.Raycaster;
   XCenter: string;
   YCenter: string;
-  files: object;
-  mesh: THREE.InstancedMesh;
+  geometries: object;
+  meshes: object;
+  colours: object;
   cursorType: string = 'default';
   infoVisible: string = 'hidden';
 
@@ -32,17 +32,21 @@ class RayCast extends LitElement {
     this.startAnimation = this.startAnimation.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.setupScene = this.setupScene.bind(this);
 
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
     this.mousePosX = "0px";
     this.scene = new THREE.Scene();
-    this.color = new THREE.Color();
-    this.white = new THREE.Color().setHex(0xffffff);
+
+    this.dark_grey = new THREE.Color().setHex( 0x424242 );
+
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.raycaster = new THREE.Raycaster();
 
-    this.files = {}
+    this.geometries = {}
+    this.meshes = {}
+    this.colours = {}
 
     // this.addEventListener('click', this.clickLink);
     // this.addEventListener('touchstart', this.touchStart)
@@ -111,14 +115,16 @@ class RayCast extends LitElement {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
     this.init();
+    this.setupScene();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
-      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
-      { key: 'github', url: '/assets/models/gltf/github.glb' },
-      { key: 'math', url: '/assets/models/gltf/math.glb' },
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb', colour: new THREE.Color().setHex( 0xc96833 )},
+      { key: 'work', url: '/assets/models/gltf/radcam.glb', colour: new THREE.Color().setHex( 0x370e42 ) },
+      { key: 'github', url: '/assets/models/gltf/github.glb', colour: new THREE.Color().setHex( 0xff4162 ) },
+      { key: 'math', url: '/assets/models/gltf/math.glb', colour: new THREE.Color().setHex( 0xbfe3bf ) },
     ];
     const files = await this.getFiles(modelUrls)
-    this.addModels(files)
+    this.addModels(files);
+    this.setupScene();
     this.startAnimation();
   }
 
@@ -130,31 +136,17 @@ class RayCast extends LitElement {
 
     this.mousePosX = this.XCenter;
     this.mousePosY = this.YCenter;
-
-    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-    this.camera.position.z = 20;
-
-    this.scene.background = new THREE.Color( 0x424242 );
-    this.scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
-    light_one.position.set( 0, 500, 20000 );
-    this.scene.add(light_one);
-
-    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
-    light_two.position.set(0, 1, 0);
-    this.scene.add(light_two);
   }
   
   addModels(files){
   
     const matrix = new THREE.Matrix4();
     const objsToDraw = 20
+    const material = new THREE.MeshPhongMaterial({ color:this.dark_grey, flatShading: true, shininess: 0 });
+    const keys = Object.keys(files);
 
-    const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0 });
-
-    for ( let i = 0; i < Object.keys(files).length; i ++ ) {
-      var geometry = files[Object.keys(files)[i]];
+    for ( let i = 0; i < keys.length; i ++ ) {
+      var geometry = files[keys[i]];
       var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
       for ( let j = 0; j < objsToDraw; j ++ ) {
 
@@ -173,8 +165,26 @@ class RayCast extends LitElement {
         rotation.z = Math.random() * 2 * Math.PI;
         mesh.setRotationFromEuler(rotation);
       }
+      this.meshes[keys[i]] = mesh;
+      this.colours[keys[i]] = files[keys[i]].colour;
       this.scene.add( mesh );
     }
+  }
+
+  setupScene() {
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    this.camera.position.z = 20;
+
+    this.scene.background = new THREE.Color( 0x424242 );
+    this.scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
+    light_one.position.set( 0, 500, 20000 );
+    this.scene.add(light_one);
+
+    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
+    light_two.position.set(0, 1, 0);
+    this.scene.add(light_two);
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -182,11 +192,13 @@ class RayCast extends LitElement {
     this.renderer.setAnimationLoop(this.startAnimation);
   
     this.controls = new TrackballControls( this.camera, this.renderer.domElement );
-  
+    this.controls.rotateSpeed = -1.0;
+
     window.addEventListener('resize', this.onWindowResize);
     document.addEventListener('mousemove', this.onMouseMove);
     var loadingDiv =this.parentElement?.querySelector('#loading') as HTMLElement;
     loadingDiv.style.visibility = 'hidden'
+
   };
 
   async getFiles(modelUrls) {
@@ -273,24 +285,20 @@ class RayCast extends LitElement {
   
     this.raycaster.setFromCamera(this.mouse, this.camera);
     this.renderer.setRenderTarget( null );
+
+    const key = 'que'
   
-    // const intersection = this.raycaster.intersectObject(this.mesh);
+    const intersection = this.raycaster.intersectObject(this.meshes[key]);
   
-    // if (intersection.length > 0) {
+    if (intersection.length > 0) {
   
-    //   const instanceId = intersection[0].instanceId;
+      const instanceId = intersection[0].instanceId;
+    
   
-    //   this.mesh.getColorAt(instanceId,this.color);
-  
-    //   if (this.color.equals(this.white)) {
-  
-    //     this.mesh.setColorAt(instanceId, this.color.setHex(Math.random() * 0xffffff));
-  
-    //     this.mesh.instanceColor.needsUpdate = true;
-  
-    //   }
-  
-    // }
+      this.meshes[key].setColorAt(instanceId, this.white);
+      this.meshes[key].instanceColor.needsUpdate = true;
+    
+    }
   
     this.renderer.render(this.scene, this.camera);
   }
