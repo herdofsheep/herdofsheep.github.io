@@ -111,7 +111,13 @@ class RayCast extends LitElement {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
     this.init();
-    const files = await this.getFiles()
+    const modelUrls = [
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
+      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
+      { key: 'github', url: '/assets/models/gltf/github.glb' },
+      { key: 'math', url: '/assets/models/gltf/math.glb' },
+    ];
+    const files = await this.getFiles(modelUrls)
     this.addModels(files)
     this.startAnimation();
   }
@@ -143,10 +149,9 @@ class RayCast extends LitElement {
   addModels(files){
   
     const matrix = new THREE.Matrix4();
-    const quaternion = new THREE.Quaternion();
-    const objsToDraw = 51
+    const objsToDraw = 20
 
-    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+    const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0 });
 
     for ( let i = 0; i < Object.keys(files).length; i ++ ) {
       var geometry = files[Object.keys(files)[i]];
@@ -177,27 +182,14 @@ class RayCast extends LitElement {
     this.renderer.setAnimationLoop(this.startAnimation);
   
     this.controls = new TrackballControls( this.camera, this.renderer.domElement );
-    // this.controls.rotateSpeed = -1.0;
-    // this.controls.zoomSpeed = 1.2;
-    // this.controls.panSpeed = -0.8;
-    // this.controls.noZoom = false;
-    // this.controls.noPan = false;
-    // this.controls.staticMoving = true;
-    // this.controls.dynamicDampingFactor = 0.3;
   
-    // window.addEventListener('resize', this.onWindowResize);
-    // document.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('resize', this.onWindowResize);
+    document.addEventListener('mousemove', this.onMouseMove);
     var loadingDiv =this.parentElement?.querySelector('#loading') as HTMLElement;
     loadingDiv.style.visibility = 'hidden'
   };
 
-  async getFiles() {
-    const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
-      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
-      { key: 'github', url: '/assets/models/gltf/github.glb' },
-      { key: 'math', url: '/assets/models/gltf/math.glb' },
-    ];
+  async getFiles(modelUrls) {
   
     const modelPromises = modelUrls.map(async (model) => {
       const geometry = await this.getModelMesh(model.url);

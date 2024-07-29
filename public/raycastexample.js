@@ -1,7 +1,7 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 
 // import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 let camera, scene, renderer, controls;
 
@@ -18,8 +18,12 @@ const white = new THREE.Color().setHex(0xffffff);
 init();
 
 function init() {
-
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100,
+  );
   camera.position.set(amount, amount, amount);
   camera.lookAt(0, 0, 0);
 
@@ -40,22 +44,16 @@ function init() {
   const matrix = new THREE.Matrix4();
 
   for (let x = 0; x < amount; x++) {
-
     for (let y = 0; y < amount; y++) {
-
       for (let z = 0; z < amount; z++) {
-
         matrix.setPosition(offset - x, offset - y, offset - z);
 
         mesh.setMatrixAt(i, matrix);
         mesh.setColorAt(i, color);
 
         i++;
-
       }
-
     }
-
   }
 
   scene.add(mesh);
@@ -71,29 +69,24 @@ function init() {
   controls.enableZoom = false;
   controls.enablePan = false;
 
-  window.addEventListener('resize', onWindowResize);
-  document.addEventListener('mousemove', onMouseMove);
-
+  window.addEventListener("resize", onWindowResize);
+  document.addEventListener("mousemove", onMouseMove);
 }
 
 function onWindowResize() {
-
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
   renderer.setSize(window.innerWidth, window.innerHeight);
-
 }
 
 function onMouseMove(event) {
-
   event.preventDefault();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 function animate() {
-
   controls.update();
 
   raycaster.setFromCamera(mouse, camera);
@@ -101,22 +94,16 @@ function animate() {
   const intersection = raycaster.intersectObject(mesh);
 
   if (intersection.length > 0) {
-
     const instanceId = intersection[0].instanceId;
 
     mesh.getColorAt(instanceId, color);
 
     if (color.equals(white)) {
-
       mesh.setColorAt(instanceId, color.setHex(Math.random() * 0xffffff));
 
       mesh.instanceColor.needsUpdate = true;
-
     }
-
   }
 
   renderer.render(scene, camera);
-
-
 }
