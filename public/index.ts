@@ -147,17 +147,11 @@ class RayCast extends LitElement {
     const objsToDraw = 51
 
     const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-    // const geometry = new THREE.IcosahedronGeometry(5, 3);
-    var geometry = files[Object.keys(files)[0]];
-    // this.mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
 
-    const amount = parseInt(window.location.search.slice(1)) || 10;
-    let i = 0;
-    const offset = (amount - 1) / 2;
-
-    for ( let i = 1; i < Object.keys(files).length; i ++ ) {
+    for ( let i = 0; i < Object.keys(files).length; i ++ ) {
+      var geometry = files[Object.keys(files)[i]];
       var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
-      for ( let j = 1; j < objsToDraw; j ++ ) {
+      for ( let j = 0; j < objsToDraw; j ++ ) {
 
         // random position
         const position = new THREE.Vector3();
@@ -173,14 +167,6 @@ class RayCast extends LitElement {
         rotation.y = Math.random() * 2 * Math.PI;
         rotation.z = Math.random() * 2 * Math.PI;
         mesh.setRotationFromEuler(rotation);
-
-        // var scaleSize = 50;
-        // const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
-
-        // quaternion.setFromEuler( rotation );
-        // matrix.compose( position, quaternion, scale );
-
-        // this.mesh.setMatrixAt(i, matrix);
       }
       this.scene.add( mesh );
     }
