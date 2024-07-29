@@ -5,8 +5,7 @@ import _ from 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-// import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
-// import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 class RayCast extends LitElement {
   mouse: THREE.Vector2;
@@ -143,22 +142,20 @@ class RayCast extends LitElement {
   
   addModels(files){
   
-    const geometry = new THREE.IcosahedronGeometry(0.5, 3);
-
     const matrix = new THREE.Matrix4();
     const quaternion = new THREE.Quaternion();
     const objsToDraw = 51
 
     const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
     // const geometry = new THREE.IcosahedronGeometry(5, 3);
-    this.mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
+    var geometry = files[Object.keys(files)[0]];
+    // this.mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
 
     const amount = parseInt(window.location.search.slice(1)) || 10;
     let i = 0;
     const offset = (amount - 1) / 2;
 
     for ( let i = 1; i < Object.keys(files).length; i ++ ) {
-      // var geometry = this.files[i];
       var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
       for ( let j = 1; j < objsToDraw; j ++ ) {
 
@@ -168,14 +165,14 @@ class RayCast extends LitElement {
         position.y = Math.random() * 100 - 50;
         position.z = Math.random() * 100 - 50;
         matrix.setPosition(position);
-        this.mesh.setMatrixAt(j, matrix);
+        mesh.setMatrixAt(j, matrix);
         
         // random rotation
         const rotation = new THREE.Euler();
         rotation.x = Math.random() * 2 * Math.PI;
         rotation.y = Math.random() * 2 * Math.PI;
         rotation.z = Math.random() * 2 * Math.PI;
-        this.mesh.setRotationFromEuler(rotation);
+        mesh.setRotationFromEuler(rotation);
 
         // var scaleSize = 50;
         // const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
@@ -185,7 +182,7 @@ class RayCast extends LitElement {
 
         // this.mesh.setMatrixAt(i, matrix);
       }
-      this.scene.add( this.mesh );
+      this.scene.add( mesh );
     }
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -209,59 +206,72 @@ class RayCast extends LitElement {
   };
 
   async getFiles() {
-    return     {
-      "que": this.getModelMesh( '/assets/models/gltf/questionmark.glb' ),
-      "work": this.getModelMesh( '/assets/models/gltf/radcam.glb' ),
-      "github": this.getModelMesh( '/assets/models/gltf/github.glb' ),
-      "math": this.getModelMesh( '/assets/models/gltf/math.glb' ),
-    }
+    const modelUrls = [
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
+      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
+      { key: 'github', url: '/assets/models/gltf/github.glb' },
+      { key: 'math', url: '/assets/models/gltf/math.glb' },
+    ];
+  
+    const modelPromises = modelUrls.map(async (model) => {
+      const geometry = await this.getModelMesh(model.url);
+      return { key: model.key, geometry: geometry };
+    });
+  
+    const modelsArray = await Promise.all(modelPromises);
+  
+    const models = modelsArray.reduce((acc, model) => {
+      acc[model.key] = model.geometry;
+      return acc;
+    }, {});
+  
+    return models;
   }
 
-  async getModelMesh(url: string): Promise<THREE.BufferGeometry[] | undefined> {
+  async getModelMesh(url: string): Promise<THREE.BufferGeometry | undefined> {
     const model = await this.loadModel(url);
     if (model && model.children.length > 0) {
-        const firstChild = model.children[0];
-        if (firstChild.children.length > 0) {
-            const meshGeometry = firstChild.children.find(x => x.type === 'Mesh') as THREE.Mesh;
-            if (meshGeometry) {
-                return [meshGeometry.geometry];
-            }
-            const groupGeometry = firstChild.children.find(x => x.type === 'Group') as THREE.Group;
-            if (groupGeometry) {
-                const meshes: THREE.BufferGeometry[] = [];
-                for (let j = 0; j < groupGeometry.children.length; j++) {
-                    const meshGeometry = groupGeometry.children[j] as THREE.Mesh;
-                    const mesh = meshGeometry.geometry;
-                    meshes.push(mesh);
-                }
-                return meshes;
-            }
+      const firstChild = model.children[0];
+      if (firstChild.children.length > 0) {
+        const meshGeometry = firstChild.children.find(x => x.type === 'Mesh') as THREE.Mesh;
+        if (meshGeometry) {
+          return meshGeometry.geometry;
         }
+        const groupGeometry = firstChild.children.find(x => x.type === 'Group') as THREE.Group;
+        if (groupGeometry) {
+          const meshes: THREE.BufferGeometry[] = [];
+          for (let j = 0; j < groupGeometry.children.length; j++) {
+            const meshGeometry = groupGeometry.children[j] as THREE.Mesh;
+            const mesh = meshGeometry.geometry;
+            meshes.push(mesh);
+          }
+          return mergeGeometries(meshes);
+        }
+      }
     }
     return undefined;
   }
 
   async loadModel(url: string): Promise<THREE.Group | null> {
-      try {
-          const response = await fetch(url);
-          if (!response.ok) {
-              console.log('file not found');
-              return null;
-          }
-
-          const loader = new GLTFLoader();
+    const loader = new GLTFLoader();
+    return new Promise((resolve, reject) => {
+      loader.load(
+        url,
+        (gltf) => {
           const model = new THREE.Group();
-
-          loader.load(url, function (gltf) {
-              gltf.scene.traverse(function (child) {});
-              model.add(gltf.scene);
+          model.add(gltf.scene);
+          gltf.scene.traverse(child => {
+            // Perform any additional processing on each child if needed
           });
-
-          return model;
-      } catch (error) {
+          resolve(model);
+        },
+        undefined, // onProgress callback is optional, can be omitted or used if needed
+        (error) => {
           console.error('Error loading model:', error);
-          return null;
-      }
+          reject(null);
+        }
+      );
+    });
   }
 
 
