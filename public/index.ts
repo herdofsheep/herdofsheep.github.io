@@ -24,6 +24,7 @@ class RayCast extends LitElement {
   XCenter: string;
   YCenter: string;
   files: object;
+  mesh: THREE.InstancedMesh;
   cursorType: string = 'default';
   infoVisible: string = 'hidden';
 
@@ -126,18 +127,21 @@ class RayCast extends LitElement {
     this.mousePosY = this.YCenter;
 
     this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-    this.camera.position.z = 1000;
-    
+    this.camera.position.z = 20;
+
     this.scene.background = new THREE.Color( 0x424242 );
     this.scene.add( new THREE.AmbientLight( 0x555555 ) );
 
-    const light = new THREE.SpotLight( 0xffffff, 1.5 );
-    light.position.set( 0, 500, 20000 );
-    this.scene.add(light);
+    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
+    light_one.position.set( 0, 500, 20000 );
+    this.scene.add(light_one);
+
+    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
+    light_two.position.set(0, 1, 0);
+    this.scene.add(light_two);
   }
   
   addModels(files){
-    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
   
     const geometry = new THREE.IcosahedronGeometry(0.5, 3);
 
@@ -145,51 +149,48 @@ class RayCast extends LitElement {
     const quaternion = new THREE.Quaternion();
     const objsToDraw = 51
 
-    let keys = Object.keys(this.files);
-    let randomIndex = Math.floor(Math.random() * keys.length);
-    
+    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+    // const geometry = new THREE.IcosahedronGeometry(5, 3);
+    this.mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
 
-    // var geometry = this.files[keys[0]];
+    const amount = parseInt(window.location.search.slice(1)) || 10;
+    let i = 0;
+    const offset = (amount - 1) / 2;
 
-    var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
+    for ( let i = 1; i < Object.keys(files).length; i ++ ) {
+      // var geometry = this.files[i];
+      var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
+      for ( let j = 1; j < objsToDraw; j ++ ) {
 
-    const position = new THREE.Vector3();
-    var scaleSize = 500;
-    const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
-    matrix.compose( position, quaternion, scale );
+        // random position
+        const position = new THREE.Vector3();
+        position.x = Math.random() * 100 - 50;
+        position.y = Math.random() * 100 - 50;
+        position.z = Math.random() * 100 - 50;
+        matrix.setPosition(position);
+        this.mesh.setMatrixAt(j, matrix);
+        
+        // random rotation
+        const rotation = new THREE.Euler();
+        rotation.x = Math.random() * 2 * Math.PI;
+        rotation.y = Math.random() * 2 * Math.PI;
+        rotation.z = Math.random() * 2 * Math.PI;
+        this.mesh.setRotationFromEuler(rotation);
 
-    mesh.applyMatrix4( matrix );
-    this.scene.add( mesh );
+        // var scaleSize = 50;
+        // const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
 
-    // for ( let i = 1; i < objsToDraw; i ++ ) {
-    //   var randomPick = Math.floor(Math.random() * Object.keys(this.files).length);
-    //   var geometry = this.files[randomPick];
+        // quaternion.setFromEuler( rotation );
+        // matrix.compose( position, quaternion, scale );
 
-    //   const position = new THREE.Vector3();
-    //   position.x = Math.random() * 10000 - 5000;
-    //   position.y = Math.random() * 6000 - 3000;
-    //   position.z = Math.random() * 8000 - 4000;
-
-    //   const rotation = new THREE.Euler();
-    //   rotation.x = Math.random() * 2 * Math.PI;
-    //   rotation.y = Math.random() * 2 * Math.PI;
-    //   rotation.z = Math.random() * 2 * Math.PI;
-
-    //   var scaleSize = 50;
-    //   const scale = new THREE.Vector3(scaleSize,scaleSize,scaleSize);
-
-    //   quaternion.setFromEuler( rotation );
-    //   matrix.compose( position, quaternion, scale );
-
-    //   var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
-    //   mesh.setMatrixAt(i, matrix);
-    //   mesh.setColorAt(i, this.color);
-    //   this.scene.add( mesh );
-    // }
+        // this.mesh.setMatrixAt(i, matrix);
+      }
+      this.scene.add( this.mesh );
+    }
 
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.container.appendChild( this.renderer.domElement );
+    this.container?.appendChild( this.renderer.domElement );
     this.renderer.setAnimationLoop(this.startAnimation);
   
     this.controls = new TrackballControls( this.camera, this.renderer.domElement );
