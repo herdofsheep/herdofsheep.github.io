@@ -7,31 +7,25 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
-class RayCast extends LitElement {
+class ThreeBase extends LitElement {
   mouse: THREE.Vector2;
   mousePosX: string;
   mousePosY: string;
   container: HTMLElement | null;
   camera: THREE.PerspectiveCamera;
   scene: THREE.Scene;
-  count: number;
   renderer: THREE.WebGLRenderer;
   controls: TrackballControls;
-  raycaster: THREE.Raycaster;
   XCenter: string;
   YCenter: string;
   geometries: object;
   meshes: object;
-  colours: object;
-  cursorType: string = 'default';
-  infoVisible: string = 'hidden';
 
   constructor() {
     super();
     this.startAnimation = this.startAnimation.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
-    this.setupScene = this.setupScene.bind(this);
 
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
@@ -145,3 +139,5 @@ class RayCast extends LitElement {
     this.renderer.render(this.scene, this.camera);
   }
 }
+
+export default ThreeBase;
