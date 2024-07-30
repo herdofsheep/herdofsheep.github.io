@@ -56,7 +56,7 @@ class ThreeBase extends LitElement {
   };
 
   async getFiles(modelUrls) {
-  
+
     const modelPromises = modelUrls.map(async (model) => {
       const geometry = await this.getModelMesh(model.url);
       return { key: model.key, geometry: geometry };

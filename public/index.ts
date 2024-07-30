@@ -14,16 +14,20 @@ class RayCast extends ThreeBase {
   raycaster: THREE.Raycaster;
   geometries: object;
   meshes: object;
+  white: THREE.Color;
   colours: object;
   cursorType: string = 'default';
   infoVisible: string = 'hidden';
 
   constructor() {
     super();
-    this.dark_grey = new THREE.Color().setHex( 0x424242 );
     this.setupScene = this.setupScene.bind(this);
+    this.white = new THREE.Color().setHex(0xffffff);
     this.raycaster = new THREE.Raycaster();
-    this.colours = {}
+
+    this.geometries = {}
+    this.meshes = {}
+
     // this.addEventListener('click', this.clickLink);
     // this.addEventListener('touchstart', this.touchStart)
     // this.addEventListener("touchmove", this.touchMove);
@@ -91,28 +95,52 @@ class RayCast extends ThreeBase {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
     this.init();
-    this.setupScene();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb', colour: new THREE.Color().setHex( 0xc96833 )},
-      { key: 'work', url: '/assets/models/gltf/radcam.glb', colour: new THREE.Color().setHex( 0x370e42 ) },
-      { key: 'github', url: '/assets/models/gltf/github.glb', colour: new THREE.Color().setHex( 0xff4162 ) },
-      { key: 'math', url: '/assets/models/gltf/math.glb', colour: new THREE.Color().setHex( 0xbfe3bf ) },
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
+      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
+      { key: 'github', url: '/assets/models/gltf/github.glb' },
+      { key: 'math', url: '/assets/models/gltf/math.glb' },
     ];
     const files = await this.getFiles(modelUrls)
     this.addModels(files);
     this.setupScene();
     this.startAnimation();
   }
+
+  init() {
+    this.container = this.shadowRoot?.getElementById("container") as HTMLElement;
+
+    this.XCenter = window.innerWidth/2 + "px";
+    this.YCenter = window.innerHeight/2 + "px";
+
+    this.mousePosX = this.XCenter;
+    this.mousePosY = this.YCenter;
+
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    this.camera.position.z = 20;
+
+    this.scene.background = new THREE.Color( 0x424242 );
+    this.scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
+    light_one.position.set( 0, 500, 20000 );
+    this.scene.add(light_one);
+
+    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
+    light_two.position.set(0, 1, 0);
+    this.scene.add(light_two);
+  }
   
   addModels(files){
   
     const matrix = new THREE.Matrix4();
     const objsToDraw = 20
-    const material = new THREE.MeshPhongMaterial({ color:this.dark_grey, flatShading: true, shininess: 0 });
-    const keys = Object.keys(files);
+    // const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0 });
+    const material = new THREE.MeshPhongMaterial({ flatShading: true, shininess: 0 });
 
-    for ( let i = 0; i < keys.length; i ++ ) {
-      var geometry = files[keys[i]];
+
+    for ( let i = 0; i < Object.keys(files).length; i ++ ) {
+      var geometry = files[Object.keys(files)[i]];
       var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
       for ( let j = 0; j < objsToDraw; j ++ ) {
 
@@ -131,27 +159,13 @@ class RayCast extends ThreeBase {
         rotation.z = Math.random() * 2 * Math.PI;
         mesh.setRotationFromEuler(rotation);
       }
-      this.meshes[keys[i]] = mesh;
-      this.colours[keys[i]] = files[keys[i]].colour;
+      this.meshes[Object.keys(files)[i]] = mesh;
       this.scene.add( mesh );
     }
   }
 
   setupScene() {
-    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-    this.camera.position.z = 20;
-
-    this.scene.background = new THREE.Color( 0x424242 );
-    this.scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
-    light_one.position.set( 0, 500, 20000 );
-    this.scene.add(light_one);
-
-    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
-    light_two.position.set(0, 1, 0);
-    this.scene.add(light_two);
-
+  
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container?.appendChild( this.renderer.domElement );
@@ -166,7 +180,6 @@ class RayCast extends ThreeBase {
     loadingDiv.style.visibility = 'hidden'
 
   };
-
 
   startAnimation() {
     this.controls.update();
