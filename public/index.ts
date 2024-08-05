@@ -9,6 +9,12 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 
 import ThreeBase from '../js/base';
 
+interface ModelInfo {
+  key: string;
+  url: string;
+  link: string;
+}
+
 class RayCast extends ThreeBase {
   dark_grey: THREE.Color;
   raycaster: THREE.Raycaster;
@@ -18,17 +24,21 @@ class RayCast extends ThreeBase {
   colours: object;
   cursorType: string = 'default';
   infoVisible: string = 'hidden';
+  private modelInfo: ModelInfo[];
+  link: string;
 
   constructor() {
     super();
     this.setupScene = this.setupScene.bind(this);
     this.white = new THREE.Color().setHex(0xffffff);
+    this.dark_grey = new THREE.Color().setHex(0x202020);
     this.raycaster = new THREE.Raycaster();
+    this.cursorType = "grab";
 
     this.geometries = {}
     this.meshes = {}
 
-    // this.addEventListener('click', this.clickLink);
+    this.addEventListener('click', this.clickLink);
     // this.addEventListener('touchstart', this.touchStart)
     // this.addEventListener("touchmove", this.touchMove);
     // this.addEventListener("touchcancel", this.touchMove);
@@ -91,42 +101,42 @@ class RayCast extends ThreeBase {
     `;
   }
 
+  clickLink() {
+    if (this.infoVisible === 'visible') {
+      window.location.href = this.link;
+    }
+  }
+
   async firstUpdated() {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
     this.init();
+    this.setupLights();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb' },
-      { key: 'work', url: '/assets/models/gltf/radcam.glb' },
-      { key: 'github', url: '/assets/models/gltf/github.glb' },
-      { key: 'math', url: '/assets/models/gltf/math.glb' },
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/what.html' },
+      { key: 'work', url: '/assets/models/gltf/radcam.glb', link: '/src/CV.html' },
+      { key: 'github', url: '/assets/models/gltf/github.glb', link: 'https://github.com/herdofsheep' },
+      { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html' },
     ];
     const files = await this.getFiles(modelUrls)
+    this.modelInfo = modelUrls;
     this.addModels(files);
     this.setupScene();
     this.startAnimation();
   }
 
-  init() {
-    this.container = this.shadowRoot?.getElementById("container") as HTMLElement;
-
-    this.XCenter = window.innerWidth/2 + "px";
-    this.YCenter = window.innerHeight/2 + "px";
-
-    this.mousePosX = this.XCenter;
-    this.mousePosY = this.YCenter;
-
+  setupLights() {
     this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
     this.camera.position.z = 20;
 
     this.scene.background = new THREE.Color( 0x424242 );
     this.scene.add( new THREE.AmbientLight( 0x555555 ) );
 
-    const light_one = new THREE.SpotLight( 0xffffff, 1.5 );
+    const light_one = new THREE.SpotLight( this.white, 1.5 );
     light_one.position.set( 0, 500, 20000 );
     this.scene.add(light_one);
 
-    const light_two = new THREE.HemisphereLight(0xffffff, 0x888888, 3);
+    const light_two = new THREE.HemisphereLight(this.white, 0x888888, 3);
     light_two.position.set(0, 1, 0);
     this.scene.add(light_two);
   }
@@ -135,8 +145,7 @@ class RayCast extends ThreeBase {
   
     const matrix = new THREE.Matrix4();
     const objsToDraw = 20
-    // const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0 });
-    const material = new THREE.MeshPhongMaterial({ flatShading: true, shininess: 0 });
+    const material = new THREE.MeshPhongMaterial({ color: this.white, flatShading: true, shininess: 0 });
 
 
     for ( let i = 0; i < Object.keys(files).length; i ++ ) {
@@ -158,6 +167,8 @@ class RayCast extends ThreeBase {
         rotation.y = Math.random() * 2 * Math.PI;
         rotation.z = Math.random() * 2 * Math.PI;
         mesh.setRotationFromEuler(rotation);
+
+        mesh.setColorAt(j, this.dark_grey);
       }
       this.meshes[Object.keys(files)[i]] = mesh;
       this.scene.add( mesh );
@@ -187,21 +198,33 @@ class RayCast extends ThreeBase {
     this.raycaster.setFromCamera(this.mouse, this.camera);
     this.renderer.setRenderTarget( null );
 
-    const key = 'que'
-  
-    const intersection = this.raycaster.intersectObject(this.meshes[key]);
-  
-    if (intersection.length > 0) {
-  
-      const instanceId = intersection[0].instanceId;
+    for (const key in this.meshes) {
+      const mesh = this.meshes[key];
+      const intersection = this.raycaster.intersectObject(mesh);
+
+      for (let i = 0; i < mesh.count; i++) {
+        mesh.setColorAt(i, this.dark_grey);
+        mesh.instanceColor.needsUpdate = true;
+      }
     
-  
-      this.meshes[key].setColorAt(instanceId, this.white);
-      this.meshes[key].instanceColor.needsUpdate = true;
+      if (intersection.length > 0) {
+        this.cursorType = "pointer";
+        this.infoVisible = 'visible';
+        const modelInfoItem = this.modelInfo.find(item => item.key === key);
+        if (modelInfoItem) {
+          this.link = modelInfoItem.link;
+        }
+        const instanceId = intersection[0].instanceId;
+        mesh.setColorAt(instanceId, this.white);
+        mesh.instanceColor.needsUpdate = true;
+      }
+      else {
+        this.cursorType = "default";
+        this.infoVisible = 'hidden';
+      }
     
+      this.renderer.render(this.scene, this.camera);
     }
-  
-    this.renderer.render(this.scene, this.camera);
   }
 }
 
