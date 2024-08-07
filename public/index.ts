@@ -13,13 +13,17 @@ interface ModelInfo {
   key: string;
   url: string;
   link: string;
+  description: string;
 }
 
 class RayCast extends ThreeBase {
   static properties = {
-    cursorType: { type: String }
+    cursorType: { type: String },
+    mousePosX: { type: String },
+    mousePosY: { type: String }
   };
 
+  cursorType: string;
   dark_grey: THREE.Color;
   raycaster: THREE.Raycaster;
   geometries: object;
@@ -27,10 +31,14 @@ class RayCast extends ThreeBase {
   white: THREE.Color;
   colours: object;
   infoVisible: string = 'hidden';
+  canClick: boolean;
+  beganTouching: boolean;
   private modelInfo: ModelInfo[];
+  debugWindow: HTMLElement;
   link: string;
   mousePosX: string;
   mousePosY: string;
+  clickingActive: boolean;
 
   constructor() {
     super();
@@ -42,36 +50,30 @@ class RayCast extends ThreeBase {
     this.mouse = new THREE.Vector2();
     this.mousePosX = "0px";
     this.mousePosX = "0px";
+    this.clickingActive = false;
 
     this.cursorType = "grab";
     this.infoVisible = 'hidden';
+    this.canClick = false;
+    this.beganTouching = false;
 
     this.geometries = {}
     this.meshes = {}
 
-    this.addEventListener('click', this.clickLink);
-    // this.addEventListener('touchstart', this.touchStart)
-    // this.addEventListener("touchmove", this.touchMove);
-    // this.addEventListener("touchcancel", this.touchMove);
-    // this.addEventListener('touchend', this.touchEnd)
+    this.addEventListener('mousedown', this.startClick);
+    this.addEventListener('mouseup', this.clickLink);
+    this.addEventListener('touchstart', this.touchStart)
+    this.addEventListener("touchmove", this.touchMove);
+    this.addEventListener("touchcancel", this.touchMove);
+    this.addEventListener('touchend', this.touchEnd)
   }
-
-  static styles = css`
-    :host {
-      cursor: var(--cursor-type, grab);
-    }
-  `;
-
-  updated(changedProperties) {
-    if (changedProperties.has('cursorType')) {
-      this.style.setProperty('--cursor-type', this.cursorType);
-    }
-  }
-
 
   render(){
     return html`
     <style>
+      :host {
+        cursor: ${this.cursorType};
+      }
       .followMouse {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
@@ -114,7 +116,7 @@ class RayCast extends ThreeBase {
       }
     </style>
     <div id="container" ></div>
-    <div id="infoText" class="followMouse" >INFO</div>
+    <div id="infoText" class="followMouse" ></div>
     <div id="crosshair" >
       <div id="upSpoke"></div>
       <div id="sideSpoke"></div>
@@ -122,8 +124,31 @@ class RayCast extends ThreeBase {
     `;
   }
 
+  startClick() {
+    this.clickingActive = false;
+    if (this.canClick == true) {
+      this.clickingActive = true;
+    }
+  }
+
   clickLink() {
-    if (this.infoVisible === 'visible') {
+    if (this.clickingActive == true) {
+      window.location.href = this.link;
+    }
+  }
+
+  touchStart() {
+    if (this.canClick) {
+      this.beganTouching = true;
+    }
+  }
+
+  touchMove() {
+    this.beganTouching = false;
+  }
+
+  touchEnd() {
+    if (this.canClick && this.beganTouching) {
       window.location.href = this.link;
     }
   }
@@ -132,22 +157,24 @@ class RayCast extends ThreeBase {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
     this.init();
+    if (this.shadowRoot){
+      const debugElement = this.shadowRoot.getElementById("infoText");
+      if (debugElement){
+        this.debugWindow = debugElement;
+      }
+    }
     this.setupLights();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/what.html' },
-      { key: 'work', url: '/assets/models/gltf/radcam.glb', link: '/src/CV.html' },
-      { key: 'github', url: '/assets/models/gltf/github.glb', link: 'https://github.com/herdofsheep' },
-      { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html' },
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/what.html', description: "what?"},
+      { key: 'work', url: '/assets/models/gltf/radcam.glb', link: '/src/CV.html', description: "work"},
+      { key: 'github', url: '/assets/models/gltf/github.glb', link: 'https://github.com/herdofsheep', description: "github"},
+      { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html', description: "art"},
     ];
     const files = await this.getFiles(modelUrls)
     this.modelInfo = modelUrls;
     this.addModels(files);
     this.setupScene();
     this.startAnimation();
-    this.handleMouse();
-  }
-
-  handleMouse() {
   }
 
   setupLights() {
@@ -224,6 +251,7 @@ class RayCast extends ThreeBase {
     this.renderer.setRenderTarget( null );
     this.cursorType = "cell";
     this.infoVisible = 'hidden';
+    this.handleMouse();
 
     for (const key in this.meshes) {
       const mesh = this.meshes[key];
@@ -236,10 +264,12 @@ class RayCast extends ThreeBase {
     
       if (intersection.length > 0) {
         this.infoVisible = 'visible';
+        this.canClick = true;
         this.cursorType = "pointer";
         const modelInfoItem = this.modelInfo.find(item => item.key === key);
         if (modelInfoItem) {
           this.link = modelInfoItem.link;
+          this.debugWindow.innerHTML = modelInfoItem.description;
         }
         const instanceId = intersection[0].instanceId;
         mesh.setColorAt(instanceId, this.white);
@@ -247,6 +277,11 @@ class RayCast extends ThreeBase {
       }
     }
     this.renderer.render(this.scene, this.camera);
+  }
+
+  handleMouse() {
+    this.mousePosX = this.mousePos.x + 15 + "px";
+    this.mousePosY = this.mousePos.y + 15 + "px";
   }
 }
 

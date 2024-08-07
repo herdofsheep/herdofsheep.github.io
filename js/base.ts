@@ -9,6 +9,7 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 
 class ThreeBase extends LitElement {
   mouse: THREE.Vector2;
+  mousePos: { x: number, y: number };
   
   container: HTMLElement | null;
   camera: THREE.PerspectiveCamera;
@@ -27,6 +28,7 @@ class ThreeBase extends LitElement {
     this.onMouseMove = this.onMouseMove.bind(this);
 
     this.mouse = new THREE.Vector2();
+    this.mousePos = { x: 0, y: 0 };
 
     this.scene = new THREE.Scene();
 
@@ -48,9 +50,6 @@ class ThreeBase extends LitElement {
 
     this.XCenter = window.innerWidth/2 + "px";
     this.YCenter = window.innerHeight/2 + "px";
-
-    this.mousePosX = this.XCenter;
-    this.mousePosY = this.YCenter;
   };
 
   async getFiles(modelUrls) {
@@ -127,9 +126,7 @@ class ThreeBase extends LitElement {
     event.preventDefault();
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-    this.mousePosX = this.mouse.x + 15 + 'px';
-    this.mousePosY = this.mouse.y + 15 + 'px';
+    this.mousePos = { x: event.clientX, y: event.clientY };
   }
 
   startAnimation() {
