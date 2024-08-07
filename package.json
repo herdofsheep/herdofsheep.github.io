@@ -11,6 +11,7 @@
     "watch": "parcel watch public/index.html"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.7",
     "@types/three": "^0.166.0",
     "express": "^4.19.2",
     "lil-gui": "^0.19.2",

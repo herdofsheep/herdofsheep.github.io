@@ -132,7 +132,7 @@ class RayCast extends ThreeBase {
   }
 
   clickLink() {
-    if (this.clickingActive == true) {
+    if (this.clickingActive == true && this.canClick == true) {
       window.location.href = this.link;
     }
   }
