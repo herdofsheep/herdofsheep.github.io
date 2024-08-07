@@ -1,5 +1,5 @@
 
-import { LitElement, html } from 'lit-element';
+import { LitElement } from 'lit';
 import * as THREE from 'three';
 import _ from 'lodash';
 
@@ -9,8 +9,7 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 
 class ThreeBase extends LitElement {
   mouse: THREE.Vector2;
-  mousePosX: string;
-  mousePosY: string;
+  
   container: HTMLElement | null;
   camera: THREE.PerspectiveCamera;
   scene: THREE.Scene;
@@ -28,8 +27,7 @@ class ThreeBase extends LitElement {
     this.onMouseMove = this.onMouseMove.bind(this);
 
     this.mouse = new THREE.Vector2();
-    this.mousePosX = "0px";
-    this.mousePosX = "0px";
+
     this.scene = new THREE.Scene();
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });

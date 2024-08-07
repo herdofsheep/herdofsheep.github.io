@@ -1,6 +1,6 @@
 **herdoofsheep.github.io**
 
-uses lit-element, parcel and threejs, and well as jquery and lodash.
+uses lit, parcel and threejs, and well as jquery and lodash.
 To begin development, run 
     npm i
 to reflect a local deployment for testing, run

@@ -1,5 +1,5 @@
 
-import { html } from 'lit-element';
+import { html, css } from 'lit';
 import * as THREE from 'three';
 import _ from 'lodash';
 
@@ -16,16 +16,21 @@ interface ModelInfo {
 }
 
 class RayCast extends ThreeBase {
+  static properties = {
+    cursorType: { type: String }
+  };
+
   dark_grey: THREE.Color;
   raycaster: THREE.Raycaster;
   geometries: object;
   meshes: object;
   white: THREE.Color;
   colours: object;
-  cursorType: string = 'default';
   infoVisible: string = 'hidden';
   private modelInfo: ModelInfo[];
   link: string;
+  mousePosX: string;
+  mousePosY: string;
 
   constructor() {
     super();
@@ -33,7 +38,13 @@ class RayCast extends ThreeBase {
     this.white = new THREE.Color().setHex(0xffffff);
     this.dark_grey = new THREE.Color().setHex(0x202020);
     this.raycaster = new THREE.Raycaster();
+
+    this.mouse = new THREE.Vector2();
+    this.mousePosX = "0px";
+    this.mousePosX = "0px";
+
     this.cursorType = "grab";
+    this.infoVisible = 'hidden';
 
     this.geometries = {}
     this.meshes = {}
@@ -45,12 +56,22 @@ class RayCast extends ThreeBase {
     // this.addEventListener('touchend', this.touchEnd)
   }
 
+  static styles = css`
+    :host {
+      cursor: var(--cursor-type, grab);
+    }
+  `;
+
+  updated(changedProperties) {
+    if (changedProperties.has('cursorType')) {
+      this.style.setProperty('--cursor-type', this.cursorType);
+    }
+  }
+
+
   render(){
     return html`
     <style>
-      :host {
-        cursor: ${this.cursorType}
-      }
       .followMouse {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
@@ -93,7 +114,7 @@ class RayCast extends ThreeBase {
       }
     </style>
     <div id="container" ></div>
-    <div id="infoText" class="followMouse" ></div>
+    <div id="infoText" class="followMouse" >INFO</div>
     <div id="crosshair" >
       <div id="upSpoke"></div>
       <div id="sideSpoke"></div>
@@ -123,6 +144,10 @@ class RayCast extends ThreeBase {
     this.addModels(files);
     this.setupScene();
     this.startAnimation();
+    this.handleMouse();
+  }
+
+  handleMouse() {
   }
 
   setupLights() {
@@ -197,6 +222,8 @@ class RayCast extends ThreeBase {
   
     this.raycaster.setFromCamera(this.mouse, this.camera);
     this.renderer.setRenderTarget( null );
+    this.cursorType = "cell";
+    this.infoVisible = 'hidden';
 
     for (const key in this.meshes) {
       const mesh = this.meshes[key];
@@ -208,8 +235,8 @@ class RayCast extends ThreeBase {
       }
     
       if (intersection.length > 0) {
-        this.cursorType = "pointer";
         this.infoVisible = 'visible';
+        this.cursorType = "pointer";
         const modelInfoItem = this.modelInfo.find(item => item.key === key);
         if (modelInfoItem) {
           this.link = modelInfoItem.link;
@@ -218,13 +245,8 @@ class RayCast extends ThreeBase {
         mesh.setColorAt(instanceId, this.white);
         mesh.instanceColor.needsUpdate = true;
       }
-      else {
-        this.cursorType = "default";
-        this.infoVisible = 'hidden';
-      }
-    
-      this.renderer.render(this.scene, this.camera);
     }
+    this.renderer.render(this.scene, this.camera);
   }
 }
 
