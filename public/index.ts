@@ -251,6 +251,7 @@ class RayCast extends ThreeBase {
     this.renderer.setRenderTarget( null );
     this.cursorType = "cell";
     this.infoVisible = 'hidden';
+    this.canClick = false;
     this.handleMouse();
 
     for (const key in this.meshes) {
