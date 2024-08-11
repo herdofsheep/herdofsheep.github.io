@@ -93,9 +93,9 @@
 
     <script type="module">
 
-      var allSvgs;
-      var gitImg, mathImg, queImg, workImg;
-      var focusTarget;
+      let allSvgs;
+      let gitImg, mathImg, queImg, workImg;
+      let focusTarget;
 
       init()
 
@@ -113,7 +113,7 @@
 
         let path = svgOverlay.addEventListener("load",function(){
           // get the inner DOM of alpha.svg
-          var svgDoc = svgOverlay.contentDocument.firstElementChild;
+          let svgDoc = svgOverlay.contentDocument.firstElementChild;
           svgLoaded(svgDoc.children);
         });
 
@@ -123,9 +123,9 @@
 
         allSvgs = svgs;
 
-        for (var i=0; i<svgs.length; i++){
+        for (let i=0; i<svgs.length; i++){
 
-          var path = svgs[i];
+          let path = svgs[i];
           if(svgs[i].id == ""){
             continue;
           }
@@ -144,7 +144,7 @@
           
           path.addEventListener("mouseenter",function(e){
 
-            var id = e.currentTarget.id;
+            let id = e.currentTarget.id;
             focusTarget = id
 
             if(id.slice(0,3) == 'que'){
@@ -163,7 +163,7 @@
 
           path.addEventListener("mouseleave",function(e){
 
-            var id = e.currentTarget.id;
+            let id = e.currentTarget.id;
 
             focusTarget = ""
 
@@ -209,7 +209,7 @@
       }
 
       function onFocus(){
-        var id = this.event.target.id
+        let id = this.event.target.id
         if(id == 'que'){
           document.getElementById('imageLayer').src = queImg.src
         }
@@ -233,7 +233,7 @@
 
       function clickTrigger(){
 
-        var link = ""
+        let link = ""
 
         if(focusTarget.slice(0,3) == 'que'){
           link = "/src/what.html";
@@ -245,7 +245,7 @@
           link = "/src/art.html";
         }
         if(focusTarget.slice(0,4) == 'work'){
-          link = "/src/portfolio.html";
+          link = "/src/work.html";
         }
         if(link != ""){
           window.location.href = link;
@@ -255,7 +255,7 @@
 
       function touchTrigger(e){
 
-        var id = this.event.target.id
+        let id = this.event.target.id
 
         if(id.slice(0,3) == 'que'){
           window.location.href = "/src/what.html";
@@ -267,7 +267,7 @@
           window.location.href = "/src/art.html";
         }
         if(id.slice(0,4) == 'work'){
-          window.location.href = "/src/portfolio.html";
+          window.location.href = "/src/work.html";
         }
 
       }
