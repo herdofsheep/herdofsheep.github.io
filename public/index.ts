@@ -8,6 +8,7 @@ import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 import ThreeBase from '../js/base';
+import { any } from 'three/examples/jsm/nodes/Nodes.js';
 
 interface ModelInfo {
   key: string;
@@ -165,9 +166,8 @@ class RayCast extends ThreeBase {
     }
     this.setupLights();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/what.html', description: "what?"},
-      { key: 'work', url: '/assets/models/gltf/radcam.glb', link: '/src/CV.html', description: "work"},
-      { key: 'github', url: '/assets/models/gltf/github.glb', link: 'https://github.com/herdofsheep', description: "github"},
+      // { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/about.html', description: "about"},
+      { key: 'work', url: '/assets/models/gltf/knot.glb', link: '/src/CV.html', description: "CV"},
       { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html', description: "art"},
     ];
     const files = await this.getFiles(modelUrls)
@@ -204,22 +204,34 @@ class RayCast extends ThreeBase {
       var geometry = files[Object.keys(files)[i]];
       var mesh = new THREE.InstancedMesh(geometry, material, objsToDraw);
       for ( let j = 0; j < objsToDraw; j ++ ) {
-
-        // random position
-        const position = new THREE.Vector3();
-        position.x = Math.random() * 100 - 50;
-        position.y = Math.random() * 100 - 50;
-        position.z = Math.random() * 100 - 50;
-        matrix.setPosition(position);
+        // Create a transformation matrix
+        const matrix = new THREE.Matrix4();
+    
+        // Random position
+        const position = new THREE.Vector3(
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50
+        );
+    
+        // Random rotation
+        const rotation = new THREE.Euler(
+          Math.random() * 2 * Math.PI,
+          Math.random() * 2 * Math.PI,
+          Math.random() * 2 * Math.PI
+        );
+    
+        // Apply position and rotation to the matrix
+        matrix.compose(
+          position,
+          new THREE.Quaternion().setFromEuler(rotation),
+          new THREE.Vector3(1, 1, 1) // scale (1, 1, 1) for no scaling
+        );
+    
+        // Set the transformation matrix for the instance
         mesh.setMatrixAt(j, matrix);
-        
-        // random rotation
-        const rotation = new THREE.Euler();
-        rotation.x = Math.random() * 2 * Math.PI;
-        rotation.y = Math.random() * 2 * Math.PI;
-        rotation.z = Math.random() * 2 * Math.PI;
-        mesh.setRotationFromEuler(rotation);
-
+    
+        // Set color for the instance
         mesh.setColorAt(j, this.dark_grey);
       }
       this.meshes[Object.keys(files)[i]] = mesh;

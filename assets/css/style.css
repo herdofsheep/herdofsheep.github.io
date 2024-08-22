@@ -260,11 +260,10 @@ a:focus{
 }
 
 .threedsaver {
-  font-weight: 600;
+  font-weight: 400;
   color: black;
   background: white;
   box-shadow: 0 0 0 1.3pt black;
-  border-radius: 50%;
 }
 
 .saver:hover, .saver:focus {
@@ -274,7 +273,7 @@ a:focus{
 }
 
 .threedsaver:hover, .threedsaver:focus {
-  font-weight: 900;
+  font-weight: 400;
   color: black;
   box-shadow: 0 0 0 4pt black;
 }

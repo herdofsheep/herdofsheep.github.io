@@ -1,7 +1,7 @@
 
 import { LitElement } from 'lit';
 import * as THREE from 'three';
-import _ from 'lodash';
+import _, { find } from 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
@@ -53,42 +53,66 @@ class ThreeBase extends LitElement {
   };
 
   async getFiles(modelUrls) {
-
     const modelPromises = modelUrls.map(async (model) => {
-      const geometry = await this.getModelMesh(model.url);
-      return { key: model.key, geometry: geometry };
+      // Try to load the model and catch any errors
+      try {
+        const geometry = await this.getModelMesh(model.url);
+
+        // If the geometry is undefined, throw an error
+        if (!geometry) {
+          throw new Error(`Model '${model.key}' failed to load or returned undefined geometry.`);
+        }
+
+        return { key: model.key, geometry: geometry };
+      }
+      catch (error) {
+        // Add more context to the error
+        throw new Error(`Failed to load model '${model.key}': ${error.message}`);
+      }
     });
-  
     const modelsArray = await Promise.all(modelPromises);
-  
     const models = modelsArray.reduce((acc, model) => {
       acc[model.key] = model.geometry;
       return acc;
     }, {});
-  
-    return models;
+    return models
+  }
+
+  findNestedGeometry(model: THREE.Group): THREE.BufferGeometry | undefined {
+    for (const child of model.children) {
+        if (child.type === 'Mesh') {
+          return (child as THREE.Mesh).geometry;
+        } 
+        else if (child.type === 'Group') {
+          const group = child as THREE.Group;
+          const meshes: THREE.BufferGeometry[] = [];
+          
+          for (const groupChild of group.children) {
+              if (groupChild.type === 'Mesh') {
+                  meshes.push((groupChild as THREE.Mesh).geometry);
+              }
+          }
+          
+          if (meshes.length > 0) {
+              return mergeGeometries(meshes);
+          }
+        }
+        
+        // Recursively check nested groups
+        const nestedGeometry = this.findNestedGeometry(child as THREE.Group);
+        if (nestedGeometry) {
+            return nestedGeometry;
+        }
+    }
+    
+    // If no geometry is found, return undefined
+    return undefined;
   }
 
   async getModelMesh(url: string): Promise<THREE.BufferGeometry | undefined> {
     const model = await this.loadModel(url);
-    if (model && model.children.length > 0) {
-      const firstChild = model.children[0];
-      if (firstChild.children.length > 0) {
-        const meshGeometry = firstChild.children.find(x => x.type === 'Mesh') as THREE.Mesh;
-        if (meshGeometry) {
-          return meshGeometry.geometry;
-        }
-        const groupGeometry = firstChild.children.find(x => x.type === 'Group') as THREE.Group;
-        if (groupGeometry) {
-          const meshes: THREE.BufferGeometry[] = [];
-          for (let j = 0; j < groupGeometry.children.length; j++) {
-            const meshGeometry = groupGeometry.children[j] as THREE.Mesh;
-            const mesh = meshGeometry.geometry;
-            meshes.push(mesh);
-          }
-          return mergeGeometries(meshes);
-        }
-      }
+    if (model) {
+      return this.findNestedGeometry(model);
     }
     return undefined;
   }
