@@ -167,7 +167,7 @@ class RayCast extends ThreeBase {
     this.setupLights();
     const modelUrls = [
       { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/about.html', description: "statement"},
-      { key: 'work', url: '/assets/models/gltf/knot.glb', link: '/src/CV.html', description: "CV"},
+      { key: 'work', url: '/assets/models/gltf/jennings_dog.glb', link: '/src/CV.html', description: "CV"},
       { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html', description: "portfolio"},
     ];
     const files = await this.getFiles(modelUrls)
