@@ -42,6 +42,7 @@ class RayCast extends ThreeBase {
   private modelInfo: ModelInfo[];
   debugWindow: HTMLElement;
   link: string;
+  camera: THREE.PerspectiveCamera;
   mousePosX: string;
   mousePosY: string;
   clickingActive: boolean;
@@ -203,7 +204,6 @@ class RayCast extends ThreeBase {
   
   addModels(files){
   
-    const matrix = new THREE.Matrix4();
     const objsToDraw = 20
     const material = new THREE.MeshPhongMaterial({ color: this.white, flatShading: true, shininess: 0 });
 

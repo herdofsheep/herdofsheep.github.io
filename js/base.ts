@@ -12,7 +12,7 @@ class ThreeBase extends LitElement {
   mousePos: { x: number, y: number };
   
   container: HTMLElement | null;
-  camera: THREE.PerspectiveCamera;
+  camera: THREE.Camera;
   scene: THREE.Scene;
   renderer: THREE.WebGLRenderer;
   controls: TrackballControls;
@@ -52,23 +52,27 @@ class ThreeBase extends LitElement {
     this.YCenter = window.innerHeight/2 + "px";
   };
 
-  async getFiles(modelUrls) {
+  async getModel(url): Promise<THREE.BufferGeometry> {
+    // Try to load the model and catch any errors
+    try {
+      const geometry = await this.getModelMesh(url);
+
+      // If the geometry is undefined, throw an error
+      if (!geometry) {
+        throw new Error(`Model '${url}' failed to load or returned undefined geometry.`);
+      }
+
+      return geometry;
+    }
+    catch (error) {
+      // Add more context to the error
+      throw new Error(`Failed to load model '${url}': ${error.message}`);
+    }
+  }
+
+  async getFiles(modelUrls): Promise<object> {
     const modelPromises = modelUrls.map(async (model) => {
-      // Try to load the model and catch any errors
-      try {
-        const geometry = await this.getModelMesh(model.url);
-
-        // If the geometry is undefined, throw an error
-        if (!geometry) {
-          throw new Error(`Model '${model.key}' failed to load or returned undefined geometry.`);
-        }
-
-        return { key: model.key, geometry: geometry };
-      }
-      catch (error) {
-        // Add more context to the error
-        throw new Error(`Failed to load model '${model.key}': ${error.message}`);
-      }
+      return { key: model.key, geometry: await this.getModel(model.url) };
     });
     const modelsArray = await Promise.all(modelPromises);
     const models = modelsArray.reduce((acc, model) => {
@@ -154,7 +158,9 @@ class ThreeBase extends LitElement {
   }
 
   startAnimation() {
-    this.controls.update();
+    if(this.controls){
+      this.controls.update();
+    }
     this.renderer.render(this.scene, this.camera);
   }
 }
