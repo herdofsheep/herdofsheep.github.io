@@ -259,6 +259,19 @@ a:focus{
   border: solid;
 }
 
+.twodlink {
+  display: flex;
+  font-size: 3ex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.threedmodel {
+  
+}
+
 .threedsaver {
   font-weight: 400;
   color: black;
@@ -267,7 +280,7 @@ a:focus{
 }
 
 .saver:hover, .saver:focus {
-  background: black;
+  background: #141414;
   color: white;
   font-weight: 400;
 }
