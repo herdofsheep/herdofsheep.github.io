@@ -24,7 +24,6 @@ class ThreeBase extends LitElement {
   constructor() {
     super();
     this.startAnimation = this.startAnimation.bind(this);
-    this.onWindowResize = this.onWindowResize.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
 
     this.mouse = new THREE.Vector2();
@@ -141,13 +140,6 @@ class ThreeBase extends LitElement {
         }
       );
     });
-  }
-
-
-  onWindowResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
   }
 
   onMouseMove( event ) {

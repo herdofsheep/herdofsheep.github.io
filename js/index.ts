@@ -47,6 +47,9 @@ class RayCast extends ThreeBase {
   mousePosY: string;
   clickingActive: boolean;
 
+  light_one: THREE.SpotLight;
+  light_two: THREE.HemisphereLight;
+
   constructor() {
     super();
     this.setupScene = this.setupScene.bind(this);
@@ -87,10 +90,11 @@ class RayCast extends ThreeBase {
       .followMouse {
         top: ${this.mousePosY};
         left: ${this.mousePosX};
-        color: white;
         font-size:50px;
         visibility: ${this.infoVisible};
         position:absolute;
+        font-weight: 600;
+        color: #ff284d;
         z-index: 10;
       }
       #crosshair {
@@ -176,7 +180,7 @@ class RayCast extends ThreeBase {
     this.setupLights();
     const modelUrls = [
       { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/about.html', description: "statement"},
-      { key: 'work', url: '/assets/models/gltf/jennings.glb', link: '/src/CV.html', description: "CV"},
+      { key: 'work', url: '/assets/models/gltf/jennings_lo.glb', link: '/src/CV.html', description: "CV"},
       { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html', description: "portfolio"},
     ];
     const files = await this.getFiles(modelUrls)
@@ -193,13 +197,13 @@ class RayCast extends ThreeBase {
     this.scene.background = new THREE.Color( this.light_pink );
     this.scene.add( new THREE.AmbientLight( this.bright_pink ) );
 
-    const light_one = new THREE.SpotLight( this.white, 1.5 );
-    light_one.position.set( 0, 500, 20000 );
-    this.scene.add(light_one);
+    this.light_one = new THREE.SpotLight( this.white, 1.5 );
+    this.light_one.position.set( 0, 10, 10 );
+    this.scene.add(this.light_one);
 
-    const light_two = new THREE.HemisphereLight(this.white, 0x888888, 3);
-    light_two.position.set(0, 1, 0);
-    this.scene.add(light_two);
+    this.light_two = new THREE.HemisphereLight(this.white, this.bright_pink,  3);
+    this.light_two.position.set(0, 1, 0);
+    this.scene.add(this.light_two);
   }
   
   addModels(files){
@@ -264,6 +268,12 @@ class RayCast extends ThreeBase {
 
   };
 
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+  }
+
   startAnimation() {
     this.controls.update();
   
@@ -293,7 +303,7 @@ class RayCast extends ThreeBase {
           this.debugWindow.innerHTML = modelInfoItem.description;
         }
         const instanceId = intersection[0].instanceId;
-        mesh.setColorAt(instanceId, this.white);
+        mesh.setColorAt(instanceId, this.light_pink);
         mesh.instanceColor.needsUpdate = true;
       }
     }

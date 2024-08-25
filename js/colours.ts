@@ -4,6 +4,7 @@ const colours = {
     dark_grey: 0x202020,
     light_pink: 0xFFC0CB,
     bright_pink: 0xfb8da0,
+    pink: 0xff4162,
   };
   
 export default colours;

@@ -10,9 +10,12 @@ class ThreeDModel extends ThreeBase {
 
   white: THREE.Color;
   light_pink: THREE.Color;
+  bright_pink: THREE.Color;
   dark_grey: THREE.Color;
 
-  // camera: THREE.OrthographicCamera;
+  highlight: HTMLElement;
+
+  camera: THREE.OrthographicCamera;
   model: THREE.Group;
   width: number;
   height: number;
@@ -24,10 +27,13 @@ class ThreeDModel extends ThreeBase {
 
     this.white = new THREE.Color().setHex(colours.white);
     this.light_pink = new THREE.Color().setHex(colours.light_pink);
+    this.bright_pink = new THREE.Color().setHex(colours.bright_pink);
     this.dark_grey = new THREE.Color().setHex(colours.dark_grey);
 
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.highlight = this.parentElement?.querySelector('.twodlink') as HTMLElement;
+
+    this.width = 100;
+    this.height = 100;
   }
 
   render(){
@@ -39,9 +45,11 @@ class ThreeDModel extends ThreeBase {
   async firstUpdated() {
     // Give the browser a chance to paint
     await new Promise((r) => setTimeout(r, 0));
+
     this.init();
-    const geometry = await this.getModel("/assets/models/gltf/questionmark.glb")
-    const material = new THREE.MeshPhongMaterial({ color: this.white, flatShading: true, shininess: 0 });
+    const link = this.getAttribute('link')
+    const geometry = await this.getModel(link)
+    const material = new THREE.MeshPhongMaterial({ color: this.dark_grey, flatShading: true, shininess: 0 });
 
     this.mesh = new THREE.Mesh(geometry, material);
     this.setupLights();
@@ -50,18 +58,18 @@ class ThreeDModel extends ThreeBase {
   }
 
   setupLights() {
-    this.scene.background = new THREE.Color(this.dark_grey);
+    this.scene.background = new THREE.Color(this.light_pink);
 
-    this.camera = new THREE.OrthographicCamera( this.width / - 2, this.width / 2, this.height / 2, this.height / - 2, 1, 1000 );
+    this.camera = new THREE.OrthographicCamera( this.width / - 2, this.width / 2, this.height / 2, this.height / - 2, 0, 1000 );
     this.scene.add( this.mesh );
-    this.camera.position.set(0, 0, 0);
-    this.camera.lookAt(this.mesh.position);
+    this.mesh.scale.set( 8, 8, 8 );
+    this.mesh.position.set(0, 0, -100);
 
     const light_one = new THREE.SpotLight( this.white, 1.5 );
-    light_one.position.set( 0, 500, 20000 );
+    light_one.position.set( 0, 10, 10 );
     this.scene.add(light_one);
 
-    const light_two = new THREE.HemisphereLight(this.white, 0x888888, 3);
+    const light_two = new THREE.HemisphereLight(this.white, this.bright_pink,  3);
     light_two.position.set(0, 1, 0);
     this.scene.add(light_two);
   }
@@ -71,18 +79,23 @@ class ThreeDModel extends ThreeBase {
     this.renderer.setSize(this.width, this.height);
     this.container?.appendChild( this.renderer.domElement );
     this.renderer.setAnimationLoop(this.startAnimation);
-
-    window.addEventListener('resize', this.onWindowResize);
   };
 
-  onWindowResize() {
-    this.camera.left = this.width / -2;
-    this.camera.right = this.width / 2;
-    this.camera.top = this.height / 2;
-    this.camera.bottom = this.height / -2;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.width, this.height);
-  }
+  startAnimation() {
+      let hover = this.highlight.matches(':hover');
+      let focus = this.highlight.matches(':focus');
+      const material = this.mesh.material as THREE.MeshPhongMaterial;
+      if (hover || focus) {
+        material.color.setHex(colours.light_pink);
+        material.shininess = 100;
+      } else {
+        material.color.setHex(colours.dark_grey);
+      }
+      let timer = Date.now() * 0.0005;
+      this.mesh.rotation.x = Math.sin(timer);
+      this.mesh.rotation.y = Math.cos(timer);
+      this.renderer.render(this.scene, this.camera);
+    }
 }
 
 window.customElements.define("three-d-model", ThreeDModel);

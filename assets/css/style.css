@@ -9,7 +9,8 @@ body{
 
 /* links */
 a, a {
-  color: #ff4162;
+  --is-focused: false;
+  color: #141414;
   font-weight: 700;
   text-decoration: none; 
   display: inline-block;
@@ -36,6 +37,7 @@ a:focus{
   /* letter-spacing: 1px; */
   font-weight: 800;
   text-decoration: none;
+  --is-focused: true;
 }
 
 /* thin outline to show container elements */
@@ -264,12 +266,24 @@ a:focus{
   font-size: 3ex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.pageblock{
+  background: #FFC0CB;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.twodblock{
+  top: 50%;
+  transform: translate(0, -60%);
+  position: relative;
 }
 
 .threedmodel {
-  
+  align-content: auto;
 }
 
 .threedsaver {
