@@ -243,29 +243,13 @@ a:focus{
   line-height: 3ex;
 }
 
-.saver, .threedsaver{
-  position: fixed;
-  padding: 20px;
-  left: 10px;
-  bottom: 10px;
-  font-size: 30px;
-  width: 150px;
-  z-index:1000;
-}
-
-/*popup 2d version saver*/
-.saver {
-  font-weight: 400;
-  background: none;
-  color: white;
-  border: solid;
-}
-
 .twodlink {
   display: flex;
   font-size: 3ex;
   align-items: center;
   justify-content: center;
+  margin: auto;
+  width: fit-content;
 }
 
 .pageblock{
@@ -286,23 +270,28 @@ a:focus{
   align-content: auto;
 }
 
-.threedsaver {
+.saver{
+  position: fixed;
+  padding: 20px;
+  left: 10px;
+  bottom: 10px;
+  font-size: 30px;
+  width: 170px;
+  z-index:1000;
+}
+
+.saver {
   font-weight: 400;
-  color: black;
-  background: white;
-  box-shadow: 0 0 0 1.3pt black;
+  background: none;
+  color: #141414;
+  border: 3px solid;
 }
 
 .saver:hover, .saver:focus {
-  background: #141414;
-  color: white;
-  font-weight: 400;
-}
-
-.threedsaver:hover, .threedsaver:focus {
-  font-weight: 400;
-  color: black;
-  box-shadow: 0 0 0 4pt black;
+  background: #fb8da0;
+  color: #FFC0CB;
+  font-weight: 600;
+  border: 3px solid transparent;
 }
 
 .grabcursor{

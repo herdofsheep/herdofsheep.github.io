@@ -30,7 +30,7 @@ class ThreeDModel extends ThreeBase {
     this.bright_pink = new THREE.Color().setHex(colours.bright_pink);
     this.dark_grey = new THREE.Color().setHex(colours.dark_grey);
 
-    this.highlight = this.parentElement?.querySelector('.twodlink') as HTMLElement;
+    this.highlight = this.parentElement as HTMLElement;
 
     this.width = 100;
     this.height = 100;

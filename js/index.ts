@@ -47,9 +47,6 @@ class RayCast extends ThreeBase {
   mousePosY: string;
   clickingActive: boolean;
 
-  light_one: THREE.SpotLight;
-  light_two: THREE.HemisphereLight;
-
   constructor() {
     super();
     this.setupScene = this.setupScene.bind(this);
@@ -197,19 +194,23 @@ class RayCast extends ThreeBase {
     this.scene.background = new THREE.Color( this.light_pink );
     this.scene.add( new THREE.AmbientLight( this.bright_pink ) );
 
-    this.light_one = new THREE.SpotLight( this.white, 1.5 );
-    this.light_one.position.set( 0, 10, 10 );
-    this.scene.add(this.light_one);
+    const light_one = new THREE.SpotLight( this.white, 30000 );
+    light_one.position.set( 0, 10, 100 );
+    this.scene.add(light_one);
 
-    this.light_two = new THREE.HemisphereLight(this.white, this.bright_pink,  3);
-    this.light_two.position.set(0, 1, 0);
-    this.scene.add(this.light_two);
+    const light_two = new THREE.HemisphereLight(this.white, this.bright_pink, 1);
+    light_two.position.set(0, 1, 0);
+    this.scene.add(light_two);
+
+    const light_three = new THREE.SpotLight( this.bright_pink, 30000 );
+    light_three.position.set( 0, -10, -100 );
+    this.scene.add(light_three);
   }
   
   addModels(files){
   
     const objsToDraw = 20
-    const material = new THREE.MeshPhongMaterial({ color: this.white, flatShading: true, shininess: 0 });
+    const material = new THREE.MeshPhongMaterial({ color: this.white, flatShading: true, shininess: 1});
 
 
     for ( let i = 0; i < Object.keys(files).length; i ++ ) {
