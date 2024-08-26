@@ -19,21 +19,6 @@
         display: none;
       }
   
-      #artMain{
-        background-image: url("/assets/images/shroms.png");
-        background-size: calc(100%);
-        font-size: 50px;
-        text-align: center;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-      }
-      
-      /* Hide scrollbar for Chrome, Safari and Opera */
-  
-      #artMain::-webkit-scrollbar {
-      display: none;
-      }
-  
       /* .slideContainer{
         visibility: hidden;
       } */
@@ -94,14 +79,6 @@
         height: 100vh;
         width: 0px;
         padding: 10px;
-      }
-  
-      .slider::-moz-range-thumb {
-        background-image: url('/assets/images/shrom2.png');
-      }
-  
-      .slider::-webkit-slider-thumb{
-        background-image: url('/assets/images/shrom2.png');
       }
   
       .whiteBorder{
@@ -173,6 +150,12 @@
   
   <body>
 
+    <div class="container navigation pink">
+      <a href="/public/index.html"><div class="flower"></div></a>
+      <a class="margin homelinks" href="/src/CV.html"> CV </a>
+      <a class="margin homelinks" href="/src/about.html"> about </a>
+    </div>
+
         <div id="leftSidebar">
           <div class ="centralise" id="artStatement">
             <a href="/public/index.html" class ="navigator">
@@ -240,14 +223,10 @@
             <div title="colour metaphor" class="artItem">colour metaphor</div>
           </div>
           <br>
-          <img src="/assets/images/shrom.png" class='full'/>
+          <img src="/assets/images/shrooms/shrom.png" class='full'/>
         </div>
 
         <div id="artMain">
-
-
-
-
           <div class ="contentOption" id="artStatement">
             <div class="contents">
                 <div class="description">
@@ -347,29 +326,6 @@
           </div>
 
 
-          <div class ="contentOption" id="computationalGarden">
-            <div class="contents">
-              <div class="pieceTitle">computational garden</div>
-                <div class="description">
-                  <div class="paragraph">
-                    A single piece which is a predecessor to Megan's 'render paintings'. This is a machine-automated embroidery of a digitally rendered monochrome scene of flowers.
-                  </div>
-                  <a href="art/computationalGarden.html" class="imgWrap" target="_blank">
-                    <img class="img inlineImg whiteBorder" src="/assets/images/embroidery.jpg" alt="Computational Garden Embroidery">
-                  </a>
-                  <div class="paragraph">
-                    The greyscale tones are calculated through raytracing a virtual light's beams of light bouncing through a scene of flower models. The flowers are a kind of 3D 'collage' of collected opensource models, some made by other artists, some constructed with photogrammetry of real flowers.
-                  </div>
-                  <div class="paragraph">
-                    <a href="art/computationalGarden.html" class="imgWrap" target="_blank">click here</a>
-                    for a full-screen image of the work.
-                  </div>
-                  <div class="buffer"></div>
-                </div>
-            </div>
-          </div>
-
-
 
           <div class ="contentOption" id="balloon">
             <div class="contents">
@@ -464,7 +420,7 @@
                   to read it.
                 </div>
                 <a href="/assets/pdf/Medusan and Athenian Interactions.pdf" class="imgWrap" target="_blank">
-                  <img class="img inlineImg whiteBorder" src="/assets/images/symbiote.png" alt="Gaze eyetracking interactive machine vision artwork">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/symbiote/symbiote.png" alt="Gaze eyetracking interactive machine vision artwork">
                 </a>
               </div>
             </div>
@@ -528,29 +484,6 @@
 
 
 
-          <div class ="contentOption" id="oapvr">
-            <div class="contents">
-              <div class="pieceTitle">o a p v r</div>
-                <div class="description">
-                  <div class="paragraph">
-                    'Old Age Pensioner Virtual Reality', a speculative piece about what VR might look like/be used for if it were invented by a woman of the archetype of a 'granny'.
-                  </div>
-                  <div class="paragraph">
-                    <iframe class="vidEmbed" src="https://player.vimeo.com/video/248296353" width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                  </div>
-                  <a href="art/oapvr.html" class="imgWrap" target="_blank">
-                    <img class="img inlineImg whiteBorder" src="/assets/images/oapvr2.jpg" alt="oapvr sculpture">
-                  </a>
-                  <div class="paragraph">
-                    In homage to the history of women's work inventing programming which was erased, this work explores an alternative world in which the aesthetics of little old ladies is brought to 'cutting edge' tech.
-                  </div>        
-                  <div class="buffer">
-                  </div>
-              </div>
-            </div>
-          </div>
-
-
 
           <div class ="contentOption" id="planets">
             <div class="contents">
@@ -589,28 +522,6 @@
 
 
 
-          <div class ="contentOption" id="stayingInTouch">
-            <div class="contents">
-              <div class="pieceTitle">staying in touch</div>
-              <div class="description">
-                <div class="paragraph">
-                  Not safe for work! A project developed for the 2021 
-                  <a href="https://creativecodingutrecht.nl/" target="_blank">Creative Coding Utrecht</a>
-                  Rainbows End: Sex Tech Hackathon. Access it
-                  <a href="art/witchcraftWebdev.html" class="imgWrap" target="_blank"> here. </a>
-                </div>
-                <a href="https://staying-in-touch.github.io/" class="imgWrap" target="_blank">
-                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/stayingInTouch.png" alt="staying-in-touch page screenshot">
-                </a>
-                <div class="paragraph">
-                  'staying in touch' was created as a gentle and data-safe introduction to online eroticism.
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
           <div class ="contentOption" id="kite">
             <div class="contents">
               <div class="pieceTitle">colour metaphor</div>
@@ -633,15 +544,6 @@
 
         </div>
 
-        <div class="slideContainer" id="scroller">
-          <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
-        </div>
-
-      <script type="module">
-        new fairyDustCursor({
-          colors: ["#ff284d"]
-        });
-      </script>
       <script type="module" src="/js/art.js"></script>
 
   </body>
