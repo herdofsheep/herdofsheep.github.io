@@ -1,9 +1,8 @@
 import { html } from "lit";
 import * as THREE from "three";
-import _ from "lodash";
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import ThreeBase from './base';
+import ThreeBase from './base.ts';
 import colours from './colours.ts';
 
 class ThreeDModel extends ThreeBase {

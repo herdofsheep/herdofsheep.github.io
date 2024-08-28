@@ -1,7 +1,6 @@
 
 import { LitElement } from 'lit';
 import * as THREE from 'three';
-import _, { find } from 'lodash';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
