@@ -7,14 +7,23 @@
     <title>CV</title>
 		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" charset="utf-8"/>
 		<link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+    <script type="module" src="/ts/three_d_model.ts"></script>
   </head>
   
   <body>
     
     <div class="container navigation pink">
-        <a href="/public/index.html"><div class="flower"></div></a>
-        <a class="margin homelinks" href="/src/art.html"> art </a>
-        <a class="margin homelinks" href="/src/about.html"> about </a>
+      <a href="/public/index.html"><div class="flower"></div></a>
+      <a class="twodlink" href="/src/art.html">
+        <three-d-model class="threedmodel" link="/assets/models/gltf/math.glb"></three-d-model>
+        <div class="twodlink"> art </div>
+        <three-d-model class="threedmodel" link="/assets/models/gltf/math.glb"></three-d-model>
+      </a>
+      <a class="twodlink" href="/src/about.html">
+        <three-d-model class="threedmodel" link="/assets/models/gltf/questionmark.glb"></three-d-model>
+        <div class="twodlink"> about </div>
+        <three-d-model class="threedmodel" link="/assets/models/gltf/questionmark.glb"></three-d-model>
+      </a>
     </div>
     
     <div class="text justifyText newClass smallFull centralise textSpacer topMargin2 bottomMargin">
@@ -22,6 +31,7 @@
           <div class="alongText">
               CV hello hello
           </div>
+      </div>
   </div>
     
   </body>

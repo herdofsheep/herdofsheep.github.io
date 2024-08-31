@@ -175,9 +175,9 @@ class RayCast extends ThreeBase {
     }
     this.setupLights();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: '/src/about.html', description: "statement"},
-      { key: 'work', url: '/assets/models/gltf/jennings_lo.glb', link: '/src/CV.html', description: "CV"},
-      { key: 'math', url: '/assets/models/gltf/math.glb', link: '/src/art.html', description: "portfolio"},
+      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: "about", description: "statement"},
+      { key: 'work', url: '/assets/models/gltf/jennings_lo.glb', link: "CV", description: "CV"},
+      { key: 'math', url: '/assets/models/gltf/math.glb', link: "art", description: "portfolio"},
     ];
     const files = await this.getFiles(modelUrls)
     this.modelInfo = modelUrls;
@@ -299,7 +299,7 @@ class RayCast extends ThreeBase {
         this.cursorType = "pointer";
         const modelInfoItem = this.modelInfo.find(item => item.key === key);
         if (modelInfoItem) {
-          this.link = modelInfoItem.link;
+          this.link = (this.parentElement?.querySelector("#"+modelInfoItem.link) as HTMLAnchorElement)?.href;
           this.debugWindow.innerHTML = modelInfoItem.description;
         }
         const instanceId = intersection[0].instanceId;

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<html>
+
+  <head>
+
+    <title>art</title>
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" charset="utf-8"/>
+		<link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+
+    <style>
+
+      body{
+        cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKlmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDggNzkuMTY0MDM2LCAyMDE5LzA4LzEzLTAxOjA2OjU3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIxLTAxLTAxVDIyOjQ1OjI2WiIgeG1wOk1vZGlmeURhdGU9IjIwMjEtMDItMDVUMDE6MjA6MzRaIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTAyLTA1VDAxOjIwOjM0WiIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3MDIzYTI0ZC1jMGZiLTRjMzktOWVlYS1mMDFhZTkwODcxOTIiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDphM2JiNDkzNS1jMzNiLTkyNDctOTczYi1mMTEwY2ViOWU5NjQiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjMyNDU4MWYyLWVkOTItNDIwOS04MWI5LTc1NjhiYWE4MGQ5NyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0NToyNloiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjb252ZXJ0ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImZyb20gaW1hZ2UvcG5nIHRvIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmU0NTkxMTI5LWEwZjUtNDcyOS1iOGQ3LTFjYzM0NzUwNGUwMyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0ODoyMFoiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDphMDY2NWY0OC01NGExLTQxMmEtYjBkNS1hODA2YjUxZjk3MTUiIHN0RXZ0OndoZW49IjIwMjEtMDEtMDFUMjI6NDg6NDdaIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjEuMCAoTWFjaW50b3NoKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY29udmVydGVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJmcm9tIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AgdG8gaW1hZ2UvcG5nIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJkZXJpdmVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJjb252ZXJ0ZWQgZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NTI0Y2VhNTgtYTEwMy00NzI1LWE2NDItYzIwNWJmNzRhZDM1IiBzdEV2dDp3aGVuPSIyMDIxLTAxLTAxVDIyOjQ4OjQ3WiIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjcwMjNhMjRkLWMwZmItNGMzOS05ZWVhLWYwMWFlOTA4NzE5MiIgc3RFdnQ6d2hlbj0iMjAyMS0wMi0wNVQwMToyMDozNFoiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDphMDY2NWY0OC01NGExLTQxMmEtYjBkNS1hODA2YjUxZjk3MTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzI0NTgxZjItZWQ5Mi00MjA5LTgxYjktNzU2OGJhYTgwZDk3IiBzdFJlZjpvcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MzI0NTgxZjItZWQ5Mi00MjA5LTgxYjktNzU2OGJhYTgwZDk3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+PwhHAQAAAZxJREFUSMetlbtKA0EUhnfJeksURYydBhVBwRResLAS7PMQFra+gljZiQq2KcQqggEJCd4wKNipKHY2oogo2KiFisZ/4B8Yhtn7Fh/M7EzOl3POzK7VyBUsD8ZAp88eT/w2rICFpAQ50KxtuAPn2rN+MBJFMAwewRLoAZOgQUZBH1gDL6Araom2GPATXCuCG/DF8XqcHogsfpTAOr9gKI6gF1x5CO7BDLDDCJpAAeyCb5fAt9r8AayC6SCCKbDJH5mCi6Y7oKQ8uwSLIBumRCLtCXCq/XOH61IiGt4etQct4FnLYIdlFOspsA3OQEcUwTyD/oELRVIyZHICMmFLJM5+GYyDVvBGwasmGeT8GKSDCrIMrD7b4L0YAHUGXQbvYJbzIy+JXw1F0w85TjOYLNsHmGNP6m7lCnISxMXq5jjDskiJmsk+yxpakCK2SyaqpKZL9GC2Ye4Y1oTkwEVS5XEPnIEbbSyLSVKRkjgCKam5SPbEByyuwGLNqwaJuO3FJATyFVPRjvATyCclsPg9L1MgPqv5JHpgkhRlcME/4C67/UjLL/AAAAAASUVORK5CYII=),auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+  
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      body::-webkit-scrollbar {
+        display: none;
+      }
+  
+  
+      #artstatement{
+        visibility: visible;
+      }
+  
+      .contentOption{
+        visibility: hidden;
+        position: absolute;
+        top: 0px;
+        }
+  
+      .contents{
+        margin-top: 30px;
+        position: relative;
+        margin: 20px;
+        /* min-width: min-content; */
+        max-width: 60%;
+        max-height: 90vh;
+        width:auto;
+        height:auto;
+      }
+  
+      .pieceTitle{
+        padding: 5px;
+        font-size: 20;
+        color: black;
+        font-weight: 600;
+        letter-spacing: 1px;
+        background: white;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+  
+      .description{
+        font-size: 16px;
+        display: initial;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        max-height: 80vh;
+        letter-spacing: 1px;
+        /* min-width: min-content */
+      }
+  
+      .paragraph{
+        background: white;
+        /* max-width: 60%; */
+        margin: 10px;
+        padding: 10px;
+        display: table;
+        }
+  
+      .buffer{
+        height: 100vh;
+        width: 0px;
+        padding: 10px;
+      }
+  
+      .whiteBorder{
+        margin: 10px;
+        border: 5px white solid;
+      }
+  
+      .imgWrap{
+        display: contents;
+      }
+  
+      .inlineImg{
+        max-width: 90%;
+        max-height: 50vh;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        height: auto;
+      }
+  
+      .navigator{
+        color: white;
+        background: #ff284d;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        margin: 5px;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+        display: inline-block;
+      }
+
+      .navigator::after{
+        margin-top: 0;
+      }
+
+      .navigator:hover, .buffer:focus{
+        color: #ff284d;
+        background: white;
+        outline: 3px solid #ff284d
+      }
+  
+      .focus{
+        color: #ff4162;
+        font-weight: 700;
+        text-decoration: none; 
+        cursor: default;
+      }
+  
+      .focus:hover, .focus:focus{
+        color: #ff4162;
+        font-weight: 700;
+        text-decoration: none; 
+        cursor: default;
+      }
+
+      .vidEmbed{
+        width: 100%;
+        height: auto;
+      }
+
+      .topMargin{
+        margin-top: 10px;
+      }
+  
+    </style>
+
+  </head>
+  
+  <body>
+
+    <div class="container navigation pink">
+      <a href="/public/index.html"><div class="flower"></div></a>
+      <a class="margin homelinks" href="/src/CV.html"> CV </a>
+      <a class="margin homelinks" href="/src/about.html"> about </a>
+    </div>
+
+        <div id="leftSidebar">
+          <div class ="centralise" id="artStatement">
+            <a href="/public/index.html" class ="navigator">
+              home
+            </a>
+          </div>
+          <div class ="centralise topMargin focus" id="artStatement">
+            <div title="artist statement" class="artItem">artist statement</div>
+          </div>
+          <div class ="centralise topMargin" id="renderPaintings">
+            <div title="render paintings" class="artItem">render paintings</div>
+          </div>
+          <div class ="centralise topMargin" id="codingExperiments">
+            <div title="coding experiments" class="artItem">coding experiments</div>
+          </div>
+          <div class ="centralise topMargin" id="noSuchThing">
+            <div title="no such thing" class="artItem">no such thing</div>
+          </div>
+          <div class ="centralise topMargin" id="paintStudies">
+            <div title="painting studies" class="artItem">painting studies</div>
+          </div>
+          <div class ="centralise topMargin" id="computationalGarden">
+            <div title="computational garden" class="artItem">computational garden</div>
+          </div>
+          <div class ="centralise topMargin" id="balloon">
+            <div title="balloon" class="artItem">balloon</div>
+          </div>
+          <div class ="centralise topMargin" id="digitalSymbiote">
+            <div title="digital symbiote" class="artItem">digital symbiote</div>
+          </div>
+          <div class ="centralise topMargin" id="gaze">
+            <div title="gaze" class="artItem">gaze</div>
+          </div>
+          <div class ="centralise topMargin" id="mathena">
+            <div title="medusan and athenian interactions" class="artItem">medusan and athenian interactions</div>
+          </div>
+          <div class ="centralise topMargin" id="knots">
+            <div title="knots" class="artItem">knots</div>
+          </div>
+          <div class ="centralise topMargin" id="flown">
+            <div title="flown" class="artItem">flown</div>
+          </div>
+          <div class ="centralise topMargin" id="tarot">
+            <div title="tarot" class="artItem">tarot</div>
+          </div>
+          <div class ="centralise topMargin" id="oapvr">
+            <div title="o.a.p.v.r." class="artItem">o.a.p.v.r.</div>
+          </div>
+          <div class ="centralise topMargin" id="planets">
+            <div title="planets" class="artItem">planets</div>
+          </div>
+          <div class ="centralise topMargin" id="clouds">
+            <div title="clouds" class="artItem">clouds</div>
+          </div>
+          <div class ="centralise topMargin" id="witchcraftWebDev">
+            <div title="witchcraft web dev" class="artItem">witchcraft web dev</div>
+          </div>
+          <div class ="centralise topMargin" id="stayingInTouch">
+            <div title="staying in touch" class="artItem">staying in touch</div>
+          </div>
+          <div class ="centralise topMargin" id="millingGuide">
+            <div title="milling guide" class="artItem">milling guide</div>
+          </div>
+          <div class ="centralise topMargin" id="kite">
+            <div title="colour metaphor" class="artItem">colour metaphor</div>
+          </div>
+          <br>
+          <img src="/assets/images/shrooms/shrom.png" class='full'/>
+        </div>
+
+        <div id="artMain">
+          <div class ="contentOption" id="artStatement">
+            <div class="contents">
+                <div class="description">
+                  <div class="pieceTitle">artist statement</div>
+                  <div class="paragraph">
+                    A phone is an agent through which a specifically modern relationship exists- a site of work, contacting friends, arguing with strangers and looking at porn.
+                  </div>
+                  <div class="paragraph">
+                    The light from that phone has a narrow gamut of colours, less than those visible to the human eye. The interface of a screen promises a complete experience- Could the highest definition VR be a seamless replacement for an interconnected life? However, there's no denying that the real world just 'feels' different.
+                  
+                  </div>
+                  <div class="paragraph">
+                    Megan Bates is a computational artist who works largely with the media of code and paint. She produces works about our increasingly complex relationship with machines.
+                  
+                  </div>
+                  <div class="paragraph">
+                    Her physics background informs her practice, and she is particularly interested in interconnectedness, both quantifiable and spiritual. Informed by Karen Barad's 'meeting the universe halfway', she explores the relationship between Quantum entanglement and individuality, and queer theory questioning boundaries between the human and non-human. 
+                  
+                  </div>
+                  <div class="paragraph">
+                    She understands herself as part of a co-regulated soup of stressed-out humans, copper wires, fungal roots, twitter threads and carbon emissions. Megan hopes to capture some essence of that soup with empathy extended in unusual directions.
+                  
+                  </div>
+                  <div class="paragraph">
+                    She takes inspiration from Dutch flower paintings such as those by Jan Davidsz de Heem, which she feels succeed at representing this concept by appearing sensuous from a distance, but challenging and disorienting on closer inspection. The entangled phenomena of disgust and eroticism are depicted through this experience of encountering the alien.
+                  
+                  </div>
+                  <div class="paragraph">
+                    Digital rendering allows Megan to create photorealistic lighting within impossible environments, and enable her to construct dreamlike worlds intertwining unusual materials to construct liquid pools, misty fogs, and fleshy appendages. These are then pulled out of the screen, through Megan's process of interpreting and capturing these computational dreams in a spectrum of paint too broad for digitisation.
+                  </div>
+                  <div class="buffer">
+                  </div>
+                </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="renderPaintings">
+            <div class="contents">
+              <div class="pieceTitle">render paintings</div>
+              <div class="description">
+                <div class="paragraph">
+                  An ongoing series of works in which digital renders are interpreted into oil paints, watercolours or, ocassionally, pencils. Sometimes Megan's home-made drawing machine is involved.
+                </div>
+                <a href="art/paintingShop.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/smallRipple.jpg" alt="Ripple render painting">
+                </a>
+                <div class="paragraph">
+                  The 3D rendering environment allows for an interesting approach to image making- fantastical dream-like scenes can be depicted with photorealistic lighting despite their physical impossibility.
+                </div>
+                <a href="art/paintingShop.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/cloud.png" alt="Cloud render painting">
+                </a>
+                <a href="art/paintingShop.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/mushroom.png" alt="Mushroom render painting">
+                </a>
+                <div class="paragraph">
+                  The result is intended to be a strange in-between place of neither realism or abstraction, a plein air painting in an imaginary video game.                
+                </div>
+                <div class="paragraph">
+                  <a href="art/paintingShop.html" target="_blank">click here</a>
+                  to go through to the full gallery of these works.<br>
+                </div>            
+                <div class="buffer">
+                </div>
+            </div>
+          </div>
+          </div>
+
+
+          <div class ="contentOption" id="noSuchThing">
+            <div class="contents">
+              <div class="pieceTitle">no such thing</div>
+                <div class="description">
+                  <div class="paragraph">
+                    A collaborative work between Megan and Daniel Cesarani 
+                    <a href="https://twitter.com/chezzarani?lang=en" target="_blank">
+                    @chezzarani.
+                    </a>
+                    Writing by Daniel, images by Megan.
+                  </div>
+                  <a href="art/noSuchThing.html" target="_blank">
+                    <img class="img inlineImg whiteBorder" src="/assets/images/noSuchThing/fox.jpg" alt="Computational Garden Embroidery">
+                  </a>
+                  <div class="paragraph">
+                    A work about memory, and the isolating experience of existing persistently in a digital space. It was created during covid lockdown 1, 2020. Read it 
+                  <a href="art/noSuchThing.html" target="_blank">
+                    here.
+                  </a>
+                  </div>
+                  <div class="paragraph">
+                    The images are a collection of collages of assets from video games, photographs of reality, and oil paintings by Megan. The possibility to distinguish between the sources of these collage elements is kept deliberately challenging.
+                  </div>
+                </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="balloon">
+            <div class="contents">
+              <div class="pieceTitle">balloon</div>
+              <div class="description">
+                <div class="paragraph">
+                  An interactive experiment which can be 'played' 
+                  <a href="art/balloon/balloon.html" class="imgWrap" target="_blank">here.</a>
+                  Inspired by video games such as QWOP, this work encourages the user to use an unconventional finger position on the keyboard to create an unusual interactive experience.
+                </div>
+                <a href="art/balloon/balloon.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/balloon2.png" alt="Computational Garden Embroidery">
+                </a>
+                <div class="paragraph">
+                  A pinching/pulling finger position is used to control an inflating balloon. Holding all of the WAXD keys causes the balloon to inflate and rise, and removing a key lets the balloon spring back in the correlating direction, and get a little boost moving that way.
+                </div>
+                <div class="paragraph">
+                  This work is in development- this image depicts the custom controller made of entirely soft materials (mostly conductive thread) which exaggerates the 'stretching' experience of the finger positions.
+                </div>
+                <div class="buffer"></div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="digitalSymbiote">
+            <div class="contents">
+              <div class="pieceTitle">digital symbiote</div>
+              <div class="description">
+                <div class="paragraph">
+                  Digital Symbiote was the final piece for Megan's Computational arts MA. The system is programmed microchip and circuitboard of her own design, which is set up to have a symbiotic relationship with a plant.
+                  <a href="art/digitalSymbiote.html" target="_blank">click here</a>
+                  to view the video documentation of this piece as it was exhibited at the Goldsmith Computational Arts degree show 2018.
+                </div>
+                <a href="art/digitalSymbiote.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/symbiote.png" alt="Computational Garden Embroidery">
+                </a>
+                <div class="paragraph">
+                  The plant and digital symbiote share a biodegradable home. When the plant triggers a signal in a photoelectric sensor, the microchip in the digital symbiote is programmed to respond by stimulating the game of life on its LED array. The colours of the LEDs are chosen to be a good spectrum for photosynthesis, and within the dark space help to sustain the plant that the digital symbiont lives with.
+                </div>
+                <div class="paragraph">
+                  <iframe class="vidEmbed" style="display:inline-block" width="1080" height="630" src="https://www.youtube.com/embed/Qmy8-eLwSVQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="paragraph">
+                  If either dies, so does the other, and so the piece is a reflection on what we consider alive, what we consider complex, and what collaborative relationships are possible.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="gaze">
+            <div class="contents">
+              <div class="pieceTitle">gaze</div>
+              <div class="description">
+                <div class="paragraph">
+                  An opensource eye-tracking software project using machine learning to detect eyes, and computer vision to correlate pupil position. After calibration, the software presents an interactive experience whereby wherever the audience looks the contents of the screen are removed.
+                  <a href="art/gaze.html" target="_blank">click here</a>
+                  to view the video documentation of this piece.
+                </div>
+                <a href="art/gaze.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/gaze.png" alt="Gaze eyetracking interactive machine vision artwork">
+                </a>
+                <div class="paragraph">
+                  Into the peripheral vision, the color of the screen is tinted. As human eyes see peripheral colour differently, the work explores a unique colour experience as well as playing with disorientation.
+                </div>
+                <div class="paragraph">
+                  <iframe class="vidEmbed" src="https://player.vimeo.com/video/267027896" width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+                <div class="paragraph">
+                  The project was based on deprecated C++ code for openframeworks, and updated with a pull request made on github. You can read the code 
+                  <a href="https://github.com/herdofsheep/eyeTracker" target="_blank">here. </a>
+                </div>
+                <div class="paragraph">
+                  The project was originally built as a computer interface for users wih mobility accessibility needs, to control a PC, for making art using only eye movement.              
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="mathena">
+            <div class="contents">
+              <div class="pieceTitle">medusan and athenian interactions</div>
+              <div class="description">
+                <div class="paragraph">
+                  An essay-come-artwork meditating on digital vs natural aesthetics. This dichotomy was explored using the myth of Medusa and Athena. This work was a predecessor to digital symbiote. 
+                  <a href="/assets/pdf/Medusan and Athenian Interactions.pdf" target="_blank">Click here</a>
+                  to read it.
+                </div>
+                <a href="/assets/pdf/Medusan and Athenian Interactions.pdf" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/symbiote/symbiote.png" alt="Gaze eyetracking interactive machine vision artwork">
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="knots">
+            <div class="contents">
+              <div class="pieceTitle">knots</div>
+              <div class="description">
+                <div class="paragraph">
+                  A piece exploring creating different visuals with a shared 'knotting' pathing program, winding digital ropes over one another.
+                </div>
+                <div class="paragraph">
+                  <iframe class="vidEmbed" src="https://player.vimeo.com/video/250971240" width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+                <div class="paragraph">
+                  The programs were projection-mapped onto a 3d shape to create the illusion that the surfaces of the shape were screens.
+                  <a href="art/knots.html" target="_blank">click here</a>
+                  to view the video documentation of this piece.
+                </div>
+                <a href="art/knots.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/knots.png" alt="digital symbiote plant and LED array sculpture">
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="flown">
+            <div class="contents">
+              <div class="pieceTitle">flown</div>
+              <div class="description">
+                <div class="paragraph">
+                  <iframe class="vidEmbed" style="display:inline-block" width="1080" height="630" src="https://www.youtube.com/embed/q9V6dAZHJvQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="paragraph">
+                  A mobile game which uses gyroscopics to control the motion of a bird within a generative landscape.
+                  <a href="art/flown.html" target="_blank">click here</a>
+                  to view the video documentation of this piece.
+                </div>
+                <a href="art/flown.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/flown.jpg" alt="Flown game">
+                </a>
+                <div class="paragraph">
+                  This work was a collaborative piece between Megan,
+                  <a href="https://rebeccaaston.com/" target="_blank">Rebecca Aston, </a>
+                  <a href="https://tin.fyi/" target="_blank">Tin Geber, </a> 
+                  <a href="https://rodriguesmarsh.com/" target="_blank">Joseph Rodrigues Marsh, </a>
+                  and
+                  <a href="https://isaacclarke.com/" target="_blank">Isaac Clarke.</a>
+                </div>
+                <div class="paragraph">
+                  This was an early work using 3D modelling and git workflows. It was built in Unity, and Megan modelled and animated the bird in Blender. She also wrote the camera controls and physics for flight and wind-tunnel forces.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class ="contentOption" id="planets">
+            <div class="contents">
+              <div class="pieceTitle">planets</div>
+              <div class="description">
+                <div class="paragraph">
+                  A close study of the surfaces of the planets in our solar system. See them all
+                  <a href="art/planets.html" target="_blank">here.</a>
+                </div>
+                <a href="art/planets.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg" src="/assets/images/planets/earth.png" alt="Planet illustration">
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="witchcraftWebDev">
+            <div class="contents">
+              <div class="pieceTitle">witchcraft web dev</div>
+              <div class="description">
+                <div class="paragraph">
+                  A guide/ritual to introduce people to web development, and how to make a free web page using github. Read it
+                  <a href="art/witchcraftWebdev.html" class="imgWrap" target="_blank"> here. </a>
+                </div>
+                <a href="art/witchcraftWebdev.html" class="imgWrap" target="_blank">
+                  <img class="img inlineImg whiteBorder" src="/assets/images/optimised/webdev.png" alt="wwebdev page screenshot">
+                </a>
+                <div class="paragraph">
+                  The instructions are delivered by explaining with an unusual tone of voice. Considering coding as a kind of 'spellcasting' is presented as an alternative to the common thinking framework and language used in typical programming guides.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class ="contentOption" id="kite">
+            <div class="contents">
+              <div class="pieceTitle">colour metaphor</div>
+              <div class="description">
+                <div class="paragraph">
+                  <iframe class="vidEmbed" src="https://player.vimeo.com/video/210489434"  width="1080" height="630" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+                <div class="paragraph">
+                  A study of colour and materials, 555nm LEDs are strung through a fluorescent pink fabric- as the sun sets, the dominant colours shift from pink through to green, a reversal of the dominant colours the human eye sees at night and day. See the video documentation of this piece 
+                  <a href="art/kite.html" target="_blank">here.</a>
+                </div>
+                <div class="paragraph">
+                  This piece is a kite which can be flown! But it was a little large and uncontrollable to be flown through a full sunset.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      <script type="module" src="/ts/art.js"></script>
+
+  </body>
+  
+</html>
