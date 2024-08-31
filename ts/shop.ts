@@ -80,12 +80,17 @@ function update(){
 
 function updateText(){
     var infoText = document.getElementById('info');
-    infoText.innerHTML = images[focusPos].firstElementChild.alt;
+    if (infoText !== null) {
+        infoText.innerHTML = images[focusPos].firstElementChild.alt;
+    }
 }
 
 function leftClick(){
 
-    document.getElementById('arrow-right').style.visibility = 'visible';
+    const arrowRight = document.getElementById('arrow-right');
+    if (arrowRight !== null) {
+        arrowRight.style.visibility = 'visible';
+    }
 
     images[focusPos].id = 'unfocus';
     images[focusPos].style.zIndex = '0';
@@ -97,7 +102,10 @@ function leftClick(){
 
 function rightClick(){
 
-    document.getElementById('arrow-left').style.visibility = 'visible';
+    const arrowLeft = document.getElementById('arrow-left');
+    if (arrowLeft !== null) {
+        arrowLeft.style.visibility = 'visible';
+    }
 
     images[focusPos].id = 'unfocus';
     images[focusPos].style.zIndex = '0';
