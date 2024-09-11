@@ -2,6 +2,7 @@ var translateDistance;
 var images, focusPos;
 var offset = 50;
 var imageFocus;
+var width, height;
 
 let index = 0;
 let x0 = null;
@@ -40,9 +41,10 @@ function init(){
     var is_touch_device = 'ontouchstart' in document.documentElement;
     //redirect to homepage if a touch device
     if(is_touch_device){
-        var arrows = document.getElementsByClassName("arrow")
+        var arrows = document.getElementsByClassName("arrow");
         for(var i=0; i < arrows.length; i++){
-            arrows[i].style.width='15%'
+            var arrow = arrows[i] as HTMLElement;
+            arrow.style.width='15%';
         }
     }
 
@@ -62,10 +64,16 @@ function update(){
     var translateValue = 100*((images.length/2)-focusPos) - offset;
 
     if (focusPos == images.length-1){
-        document.getElementById('arrow-right').style.visibility = 'hidden';
+        const arrowRight = document.getElementById('arrow-right');
+        if (arrowRight !== null) {
+            arrowRight.style.visibility = 'hidden';
+        }
     }
     if (focusPos == 0){
-        document.getElementById('arrow-left').style.visibility = 'hidden';
+        const arrowLeft = document.getElementById('arrow-left');
+        if (arrowLeft !== null) {
+            arrowLeft.style.visibility = 'hidden';
+        }
     }
 
     for(var i=0; i<images.length; i++){
@@ -113,6 +121,7 @@ function rightClick(){
 
     update();
 
+
 }
 
 function onWindowResize() {
@@ -132,7 +141,10 @@ function updateWidth(){
 
     // make all the images the same width so that the panning behaviour works well
     for(var i=0; i<images.length; i++){
-        images[i].style.maxWidth = "" + document.getElementById("imageFocus").clientWidth + "px"
+        const imageFocusElement = document.getElementById("imageFocus");
+        if (imageFocusElement !== null) {
+          (images[i] as HTMLElement).style.maxWidth = "" + imageFocusElement.clientWidth + "px";
+        }
     }
 
     // var arr = Array.prototype.slice.call( imageWraps )

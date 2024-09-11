@@ -1,0 +1,38 @@
+.megPhoto{
+    max-width: 50vw;
+    max-height: 45vh;
+    padding-right: 5vh;
+}
+
+.alongside{
+    display: inline-flex;
+    padding-bottom: 5vh;
+}
+
+.alongText{
+    display: block;
+    margin: auto;
+}
+
+.noShadow::after{
+    content: none; 
+}
+
+.citations{
+    display: flow-root;
+    font-size: 15px;
+    width: fit-content;
+    margin: auto;
+}
+
+.cite{
+    display: flex;
+    line-height: 3ex;
+    text-align: left;
+}
+
+.date{
+    min-width: 150px;
+    display: flex;
+    font-weight: 600;
+}

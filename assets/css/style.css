@@ -88,7 +88,6 @@ a:focus{
 /* non-homepage navigation bar styling */
 .navigation{
   position:relative;
-  height: 100px;
   z-index: 1;
   display: flex;
 }
@@ -164,58 +163,6 @@ a:focus{
   margin-bottom: 10%;
 }
 
-/* breather margins for design portfolio homepage */
-.portfolioSpacer {
-  margin-top: 4.16666%;
-  margin-bottom: 4.16666%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 83.333333%;
-}
-
-/* portfolio boxes styling */
-.portfolioTextTwoline{
-  display: inline-block;
-  margin-top:30px;
-  margin-left:auto;
-  margin-right:auto;
-  width: 160px;
-  height: 50px;
-  line-height: 25px;
-  background: black;
-
-  color: #FFFFFF;
-  font-size: 18px;
-  text-align:center;
-}
-
-.portfolioTextOneline{
-  display: inline-block;
-  margin-top:30px;
-  margin-left:auto;
-  margin-right:auto;
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
-  background: black;
-
-  color: #FFFFFF;
-  font-size: 18px;
-  text-align: center;
-}
-
-.portfolioBox{
-  vertical-align: top;
-  text-align: center;
-  display: inline-block;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
-  margin-left: 4.16666%;
-  margin-right: 4.16666%;
-  height: 350px;
-  width: 250px;
-}
-
 /* text */
 .text{
   color: black;
@@ -270,211 +217,7 @@ a:focus{
   align-content: auto;
 }
 
-.saver{
-  position: fixed;
-  padding: 20px;
-  left: 10px;
-  bottom: 10px;
-  font-size: 30px;
-  width: 170px;
-  z-index:1000;
-}
-
-.saver {
-  font-weight: 400;
-  background: none;
-  color: #141414;
-  border: 3px solid;
-}
-
-.saver:hover, .saver:focus {
-  background: #fb8da0;
-  color: #FFC0CB;
-  font-weight: 600;
-  border: 3px solid transparent;
-}
-
-.grabcursor{
-  cursor: grab;
-}
-
-/*///////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-///////////////////////  work portfolio  ////////////////////////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////*/
-
- /* Tooltip container */
- .tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  min-width: 120px;
-  background-color: white;
-  color: black;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 45%;
-  border: black solid 5px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Tooltip arrow */
-.tooltip .tooltiptext::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -20px;
-  border-width: 20px;
-  border-style: solid;
-  border-color: black transparent transparent transparent;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -12px;
-  border-width: 12px;
-  border-style: solid;
-  border-color: white transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-} 
-
-/* image sizing tools */
-.quarter{
-  width: 24%;
-}
-.smallThird{
-  width: 30%;
-}
-.third{
-  width: 33%;
-}
-.smallHalf{
-  width: 40%;
-}
-.half{
-  width: 49%;
-}
-.bigPlanet{
-  width: 50%;
-}
-.smallFull{
-  width:90%;
-}
-.full{
-  width:100%;
-}
-
-.fullScreen{
-  width:100%;
-  height:100%;
-  position: absolute;
-  top:0px;
-}
-
-/*/////////////////////////////////////////////////////////
-/////////////////////  what?? page  ///////////////////////
-/////////////////////////////////////////////////////////*/
-
-.megPhoto{
-  max-width: 50vw;
-  max-height: 45vh;
-  padding-right: 5vh;
-}
-
-.alongside{
-  display: inline-flex;
-  padding-bottom: 5vh;
-}
-
-.alongText{
-  display: block;
-  margin: auto;
-}
-
-.noShadow::after{
-  content: none; 
-}
-
-/*/////////////////////////////////////////////////////////
-////////////////////////  slider  /////////////////////////
-/////////////////////////////////////////////////////////*/
-
-.slideContainer {
-  position: fixed;
-  left: 60%;
-  transform: translateX(-50%);
-  width: 70%;
-  bottom: 10px;
-}
-
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  border-radius: 10px;
-  outline: none;
-  background: white;
-  outline: none;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider:hover {
-  box-shadow: 0 0 0 3px black;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: none;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  border:none;
-  width: 25px;
-  height: 25px;
-  background: none;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
-}
-
 /* scaling tools for different devices */
-
 /* phone */
 @media only screen
   and (min-device-width: 320px) 
@@ -483,38 +226,8 @@ a:focus{
       width: 200px;
       font-size: 50px;
     }
-    .portfolioSpacer {
-      margin-top: 4.16666%;
-      margin-bottom: 4.16666%;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 90%;
-    }
-    .portfolioBox{
-      width: 350px;
-      height: 490px;
-    }
-    .portfolioTextTwoline{
-      width: 300px;
-      font-size: 30px;
-      width: 300px;
-      height: 100px;
-      line-height: 50px;
-    }
-    .portfolioTextOneline{
-      width: 300px;
-      font-size: 30px;
-      height: 100px;
-      line-height: 100px;
-    }
-    .quarter{
-      width: 33%;
-    }
-    .smallThird{
-      width: 40%;
-    }
-    .third{
-      width: 49%;
+    .navigation{
+      display: flow-root;
     }
     .bigPlanet{
       width: 75%;
@@ -532,6 +245,9 @@ a:focus{
   and (min-device-width: 768px) 
   and (max-device-width: 1024px) 
   and (orientation: landscape){
+    .navigation{
+      display: flow-root;
+    }
 }
 
 /* horizontal tablet */
@@ -539,6 +255,14 @@ a:focus{
   and (min-device-width: 768px) 
   and (max-device-width: 1024px) 
   and (orientation: portrait){
+}
+
+/* too skinny for the nav bar */
+@media screen
+  and (max-device-width: 700) {
+    .navigation{
+      display: flow-root;
+    }
 }
 
 /* desktop */
