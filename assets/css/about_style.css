@@ -49,3 +49,27 @@
     max-width: 80%;
     width: fit-content;
 }
+
+.CV_write{
+    font-size: 18px;
+    text-align: justify;
+    max-width: 80%;
+    width: fit-content;
+    padding-top: 30px;
+}
+
+.hr_style{
+    width: 80%;
+    margin: 50px;
+}
+
+.flower_spacer{
+    background-image: url(/assets/images/flower/flower_dark.png);
+    background-position: center;
+    background-size: contain;
+    position:relative;
+    display: block;
+    height:50px;
+    width: 50px;
+    margin-bottom: 100px;
+}

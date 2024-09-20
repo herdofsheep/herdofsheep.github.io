@@ -112,6 +112,14 @@ a:focus{
 }
 
 /* home button */
+
+.flower_box{
+  display: flex;
+  height: 120px;
+  margin-left: 10px;
+}
+
+
 .flower{
   background-image: url(/assets/images/flower/flower_dark.png);
   position:relative;
@@ -121,6 +129,7 @@ a:focus{
   background-position: center;
   background-size: contain;
   display: block;
+  margin: auto;
 }
 
 .flower:hover, .flower:focus{
@@ -145,8 +154,21 @@ a:focus{
 }
 
 /* breather margins for image pages that need it */
-.topMargin {
-  margin-top: 2.5ex;
+.top_margin {
+  margin-top: 5ex;
+}
+
+.bottom_margin {
+  margin-bottom: 5ex;
+}
+
+.bottom_page_margin {
+  margin-bottom: 200px;
+}
+
+.auto_lr_margin {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* text */
@@ -175,6 +197,7 @@ a:focus{
 .textSpacer{
   line-height: 3ex;
 }
+
 
 .twodlink {
   display: flex;
