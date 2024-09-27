@@ -1,4 +1,5 @@
 node_modules
 webAssets
 .parcel-cache
-dist/*
+dist
+.cache
