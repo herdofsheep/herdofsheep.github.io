@@ -1,12 +1,10 @@
-.megPhoto{
-    max-width: 50vw;
-    max-height: 45vh;
-    padding-right: 5vh;
+.meg_photo{
+    max-height: 25ex;
+    margin: 20px;
 }
 
 .alongside{
-    display: inline-flex;
-    padding-bottom: 5vh;
+    width: 90%;
 }
 
 .alongText{
@@ -22,7 +20,6 @@
     display: flow-root;
     font-size: 15px;
     width: fit-content;
-    margin: auto;
 }
 
 .cite{
@@ -72,4 +69,22 @@
     height:50px;
     width: 50px;
     margin-bottom: 100px;
+}
+
+.statement{
+    font-size: 18px;
+}
+
+.floated{
+    float: left;
+}
+
+.round{
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+}
+
+.board{
+    width: 180px;
 }

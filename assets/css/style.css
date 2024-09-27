@@ -26,7 +26,7 @@ a::after {
   color: transparent;
   overflow: hidden;
   visibility: hidden;
-  margin-top: -0.78ex;
+  margin-top: -0.95ex;
 }
 
 /* focus (mouse hover) */
@@ -268,7 +268,7 @@ a:focus{
 
 /* too skinny for the nav bar */
 @media screen
-  and (max-width: 650) {
+  and (max-width: 800) {
     .navigation{
       display: flow-root;
     }
