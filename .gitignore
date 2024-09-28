@@ -3,3 +3,5 @@ webAssets
 .parcel-cache
 dist
 .cache
+dist/*
+.DS_Store
