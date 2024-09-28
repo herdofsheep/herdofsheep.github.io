@@ -1,0 +1,378 @@
+<html>
+
+  <head>
+    <title>witchcraft web dev</title>
+    <link rel="stylesheet" href="/assets/css/witchcraft_style.css" type="text/css" charset="utf-8"/>
+    <script type="module" src="/ts/cursorShenanigans.ts"></script>
+  </head>
+
+  <style>
+    body{
+        cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAJzGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDggNzkuMTY0MDM2LCAyMDE5LzA4LzEzLTAxOjA2OjU3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIxLTAxLTAxVDIyOjQ1OjI2WiIgeG1wOk1vZGlmeURhdGU9IjIwMjEtMDEtMDFUMjI6NDg6NDdaIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTAxLTAxVDIyOjQ4OjQ3WiIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1MjRjZWE1OC1hMTAzLTQ3MjUtYTY0Mi1jMjA1YmY3NGFkMzUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozNzZlNDFjZi1jNDE0LWExNGEtOTZmMi02YjVmZTMxMTcwN2YiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjMyNDU4MWYyLWVkOTItNDIwOS04MWI5LTc1NjhiYWE4MGQ5NyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0NToyNloiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjb252ZXJ0ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImZyb20gaW1hZ2UvcG5nIHRvIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmU0NTkxMTI5LWEwZjUtNDcyOS1iOGQ3LTFjYzM0NzUwNGUwMyIgc3RFdnQ6d2hlbj0iMjAyMS0wMS0wMVQyMjo0ODoyMFoiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDphMDY2NWY0OC01NGExLTQxMmEtYjBkNS1hODA2YjUxZjk3MTUiIHN0RXZ0OndoZW49IjIwMjEtMDEtMDFUMjI6NDg6NDdaIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjEuMCAoTWFjaW50b3NoKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY29udmVydGVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJmcm9tIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AgdG8gaW1hZ2UvcG5nIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJkZXJpdmVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJjb252ZXJ0ZWQgZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NTI0Y2VhNTgtYTEwMy00NzI1LWE2NDItYzIwNWJmNzRhZDM1IiBzdEV2dDp3aGVuPSIyMDIxLTAxLTAxVDIyOjQ4OjQ3WiIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKE1hY2ludG9zaCkiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmEwNjY1ZjQ4LTU0YTEtNDEyYS1iMGQ1LWE4MDZiNTFmOTcxNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciIHN0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozMjQ1ODFmMi1lZDkyLTQyMDktODFiOS03NTY4YmFhODBkOTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4oan54AAABmklEQVRIx63Vz0sWURTG8XnxzfK1KCLbZZQIBbnIooWroH1/RIu2/QvSql1U4NZFtDJICFH6IUpCOw2lXZswRAzaZAsV+7Q5Q8Nl5v194MA9d+483znPvTOTIWuSN3C2xZqm2WrBEzzsF+AyBpMF3/A5mRvFtW4A4/iBaVzALf/jOi7hGfZwrluLXobgH2wWAFs4iPHzXvZgHEeq4xhjvQAu4ksTwHdModYJ4ATu4w0OK4S/JvU2nuJOO4DbmImbymIadcwV5jbwCCOdWFTDJD4lT16P6zlkC6e73YOT2E06eB02ZhjAK6zhTDeAByH6F+sFyFxJJysY7tSiTczjJk7hVwB+JpCrUS+j0S5gJISLcy/ivbiC1RB9jN+4G/XHZpBWHk7iQ4wbIZbHPu7FnqxW2dXOSZjC+RgPhy15FDt5F7Z2DBiIrFV0UoQspZBUrFZS10uuNfC+ArIYx73tDqpyKGwpgyzkkF4AOWSpAvIWg70CsvB8sQSyhtl+APJPzEJyhHcw0S9AFv/z+QDsYaIfe1AGmc3Fkf0DcIZCeRD8km8AAAAASUVORK5CYII=),auto;
+        background-image: url("/assets/images/shrooms/shroms.png");
+    }
+    h{
+        color:white;
+        font-size: 50px;
+        text-align: center;
+    }
+    .littleImg{
+        width:300px;
+    }
+    .box {
+        display: inline-block;
+        position: relative;
+        border: double white 10px;
+        width: 90%;
+        margin-bottom: 30px;
+    }
+    .box::before, .box::after {
+        content: "•";
+        position: absolute;
+        display: block;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: white;
+        border: 2px solid white;
+        }
+    .box::before {
+        top: 0px;
+    }
+    .box::after {
+        bottom: 0px;
+    }
+    .box-inner {
+        margin: 18px;
+        padding: 5px;
+        border: 2px solid white;
+    }
+    .box-inner::before, .box-inner::after {
+        content: "•";
+        right: 0px;
+        position: absolute;
+        display: block;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: white;
+        border: 2px solid white;
+    }
+    .box-inner::before {
+        top: 0px;
+    }
+    .box-inner::after {
+        bottom: 0px;
+    }
+  </style>
+  
+  <body>
+
+    <script type="module">
+        new fairyDustCursor({
+          colors: ["#ffffff"]
+        });
+    </script>
+
+    <div class="contents">
+        <div class="textWindow">
+            <h>Witchcraft Web Dev</h>
+        </div>
+
+        <div class="textWindow">
+        <div class="text margin">
+            This page is a ritual to guide artists to building a web page hosting their own images, text and links. With a bit of independent learning it is perfectly possible to work with the many wonders of the modern web including 3D things, playable games and interactive experiences.<br><br>
+            To begin we will be starting small, no knowledge of any kind of programming is necessary. We will be building a website from nothing where we can host images as a personal gallery. <br><br>
+            To see some of what can be done with a little coding knowledge, check out my website <a href="https://www.meganbat.es/">here</a> of which you can read the entirety of the code running it <a href="https://github.com/herdofsheep/herdofsheep.github.io" target="_blank">here.</a><br><br>
+            The web has a high barrier for entry, there is a lot of money in keeping the internet expensive, mysterious and inaccessible, and part of that is in the language we use to describe it. <br><br>
+            In this ritual, We will be simulatenously be leaning web development 101, and using a mental framework to approach web development from an unusual perspective- using witchcraft to manifest a link for ourselves in the online web. <br><br>
+            The entire exercise is free, and will end with us having a web page, which we can customise to the limits of how much code/spellcasting we are willing to learn. This is not squarespace or livejournal- everything will run on our own code, and there are no constraints to what we can do, other than what is currently possible on the internet, and 2GB of storage space (loads!).<br><br>
+            I will encourage you to learn some of the 'tech' language to be able to speak in the internet's tongue, but also think of creating a website in an unconventional way.
+        </div>
+        </div>
+        
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/1.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/1.png" alt="github splashscreen"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+        <div class="text margin">
+            github is a space on the internet you may have heard of- it is largely an organisational space for a tool called 'git'. Its extremely useful, but we won't be using it in a great amount of detail here. <br><br>
+            Each github account provides you with a free web domain, where we can 'host' our code, and manifest the spell we are casting- to command a space on the web, where anyone can visit and experience the web page which we have manifested. <br><br>
+            We need to create a unique name for our account, which will also be the 'address' url which will be used to find our link. <br><br>
+            For deciding on your url- try thinking about what it is you are hoping to manifest. Will it be a place to showcase your art? Somewhere to experiment and make work with the medium of code? A place to write down your thoughts?
+        </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/2.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/2.png" alt="naming our domain">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+        <div class="text margin">
+            you could think about:
+            <ul>
+                <li>the web as an invisible entangled connection between thousands of individuals, similar to a fungal blanket connecting trees in an ancient forest.</li> <br>
+                <li>the web as a word associated with spiders, capturing and entrapping data and hours of time of people, encircling the whole world.</li> <br>
+                <li>the web as a social project, the effort of thousands, all contributing to an enormous collaboration. The organising of enormous amounts of complex work in a way which is trying to constantly grow and innovate, without breaking the millions of web projects which have been built since 1989.</li> <br>
+                <li>
+                    the act of writing code (which we will think of in this workshop as 'spell writing'), the tapestry weaving of connecting logic, the feminine history of developing programming-
+                    <a href="https://en.wikipedia.org/wiki/Women_in_computing" target="_blank">Ada Lovelace, Grace Hopper, the women of Bletchley Park.</a>
+                </li>
+            </ul>
+
+        </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/3.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/3.png" alt="confirming email">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                We now, in order to proceed, need to confirm our email address. It is best not to take this decision lightly- github is owned by Microsoft. <br><br>
+                The hierarchical accumulation of data is an important concern. Now is a good moment to try and visualise this accumulation of data, information, currency, power, concentrated in locuses like Amazon, Apple, Microsoft, Google. <br><br>
+                Remember our goal- what are we manifesting? A space in this interconnected web for ourselves, free and accessible to us and to those we share it with. Is data harvesting a price worth paying for access to this powerful online space? Perhaps think on collective responsibility, grass roots power. Perhaps you want to do a little research into this yourself.
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/4a.png">
+                        <img class= "img littleImg" src="/assets/images/witchcraftWebDev/4a.png" alt="creating a repo button">
+                    </a>
+                    <a href="/assets/images/witchcraftWebDev/4.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/4.png" alt="creating a repo"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                We now, in the words of github, create a 'repository'. We can think of this as a host to hold our spell, a location in the web, in github's information storage and (if we want) a file location on our computer simulataneously. <br><br>
+                What makes it a 'repository' is the linking of these things, which makes our spell (aka our code) consistent in all of these different forms. That is essentially all that 'git' is. <br><br>
+                In order for this repository to be treated as a website, it must use the free domain that you get associated with your github account as the name. For me, it is manifestation-spell.github.io. For you, it will be USERNAME-YOU-CHOSE.github.io
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/5.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/5.png" alt="create a new file button"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                Click on 'creating a new file'
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/6.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/6.png" alt="commit your first file part 1"> 
+                    </a>
+                    <a href="/assets/images/witchcraftWebDev/7.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/7.png" alt="commit your first file part 2"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                Name your new file index.html, with the contents <br><br> <div class="code margin">I will these words to appear.</div> <br><br>  Then, click on 'Commit new file'.<br><br>
+                An index.html is a universally understood gateway to a website. It will be understood by an 'internet browser' (firefox, chrome, edge, safari) to be the place where a website begins. This has worked since the early days of the web and will do into the future of the internet!
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/8.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/8.png" alt="working website"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                You can now navigate to the host of your spell. This will be USERNAME-YOU-CHOSE.github.io. You can look at mine here: 
+                <a href="https://manifestation-spell.github.io/" target="_blank">manifestation-spell.github.io</a><br><br>
+                We now have everything set up to host a web page! We can write any HTML in this file and it will function as a web page for us to use however we like, and share with anyone! Very exciting, you are on your fist step as a software developer, tech witch, and web artist!
+                Bear with if you get a 404 error at first- github pages sometimes takes a while to update. If you have a blank page, your code has an error (and read on to learn how to 'debug' with inspect), if you have a 404, github pages is just taking a moment to update.
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/404.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/404.png" alt="github 404 error"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="textWindow">
+            <div class="text margin">
+                But wait, what is HTML?
+                <a href="https://www.w3schools.com/html/html_basic.asp" target="_blank">W3Schools</a>
+                is a brilliant place to start.<br><br>
+                The most important lesson in learning to be an internet witch is that you can learn how to do anything, if you are patient and dedicated enough. The thing that is difficult is getting started. Once you can learn how to learn, You can build a piece of the internet yourself- we've already begun.
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/12.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/12.png" alt="W3Schools on images"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                Within the <a href="https://www.w3schools.com/html/html_basic.asp" target="_blank">W3Schools</a> link, you can scroll to find the information on including images in HTML. We wanted to make a gallery of our art, so to include images, this is the form which our spell must take. <br><br>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/9.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/9.png" alt="commit your first file part 1">
+                    </a>
+                    <a href="/assets/images/witchcraftWebDev/10.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/10.png" alt="commit your first file part 2"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                To adapt the code to manifest a painting of mine instead of a w3schools logo, I must change key elements of the line of code. W3Schools uses <br><br>
+                <div class="code margin">&ltimg src="w3schools.jpg" alt="W3Schools.com" width="104" height="142"&gt </div><br><br>
+                and I use <br><br>
+                <div class="code margin">&ltimg src="artwork.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+                we can save this line of code in index.html to replace<br><br> <div class="code margin">I will these words to appear.</div> <br><br>
+                But I have saved this code in a new file, artwork-portal.html. It can be accessed at <a href="https://manifestation-spell.github.io/artwork-portal.html" target="_blank">manifestation-spell.github.io/artwork-portal.html</a>
+                However, something unexpected has happened- instead of any image, there is just my alt text, 'a painting by Megan Bates of a computer generated rippling water pool with mushrooms'. <br><br>
+                This begins to show us why it is always important to use alt text when including images on our website- if the image can't by found, we get context explaining what should be there. This is incredibly important for blind users of the internet- often images are essential for basic web navigation, and so you must provide a clear explanation of what each of the images on your website are, and what their function is (if they have one).
+                Accessibility is an essential part of internet spellcasting- our disabled siblings, sisters and brothers must be included in the web which we build. <br><br>
+                We need to find out where our image is- to find out what is going on, we will use the 'inspect' tool. <br> <br>
+                This is slightly different depending on which browser you use, but all are similar. I will be using firefox's inspect, which can be opened using a right-click > Inspect element or CTRL+SHIFT+C on Windows or CMD+SHIFT+C on Mac.
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/11.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/11.png" alt="seeing your new web page"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                Within the inspector- we can see we have 2 errors. One is for a jpg image- it can't be found, and the other is for something called a favicon. What is that? If we think about it- this makes perfect sense.
+                What image indeed? We haven't put an image on to github for our site to access yet. Let's do that now. <br><br> 
+                (for the curious,
+                <a href="https://favicon.io/tutorials/what-is-a-favicon/">look here for an explanation on favicons.</a> There's no rush to include one right away, they aren't necessary for our website to work.)
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/13.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/13.png" alt="seeing your new web page"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                To add our image, we just add it to our github repository as shown:
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/14.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/14.png" alt="seeing your new web page"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/15.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/15.png" alt="seeing your new web page"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="box-inner">
+                    <a href="/assets/images/witchcraftWebDev/16.png">
+                        <img class= "img full" src="/assets/images/witchcraftWebDev/16.png" alt="seeing your new web page"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="textWindow">
+            <div class="text margin">
+                In order for our html page to find this image, it needs to be named correctly. We will remember that the code we used was <br><br>
+                <div class="code margin">&ltimg src="artwork.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+                so we should make sure that the src=" " quotes contents is correct. src is a link source, which locates a url location on the internet to find the image. Now we have uploaded it, the failsafe source of the image is <a href="https://manifestation-spell.github.io/ripple.jpg" target="_blank">https://manifestation-spell.github.io/ripple.jpg</a>
+                HTML is clever enough to be able to find an image locally however. Using <br><br>
+                <div class="code margin">&ltimg src="ripple.jpg" alt="a painting by Megan Bates of a computer generated rippling water pool with mushrooms" width="100%"&gt </div><br><br>
+                will work fine.<br><br>
+                To create this linked page, I will create yet another html page, <a href="https://manifestation-spell.github.io/linked-artwork-portal.html" target="_blank">manifestation-spell.github.io/linked-artwork-portal.html</a> which hosts the single line of code above, with the correct name of the image in the src=" " quotes. Now is a good moment to experiment and test what does and doesn't work- what if we use the full url addresss of the image, 
+                'https://manifestation-spell.github.io/ripple.jpg' in the src=" " quotes instead? What happens if we rename the image itself? What do I do once I've got 100 images? Or 100 html pages? Won't it get a bit messy having them all here? Can I have text and an image? Does it still work if I name this spell index.html? 
+            </div>
+        </div>
+    </div>
+    
+  </body>
+  
+</html>
