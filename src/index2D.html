@@ -1,0 +1,309 @@
+<html>
+
+  <style>
+
+    #backgroundImage, #imageLayer{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #wrapper{
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+    #svgOverlay{
+      position: absolute;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .focusItem{
+      width: 0px;
+      height: 0px;
+    }
+
+    .focusItem:focus, .focusItem:hover {
+      background: yellow;
+    }
+
+    #tabWithin{
+      background-color: rgb(255, 255, 255);
+    }
+
+    #tabWithin:not(:focus-within) {
+      background-color: rgb(255, 255, 254);
+      transition: background-color 0.01s;
+    }
+
+    @media screen and (min-aspect-ratio: 4/5){
+      #backgroundImage, #imageLayer{
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-aspect-ratio: 4/5){
+      body {
+        background-size: 190%;
+      }
+
+      #backgroundImage, #svgOverlay, #imageLayer{
+        width: 190%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      #backgroundImage, #imageLayer{
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+  </style>
+
+  <head>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <title>2D</title>
+    <link rel="stylesheet" href="../style.css" type="text/css" charset="utf-8"/>
+  </head>
+  
+  <body>
+    
+    <div id="wrapper">
+      <img id="backgroundImage" src= "assets/images/index/lines.png"></img>
+      <img id="imageLayer" src= "assets/images/index/blank.png"></img>
+      <object id="svgOverlay" type="image/svg+xml" data="assets/svgs/all2.svg" >
+        <!-- fallback image in CSS -->
+        svgOverlay   
+      </object>
+    </div>
+
+    <div id="tabWithin">
+      <!-- <a onfocus="onFocus()" href=""></a> -->
+      <a href="../index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
+      <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
+      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="art.html"></a>
+      <a id="work" class ="centralise focusItem" onfocus="onFocus()" href="portfolio.html"></a>
+      <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="what.html"></a>
+    </div>
+
+    <script>
+
+      var allSvgs;
+      var gitImg, mathImg, queImg, workImg;
+      var focusTarget;
+
+      init()
+
+			function init(){
+
+        loadImages();
+
+        let tabWithin = document.getElementById("tabWithin");
+
+        tabWithin.addEventListener('transitionstart', (e) =>{
+          tabWithin.firstElementChild.focus()
+        });
+
+        let svgOverlay = document.getElementById("svgOverlay");
+
+        let path = svgOverlay.addEventListener("load",function(){
+          // get the inner DOM of alpha.svg
+          var svgDoc = svgOverlay.contentDocument.firstElementChild;
+          svgLoaded(svgDoc.children);
+        });
+
+      }
+
+      function svgLoaded(svgs){
+
+        allSvgs = svgs;
+
+        for (var i=0; i<svgs.length; i++){
+
+          var path = svgs[i];
+          if(svgs[i].id == ""){
+            continue;
+          }
+
+          path.style.cursor = 'pointer'
+          path.style.zIndex = 10;
+          path.style.opacity= 0;
+
+          path.addEventListener('touchend', function(e){
+            touchTrigger(e);
+          });
+
+          path.addEventListener("click",function(e){
+            clickTrigger();
+          });
+          
+          path.addEventListener("mouseenter",function(e){
+
+            var id = e.currentTarget.id;
+            focusTarget = id
+
+            if(id.slice(0,3) == 'que'){
+              document.getElementById('imageLayer').src = queImg.src
+            }
+            if(id.slice(0,3) == 'git'){
+              document.getElementById('imageLayer').src = gitImg.src
+            }
+            if(id.slice(0,4) == 'math'){
+              document.getElementById('imageLayer').src = mathImg.src
+            }
+            if(id.slice(0,4) == 'work'){
+              document.getElementById('imageLayer').src = workImg.src
+            }
+
+            //colourchanging svg test
+            // if(id.slice(0,3) == 'que'){
+            //   allSvgs.queMark.style.fill='yellow'
+            //   allSvgs.queDot.style.fill='yellow'
+            //   allSvgs.queBubble.style.fill='yellow'
+            // }
+            // else if(id.slice(-6) == 'Bubble'){
+            //   allSvgs[id.slice(0,-6)].style.fill='yellow'
+            // }
+            // else{
+            //   allSvgs[id + "Bubble"].style.fill='yellow'
+            // }
+            // e.currentTarget.style.fill='yellow'
+            
+          })
+
+          path.addEventListener("mouseleave",function(e){
+
+            var id = e.currentTarget.id;
+
+            focusTarget = ""
+
+            document.getElementById('imageLayer').src = blankImg.src
+
+            //colourchanging svg test
+            // if(id.slice(0,3) == 'que'){
+            //   allSvgs.queMark.style.fill='blue'
+            //   allSvgs.queDot.style.fill='blue'
+            //   allSvgs.queBubble.style.fill='blue'
+            // }
+            // else if(id.slice(-6) == 'Bubble'){
+            //   allSvgs[id.slice(0,-6)].style.fill='blue'
+            // }
+            // else{
+            //   allSvgs[id + "Bubble"].style.fill='blue'
+            // }
+            // e.currentTarget.style.fill='blue'
+
+          })
+
+        }
+
+      }
+
+      function loadImages(){
+
+        gitImg = new Image;
+        gitImg.onload = function() {
+            document.src = this.src;
+        }
+        gitImg.src = 'assets/images/index/github.png';
+
+        mathImg = new Image;
+        mathImg.onload = function() {
+            document.src = this.src;
+        }
+        mathImg.src = 'assets/images/index/art.png';
+
+        workImg = new Image;
+        workImg.onload = function() {
+            document.src = this.src;
+        }
+        workImg.src = 'assets/images/index/work.png';
+
+        queImg = new Image;
+        queImg.onload = function() {
+            document.src = this.src;
+        }
+        queImg.src = 'assets/images/index/que.png';
+
+        blankImg = new Image;
+        blankImg.onload = function() {
+            document.src = this.src;
+        }
+        blankImg.src = 'assets/images/index/blank.png';
+
+      }
+
+      function onFocus(){
+        var id = this.event.target.id
+        if(id == 'que'){
+          document.getElementById('imageLayer').src = queImg.src
+        }
+        if(id == 'git'){
+          document.getElementById('imageLayer').src = gitImg.src
+        }
+        if(id == 'math'){
+          document.getElementById('imageLayer').src = mathImg.src
+        }
+        if(id == 'work'){
+          document.getElementById('imageLayer').src = workImg.src
+        }
+        if(id == ''){
+          document.getElementById('imageLayer').src = blankImg.src
+        }
+      }
+
+      function dontClick(){
+        focusTarget = ""
+      }
+
+      function clickTrigger(){
+
+        var link = ""
+
+        if(focusTarget.slice(0,3) == 'que'){
+          link = "what.html";
+        }
+        if(focusTarget.slice(0,3) == 'git'){
+          link = "https://github.com/herdofsheep";
+        }
+        if(focusTarget.slice(0,4) == 'math'){
+          link = "art.html";
+        }
+        if(focusTarget.slice(0,4) == 'work'){
+          link = "portfolio.html";
+        }
+        if(link != ""){
+          window.location.href = link;
+        }
+
+      }
+
+      function touchTrigger(e){
+
+        var id = this.event.target.id
+
+        if(id.slice(0,3) == 'que'){
+          window.location.href = "what.html";
+        }
+        if(id.slice(0,3) == 'git'){
+          window.location.href = "https://github.com/herdofsheep";
+        }
+        if(id.slice(0,4) == 'math'){
+          window.location.href = "art.html";
+        }
+        if(id.slice(0,4) == 'work'){
+          window.location.href = "portfolio.html";
+        }
+
+      }
+
+    </script>
+
+  </body>
+  
+</html>
