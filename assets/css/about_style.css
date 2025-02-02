@@ -86,5 +86,20 @@
 }
 
 .board{
-    width: 180px;
+    height: 180px;
+}
+
+.sym_light{
+    top: inherit;
+    left: calc(50%);
+    transform: translateX(-50%);
+    height: 130px;
+    visibility: hidden;
+    position: absolute;
+}
+
+.sym-container{
+    position: relative;
+    display: inline-block;
+    height: 130px;
 }

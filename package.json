@@ -22,8 +22,9 @@
     "three.meshline": "^1.4.0"
   },
   "devDependencies": {
+    "@parcel/watcher": "^2.5.1",
     "nodemon": "^3.1.4",
-    "parcel": "^2.12.0",
+    "parcel": "^2.13.3",
     "path-browserify": "^1.0.1",
     "prettier": "^3.3.3",
     "process": "^0.11.10",
