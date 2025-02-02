@@ -11,6 +11,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
+          sudo apt-get update && sudo apt-get install -y rsync
           npm install --no-fund
           npm run build
 
@@ -18,3 +19,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder the action should deploy.
+          token: ${{ secrets.GITHUB_TOKEN }}
