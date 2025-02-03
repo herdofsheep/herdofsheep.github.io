@@ -24,6 +24,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.actor != 'nektos/act'  # Prevents deploy step from running in act
+    permissions:
+      id-token: write
+      pages: write
     needs: build
     steps:
       - name: Deploy
