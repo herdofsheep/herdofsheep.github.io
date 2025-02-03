@@ -1,278 +1,36 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
 <html>
 
-  <style>
-
-    #backgroundImage, #imageLayer{
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    #wrapper{
-      position: absolute;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-    }
-
-    #svgOverlay{
-      position: absolute;
-      height: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .focusItem{
-      width: 0px;
-      height: 0px;
-    }
-
-    .focusItem:focus, .focusItem:hover {
-      background: yellow;
-    }
-
-    #tabWithin{
-      background-color: rgb(255, 255, 255);
-    }
-
-    #tabWithin:not(:focus-within) {
-      background-color: rgb(255, 255, 254);
-      transition: background-color 0.01s;
-    }
-
-    @media screen and (min-aspect-ratio: 4/5){
-      #backgroundImage, #imageLayer{
-        height: 100%;
-      }
-    }
-
-    @media screen and (max-aspect-ratio: 4/5){
-      body {
-        background-size: 190%;
-      }
-
-      #backgroundImage, #svgOverlay, #imageLayer{
-        width: 190%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      #backgroundImage, #imageLayer{
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-  </style>
-
   <head>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <title>2D</title>
-    <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8"/>
+		<link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/assets/css/index_style.css" type="text/css" charset="utf-8"/>
+    <script type="module" src="/ts/three_d_model.ts"></script>
   </head>
   
-  <body>
-    
-    <div id="wrapper">
-      <img id="backgroundImage" src= "/assets/images/index/lines.png"></img>
-      <img id="imageLayer" src= "/assets/images/index/blank.png"></img>
-      <object id="svgOverlay" type="image/svg+xml" data="/assets/svgs/all2.svg" >
-        <!-- fallback image in CSS -->
-        svgOverlay   
-      </object>
+  <body class=pageblock>
+
+    <div class="twodblock">
+      <a class="twodlink" href="/src/art.html">
+        <three-d-model class="threedmodel" link="/assets/models/gltf/math.glb"></three-d-model>
+        <div class="twodlink"> artwork </div>
+        <three-d-model class="threedmodel" link="/assets/models/gltf/math.glb"></three-d-model>
+      </a>
+      <a class="twodlink" href="/src/CV.html">
+        <three-d-model class="threedmodel" link="/assets/models/gltf/jennings_lo.glb"></three-d-model>
+        <div class="twodlink"> CV </div>
+        <three-d-model class="threedmodel" link="/assets/models/gltf/jennings_lo.glb"></three-d-model>
+      </a>
+      <a class="twodlink" href="/src/statement.html">  
+        <three-d-model class="threedmodel" link="/assets/models/gltf/questionmark.glb"></three-d-model>
+        <div class="twodlink"> statement </div>
+        <three-d-model class="threedmodel" link="/assets/models/gltf/questionmark.glb"></three-d-model>
+      </a>
     </div>
-
-    <div id="tabWithin">
-      <!-- <a onfocus="onFocus()" href=""></a> -->
-      <a href="index.html" onfocus="onFocus()" class ="centralise threedsaver">click here to go to 3D</a>
-      <a id="git" class ="centralise focusItem" onfocus="onFocus()" href="https://github.com/herdofsheep"></a>
-      <a id="math" class ="centralise focusItem" onfocus="onFocus()" href="/src/art.html"></a>
-      <a id="CV" class ="centralise focusItem" onfocus="onFocus()" href="/src/CV.html"></a>
-      <a id="que" class ="centralise focusItem" onfocus="onFocus()" href="/src/what.html"></a>
-    </div>
-
-    <script>
-
-      var allSvgs;
-      var gitImg, mathImg, queImg, workImg;
-      var focusTarget;
-
-      init()
-
-			function init(){
-
-        loadImages();
-
-        let tabWithin = document.getElementById("tabWithin");
-
-        tabWithin.addEventListener('transitionstart', (e) =>{
-          tabWithin.firstElementChild.focus()
-        });
-
-        let svgOverlay = document.getElementById("svgOverlay");
-
-        let path = svgOverlay.addEventListener("load",function(){
-          // get the inner DOM of alpha.svg
-          var svgDoc = svgOverlay.contentDocument.firstElementChild;
-          svgLoaded(svgDoc.children);
-        });
-
-      }
-
-      function svgLoaded(svgs){
-
-        allSvgs = svgs;
-
-        for (var i=0; i<svgs.length; i++){
-
-          var path = svgs[i];
-          if(svgs[i].id == ""){
-            continue;
-          }
-
-          path.style.cursor = 'pointer'
-          path.style.zIndex = 10;
-          path.style.opacity= 0;
-
-          path.addEventListener('touchend', function(e){
-            touchTrigger(e);
-          });
-
-          path.addEventListener("click",function(e){
-            clickTrigger();
-          });
-          
-          path.addEventListener("mouseenter",function(e){
-
-            var id = e.currentTarget.id;
-            focusTarget = id
-
-            if(id.slice(0,3) == 'que'){
-              document.getElementById('imageLayer').src = queImg.src
-            }
-            if(id.slice(0,3) == 'git'){
-              document.getElementById('imageLayer').src = gitImg.src
-            }
-            if(id.slice(0,4) == 'math'){
-              document.getElementById('imageLayer').src = mathImg.src
-            }
-            if(id.slice(0,4) == 'work'){
-              document.getElementById('imageLayer').src = workImg.src
-            }
-          })
-
-          path.addEventListener("mouseleave",function(e){
-
-            var id = e.currentTarget.id;
-
-            focusTarget = ""
-
-            document.getElementById('imageLayer').src = blankImg.src
-          })
-
-        }
-
-      }
-
-      function loadImages(){
-
-        gitImg = new Image;
-        gitImg.onload = function() {
-            document.src = this.src;
-        }
-        gitImg.src = '/assets/images/index/github.png';
-
-        mathImg = new Image;
-        mathImg.onload = function() {
-            document.src = this.src;
-        }
-        mathImg.src = '/assets/images/index/art.png';
-
-        workImg = new Image;
-        workImg.onload = function() {
-            document.src = this.src;
-        }
-        workImg.src = '/assets/images/index/work.png';
-
-        queImg = new Image;
-        queImg.onload = function() {
-            document.src = this.src;
-        }
-        queImg.src = '/assets/images/index/que.png';
-
-        blankImg = new   Image;
-        blankImg.onload = function() {
-            document.src = this.src;
-        }
-        blankImg.src = '/assets/images/index/blank.png';
-
-      }
-
-      function onFocus(){
-        var id = this.event.target.id
-        if(id == 'que'){
-          document.getElementById('imageLayer').src = queImg.src
-        }
-        if(id == 'git'){
-          document.getElementById('imageLayer').src = gitImg.src
-        }
-        if(id == 'math'){
-          document.getElementById('imageLayer').src = mathImg.src
-        }
-        if(id == 'work'){
-          document.getElementById('imageLayer').src = workImg.src
-        }
-        if(id == ''){
-          document.getElementById('imageLayer').src = blankImg.src
-        }
-      }
-
-      function dontClick(){
-        focusTarget = ""
-      }
-
-      function clickTrigger(){
-
-        var link = ""
-
-        if(focusTarget.slice(0,3) == 'que'){
-          link = "src/what.html";
-        }
-        if(focusTarget.slice(0,3) == 'git'){
-          link = "https://github.com/herdofsheep";
-        }
-        if(focusTarget.slice(0,4) == 'math'){
-          link = "src/art.html";
-        }
-        if(focusTarget.slice(0,4) == 'work'){
-          link = "src/portfolio.html";
-        }
-        if(link != ""){
-          window.location.href = link;
-        }
-
-      }
-
-      function touchTrigger(e){
-
-        var id = this.event.target.id
-
-        if(id.slice(0,3) == 'que'){
-          window.location.href = "src/what.html";
-        }
-        if(id.slice(0,3) == 'git'){
-          window.location.href = "https://github.com/herdofsheep";
-        }
-        if(id.slice(0,4) == 'math'){
-          window.location.href = "src/art.html";
-        }
-        if(id.slice(0,4) == 'work'){
-          window.location.href = "src/portfolio.html";
-        }
-
-      }
-
-    </script>
+    <a href="index.html" class="centralise saver">click here to go to 3D</a>
 
   </body>
   

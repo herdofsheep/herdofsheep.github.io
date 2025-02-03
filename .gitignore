@@ -1,3 +1,7 @@
 node_modules
 webAssets
 .parcel-cache
+dist
+.cache
+dist/*
+.DS_Store

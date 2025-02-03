@@ -6,10 +6,12 @@
 	<head>
 		
 		<title> Megan Bates </title>
-		<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8"/>
+		<link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="/assets/css/index_style.css" type="text/css" charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<script type="module" src="index.js"></script>
+		<script type="module" src="/ts/index.ts"></script>
 
 		<style>
 			body{
@@ -20,13 +22,13 @@
 			#loading{
 				z-index: 1;
 				position: absolute;
-				background: #424242;
+				background: #FFC0CB;
 				width: 100vw;
 				text-align: center;
 				padding-top: 40vh;
 				height: 100vh;
 				top: 0px;
-				color: white;
+				color: #202020;
 				font-size: 50px;
 			}
 
@@ -43,8 +45,6 @@
 			p{
 				font-size: 30px;
 			}
-
-
 		</style>
 			
 	</head>
@@ -62,6 +62,10 @@
 		</div>
 
 		<div id="loading" >loading...</div>
+
+		<a id="statement" href="/src/statement.html"></a>
+		<a id="artwork" href="/src/art.html"></a>
+		<a id="CV" href="/src/CV.html"></a>
 
 		<a href="index2D.html" class ="centralise saver">click here to go to 2D</a>
 		<ray-cast></ray-cast>
