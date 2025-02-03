@@ -29,9 +29,6 @@ jobs:
       pages: write
     needs: build
     steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v4
-
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v3
