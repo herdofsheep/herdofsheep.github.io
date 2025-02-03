@@ -8,7 +8,9 @@
     "dev": "nodemon app.cjs",
     "parcel-dev": "parcel serve public/index.html",
     "build": "parcel build public/index.html",
-    "watch": "parcel watch public/index.html"
+    "watch": "parcel watch public/index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@types/lodash": "^4.17.7",
