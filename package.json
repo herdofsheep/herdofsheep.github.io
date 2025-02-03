@@ -4,7 +4,8 @@
   "scripts": {
     "start": "node app.js",
     "watch": "parcel watch public/index.html",
-    "build": "parcel build public/index.html"
+    "predeploy": "rm -rf dist && parcel build index.html --public-url 'https://www.meganbat.es/' && cp CNAME ./dist",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.24.6",
