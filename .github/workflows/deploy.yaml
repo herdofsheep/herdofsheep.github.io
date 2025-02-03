@@ -1,8 +1,6 @@
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "develop" branch
   push:
     branches: [ "develop" ]
   pull_request:
@@ -11,23 +9,23 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
+      - name: Build
         run: |
-          sudo apt-get update && sudo apt-get install -y rsync
           npm ci
           npm run build
 
-      - name: Deploy to GitHub Pages
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.actor != 'nektos/act'  # Prevents deploy step from running in act
+    needs: build
+    permissions:
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
