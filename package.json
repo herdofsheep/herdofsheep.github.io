@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node app.cjs",
+    "start": "parcel ./*.html",
     "dev": "nodemon app.cjs",
     "parcel-dev": "parcel serve public/index.html",
     "build": "parcel build public/index.html",
