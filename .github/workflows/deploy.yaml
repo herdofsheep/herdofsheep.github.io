@@ -11,9 +11,6 @@ on:
 
 jobs:
   build:
-    permissions:
-      id-token: write
-      pages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,13 +21,17 @@ jobs:
           npm ci
           npm run build
 
+  deploy:
+    permissions:
+      id-token: write
+      pages: write
+    runs-on: ubuntu-latest
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './dist'
 
       - name: Deploy to GitHub Pages
