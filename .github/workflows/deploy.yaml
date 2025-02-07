@@ -22,10 +22,11 @@ jobs:
           npm run build
 
   deploy:
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       pages: write
-    runs-on: ubuntu-latest
+    steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -36,3 +37,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
