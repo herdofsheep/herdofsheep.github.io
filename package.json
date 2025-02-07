@@ -23,6 +23,7 @@
     "three.meshline": "^1.4.0"
   },
   "devDependencies": {
+    "@parcel/transformer-raw": "^2.13.3",
     "@parcel/watcher": "^2.5.1",
     "nodemon": "^3.1.4",
     "parcel": "^2.13.3",

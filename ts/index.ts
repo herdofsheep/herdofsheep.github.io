@@ -10,6 +10,10 @@ import ThreeBase from './base.ts';
 import { any } from 'three/examples/jsm/nodes/Nodes.js';
 import colours from './colours.ts';
 
+import mathPath from "/assets/models/gltf/math.glb";
+import workPath from "/assets/models/gltf/jennings_lo.glb";
+import quePath from "/assets/models/gltf/questionmark.glb";
+
 interface ModelInfo {
   key: string;
   url: string;
@@ -175,9 +179,9 @@ class RayCast extends ThreeBase {
     }
     this.setupLights();
     const modelUrls = [
-      { key: 'que', url: '/assets/models/gltf/questionmark.glb', link: "statement", description: "statement"},
-      { key: 'work', url: '/assets/models/gltf/jennings_lo.glb', link: "CV", description: "CV"},
-      { key: 'math', url: '/assets/models/gltf/math.glb', link: "artwork", description: "artwork"},
+      { key: 'que', url: quePath, link: "statement", description: "statement"},
+      { key: 'work', url: workPath, link: "CV", description: "CV"},
+      { key: 'math', url: mathPath, link: "artwork", description: "artwork"},
     ];
     const files = await this.getFiles(modelUrls)
     this.modelInfo = modelUrls;
