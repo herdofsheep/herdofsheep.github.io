@@ -6,6 +6,11 @@ import ThreeBase from './base.ts';
 import colours from './colours.ts';
 
 class ThreeDModel extends ThreeBase {
+  static properties = {
+    modelUrl: { type: String }
+  };
+
+  modelUrl: string = '';
 
   white: THREE.Color;
   light_pink: THREE.Color;
@@ -46,8 +51,7 @@ class ThreeDModel extends ThreeBase {
     await new Promise((r) => setTimeout(r, 0));
 
     this.init();
-    const link = this.getAttribute('link')
-    const geometry = await this.getModel(link)
+    const geometry = await this.getModel(this.modelUrl)
     const material = new THREE.MeshPhongMaterial({ color: this.dark_grey, flatShading: true, shininess: 0 });
 
     this.mesh = new THREE.Mesh(geometry, material);
