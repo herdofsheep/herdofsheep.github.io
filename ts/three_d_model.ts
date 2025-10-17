@@ -5,6 +5,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ThreeBase from './base.ts';
 import colours from './colours.ts';
 
+// Import GLB files so Parcel can process them with proper hashing
+import mathPath from "/assets/models/gltf/math.glb";
+import jenningsPath from "/assets/models/gltf/jennings_lo.glb";
+import questionmarkPath from "/assets/models/gltf/questionmark.glb";
+
 class ThreeDModel extends ThreeBase {
   static properties = {
     modelUrl: { type: String }
@@ -51,7 +56,21 @@ class ThreeDModel extends ThreeBase {
     await new Promise((r) => setTimeout(r, 0));
 
     this.init();
-    const geometry = await this.getModel(this.modelUrl)
+    
+    // Map original URLs to imported paths
+    const urlMap = new Map([
+      ['/assets/models/gltf/math.glb', mathPath],
+      ['/assets/models/gltf/jennings_lo.glb', jenningsPath],
+      ['/assets/models/gltf/questionmark.glb', questionmarkPath]
+    ]);
+    
+    const originalUrl = this.getAttribute('link');
+    const actualUrl = urlMap.get(originalUrl) || originalUrl;
+    
+    console.log('Original URL:', originalUrl);
+    console.log('Actual URL:', actualUrl);
+    
+    const geometry = await this.getModel(actualUrl)
     const material = new THREE.MeshPhongMaterial({ color: this.dark_grey, flatShading: true, shininess: 0 });
 
     this.mesh = new THREE.Mesh(geometry, material);
