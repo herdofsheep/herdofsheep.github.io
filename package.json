@@ -15,7 +15,7 @@
     "@types/three": "^0.168.0",
     "express": "^4.19.2",
     "lightningcss": "^1.29.1",
-    "lil-gui": "^0.19.2",
+    "lil-gui": "^0.21.0",
     "lit": "^3.2.0",
     "punycode": "^2.3.1",
     "three": "^0.168.0",
