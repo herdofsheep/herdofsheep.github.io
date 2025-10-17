@@ -8,9 +8,9 @@ updates:
     # Disable cleanup to avoid issues
     open-pull-requests-limit: 10
     reviewers:
-      - "meganbates"
+      - "herdofsheep"
     assignees:
-      - "meganbates"
+      - "herdofsheep"
     commit-message:
       prefix: "chore"
       include: "scope"
