@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Disable cleanup to avoid issues
+    open-pull-requests-limit: 10
+    reviewers:
+      - "meganbates"
+    assignees:
+      - "meganbates"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
