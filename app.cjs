@@ -6,9 +6,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Set the MIME type for TypeScript files
-express.static.mime.define({'application/typescript': ['ts']});
-
 // Serve other static files if needed
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
