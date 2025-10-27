@@ -32,7 +32,7 @@
     "typescript": "^5.5.4"
   },
   "optionalDependencies": {
-    "@swc/core-linux-x64-gnu": "^1.2.160"
+    "@swc/core-linux-x64-gnu": "^1.13.21"
   },
   "resolutions": {
     "punycode": "2.1.1"
