@@ -18,7 +18,7 @@
     "lil-gui": "^0.21.0",
     "lit": "^3.2.0",
     "punycode": "^2.3.1",
-    "three": "^0.180.0",
+    "three": "^0.181.2",
     "three.meshline": "^1.4.0"
   },
   "devDependencies": {
