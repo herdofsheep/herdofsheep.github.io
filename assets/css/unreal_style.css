@@ -35,7 +35,7 @@ a, a {
   display: inline-block;
 }
 
-.centerVideo{
+.center-video{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@ a, a {
 }
 
 /* header navigation text*/
-.homelinks {
+.home-links {
   display: inline-block;
   text-align: center;
   width: 130px;
@@ -123,11 +123,11 @@ a, a {
 @media only screen
   and (min-device-width: 320px) 
   and (max-device-width: 480px){
-    .homelinks{
+    .home-links{
       width: 200px;
       font-size: 50px;
     }
-    .portfolioSpacer {
+    .portfolio-spacer {
       margin-top: 4.16666%;
       margin-bottom: 4.16666%;
       margin-left: auto;
@@ -160,7 +160,7 @@ a, a {
     .third{
       width: 49%;
     }
-    .bigPlanet{
+    .big-planet{
       width: 75%;
     }
     .smallHalf{
@@ -193,7 +193,7 @@ a, a {
 /* widescreen desktop */
 @media screen
   and (min-device-width: 1600px){
-    .portfolioSpacer {
+    .portfolio-spacer {
       margin-top: 4.16666%;
       margin-bottom: 4.16666%;
       margin-left: auto;

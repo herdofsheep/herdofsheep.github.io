@@ -1,21 +1,79 @@
+/* ===========================
+   1. Design Tokens
+   =========================== */
 
-/* rules to generally apply */
-body{
+:root {
+  --color-text: #141414;
+  --color-link-hover: #ff284d;
+  --color-pink: #FFC0CB;
+  --color-nav-bg: pink;
+  --spacing-section: 5ex;
+}
+
+/* ===========================
+   2. Font Faces
+   =========================== */
+
+/* ultralight font */
+@font-face {
+  font-family: 'arlon';
+  src: url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
+       url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
+       url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'),
+       url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype');
+  font-weight: 300;
+}
+
+/* light font */
+@font-face {
+  font-family: 'arlon';
+  src: url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
+       url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
+       url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'),
+       url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype');
+  font-weight: 500;
+}
+
+/* semibold font */
+@font-face {
+  font-family: 'arlon';
+  src: url('/assets/fonts/arlon-semibold/arlon-semibold.woff') format('woff'),
+       url('/assets/fonts/arlon-semibold/arlon-semibold.woff2') format('woff2'),
+       url('/assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype'),
+       url('/assets/fonts/arlon-semibold/arlon-semibold.otf') format('opentype');
+  font-weight: 700;
+}
+
+/* ultrabold font */
+@font-face {
+  font-family: 'arlon';
+  src: url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff') format('woff'),
+       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff2') format('woff2'),
+       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype'),
+       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.otf') format('opentype');
+  font-weight: 900;
+}
+
+/* ===========================
+   3. Reset / Base Styles
+   =========================== */
+
+body {
   margin: 0;
   padding: 0;
-  font-family:'arlon';
+  font-family: 'arlon';
   overflow-x: hidden;
 }
 
 /* links */
-a, a {
-  --is-focused: false;
-  color: #141414;
+a {
+  color: var(--color-text);
   font-weight: 700;
-  text-decoration: none; 
+  text-decoration: none;
   display: inline-block;
 }
 
+/* hidden pseudo-element reserves space for bold text to prevent layout shift on hover */
 a::after {
   display: block;
   position: inherit;
@@ -31,30 +89,27 @@ a::after {
 
 /* focus (mouse hover) */
 a:hover,
-a:focus{
-  color: #ff284d;
-  /* text-shadow: 1px 0px 0px #ff284d; */
-  /* letter-spacing: 1px; */
+a:focus {
+  color: var(--color-link-hover);
   font-weight: 800;
   text-decoration: none;
-  --is-focused: true;
 }
+
+/* ===========================
+   4. Layout Utilities
+   =========================== */
 
 /* thin outline to show container elements */
 .outline {
-  border:1px solid white;
+  border: 1px solid white;
 }
 
-/* tool to centralise multiple images */
-.container{
+/* centre-align child content (for multiple images etc.) */
+.container {
   text-align: center;
 }
 
-.heightCap{
-    max-height: 60vh;
-}
-
-/* tool to centralise 1 image wide */
+/* centre a single block element */
 .centralise {
   display: block;
   margin-left: auto;
@@ -66,28 +121,31 @@ a:focus{
   display: inline-block;
 }
 
-.roundimg {
-  display: inline-block;
-  border-radius: 50%;
+/* breather margins for image pages */
+.top-margin {
+  margin-top: var(--spacing-section);
 }
 
-.bubbleimg {
-  width: 100px;
-  height: 100px;
+.bottom-margin {
+  margin-bottom: var(--spacing-section);
 }
 
-.centerVideo{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.bottom-page-margin {
+  margin-bottom: 200px;
+}
+
+.auto-lr-margin {
   margin-left: auto;
   margin-right: auto;
-  width:90%;
 }
 
-/* non-homepage navigation bar styling */
-.navigation{
-  position:relative;
+/* ===========================
+   5. Navigation
+   =========================== */
+
+/* non-homepage navigation bar */
+.navigation {
+  position: relative;
   z-index: 1;
   display: flex;
 }
@@ -98,52 +156,37 @@ a:focus{
   margin-right: 1.5%;
 }
 
-/* header navigation colouring*/
-.pink{
-  background: pink;
-}
-
-.paleBlue{
-  background: #b7dbd4;
-}
-
-.innerFlower{
-  top:0px
+/* header navigation colouring */
+.pink {
+  background: var(--color-nav-bg);
 }
 
 /* home button */
-
-.flower_box{
+.flower-box {
   display: flex;
   height: 120px;
   margin-left: 10px;
 }
 
-
-.flower{
+.flower {
   background-image: url(/assets/images/flower/flower_dark.png);
-  position:relative;
+  position: relative;
   z-index: 2;
-  height:100px;
-  width:100px;
+  height: 100px;
+  width: 100px;
   background-position: center;
   background-size: contain;
   display: block;
   margin: auto;
 }
 
-.flower:hover, .flower:focus{
+.flower:hover,
+.flower:focus {
   background-image: url(/assets/images/flower/flower_pink.png);
-  position:relative;
-  z-index: 2;
-  height:100px;
-  width:100px;
-  background-position: center;
-  background-size: contain;
 }
 
-/* header navigation text*/
-.homelinks {
+/* header navigation text */
+.home-links {
   display: inline-block;
   text-align: center;
   width: 130px;
@@ -153,53 +196,50 @@ a:focus{
   font-weight: 700;
 }
 
-/* breather margins for image pages that need it */
-.top_margin {
-  margin-top: 5ex;
-}
+/* ===========================
+   6. Typography
+   =========================== */
 
-.bottom_margin {
-  margin-bottom: 5ex;
-}
-
-.bottom_page_margin {
-  margin-bottom: 200px;
-}
-
-.auto_lr_margin {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* text */
-.text{
+.text {
   color: black;
   font-weight: 500;
   text-align: center;
-  font-size: 30;
-  text-decoration: none; 
+  font-size: 30px;
+  text-decoration: none;
 }
 
-.explainText{
+.explain-text {
   color: white;
   font-weight: 500;
   text-align: center;
-  font-size: 20;
+  font-size: 20px;
   margin: 20px;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
-.justifyText{
+.justify-text {
   text-align: justify;
   text-align-last: center;
 }
 
-.text_spacer{
+.text-spacer {
   line-height: 3ex;
 }
 
+/* ===========================
+   7. Page-specific Components
+   =========================== */
 
-.twodlink {
+.center-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.twod-link {
   display: flex;
   font-size: 3ex;
   align-items: center;
@@ -208,81 +248,66 @@ a:focus{
   width: fit-content;
 }
 
-.pageblock{
-  background: #FFC0CB;
+.page-block {
+  background: var(--color-pink);
   margin: auto;
   height: 100%;
   width: 100%;
   position: absolute;
 }
 
-.twodblock{
+.twod-block {
   top: 50%;
   transform: translate(0, -60%);
   position: relative;
 }
 
-.threedmodel {
+.threed-model {
   align-content: auto;
 }
 
-/* scaling tools for different devices */
+/* ===========================
+   8. Media Queries
+   =========================== */
+
 /* phone */
 @media only screen
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px){
-    .homelinks{
+  and (min-width: 320px)
+  and (max-width: 480px) {
+    .home-links {
       width: 200px;
       font-size: 50px;
     }
-    .navigation{
+    .navigation {
       display: flow-root;
     }
-    .bigPlanet{
+    .big-planet {
       width: 75%;
     }
-    .smallHalf{
-      width: 80%;
-    }
-    .half{
-      width: 100%;
-    }
 }
 
-/* vertical tablet */
+/* landscape tablet */
 @media only screen
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (orientation: landscape){
-    .navigation{
+  and (min-width: 768px)
+  and (max-width: 1024px)
+  and (orientation: landscape) {
+    .navigation {
       display: flow-root;
     }
-}
-
-/* horizontal tablet */
-@media only screen
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (orientation: portrait){
 }
 
 /* too skinny for the nav bar */
 @media screen
-  and (max-width: 800) {
-    .navigation{
+  and (max-width: 800px) {
+    .navigation {
       display: flow-root;
     }
 }
 
-/* desktop */
-@media screen
-  and (min-device-width: 1200px){
-}
-
 /* widescreen desktop */
 @media screen
-  and (min-device-width: 1600px){
-    .portfolioSpacer {
+  and (min-width: 1600px) {
+    .portfolio-spacer {
       margin-top: 4.16666%;
       margin-bottom: 4.16666%;
       margin-left: auto;
@@ -290,46 +315,3 @@ a:focus{
       max-width: 66.666667%;
     }
 }
-
-/* fonts */
-
-/* ultralight font */
-@font-face{
-  font-family: 'arlon';
-  src:  url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
-        url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
-        url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'), 
-        url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype'); 
-  font-weight: 300;
-}
-
-/* light font */
-@font-face{
-  font-family: 'arlon';
-  src:  url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
-        url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
-        url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'), 
-        url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype'); 
-  font-weight: 500;
-}
-
-/* semibold font */
-@font-face {
-	font-family: 'arlon';
-	src:  url('/assets/fonts/arlon-semibold/arlon-semibold.woff') format('woff'),
-        url('/assets/fonts/arlon-semibold/arlon-semibold.woff2') format('woff2'),
-        url('/assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype'),
-        url('/assets/fonts/arlon-semibold/arlon-semibold.otf') format('opentype');
-	font-weight: 700;
-}
-
-/* ultrabold font */
-@font-face {
-	font-family: 'arlon';
-	src:  url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff') format('woff'),
-        url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff2') format('woff2'),
-        url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype'),
-        url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.otf') format('opentype');
-	font-weight: 900;
-}
-
