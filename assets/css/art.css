@@ -7,6 +7,27 @@
 }
 
 .portfolio_style {
+  margin-left: auto;
+  margin-right: auto;
+  outline-style: solid;
+}
+
+.description {
+}
+
+/* 
+.portfolio_img {
+  width: 40%;
+}
+
+.portfolio_style {
   width: 90%;
   margin-left: auto;
+  margin-right: auto;
+  outline-style: solid;
 }
+
+.description {
+  margin-right: auto;
+  width: 50%;
+} */
