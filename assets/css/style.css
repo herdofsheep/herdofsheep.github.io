@@ -11,51 +11,7 @@
 }
 
 /* ===========================
-   2. Font Faces
-   =========================== */
-
-/* ultralight font */
-@font-face {
-  font-family: 'arlon';
-  src: url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
-       url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
-       url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'),
-       url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype');
-  font-weight: 300;
-}
-
-/* light font */
-@font-face {
-  font-family: 'arlon';
-  src: url('/assets/fonts/arlon-light/arlon-light.woff') format('woff'),
-       url('/assets/fonts/arlon-light/arlon-light.woff2') format('woff2'),
-       url('/assets/fonts/arlon-light/arlon-light.ttf') format('truetype'),
-       url('/assets/fonts/arlon-light/arlon-light.otf') format('opentype');
-  font-weight: 500;
-}
-
-/* semibold font */
-@font-face {
-  font-family: 'arlon';
-  src: url('/assets/fonts/arlon-semibold/arlon-semibold.woff') format('woff'),
-       url('/assets/fonts/arlon-semibold/arlon-semibold.woff2') format('woff2'),
-       url('/assets/fonts/arlon-semibold/arlon-semibold.ttf') format('truetype'),
-       url('/assets/fonts/arlon-semibold/arlon-semibold.otf') format('opentype');
-  font-weight: 700;
-}
-
-/* ultrabold font */
-@font-face {
-  font-family: 'arlon';
-  src: url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff') format('woff'),
-       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.woff2') format('woff2'),
-       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.ttf') format('truetype'),
-       url('/assets/fonts/arlon-ultrabold/arlon-ultrabold.otf') format('opentype');
-  font-weight: 900;
-}
-
-/* ===========================
-   3. Reset / Base Styles
+   2. Reset / Base Styles
    =========================== */
 
 body {
@@ -96,7 +52,7 @@ a:focus {
 }
 
 /* ===========================
-   4. Layout Utilities
+   3. Layout Utilities
    =========================== */
 
 /* centre-align child content (for multiple images etc.) */
@@ -131,7 +87,7 @@ a:focus {
 }
 
 /* ===========================
-   5. Navigation
+   4. Navigation
    =========================== */
 
 /* non-homepage navigation bar */
@@ -171,7 +127,7 @@ a:focus {
 }
 
 /* ===========================
-   6. Shared Components
+   5. Shared Components
    =========================== */
 
 .twod-link {
@@ -188,7 +144,7 @@ a:focus {
 }
 
 /* ===========================
-   7. Media Queries
+   6. Media Queries
    =========================== */
 
 /* phone */

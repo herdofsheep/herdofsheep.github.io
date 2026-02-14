@@ -3,12 +3,6 @@
    Does NOT use style.css — self-contained stylesheet
    =========================== */
 
-@font-face {
-  font-family: 'anon';
-  src: url('/assets/fonts/anon-pro/anon-pro.ttf') format('truetype');
-  font-weight: 300;
-}
-
 body {
   margin: 10%;
   padding: 0;
