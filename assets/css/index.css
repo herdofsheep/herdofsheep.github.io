@@ -1,0 +1,77 @@
+/* ===========================
+   index.html  (3D homepage)
+   index2D.html (2D fallback)
+   =========================== */
+
+/* 3D homepage: hide vertical scroll, lock to viewport */
+body.index-3d {
+  overflow-y: hidden;
+  width: 100vw;
+}
+
+/* loading overlay */
+#loading {
+  z-index: 1;
+  position: absolute;
+  background: #FFC0CB;
+  width: 100vw;
+  text-align: center;
+  padding-top: 40vh;
+  height: 100vh;
+  top: 0px;
+  color: #202020;
+  font-size: 50px;
+}
+
+/* hidden SEO content */
+.SEOHack {
+  color: white;
+  background: white;
+  z-index: 0;
+}
+
+.SEOHack h1 {
+  font-size: 50px;
+}
+
+.SEOHack p {
+  font-size: 30px;
+}
+
+/* 2D/3D toggle button */
+.saver {
+  position: fixed;
+  padding: 20px;
+  left: 10px;
+  bottom: 10px;
+  font-size: 30px;
+  width: 170px;
+  z-index: 1000;
+  font-weight: 400;
+  background: none;
+  color: #141414;
+  border: 3px solid;
+}
+
+.saver:hover,
+.saver:focus {
+  background: #fb8da0;
+  color: #FFC0CB;
+  font-weight: 600;
+  border: 3px solid transparent;
+}
+
+/* 2D fallback page layout */
+.page-block {
+  background: #FFC0CB;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.twod-block {
+  top: 50%;
+  transform: translate(0, -60%);
+  position: relative;
+}

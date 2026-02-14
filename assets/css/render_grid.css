@@ -1,0 +1,43 @@
+/* ===========================
+   render_grid.html  (standalone painting grid page)
+   Does NOT use style.css — self-contained stylesheet
+   =========================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* grid layout */
+.grid {
+  flex-wrap: wrap;
+  margin: auto;
+  width: 90%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.imgLink {
+  display: contents;
+}
+
+.imgAspect {
+  width: 32%;
+}
+
+/* carousel focus states */
+#focus {
+  height: 100%;
+}
+
+#unfocus {
+  margin: auto;
+  opacity: 50%;
+}

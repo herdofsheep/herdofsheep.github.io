@@ -99,11 +99,6 @@ a:focus {
    4. Layout Utilities
    =========================== */
 
-/* thin outline to show container elements */
-.outline {
-  border: 1px solid white;
-}
-
 /* centre-align child content (for multiple images etc.) */
 .container {
   text-align: center;
@@ -115,10 +110,6 @@ a:focus {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
-
-.img {
-  display: inline-block;
 }
 
 /* breather margins for image pages */
@@ -150,12 +141,6 @@ a:focus {
   display: flex;
 }
 
-/* header navigation spacing */
-.margin {
-  margin-left: 1.5%;
-  margin-right: 1.5%;
-}
-
 /* header navigation colouring */
 .pink {
   background: var(--color-nav-bg);
@@ -185,59 +170,9 @@ a:focus {
   background-image: url(/assets/images/flower/flower_pink.png);
 }
 
-/* header navigation text */
-.home-links {
-  display: inline-block;
-  text-align: center;
-  width: 130px;
-  height: 100px;
-  line-height: 100px;
-  font-size: 30px;
-  font-weight: 700;
-}
-
 /* ===========================
-   6. Typography
+   6. Shared Components
    =========================== */
-
-.text {
-  color: black;
-  font-weight: 500;
-  text-align: center;
-  font-size: 30px;
-  text-decoration: none;
-}
-
-.explain-text {
-  color: white;
-  font-weight: 500;
-  text-align: center;
-  font-size: 20px;
-  margin: 20px;
-  text-decoration: none;
-}
-
-.justify-text {
-  text-align: justify;
-  text-align-last: center;
-}
-
-.text-spacer {
-  line-height: 3ex;
-}
-
-/* ===========================
-   7. Page-specific Components
-   =========================== */
-
-.center-video {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-}
 
 .twod-link {
   display: flex;
@@ -248,41 +183,20 @@ a:focus {
   width: fit-content;
 }
 
-.page-block {
-  background: var(--color-pink);
-  margin: auto;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-.twod-block {
-  top: 50%;
-  transform: translate(0, -60%);
-  position: relative;
-}
-
 .threed-model {
   align-content: auto;
 }
 
 /* ===========================
-   8. Media Queries
+   7. Media Queries
    =========================== */
 
 /* phone */
 @media only screen
   and (min-width: 320px)
   and (max-width: 480px) {
-    .home-links {
-      width: 200px;
-      font-size: 50px;
-    }
     .navigation {
       display: flow-root;
-    }
-    .big-planet {
-      width: 75%;
     }
 }
 
@@ -304,14 +218,3 @@ a:focus {
     }
 }
 
-/* widescreen desktop */
-@media screen
-  and (min-width: 1600px) {
-    .portfolio-spacer {
-      margin-top: 4.16666%;
-      margin-bottom: 4.16666%;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 66.666667%;
-    }
-}
