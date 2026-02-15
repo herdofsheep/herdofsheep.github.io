@@ -2,32 +2,36 @@
    art.html  (artwork portfolio listing)
    =========================== */
 
-.portfolio_img {
-  width: 40%;
+/* masonry-style columns: each column ≥ 280px, items pack by height */
+.portfolio-grid {
+  columns: 350px;
+  column-gap: 2rem;
+  padding: 0 2rem;
+}
+
+.portfolio-grid > a {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 2rem;
 }
 
 .portfolio_style {
-  margin-left: auto;
-  margin-right: auto;
-  outline-style: solid;
+  background-color: var(--color-pink);
+  margin-top: 0;
+  padding-bottom: 5%;
 }
 
-.description {
-}
-
-/* 
 .portfolio_img {
-  width: 40%;
-}
-
-.portfolio_style {
   width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  outline-style: solid;
+  margin: 5%;
+  margin-bottom: -1%;
 }
 
 .description {
-  margin-right: auto;
-  width: 50%;
-} */
+  margin: 5%;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: white;
+  background: black;
+  padding: 2%
+}
