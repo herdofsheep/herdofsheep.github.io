@@ -1,0 +1,44 @@
+/* ===========================
+   no_such_thing.html  (standalone dark-themed artwork page)
+   Does NOT use style.css — self-contained stylesheet
+   =========================== */
+
+body {
+  margin: 10%;
+  padding: 0;
+  font-family: 'anon';
+  overflow-x: hidden;
+  background: #1e1e1e;
+}
+
+a {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.container {
+  text-align: center;
+}
+
+.img {
+  display: inline-block;
+}
+
+.text {
+  color: #73c991;
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: justify;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.textWindow {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.full {
+  width: 100%;
+}

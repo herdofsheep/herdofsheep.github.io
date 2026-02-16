@@ -1,0 +1,93 @@
+/* ===========================
+   CV.html        (curriculum vitae)
+   statement.html (artist statement)
+   =========================== */
+
+/* --- shared --- */
+
+.text-spacer {
+  line-height: 3ex;
+}
+
+.flower_spacer {
+  background-image: url(/assets/images/flower/flower_dark.png);
+  background-position: center;
+  background-size: contain;
+  position: relative;
+  display: block;
+  height: 50px;
+  width: 50px;
+  margin-bottom: 100px;
+}
+
+.cite_block {
+  max-width: 80%;
+  width: fit-content;
+}
+
+/* --- CV page --- */
+
+.meg_photo {
+  max-height: 25ex;
+  margin: 20px;
+}
+
+.floated {
+  float: left;
+}
+
+.CV_write {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: justify;
+  max-width: 80%;
+  width: fit-content;
+  padding-top: 30px;
+}
+
+.citations {
+  display: flow-root;
+  font-size: 15px;
+  width: fit-content;
+}
+
+.cite {
+  display: flex;
+  line-height: 3ex;
+  text-align: left;
+}
+
+.date {
+  min-width: 150px;
+  display: flex;
+  font-weight: 600;
+}
+
+.cite_title {
+  text-align: left;
+  margin: 15px;
+  margin-left: 150px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hr_style {
+  width: 80%;
+  margin: 50px;
+}
+
+/* --- statement page --- */
+
+.alongside {
+  width: 90%;
+}
+
+.statement {
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 30px;
+}
+
+.board {
+  height: 180px;
+}
