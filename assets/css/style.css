@@ -7,7 +7,7 @@
   --color-link-hover: #ff284d;
   --color-pink: #FFC0CB;
   --color-nav-bg: pink;
-  --spacing-section: 5ex;
+  --spacing-section: 6ex;
 }
 
 /* ===========================
@@ -26,21 +26,6 @@ a {
   color: var(--color-text);
   font-weight: 700;
   text-decoration: none;
-  display: inline-block;
-}
-
-/* hidden pseudo-element reserves space for bold text to prevent layout shift on hover */
-a::after {
-  display: block;
-  position: inherit;
-  content: attr(title);
-  font-weight: 800;
-  border: 1px solid black;
-  height: 0px;
-  color: transparent;
-  overflow: hidden;
-  visibility: hidden;
-  margin-top: -0.95ex;
 }
 
 /* focus (mouse hover) */

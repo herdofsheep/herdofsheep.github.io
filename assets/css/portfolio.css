@@ -1,0 +1,44 @@
+/* ===========================
+   no_such_thing.html  (standalone dark-themed artwork page)
+   Does NOT use style.css — self-contained stylesheet
+   =========================== */
+
+.portfolio-page {
+    width: 90%;
+    margin: 5%;
+    background: var(--color-pink);
+    text-align: center;
+    display: flow-root;
+}
+
+.portfolio-image {
+    margin: 5%;
+}
+
+.portfolio-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.video-container {
+    padding:56.25% 0 0 0;
+    position:relative;
+    margin: 5%;
+    margin-top: 0;
+}
+
+.portfolio-description {
+    margin: 5%;
+    font-size: 20px;
+}
+
+.back-link-container {
+    background: var(--color-pink);
+}
+
+.back-link {
+    margin: 5%;
+    font-size: 20px;
+    background: var(--color-pink);
+    padding: 30px;
+}
