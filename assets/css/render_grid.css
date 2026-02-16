@@ -15,29 +15,121 @@ a {
   text-decoration: none;
 }
 
-/* grid layout */
+/* masonry-style columns matching art.html portfolio grid */
 .grid {
-  flex-wrap: wrap;
+  columns: 300px;
+  column-gap: 2rem;
+  padding: 0 2rem;
   margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   width: 90%;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 5%;
 }
 
 .imgLink {
-  display: contents;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 2rem;
 }
 
 .imgAspect {
-  width: 32%;
+  width: 100%;
+  display: block;
 }
 
-/* carousel focus states */
-#focus {
-  height: 100%;
+/* lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
-#unfocus {
-  margin: auto;
-  opacity: 50%;
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ccc;
+  font-family: 'arlon', sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 80vw;
+  line-height: 1.4;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  user-select: none;
+  font-family: 'arlon', sans-serif;
+}
+
+.lightbox-btn:hover {
+  opacity: 1;
+}
+
+.lightbox-prev {
+  left: 1rem;
+}
+
+.lightbox-next {
+  right: 1rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  font-family: 'arlon', sans-serif;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.lightbox-counter {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  color: #999;
+  font-family: 'arlon', sans-serif;
+  font-size: 0.85rem;
 }
