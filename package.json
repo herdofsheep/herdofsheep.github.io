@@ -24,7 +24,7 @@
   "devDependencies": {
     "@parcel/transformer-raw": "^2.13.3",
     "@parcel/watcher": "^2.5.1",
-    "nodemon": "^3.1.4",
+    "nodemon": "^3.1.11",
     "parcel": "^2.13.3",
     "path-browserify": "^1.0.1",
     "prettier": "^3.3.3",
