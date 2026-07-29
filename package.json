@@ -17,6 +17,7 @@
     "lightningcss": "^1.29.1",
     "lil-gui": "^0.21.0",
     "lit": "^3.2.0",
+    "photoswipe": "^5.4.4",
     "punycode": "^2.3.1",
     "three": "^0.180.0",
     "three.meshline": "^1.4.0"
@@ -36,5 +37,8 @@
   },
   "resolutions": {
     "punycode": "2.1.1"
+  },
+  "@parcel/resolver-default": {
+    "packageExports": true
   }
 }
