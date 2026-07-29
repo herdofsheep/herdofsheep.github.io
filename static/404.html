@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found — Megan Bates</title>
+    <meta name="robots" content="noindex">
+    <style>
+      body { margin: 0; padding: 3rem 2rem; background: pink; color: #141414; font-family: sans-serif; }
+      a { color: #141414; font-weight: 700; }
+      a:hover { color: #ff284d; }
+    </style>
+    <script>
+      // pages used to live under the /up_/src/ prefix parcel generated
+      var moved = location.pathname.match(/^\/up_\/src\/(.*)$/);
+      if (moved) {
+        location.replace('/' + moved[1].replace(/^CV\.html$/, 'cv.html'));
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Page not found</h1>
+    <p>Try the <a href="/">home page</a>, <a href="/art.html">artwork</a>, <a href="/cv.html">CV</a> or <a href="/statement.html">statement</a>.</p>
+  </body>
+</html>

@@ -24,6 +24,11 @@ jobs:
           npm ci
           npm run build
 
+      - name: Add static SEO files
+        run: |
+          cp -R static/. dist/
+          cp assets/images/no_such_thing/og-image.jpg dist/og-image.jpg
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

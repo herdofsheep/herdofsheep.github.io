@@ -9,8 +9,12 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Serve other static files if needed
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use('/ts', express.static(path.join(__dirname, 'ts')));
+
+// github pages serves 404.html for unmatched paths; express needs telling
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'dist', '404.html'));
+});
 
 // Start the Express server
 app.listen(PORT, () => {
