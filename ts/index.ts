@@ -53,6 +53,7 @@ class RayCast extends ThreeBase {
   constructor() {
     super();
     this.setupScene = this.setupScene.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
     
     this.white = new THREE.Color().setHex(colours.white);
     this.dark_grey = new THREE.Color().setHex(colours.dark_grey);
