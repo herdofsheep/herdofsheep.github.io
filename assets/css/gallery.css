@@ -1,0 +1,64 @@
+/* ===========================
+   art.html  (artwork portfolio listing)
+   =========================== */
+
+/* masonry-style columns: each column ≥ 350px, items pack by height.
+   rtl fills the columns from the right, so a short final column sits on the
+   left; the cards themselves are flipped back to ltr below */
+.portfolio-grid {
+  columns: 350px;
+  column-gap: var(--space-m);
+  padding: 0 var(--space-m);
+  direction: rtl;
+}
+
+.portfolio-grid > a {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: var(--space-m);
+  direction: ltr;
+}
+
+.portfolio_style {
+  background-color: var(--color-pink);
+  margin-top: 0;
+  padding: var(--space-s);
+  transition: transform 150ms ease;
+}
+
+.portfolio-grid > a:hover .portfolio_style,
+.portfolio-grid > a:focus .portfolio_style {
+  transform: translateY(-4px);
+}
+
+.portfolio_img {
+  display: block;
+  width: 100%;
+}
+
+.description {
+  margin-top: var(--space-s);
+  color: var(--color-on-dark);
+  background: var(--color-dark);
+  padding: 0.75rem var(--space-s);
+  text-align: left;
+}
+
+.work-title {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.work-date,
+.work-note {
+  display: block;
+  font-size: 0.9rem;
+  color: #cfcfcf;
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio-grid {
+    padding: 0 var(--space-s);
+  }
+}

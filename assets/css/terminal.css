@@ -1,20 +1,25 @@
 /* ===========================
-   no_such_thing.html  (standalone dark-themed artwork page)
-   Does NOT use style.css — self-contained stylesheet
+   art/no_such_thing_old.html  (earlier iteration, dark terminal theme)
+   Self-contained — does not load style.css
    =========================== */
 
 body {
-  margin: 10%;
-  padding: 0;
+  margin: 0;
+  padding: clamp(1.5rem, 8vw, 6rem);
   font-family: 'anon';
-  overflow-x: hidden;
   background: #1e1e1e;
+  overflow-x: hidden;
 }
 
 a {
   color: white;
   font-weight: 700;
   text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #73c991;
 }
 
 .container {
@@ -31,14 +36,23 @@ a {
   font-weight: 500;
   text-align: justify;
   font-size: 16px;
+  max-width: 70ch;
+  margin: 0 auto;
   text-decoration: none;
 }
 
 .textWindow {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: clamp(2rem, 6vw, 4rem) auto;
 }
 
 .full {
   width: 100%;
+  max-width: 60rem;
+  height: auto;
+}
+
+.back-link {
+  display: block;
+  margin-bottom: clamp(2rem, 6vw, 4rem);
+  font-size: 16px;
 }

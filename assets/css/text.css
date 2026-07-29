@@ -1,5 +1,5 @@
 /* ===========================
-   CV.html        (curriculum vitae)
+   cv.html        (curriculum vitae)
    statement.html (artist statement)
    =========================== */
 
@@ -13,6 +13,7 @@
   background-image: url(/assets/images/flower/flower_dark.png);
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
   position: relative;
   display: block;
   height: 50px;
@@ -29,8 +30,24 @@
 
 /* --- CV page --- */
 
+.cv-page > .cite_block {
+  width: 90%;
+  max-width: none;
+}
+
+.cv-page > .cite_block > .cite_block {
+  width: 100%;
+  max-width: none;
+}
+
+.cv-page .bottom-page-margin {
+  margin-bottom: 0;
+}
+
 .meg_photo {
   max-height: 25ex;
+  /* keeps the bio text alongside the photo rather than dropping below it */
+  max-width: 40%;
   margin: 20px;
 }
 
@@ -39,24 +56,28 @@
 }
 
 .CV_write {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 500;
   text-align: justify;
-  max-width: 80%;
-  width: fit-content;
-  padding-top: 30px;
+  max-width: none;
+  width: 100%;
+  padding: 30px 30px 0;
 }
 
 .citations {
   display: flow-root;
   font-size: 15px;
-  width: fit-content;
+  width: 100%;
 }
 
 .cite {
   display: flex;
   line-height: 3ex;
   text-align: left;
+}
+
+.cite a {
+  white-space: nowrap;
 }
 
 .date {
@@ -74,8 +95,10 @@
 }
 
 .hr_style {
-  width: 80%;
-  margin: 50px;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  margin: 50px 0;
 }
 
 /* --- statement page --- */
@@ -85,15 +108,15 @@
 }
 
 .statement {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
   padding-top: 30px;
 }
 
 .board {
   height: 180px;
   display: block;
-  margin: 30px auto;
+  margin: 40px auto;
 }
 
 /* without this the image margin stacks with the paragraph padding, so the gap

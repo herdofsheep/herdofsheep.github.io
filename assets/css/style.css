@@ -7,18 +7,64 @@
   --color-link-hover: #ff284d;
   --color-pink: #FFC0CB;
   --color-nav-bg: pink;
+  --color-dark: #141414;
+  --color-on-dark: #f4f4f4;
+  --color-muted: #5f5f5f;
+  --color-rule: rgba(20, 20, 20, 0.15);
+
   --spacing-section: 6ex;
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 2rem;
+  --space-l: 3rem;
+  --space-xl: clamp(4rem, 12vh, 9rem);
+
+  /* comfortable line length for body copy */
+  --measure: 46rem;
+  --page-width: 68rem;
 }
 
 /* ===========================
    2. Reset / Base Styles
    =========================== */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'arlon';
+  color: var(--color-text);
+  line-height: 1.6;
   overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2 {
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 var(--space-s);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+h2 {
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+}
+
+p {
+  margin: 0 0 var(--space-s);
 }
 
 /* links */
@@ -28,11 +74,10 @@ a {
   text-decoration: none;
 }
 
-/* focus (mouse hover) */
+/* focus (mouse hover) — colour only, so text doesn't reflow on hover */
 a:hover,
 a:focus {
   color: var(--color-link-hover);
-  font-weight: 800;
   text-decoration: none;
 }
 
@@ -63,7 +108,7 @@ a:focus {
 }
 
 .bottom-page-margin {
-  margin-bottom: 200px;
+  margin-bottom: var(--space-xl);
 }
 
 .auto-lr-margin {
@@ -102,6 +147,7 @@ a:focus {
   width: 100px;
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
   display: block;
   margin: auto;
 }
@@ -158,4 +204,3 @@ a:focus {
       display: flow-root;
     }
 }
-

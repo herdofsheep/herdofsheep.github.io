@@ -1,36 +1,20 @@
 /* ===========================
-   render_grid.html  (standalone painting grid page)
-   Does NOT use style.css — self-contained stylesheet
+   art/render_grid.html  (painting grid + lightbox)
+   Extends style.css
    =========================== */
 
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-a {
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-/* masonry-style columns matching art.html portfolio grid */
+/* masonry-style columns matching the art.html portfolio grid */
 .grid {
   columns: 300px;
-  column-gap: 2rem;
-  padding: 0 2rem;
-  margin: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  width: 90%;
-  margin-top: 5%;
+  column-gap: var(--space-m);
+  width: min(100% - var(--space-m), var(--page-width));
+  margin: var(--space-l) auto;
 }
 
 .imgLink {
   display: block;
   break-inside: avoid;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-m);
 }
 
 .imgAspect {
