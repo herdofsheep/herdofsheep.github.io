@@ -16,26 +16,31 @@ body.index-3d {
   background: #FFC0CB;
   width: 100vw;
   text-align: center;
-  padding-top: 40vh;
   height: 100vh;
   top: 0px;
   color: #202020;
   font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
-/* hidden SEO content */
-.SEOHack {
-  color: white;
-  background: white;
-  z-index: 0;
+#loading h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5rem);
 }
 
-.SEOHack h1 {
-  font-size: 50px;
+#loading .tagline {
+  margin: 0.75rem 0 0;
+  font-size: clamp(1rem, 3vw, 1.75rem);
 }
 
-.SEOHack p {
-  font-size: 30px;
+#loading .loading-text {
+  margin: 3rem 0 0;
+  font-size: clamp(1rem, 3vw, 1.75rem);
 }
 
 /* 2D/3D toggle button */
