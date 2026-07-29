@@ -7,12 +7,14 @@
   columns: 350px;
   column-gap: 2rem;
   padding: 0 2rem;
+  direction: rtl;
 }
 
 .portfolio-grid > a {
   display: block;
   break-inside: avoid;
   margin-bottom: 2rem;
+  direction: ltr;
 }
 
 .portfolio_style {

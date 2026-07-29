@@ -17,7 +17,9 @@
   display: block;
   height: 50px;
   width: 50px;
-  margin-bottom: 100px;
+  /* must stay above the 6ex section margins either side, or the neighbouring
+     element's margin wins the collapse and the spacing goes lopsided again */
+  margin: 70px auto;
 }
 
 .cite_block {
@@ -90,4 +92,12 @@
 
 .board {
   height: 180px;
+  display: block;
+  margin: 30px auto;
+}
+
+/* without this the image margin stacks with the paragraph padding, so the gap
+   below the board ends up much larger than the one above it */
+.board + .statement {
+  padding-top: 0;
 }
