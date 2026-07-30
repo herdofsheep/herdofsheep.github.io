@@ -18,8 +18,6 @@
   display: block;
   height: 50px;
   width: 50px;
-  /* must stay above the 6ex section margins either side, or the neighbouring
-     element's margin wins the collapse and the spacing goes lopsided again */
   margin: 70px auto;
 }
 
@@ -36,8 +34,8 @@
 }
 
 .cv-page > .cite_block > .cite_block {
-  width: 100%;
-  max-width: none;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .cv-page .bottom-page-margin {
@@ -46,9 +44,8 @@
 
 .meg_photo {
   max-height: 25ex;
-  /* keeps the bio text alongside the photo rather than dropping below it */
   max-width: 40%;
-  margin: 20px;
+  margin-right: 20px;
 }
 
 .floated {
@@ -59,7 +56,7 @@
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   font-weight: 500;
   text-align: justify;
-  max-width: none;
+  max-width: 900px;
   width: 100%;
   padding: 30px 30px 0;
 }
@@ -74,6 +71,7 @@
   display: flex;
   line-height: 3ex;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .cite a {
@@ -84,6 +82,11 @@
   min-width: 150px;
   display: flex;
   font-weight: 600;
+}
+
+.desc {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .cite_title {
@@ -98,7 +101,7 @@
   width: 100%;
   border: 0;
   border-top: 1px solid var(--color-rule);
-  margin: 50px 0;
+   margin: 50px 0;
 }
 
 /* --- statement page --- */
@@ -108,7 +111,7 @@
 }
 
 .statement {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
   font-weight: 500;
   padding-top: 30px;
 }
@@ -119,8 +122,6 @@
   margin: 40px auto;
 }
 
-/* without this the image margin stacks with the paragraph padding, so the gap
-   below the board ends up much larger than the one above it */
 .board + .statement {
   padding-top: 0;
 }
