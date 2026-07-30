@@ -2,21 +2,19 @@
    art.html  (artwork portfolio listing)
    =========================== */
 
-/* masonry-style columns: each column ≥ 350px, items pack by height.
-   rtl fills the columns from the right, so a short final column sits on the
-   left; the cards themselves are flipped back to ltr below */
+/* masonry-style columns: each column ≥ 350px, items pack by height,
+   filling left to right in DOM order; the gap above each card is set
+   by the card above it in the same column, not a fixed row height */
 .portfolio-grid {
   columns: 350px;
   column-gap: var(--space-m);
-  padding: 0 var(--space-m);
-  direction: rtl;
+  padding: 0 var(--spacing-section);
 }
 
 .portfolio-grid > a {
   display: block;
   break-inside: avoid;
   margin-bottom: var(--space-m);
-  direction: ltr;
 }
 
 .portfolio_style {

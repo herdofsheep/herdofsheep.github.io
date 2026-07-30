@@ -29,6 +29,32 @@
   height: auto;
 }
 
+.portfolio-image-pair {
+  margin: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.portfolio-image-pair img {
+  flex: 1 1 280px;
+  max-width: calc(50% - 0.75rem);
+  height: auto;
+}
+
+@media (max-width: 700px) {
+  .portfolio-image-pair {
+    flex-direction: column;
+  }
+
+  .portfolio-image-pair img {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+}
+
 /* 16:9 box the absolutely positioned iframe fills */
 .video-container {
   padding: 56.25% 0 0 0;
